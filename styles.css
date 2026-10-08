@@ -320,7 +320,7 @@ a {
   outline: 0;
   background: transparent;
   width: 100%;
-  font-size: 12px;
+  font-size: 14px;
 }
 .search-box kbd {
   font: 10px var(--sans);
@@ -340,9 +340,14 @@ a {
   padding: 0 30px 0 12px;
   border: 1px solid #d7d8ce;
   background: var(--white);
-  font-size: 11px;
+  font-size: 13px;
   color: #566159;
   cursor: pointer;
+}
+@media (hover: none), (pointer: coarse) {
+  .search-box kbd {
+    display: none;
+  }
 }
 .active-filters {
   min-height: 22px;
@@ -488,7 +493,7 @@ a {
   padding: 15px 15px 12px;
 }
 .card-kicker {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   color: #78837a;
   text-transform: uppercase;
@@ -510,7 +515,7 @@ a {
   min-height: 23px;
 }
 .tag-row span {
-  font-size: 9px;
+  font-size: 10px;
   background: #f0f0e9;
   color: #677169;
   padding: 5px 7px;
@@ -534,7 +539,7 @@ a {
   cursor: pointer;
 }
 .detail-link {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: #3d5849;
   padding: 4px 0;
@@ -1061,14 +1066,16 @@ a {
   }
   .filters {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .filters label:last-child {
+    grid-column: 1 / -1;
   }
   .filters select {
     width: 100%;
     max-width: none;
-    padding-left: 7px;
-    padding-right: 16px;
-    font-size: 9px;
+    padding: 0 26px 0 10px;
+    font-size: 13px;
   }
   .exercise-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1081,7 +1088,7 @@ a {
     padding: 11px 10px 9px;
   }
   .card-body h3 {
-    font-size: 13px;
+    font-size: 14px;
     min-height: 34px;
   }
   .detail-link {
@@ -1094,11 +1101,15 @@ a {
     height: 44px;
   }
   .card-kicker {
-    font-size: 8px;
+    font-size: 9px;
+    letter-spacing: 0.04em;
   }
   .tag-row span {
-    font-size: 8px;
+    font-size: 10px;
     padding: 4px 5px;
+  }
+  .search-box kbd {
+    display: none;
   }
   .routine-section {
     padding: 59px 0;

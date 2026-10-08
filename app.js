@@ -42,7 +42,7 @@ const UI = {
     addDay: 'Add session',
     export: 'Export',
     emptyRoutine: 'Start with one exercise.',
-    emptyRoutineHint: 'Use an exercise card to add it to this session.',
+    emptyRoutineHint: 'Use the + button on an exercise card to add it to this session.',
     addToSession: 'ADD TO THIS SESSION',
     exercise: 'Exercise',
     sets: 'Sets',
@@ -72,7 +72,7 @@ const UI = {
     beginner: 'Beginner',
     intermediate: 'Intermediate',
     advanced: 'Advanced',
-    added: 'Added to routine',
+    added: 'Added to current session',
     chooseExercise: 'Choose an exercise',
     confirmDelete: 'Delete this routine?',
     untitled: 'My routine',
@@ -128,7 +128,7 @@ const UI = {
     addDay: 'Agregá una sesión',
     export: 'Exportá',
     emptyRoutine: 'Empezá con un ejercicio.',
-    emptyRoutineHint: 'Agregá un ejercicio desde su tarjeta.',
+    emptyRoutineHint: 'Usá el botón + de una tarjeta para agregarlo a esta sesión.',
     addToSession: 'AGREGAR A ESTA SESIÓN',
     exercise: 'Ejercicio',
     sets: 'Series',
@@ -158,7 +158,7 @@ const UI = {
     beginner: 'Principiante',
     intermediate: 'Intermedio',
     advanced: 'Avanzado',
-    added: 'Se agregó a la rutina',
+    added: 'Se agregó a la sesión actual',
     chooseExercise: 'Elegí un ejercicio',
     confirmDelete: '¿Querés eliminar esta rutina?',
     untitled: 'Mi rutina',
@@ -253,31 +253,44 @@ function loadDB() {
       .map((r) => ({
         id: r.id,
         name: r.name.slice(0, 120),
+        defaultName:
+          typeof r.defaultName === 'boolean' ? r.defaultName : isDefaultRoutineName(r.name),
         days: r.days
           .filter((d) => d && typeof d === 'object')
-          .map((d, i) => ({
-            name: String(d.name || `${UI.en.session} ${i + 1}`).slice(0, 120),
-            items: Array.isArray(d.items)
-              ? d.items
-                  .filter((item) => item && typeof item === 'object')
-                  .map((item) => ({
-                    exerciseId: typeof item.exerciseId === 'string' ? item.exerciseId : null,
-                    name: String(item.name || '').slice(0, 200),
-                    names:
-                      item.names && typeof item.names === 'object'
-                        ? {
-                            en:
-                              typeof item.names.en === 'string' ? item.names.en.slice(0, 200) : '',
-                            es:
-                              typeof item.names.es === 'string' ? item.names.es.slice(0, 200) : '',
-                          }
-                        : null,
-                    block: String(item.block || '').slice(0, 120),
-                    sets: Math.min(99, Math.max(1, Number(item.sets) || 3)),
-                    reps: String(item.reps || '').slice(0, 80),
-                  }))
-              : [],
-          })),
+          .map((d, i) => {
+            const savedName = String(d.name || `${UI.en.session} ${i + 1}`).slice(0, 120);
+            return {
+              name: savedName,
+              defaultName:
+                typeof d.defaultName === 'boolean'
+                  ? d.defaultName
+                  : isDefaultSessionName(savedName),
+              items: Array.isArray(d.items)
+                ? d.items
+                    .filter((item) => item && typeof item === 'object')
+                    .map((item) => ({
+                      exerciseId: typeof item.exerciseId === 'string' ? item.exerciseId : null,
+                      name: String(item.name || '').slice(0, 200),
+                      names:
+                        item.names && typeof item.names === 'object'
+                          ? {
+                              en:
+                                typeof item.names.en === 'string'
+                                  ? item.names.en.slice(0, 200)
+                                  : '',
+                              es:
+                                typeof item.names.es === 'string'
+                                  ? item.names.es.slice(0, 200)
+                                  : '',
+                            }
+                          : null,
+                      block: String(item.block || '').slice(0, 120),
+                      sets: Math.min(99, Math.max(1, Number(item.sets) || 3)),
+                      reps: String(item.reps || '').slice(0, 80),
+                    }))
+                : [],
+            };
+          }),
       }));
     return {
       routines,
@@ -298,12 +311,24 @@ function saveDB() {
     renderRoutines();
     return false;
   }
-  $('#routine-name').value = currentRoutine()?.name || '';
+  $('#routine-name').value = currentRoutine() ? routineDisplayName(currentRoutine()) : '';
   renderRoutines();
   return true;
 }
 function t(key) {
   return UI[lang][key] || key;
+}
+function isDefaultRoutineName(name) {
+  return ['My routine', 'Mi rutina'].includes(String(name || '').trim());
+}
+function isDefaultSessionName(name) {
+  return /^(?:session|sesión)\s+\d+$/i.test(String(name || '').trim());
+}
+function routineDisplayName(routine) {
+  return routine.defaultName ? t('untitled') : routine.name;
+}
+function sessionDisplayName(day, index) {
+  return day.defaultName ? `${t('session')} ${index + 1}` : day.name;
 }
 function localized(obj) {
   return obj?.[lang] || obj?.en || '';
@@ -462,12 +487,18 @@ function ensureRoutine() {
     const r = {
       id: crypto.randomUUID(),
       name: t('untitled'),
-      days: [{ name: `${t('session')} 1`, items: [] }],
+      defaultName: true,
+      days: [{ name: `${t('session')} 1`, defaultName: true, items: [] }],
     };
     db.routines = [r];
     db.current = r.id;
   }
   if (!currentRoutine()) db.current = db.routines[0].id;
+  const routine = currentRoutine();
+  if (!routine.days.length) {
+    routine.days.push({ name: `${t('session')} 1`, defaultName: true, items: [] });
+  }
+  if (selectedDay >= routine.days.length) selectedDay = 0;
 }
 function renderRoutines() {
   ensureRoutine();
@@ -475,14 +506,14 @@ function renderRoutines() {
   $('#routine-select').innerHTML = db.routines
     .map(
       (x) =>
-        `<option value="${escapeHtml(x.id)}" ${x.id === r.id ? 'selected' : ''}>${escapeHtml(x.name)}</option>`,
+        `<option value="${escapeHtml(x.id)}" ${x.id === r.id ? 'selected' : ''}>${escapeHtml(routineDisplayName(x))}</option>`,
     )
     .join('');
-  $('#routine-name').value = r.name;
+  $('#routine-name').value = routineDisplayName(r);
   $('#day-tabs').innerHTML = r.days
     .map(
       (d, i) =>
-        `<button class="day-tab ${i === selectedDay ? 'selected' : ''}" data-day="${i}" aria-pressed="${i === selectedDay}">${escapeHtml(d.name)} <span>${d.items.length}</span></button>`,
+        `<button class="day-tab ${i === selectedDay ? 'selected' : ''}" data-day="${i}" aria-pressed="${i === selectedDay}">${escapeHtml(sessionDisplayName(d, i))} <span>${d.items.length}</span></button>`,
     )
     .join('');
   $('#day-tabs')
@@ -530,13 +561,29 @@ function escapeHtml(s) {
   );
 }
 function addById(id) {
+  if (addExerciseToRoutine(id) && $('#exercise-dialog').open) $('#exercise-dialog').close();
+}
+function addExerciseToRoutine(id, sets = 3, reps = '8–12') {
   const e = exercises.find((x) => x.id === id);
-  if (!e) return;
-  $('#add-exercise').value = id;
-  $('#add-reps').value = '8–12';
-  document.querySelector('#routines').scrollIntoView({ behavior: 'smooth' });
-  $('#add-reps').focus();
-  if ($('#exercise-dialog').open) $('#exercise-dialog').close();
+  if (!e) return false;
+  ensureRoutine();
+  const routine = currentRoutine();
+  const day = routine.days[selectedDay] || routine.days[0];
+  if (!day) return false;
+  day.items.push({
+    exerciseId: id,
+    name: localized(e.name),
+    names: e.name,
+    sets: Number(sets) || 3,
+    reps: String(reps || ''),
+  });
+  if (saveDB()) {
+    toast(t('added'));
+    return true;
+  }
+  day.items.pop();
+  renderRoutines();
+  return false;
 }
 function addSelected() {
   const id = $('#add-exercise').value;
@@ -544,16 +591,7 @@ function addSelected() {
     $('#add-exercise').focus();
     return;
   }
-  const e = exercises.find((x) => x.id === id);
-  const day = currentRoutine().days[selectedDay];
-  day.items.push({
-    exerciseId: id,
-    name: localized(e.name),
-    names: e.name,
-    sets: $('#add-sets').value || 3,
-    reps: $('#add-reps').value || '',
-  });
-  if (saveDB()) toast(t('added'));
+  addExerciseToRoutine(id, $('#add-sets').value, $('#add-reps').value);
 }
 function toast(msg) {
   const el = $('#toast');
@@ -568,9 +606,11 @@ function exportRoutine() {
     format: 'gym-exercise-routine',
     version: 1,
     routine: {
-      name: { [lang]: r.name },
-      days: r.days.map((d) => ({
-        name: { [lang]: d.name },
+      name: { [lang]: routineDisplayName(r) },
+      default_name: r.defaultName,
+      days: r.days.map((d, i) => ({
+        name: { [lang]: sessionDisplayName(d, i) },
+        default_name: d.defaultName,
         exercises: d.items.map((item) => ({
           name: item.names || { [lang]: item.name },
           exercise_id: item.exerciseId || null,
@@ -585,7 +625,7 @@ function exportRoutine() {
     new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' }),
   );
   a.href = url;
-  const filename = r.name
+  const filename = routineDisplayName(r)
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
@@ -609,8 +649,10 @@ async function importRoutine(file) {
       if (!d || typeof d !== 'object' || (d.exercises !== undefined && !Array.isArray(d.exercises)))
         throw new Error('invalid-routine-day');
       if ((d.exercises || []).length > 500) throw new Error('too-many-exercises');
+      const importedDayName = importText(d.name);
       return {
-        name: (importText(d.name) || `${t('session')} ${i + 1}`).slice(0, 120),
+        name: (importedDayName || `${t('session')} ${i + 1}`).slice(0, 120),
+        defaultName: typeof d.default_name === 'boolean' ? d.default_name : !importedDayName,
         items: (d.exercises || []).map((ex) => {
           if (!ex || typeof ex !== 'object') throw new Error('invalid-exercise');
           const rawSets = Number(ex.sets);
@@ -638,10 +680,12 @@ async function importRoutine(file) {
         }),
       };
     });
+    const importedRoutineName = importText(src.name);
     const r = {
       id: crypto.randomUUID(),
-      name: importText(src.name, t('untitled')).slice(0, 60),
-      days: days.length ? days : [{ name: `${t('session')} 1`, items: [] }],
+      name: (importedRoutineName || t('untitled')).slice(0, 60),
+      defaultName: typeof src.default_name === 'boolean' ? src.default_name : !importedRoutineName,
+      days: days.length ? days : [{ name: `${t('session')} 1`, defaultName: true, items: [] }],
     };
     db.routines.push(r);
     db.current = r.id;
@@ -673,7 +717,8 @@ $('#new-routine').onclick = () => {
   const r = {
     id: crypto.randomUUID(),
     name: t('untitled'),
-    days: [{ name: `${t('session')} 1`, items: [] }],
+    defaultName: true,
+    days: [{ name: `${t('session')} 1`, defaultName: true, items: [] }],
   };
   db.routines.push(r);
   db.current = r.id;
@@ -686,16 +731,26 @@ $('#routine-select').onchange = (e) => {
   saveDB();
 };
 $('#routine-name').onchange = (e) => {
-  currentRoutine().name = e.target.value.trim() || t('untitled');
+  setRoutineName(currentRoutine(), e.target.value);
   saveDB();
 };
 $('#save-routine').onclick = () => {
-  currentRoutine().name = $('#routine-name').value.trim() || t('untitled');
+  setRoutineName(currentRoutine(), $('#routine-name').value);
   if (saveDB()) toast(t('saved'));
 };
+function setRoutineName(routine, value) {
+  const name = String(value || '').trim();
+  if (!name) {
+    routine.name = t('untitled');
+    routine.defaultName = true;
+    return;
+  }
+  routine.name = name.slice(0, 60);
+  if (name !== t('untitled')) routine.defaultName = false;
+}
 $('#add-day').onclick = () => {
   const r = currentRoutine();
-  r.days.push({ name: `${t('session')} ${r.days.length + 1}`, items: [] });
+  r.days.push({ name: `${t('session')} ${r.days.length + 1}`, defaultName: true, items: [] });
   selectedDay = r.days.length - 1;
   saveDB();
 };
