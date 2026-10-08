@@ -14,6 +14,10 @@ const UI = {
     navRoutines: 'My routines',
     navRoutinesShort: 'Routines',
     language: 'Language',
+    theme: 'Theme',
+    themeSystem: 'System',
+    themeLight: 'Light',
+    themeDark: 'Dark',
     eyebrow: 'THE GYM, MADE CLEAR',
     headline: 'Know the move.<br><em>Own your workout.</em>',
     intro:
@@ -110,6 +114,10 @@ const UI = {
     navRoutines: 'Mis rutinas',
     navRoutinesShort: 'Rutinas',
     language: 'Idioma',
+    theme: 'Apariencia',
+    themeSystem: 'Sistema',
+    themeLight: 'Claro',
+    themeDark: 'Oscuro',
     eyebrow: 'EL GIMNASIO, MÁS CLARO',
     headline: 'Entendé el movimiento.<br><em>Entrená con confianza.</em>',
     intro:
@@ -249,6 +257,7 @@ const names = {
 };
 const STORAGE_KEY = 'form-routines-v1';
 const LANGUAGE_KEY = 'form-language';
+const THEME_KEY = 'repzena-theme';
 const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 function readStorage(key) {
   try {
@@ -258,6 +267,9 @@ function readStorage(key) {
   }
 }
 let lang = readStorage(LANGUAGE_KEY) === 'es' ? 'es' : 'en';
+let themePreference = ['light', 'dark', 'system'].includes(readStorage(THEME_KEY))
+  ? readStorage(THEME_KEY)
+  : 'system';
 let guideHistoryEntry = false;
 let closingFromNavigation = false;
 let currentExercisePage = 1;
@@ -348,6 +360,16 @@ function commitDBChange(change) {
   selectedDay = previousSelectedDay;
   renderRoutines();
   return false;
+}
+function applyTheme() {
+  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches || false;
+  const resolvedTheme =
+    themePreference === 'system' ? (prefersDark ? 'dark' : 'light') : themePreference;
+  document.documentElement.dataset.theme = resolvedTheme;
+  $('#theme').value = themePreference;
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute('content', resolvedTheme === 'dark' ? '#101714' : '#f6f5ef');
 }
 function t(key) {
   return UI[lang][key] || key;
@@ -849,6 +871,20 @@ async function importRoutine(file) {
     toast(err.message === 'routine-file-too-large' ? t('importTooLarge') : t('errorImport'));
   }
 }
+const systemThemeQuery = window.matchMedia?.('(prefers-color-scheme: dark)');
+systemThemeQuery?.addEventListener('change', () => {
+  if (themePreference === 'system') applyTheme();
+});
+$('#theme').addEventListener('change', (e) => {
+  themePreference = e.target.value;
+  applyTheme();
+  try {
+    localStorage.setItem(THEME_KEY, themePreference);
+  } catch (error) {
+    console.warn('Theme preference could not be saved', error);
+  }
+});
+applyTheme();
 $('#language').addEventListener('change', (e) => {
   lang = e.target.value;
   try {

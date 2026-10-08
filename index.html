@@ -1,9 +1,19 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f5f4ef" />
+    <meta name="theme-color" content="#f6f5ef" />
+    <script>
+      try {
+        const saved = localStorage.getItem('repzena-theme');
+        const preference = ['light', 'dark', 'system'].includes(saved) ? saved : 'system';
+        const dark =
+          preference === 'dark' ||
+          (preference === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      } catch {}
+    </script>
     <meta
       name="description"
       content="A clear, bilingual exercise guide and personal routine builder."
@@ -26,13 +36,24 @@
           ><span class="nav-label-short" data-i18n="navRoutinesShort">Routines</span></a
         >
       </nav>
-      <label class="language-switch"
-        ><span class="sr-only" data-i18n="language">Language</span
-        ><select id="language">
-          <option value="en">EN</option>
-          <option value="es">ES</option>
-        </select></label
-      >
+      <div class="header-controls">
+        <label class="theme-switch"
+          ><span class="sr-only" data-i18n="theme">Theme</span
+          ><span class="theme-icon" aria-hidden="true">◐</span
+          ><select id="theme">
+            <option value="system" data-i18n="themeSystem">System</option>
+            <option value="light" data-i18n="themeLight">Light</option>
+            <option value="dark" data-i18n="themeDark">Dark</option>
+          </select></label
+        >
+        <label class="language-switch"
+          ><span class="sr-only" data-i18n="language">Language</span
+          ><select id="language">
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+          </select></label
+        >
+      </div>
     </header>
     <main id="top">
       <section class="hero wrap">
