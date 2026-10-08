@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f4ef" />
+    <meta
+      name="description"
+      content="A clear, bilingual exercise guide and personal routine builder."
+    />
+    <meta name="application-name" content="Repzena" />
+    <title>Repzena — Exercise guide</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" data-i18n-aria-label="brandHome" aria-label="Repzena home"
+        ><span class="brand-mark">r</span><span>repzena<span class="brand-dot">.</span></span></a
+      >
+      <nav class="nav-links" data-i18n-aria-label="navLabel" aria-label="Main navigation">
+        <a href="#library"
+          ><span class="nav-label-full" data-i18n="navLibrary">Exercise library</span
+          ><span class="nav-label-short" data-i18n="navLibraryShort">Exercises</span></a
+        ><a href="#routines"
+          ><span class="nav-label-full" data-i18n="navRoutines">My routines</span
+          ><span class="nav-label-short" data-i18n="navRoutinesShort">Routines</span></a
+        >
+      </nav>
+      <label class="language-switch"
+        ><span class="sr-only" data-i18n="language">Language</span
+        ><select id="language">
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select></label
+      >
+    </header>
+    <main id="top">
+      <section class="hero wrap">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="pulse"></span><span data-i18n="eyebrow">THE GYM, MADE CLEAR</span>
+          </div>
+          <h1 data-i18n="headline">Know the move.<br /><em>Own your workout.</em></h1>
+          <p data-i18n="intro">
+            Clear, visual exercise guides and routines that stay yours. No noise, just what you need
+            between sets.
+          </p>
+          <a class="button button-dark" href="#library"
+            ><span data-i18n="explore">Explore exercises</span><span aria-hidden="true">↘</span></a
+          >
+          <div class="hero-note">
+            <span class="note-line"></span
+            ><span data-i18n="heroNote">Built for real gym floors</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-orbit orbit-one"></div>
+          <div class="art-orbit orbit-two"></div>
+          <div class="art-stamp">MOVE<br />WELL<br /><b>✳</b></div>
+          <svg
+            viewBox="0 0 420 390"
+            role="img"
+            data-i18n-aria-label="heroImageAlt"
+            aria-label="Illustration of a goblet squat"
+          >
+            <ellipse cx="210" cy="348" rx="151" ry="15" fill="#e0e1d5" />
+            <path
+              d="M91 112c30-40 86-59 139-39 42 16 68 53 68 97 0 29-12 54-31 73l52 69-36 21-71-79-47 44-71-38 35-91-39-57z"
+              fill="#b5d1c1"
+              stroke="#102c27"
+              stroke-width="4"
+              stroke-linejoin="round"
+            />
+            <circle cx="224" cy="72" r="31" fill="#e3a581" stroke="#102c27" stroke-width="4" />
+            <path
+              d="M226 104l-44 105 74 20 38-78M181 209l-38 93 32 10 49-70m1-113 44 59 63 6m-171 17-55-39"
+              fill="none"
+              stroke="#102c27"
+              stroke-width="17"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M132 307l-7 27m50-22 8 24m144-128 32 3"
+              stroke="#102c27"
+              stroke-width="13"
+              stroke-linecap="round"
+            />
+            <path
+              d="M284 178l25 17-20 6m-124 29-15 21 25-1"
+              fill="none"
+              stroke="#e17b54"
+              stroke-width="5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M80 87c-8 28-8 50-1 67m261 34c13-17 19-33 19-51"
+              fill="none"
+              stroke="#e17b54"
+              stroke-width="3"
+              stroke-dasharray="5 8"
+            /></svg
+          ><span class="art-caption" data-i18n="artCaption">SQUAT · CONTROL · REPEAT</span>
+        </div>
+      </section>
+      <section class="library-section" id="library">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">
+                <span class="section-number">01</span
+                ><span data-i18n="libraryEyebrow">YOUR MOVEMENT LIBRARY</span>
+              </div>
+              <h2 data-i18n="libraryTitle">Find your next <em>move.</em></h2>
+            </div>
+            <div class="result-count" id="result-count" aria-live="polite" aria-atomic="true"></div>
+          </div>
+          <div class="toolbar">
+            <label class="search-box"
+              ><span class="search-icon">⌕</span
+              ><input
+                id="search"
+                type="search"
+                data-i18n-placeholder="searchPlaceholder"
+                data-i18n-aria-label="searchPlaceholder"
+                aria-label="Search exercise, muscle or equipment"
+                placeholder="Search exercise, muscle or equipment"
+              /><kbd aria-hidden="true">⌘ K</kbd></label
+            >
+            <div class="filters">
+              <label
+                ><span class="sr-only" data-i18n="filterMovement">Movement</span
+                ><select id="pattern-filter">
+                  <option value="" data-i18n="allPatterns">All movements</option>
+                </select></label
+              ><label
+                ><span class="sr-only" data-i18n="filterEquipment">Equipment</span
+                ><select id="equipment-filter">
+                  <option value="" data-i18n="allEquipment">All equipment</option>
+                </select></label
+              ><label
+                ><span class="sr-only" data-i18n="filterMuscle">Muscles</span
+                ><select id="muscle-filter">
+                  <option value="" data-i18n="allMuscles">All muscles</option>
+                </select></label
+              >
+            </div>
+          </div>
+          <div class="active-filters" id="active-filters"></div>
+          <div class="exercise-grid" id="exercise-grid"></div>
+        </div>
+      </section>
+      <section class="routine-section" id="routines">
+        <div class="wrap routine-layout">
+          <div class="routine-intro">
+            <div class="eyebrow">
+              <span class="section-number">02</span
+              ><span data-i18n="routineEyebrow">YOUR TRAINING, YOUR WAY</span>
+            </div>
+            <h2 data-i18n="routineTitle">Build a routine<br />that <em>sticks.</em></h2>
+            <p data-i18n="routineIntro">
+              Put together your sessions, set your reps and keep everything saved on this device.
+            </p>
+            <div class="privacy-note">
+              <span>⌂</span
+              ><span data-i18n="localNote"
+                >Private by default. Routines are stored in this browser.</span
+              >
+            </div>
+            <label class="import-button button button-light" for="routine-file"
+              ><span data-i18n="importRoutine">Import routine</span><span>↑</span></label
+            ><input class="sr-only" id="routine-file" type="file" accept="application/json,.json" />
+          </div>
+          <div class="routine-card">
+            <div class="routine-card-top">
+              <div>
+                <div class="mini-label" data-i18n="currentRoutine">CURRENT ROUTINE</div>
+                <select id="routine-select" class="routine-select"></select>
+              </div>
+              <button
+                class="icon-button"
+                id="new-routine"
+                data-i18n-title="newRoutine"
+                data-i18n-aria-label="newRoutine"
+                title="New routine"
+                aria-label="New routine"
+              >
+                ＋
+              </button>
+            </div>
+            <div class="routine-name-row">
+              <input
+                id="routine-name"
+                type="text"
+                maxlength="60"
+                data-i18n-aria-label="routineName"
+                aria-label="Routine name"
+              /><button class="text-button" id="save-routine" data-i18n="save">Save</button>
+            </div>
+            <div class="day-tabs" id="day-tabs" role="group" data-i18n-aria-label="sessions"></div>
+            <div class="add-day-row">
+              <button class="text-button muted" id="add-day">
+                ＋ <span data-i18n="addDay">Add session</span></button
+              ><button class="text-button muted" id="export-routine">
+                <span data-i18n="export">Export</span> ↗
+              </button>
+            </div>
+            <div class="routine-items" id="routine-items"></div>
+            <div class="routine-empty" id="routine-empty">
+              <span class="empty-symbol">✳</span
+              ><strong data-i18n="emptyRoutine">Start with one exercise.</strong
+              ><span data-i18n="emptyRoutineHint"
+                >Use an exercise card to add it to this session.</span
+              >
+            </div>
+            <div class="routine-add-form">
+              <div class="add-label" data-i18n="addToSession">ADD TO THIS SESSION</div>
+              <div class="form-grid">
+                <label
+                  ><span data-i18n="exercise">Exercise</span
+                  ><select id="add-exercise"></select></label
+                ><label
+                  ><span data-i18n="sets">Sets</span
+                  ><input id="add-sets" type="number" min="1" max="20" value="3" /></label
+                ><label
+                  ><span data-i18n="repsTime">Reps / time</span
+                  ><input id="add-reps" type="text" placeholder="8–12" /></label
+                ><button
+                  class="add-button"
+                  id="add-exercise-button"
+                  data-i18n-aria-label="addExercise"
+                  aria-label="Add exercise"
+                >
+                  ＋
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="principles wrap">
+        <div class="principle">
+          <span>01</span><strong data-i18n="principleOne">Learn the movement</strong>
+          <p data-i18n="principleOneText">One clear visual. Cues that matter.</p>
+        </div>
+        <div class="principle">
+          <span>02</span><strong data-i18n="principleTwo">Make it your plan</strong>
+          <p data-i18n="principleTwoText">Your sessions, your order, your pace.</p>
+        </div>
+        <div class="principle">
+          <span>03</span><strong data-i18n="principleThree">Keep it simple</strong>
+          <p data-i18n="principleThreeText">No accounts. No clutter. Just training.</p>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <a class="brand" href="#top"
+          ><span class="brand-mark">r</span><span>repzena<span class="brand-dot">.</span></span></a
+        ><span data-i18n="footer">A little more confident, every rep.</span><span>© 2026</span>
+      </div>
+    </footer>
+    <dialog id="exercise-dialog" class="exercise-dialog" aria-labelledby="exercise-dialog-title">
+      <button
+        class="dialog-close"
+        id="dialog-close"
+        data-i18n-aria-label="close"
+        aria-label="Close"
+      >
+        ×
+      </button>
+      <div id="dialog-content"></div>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
