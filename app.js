@@ -34,10 +34,10 @@ const UI = {
     routineEyebrow: 'YOUR TRAINING, YOUR WAY',
     routineTitle: 'Build a routine<br>that <em>sticks.</em>',
     routineIntro:
-      'Put together your sessions, set your reps and keep everything saved on this device.',
+      'Create a separate routine for each training day. Name each one, add its exercises and keep them saved on this device.',
     localNote: 'Private by default. Routines are stored in this browser.',
     importRoutine: 'Import routine',
-    currentRoutine: 'CURRENT ROUTINE',
+    currentRoutine: 'YOUR ROUTINES',
     save: 'Save',
     addDay: 'Add session',
     export: 'Export',
@@ -76,6 +76,7 @@ const UI = {
     chooseExercise: 'Choose an exercise',
     confirmDelete: 'Delete this routine?',
     untitled: 'My routine',
+    routineLabel: 'Routine',
     session: 'Session',
     errorImport: 'Could not read that routine file.',
     sourceRoutine: 'Imported from your personal routine file',
@@ -123,10 +124,10 @@ const UI = {
     routineEyebrow: 'TU ENTRENAMIENTO, A TU MANERA',
     routineTitle: 'Creá una rutina<br>que <em>te sirva.</em>',
     routineIntro:
-      'Armá tus sesiones, definí series y repeticiones, y guardá todo en este dispositivo.',
+      'Creá una rutina distinta para cada día de entrenamiento. Poneles un nombre, agregá sus ejercicios y guardá todo en este dispositivo.',
     localNote: 'Tus rutinas quedan guardadas en este navegador.',
     importRoutine: 'Importá una rutina',
-    currentRoutine: 'RUTINA ACTUAL',
+    currentRoutine: 'TUS RUTINAS',
     save: 'Guardá',
     addDay: 'Agregá una sesión',
     export: 'Exportá',
@@ -165,6 +166,7 @@ const UI = {
     chooseExercise: 'Elegí un ejercicio',
     confirmDelete: '¿Querés eliminar esta rutina?',
     untitled: 'Mi rutina',
+    routineLabel: 'Rutina',
     session: 'Sesión',
     errorImport: 'No se pudo leer el archivo de rutina.',
     sourceRoutine: 'Importada desde tu archivo personal',
@@ -333,7 +335,9 @@ function isDefaultSessionName(name) {
   return /^(?:session|sesión)\s+\d+$/i.test(String(name || '').trim());
 }
 function routineDisplayName(routine) {
-  return routine.defaultName ? t('untitled') : routine.name;
+  if (!routine.defaultName) return routine.name;
+  const index = db.routines.indexOf(routine);
+  return db.routines.length > 1 ? `${t('routineLabel')} ${index + 1}` : t('untitled');
 }
 function sessionDisplayName(day, index) {
   return day.defaultName ? `${t('session')} ${index + 1}` : day.name;
@@ -804,7 +808,10 @@ $('#new-routine').onclick = () => {
   db.routines.push(r);
   db.current = r.id;
   selectedDay = 0;
-  saveDB();
+  if (saveDB()) {
+    $('#routine-name').focus();
+    $('#routine-name').select();
+  }
 };
 $('#routine-select').onchange = (e) => {
   db.current = e.target.value;
@@ -827,7 +834,7 @@ function setRoutineName(routine, value) {
     return;
   }
   routine.name = name.slice(0, 60);
-  if (name !== t('untitled')) routine.defaultName = false;
+  routine.defaultName = name === routineDisplayName(routine) || name === t('untitled');
 }
 $('#add-day').onclick = () => {
   const r = currentRoutine();
