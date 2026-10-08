@@ -89,6 +89,11 @@ const UI = {
     copyGuideLink: 'Copy guide link',
     linkCopied: 'Guide link copied',
     linkCopyError: 'Could not copy the link. Copy it from the address bar.',
+    pagination: 'Exercise pages',
+    previousPage: 'Previous page',
+    nextPage: 'Next page',
+    pageLabel: 'Page',
+    showingExercises: 'Showing {start}–{end} of {total}',
   },
   es: {
     brandHome: 'Inicio de Repzena',
@@ -180,6 +185,11 @@ const UI = {
     copyGuideLink: 'Copiar enlace de la guía',
     linkCopied: 'Se copió el enlace de la guía',
     linkCopyError: 'No se pudo copiar el enlace. Copialo desde la barra de direcciones.',
+    pagination: 'Páginas de ejercicios',
+    previousPage: 'Página anterior',
+    nextPage: 'Página siguiente',
+    pageLabel: 'Página',
+    showingExercises: 'Mostrando {start}–{end} de {total}',
   },
 };
 const names = {
@@ -248,6 +258,9 @@ function readStorage(key) {
 let lang = readStorage(LANGUAGE_KEY) === 'es' ? 'es' : 'en';
 let guideHistoryEntry = false;
 let closingFromNavigation = false;
+let currentExercisePage = 1;
+let exerciseColumnCount = 0;
+let resizeTimer;
 let exercises = [];
 let db = loadDB();
 let selectedDay = 0;
@@ -442,10 +455,19 @@ function renderExercises() {
       (!mu || e.muscles.includes(mu))
     );
   });
+  const grid = $('#exercise-grid');
+  const columns = Math.max(1, getComputedStyle(grid).gridTemplateColumns.split(' ').length);
+  if (exerciseColumnCount && columns !== exerciseColumnCount) currentExercisePage = 1;
+  exerciseColumnCount = columns;
+  const pageSize = columns * 3;
+  const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
+  currentExercisePage = Math.min(currentExercisePage, pageCount);
+  const startIndex = (currentExercisePage - 1) * pageSize;
+  const pageExercises = filtered.slice(startIndex, startIndex + pageSize);
   $('#result-count').textContent =
     `${String(filtered.length).padStart(2, '0')} ${lang === 'es' ? 'MOVIMIENTOS' : 'MOVES'}`;
-  $('#exercise-grid').innerHTML = filtered.length
-    ? filtered
+  grid.innerHTML = filtered.length
+    ? pageExercises
         .map(
           (e, i) =>
             `<article class="exercise-card" style="--delay:${i * 35}ms">${imageMarkup(e)}<div class="card-body"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))} <span>·</span> ${e.level === 'beginner' ? t('beginner') : e.level === 'advanced' ? t('advanced') : t('intermediate')}</div><h3>${escapeHtml(localized(e.name))}</h3><div class="tag-row">${e.muscles
@@ -457,13 +479,60 @@ function renderExercises() {
         )
         .join('')
     : `<div class="no-results">${t('emptySearch')}</div>`;
-  $('#exercise-grid')
+  renderPagination(filtered.length, pageSize, pageCount, startIndex, pageExercises.length);
+  grid
     .querySelectorAll('[data-detail]')
     .forEach((b) => (b.onclick = () => openDetail(b.dataset.detail)));
-  $('#exercise-grid')
-    .querySelectorAll('[data-add]')
-    .forEach((b) => (b.onclick = () => addById(b.dataset.add)));
+  grid.querySelectorAll('[data-add]').forEach((b) => (b.onclick = () => addById(b.dataset.add)));
   renderFilterChips();
+}
+function renderPagination(total, pageSize, pageCount, startIndex, visibleCount) {
+  const nav = $('#exercise-pagination');
+  const status = $('#pagination-status');
+  const controls = $('#pagination-controls');
+  nav.hidden = total <= pageSize;
+  status.textContent = t('showingExercises')
+    .replace('{start}', String(total ? startIndex + 1 : 0))
+    .replace('{end}', String(startIndex + visibleCount))
+    .replace('{total}', String(total));
+  if (nav.hidden) {
+    controls.innerHTML = '';
+    return;
+  }
+  const visiblePages =
+    pageCount <= 5
+      ? Array.from({ length: pageCount }, (_, i) => i + 1)
+      : currentExercisePage <= 3
+        ? [1, 2, 3, 4, null, pageCount]
+        : currentExercisePage >= pageCount - 2
+          ? [1, null, pageCount - 3, pageCount - 2, pageCount - 1, pageCount]
+          : [
+              1,
+              null,
+              currentExercisePage - 1,
+              currentExercisePage,
+              currentExercisePage + 1,
+              null,
+              pageCount,
+            ];
+  controls.innerHTML = [
+    `<button class="page-button" type="button" data-page="${currentExercisePage - 1}" aria-label="${escapeHtml(t('previousPage'))}" ${currentExercisePage === 1 ? 'disabled' : ''}>‹</button>`,
+    ...visiblePages.map((page) =>
+      page === null
+        ? '<span class="page-ellipsis" aria-hidden="true">…</span>'
+        : `<button class="page-button" type="button" data-page="${page}" aria-label="${escapeHtml(t('pageLabel'))} ${page}" ${page === currentExercisePage ? 'aria-current="page"' : ''}>${page}</button>`,
+    ),
+    `<button class="page-button" type="button" data-page="${currentExercisePage + 1}" aria-label="${escapeHtml(t('nextPage'))}" ${currentExercisePage === pageCount ? 'disabled' : ''}>›</button>`,
+  ].join('');
+  controls.querySelectorAll('[data-page]').forEach((button) => {
+    button.onclick = () => {
+      const page = Number(button.dataset.page);
+      if (page < 1 || page > pageCount || page === currentExercisePage) return;
+      currentExercisePage = page;
+      renderExercises();
+      $('#exercise-grid').querySelector('[data-detail]')?.focus();
+    };
+  });
 }
 function renderFilterChips() {
   const arr = [
@@ -483,6 +552,7 @@ function renderFilterChips() {
       (b) =>
         (b.onclick = () => {
           $('#' + b.dataset.clear).value = '';
+          currentExercisePage = 1;
           renderExercises();
         }),
     );
@@ -776,10 +846,30 @@ $('#language').addEventListener('change', (e) => {
   }
   applyLanguage();
 });
-$('#search').addEventListener('input', renderExercises);
+$('#search').addEventListener('input', () => {
+  currentExercisePage = 1;
+  renderExercises();
+});
 ['pattern-filter', 'equipment-filter', 'muscle-filter'].forEach((id) =>
-  $('#' + id).addEventListener('change', renderExercises),
+  $('#' + id).addEventListener('change', () => {
+    currentExercisePage = 1;
+    renderExercises();
+  }),
 );
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const columns = Math.max(
+      1,
+      getComputedStyle($('#exercise-grid')).gridTemplateColumns.split(' ').length,
+    );
+    if (columns !== exerciseColumnCount) {
+      exerciseColumnCount = columns;
+      currentExercisePage = 1;
+      renderExercises();
+    }
+  }, 120);
+});
 $('#dialog-close').onclick = () => $('#exercise-dialog').close();
 $('#exercise-dialog').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) e.currentTarget.close();
