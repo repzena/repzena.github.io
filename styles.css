@@ -281,6 +281,11 @@ a {
   font-size: 42px;
   margin: 14px 0 0;
 }
+.library-note {
+  margin: 8px 0 0;
+  color: #687269;
+  font-size: 13px;
+}
 .result-count {
   font-size: 10px;
   letter-spacing: 0.14em;
