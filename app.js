@@ -84,7 +84,8 @@ const UI = {
     moveUp: 'Move exercise up',
     moveDown: 'Move exercise down',
     importTooLarge: 'That routine file is too large to import.',
-    loadError: 'Exercise data could not be loaded. Open this project through a local web server.',
+    loadError:
+      'The exercise library could not be loaded and no offline copy is available. Check your connection and reload. If you opened a file directly, use a local web server.',
     clearFilter: 'Clear filter',
     copyGuideLink: 'Copy guide link',
     linkCopied: 'Guide link copied',
@@ -180,7 +181,8 @@ const UI = {
     moveUp: 'Mover ejercicio hacia arriba',
     moveDown: 'Mover ejercicio hacia abajo',
     importTooLarge: 'El archivo de rutina es demasiado grande para importarlo.',
-    loadError: 'No se pudieron cargar los ejercicios. Abrí el proyecto desde un servidor local.',
+    loadError:
+      'No se pudo cargar la biblioteca y no hay una copia sin conexión disponible. Revisá tu conexión y volvé a cargar la página. Si abriste un archivo directamente, usá un servidor web local.',
     clearFilter: 'Quitar filtro',
     copyGuideLink: 'Copiar enlace de la guía',
     linkCopied: 'Se copió el enlace de la guía',
@@ -944,17 +946,50 @@ $('#search').addEventListener('keydown', (e) => {
     e.target.focus();
   }
 });
-fetch('./data/exercises.json')
-  .then((r) => {
-    if (!r.ok) throw Error('Could not load exercise data');
-    return r.json();
-  })
-  .then((data) => {
-    exercises = data;
-    applyLanguage();
-    syncGuideWithUrl();
-  })
-  .catch((err) => {
-    console.error(err);
+const CATALOG_CACHE_KEY = 'repzena.exerciseCatalog.v1';
+function validCatalog(data) {
+  return Array.isArray(data) && data.length > 0;
+}
+async function loadCatalog() {
+  const response = await fetch('./data/exercises.json');
+  if (!response.ok) throw Error(`Could not load exercise data (${response.status})`);
+  const data = await response.json();
+  if (!validCatalog(data)) throw Error('Exercise data is empty or invalid');
+  try {
+    localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(data));
+  } catch (error) {
+    console.warn('Could not save an offline copy of exercise data', error);
+  }
+  return data;
+}
+function readCachedCatalog() {
+  try {
+    const data = JSON.parse(localStorage.getItem(CATALOG_CACHE_KEY));
+    return validCatalog(data) ? data : null;
+  } catch (error) {
+    console.warn('Could not read the offline exercise data', error);
+    return null;
+  }
+}
+function showCatalog(data) {
+  exercises = data;
+  applyLanguage();
+  syncGuideWithUrl();
+}
+loadCatalog()
+  .then(showCatalog)
+  .catch((error) => {
+    console.warn('Could not load the online exercise catalog; trying its offline copy', error);
+    const cached = readCachedCatalog();
+    if (cached) {
+      showCatalog(cached);
+      return;
+    }
     $('#exercise-grid').innerHTML = `<div class="no-results">${t('loadError')}</div>`;
   });
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js').catch((error) => {
+    console.warn('Offline support could not be installed', error);
+  });
+}
