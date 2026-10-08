@@ -85,6 +85,9 @@ const UI = {
     importTooLarge: 'That routine file is too large to import.',
     loadError: 'Exercise data could not be loaded. Open this project through a local web server.',
     clearFilter: 'Clear filter',
+    copyGuideLink: 'Copy guide link',
+    linkCopied: 'Guide link copied',
+    linkCopyError: 'Could not copy the link. Copy it from the address bar.',
   },
   es: {
     brandHome: 'Inicio de Repzena',
@@ -172,6 +175,9 @@ const UI = {
     importTooLarge: 'El archivo de rutina es demasiado grande para importarlo.',
     loadError: 'No se pudieron cargar los ejercicios. Abrí el proyecto desde un servidor local.',
     clearFilter: 'Quitar filtro',
+    copyGuideLink: 'Copiar enlace de la guía',
+    linkCopied: 'Se copió el enlace de la guía',
+    linkCopyError: 'No se pudo copiar el enlace. Copialo desde la barra de direcciones.',
   },
 };
 const names = {
@@ -238,6 +244,8 @@ function readStorage(key) {
   }
 }
 let lang = readStorage(LANGUAGE_KEY) === 'es' ? 'es' : 'en';
+let guideHistoryEntry = false;
+let closingFromNavigation = false;
 let exercises = [];
 let db = loadDB();
 let selectedDay = 0;
@@ -371,6 +379,10 @@ function applyLanguage() {
   renderFilters();
   renderExercises();
   renderRoutines();
+  if ($('#exercise-dialog').open) {
+    const id = exerciseIdFromHash();
+    if (id && exercises.some((exercise) => exercise.id === id)) openDetail(id, false);
+  }
 }
 function optionsFor(select, dict, first) {
   const old = select.value;
@@ -471,13 +483,68 @@ function renderFilterChips() {
         }),
     );
 }
-function openDetail(id) {
+function openDetail(id, updateUrl = true) {
   const e = exercises.find((x) => x.id === id);
   if (!e) return;
+  document.title = `Repzena — ${localized(e.name)} | ${lang === 'es' ? 'Guía de ejercicios' : 'Exercise guide'}`;
+  const guideHash = `#exercise/${encodeURIComponent(id)}`;
+  if (updateUrl && location.hash !== guideHash) {
+    guideHistoryEntry = true;
+    history.pushState(
+      { repzenaGuide: true },
+      '',
+      `${location.pathname}${location.search}${guideHash}`,
+    );
+  }
   $('#dialog-content').innerHTML =
-    `${imageMarkup(e)}<div class="dialog-copy"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))}</div><h2 id="exercise-dialog-title">${escapeHtml(localized(e.name))}</h2><div class="detail-facts"><div><small>${t('equipment')}</small><b>${e.equipment.map((x) => escapeHtml(label('equipment', x))).join(', ')}</b></div><div><small>${t('muscles')}</small><b>${e.muscles.map((x) => escapeHtml(label('muscles', x))).join(', ')}</b></div></div><h3>${t('howTo')}</h3><ol>${e.how[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ol><h3>${t('watchFor')}</h3><ul class="cue-list">${e.cues[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ul><button class="button button-dark detail-add" data-detail-add="${escapeHtml(e.id)}">${t('add')} <span aria-hidden="true">＋</span></button></div>`;
+    `${imageMarkup(e)}<div class="dialog-copy"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))}</div><h2 id="exercise-dialog-title">${escapeHtml(localized(e.name))}</h2><button class="guide-link" type="button" data-copy-guide>${escapeHtml(t('copyGuideLink'))}</button><div class="detail-facts"><div><small>${t('equipment')}</small><b>${e.equipment.map((x) => escapeHtml(label('equipment', x))).join(', ')}</b></div><div><small>${t('muscles')}</small><b>${e.muscles.map((x) => escapeHtml(label('muscles', x))).join(', ')}</b></div></div><h3>${t('howTo')}</h3><ol>${e.how[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ol><h3>${t('watchFor')}</h3><ul class="cue-list">${e.cues[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ul><button class="button button-dark detail-add" data-detail-add="${escapeHtml(e.id)}">${t('add')} <span aria-hidden="true">＋</span></button></div>`;
   $('#dialog-content').querySelector('[data-detail-add]').onclick = () => addById(id);
-  $('#exercise-dialog').showModal();
+  $('#dialog-content').querySelector('[data-copy-guide]').onclick = copyGuideLink;
+  if (!$('#exercise-dialog').open) $('#exercise-dialog').showModal();
+}
+function exerciseIdFromHash() {
+  const match = location.hash.match(/^#exercise\/(.+)$/);
+  if (!match) return null;
+  try {
+    return decodeURIComponent(match[1]);
+  } catch {
+    return null;
+  }
+}
+function syncGuideWithUrl() {
+  const id = exerciseIdFromHash();
+  if (id && exercises.some((exercise) => exercise.id === id)) {
+    guideHistoryEntry = false;
+    openDetail(id, false);
+    return;
+  }
+  if (id) history.replaceState(history.state, '', `${location.pathname}${location.search}#library`);
+  if ($('#exercise-dialog').open) {
+    closingFromNavigation = true;
+    $('#exercise-dialog').close();
+  }
+}
+async function copyGuideLink() {
+  const url = location.href;
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(url);
+    } else {
+      const input = document.createElement('input');
+      input.value = url;
+      input.setAttribute('readonly', '');
+      input.style.position = 'fixed';
+      input.style.opacity = '0';
+      document.body.append(input);
+      input.select();
+      const copied = document.execCommand('copy');
+      input.remove();
+      if (!copied) throw new Error('clipboard-unavailable');
+    }
+    toast(t('linkCopied'));
+  } catch {
+    toast(t('linkCopyError'));
+  }
 }
 function currentRoutine() {
   return db.routines.find((r) => r.id === db.current) || db.routines[0] || null;
@@ -713,6 +780,20 @@ $('#dialog-close').onclick = () => $('#exercise-dialog').close();
 $('#exercise-dialog').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) e.currentTarget.close();
 });
+$('#exercise-dialog').addEventListener('close', () => {
+  document.title = lang === 'es' ? 'Repzena — Guía de ejercicios' : 'Repzena — Exercise guide';
+  if (closingFromNavigation) {
+    closingFromNavigation = false;
+    return;
+  }
+  if (guideHistoryEntry) {
+    guideHistoryEntry = false;
+    history.back();
+  } else if (exerciseIdFromHash()) {
+    history.replaceState(history.state, '', `${location.pathname}${location.search}#library`);
+  }
+});
+window.addEventListener('hashchange', syncGuideWithUrl);
 $('#new-routine').onclick = () => {
   const r = {
     id: crypto.randomUUID(),
@@ -774,6 +855,7 @@ fetch('./data/exercises.json')
   .then((data) => {
     exercises = data;
     applyLanguage();
+    syncGuideWithUrl();
   })
   .catch((err) => {
     console.error(err);

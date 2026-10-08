@@ -883,6 +883,21 @@ a {
   letter-spacing: -0.04em;
   margin: 10px 0 19px;
 }
+.guide-link {
+  border: 0;
+  padding: 0;
+  margin: -10px 0 20px;
+  background: transparent;
+  color: var(--ink);
+  font: 600 12px var(--body);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.guide-link:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
 .detail-facts {
   display: grid;
   grid-template-columns: 1fr 1fr;
