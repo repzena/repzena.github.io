@@ -333,12 +333,21 @@ function saveDB() {
   } catch (error) {
     console.error('Routine storage failed', error);
     toast(t('storageError'));
-    renderRoutines();
     return false;
   }
   $('#routine-name').value = currentRoutine() ? routineDisplayName(currentRoutine()) : '';
   renderRoutines();
   return true;
+}
+function commitDBChange(change) {
+  const previousDB = JSON.parse(JSON.stringify(db));
+  const previousSelectedDay = selectedDay;
+  change();
+  if (saveDB()) return true;
+  db = previousDB;
+  selectedDay = previousSelectedDay;
+  renderRoutines();
+  return false;
 }
 function t(key) {
   return UI[lang][key] || key;
@@ -682,8 +691,7 @@ function renderRoutines() {
     .forEach(
       (b) =>
         (b.onclick = () => {
-          day.items.splice(+b.dataset.remove, 1);
-          saveDB();
+          commitDBChange(() => day.items.splice(+b.dataset.remove, 1));
         }),
     );
   $('#routine-items')
@@ -694,8 +702,9 @@ function renderRoutines() {
     .forEach((b) => (b.onclick = () => moveItem(day, +b.dataset.down, 1)));
 }
 function moveItem(day, i, delta) {
-  [day.items[i], day.items[i + delta]] = [day.items[i + delta], day.items[i]];
-  saveDB();
+  commitDBChange(() => {
+    [day.items[i], day.items[i + delta]] = [day.items[i + delta], day.items[i]];
+  });
 }
 function escapeHtml(s) {
   return String(s ?? '').replace(
@@ -713,20 +722,17 @@ function addExerciseToRoutine(id, sets = 3, reps = '8–12') {
   const routine = currentRoutine();
   const day = routine.days[selectedDay] || routine.days[0];
   if (!day) return false;
-  day.items.push({
-    exerciseId: id,
-    name: localized(e.name),
-    names: e.name,
-    sets: Number(sets) || 3,
-    reps: String(reps || ''),
+  const saved = commitDBChange(() => {
+    day.items.push({
+      exerciseId: id,
+      name: localized(e.name),
+      names: e.name,
+      sets: Number(sets) || 3,
+      reps: String(reps || ''),
+    });
   });
-  if (saveDB()) {
-    toast(t('added'));
-    return true;
-  }
-  day.items.pop();
-  renderRoutines();
-  return false;
+  if (saved) toast(t('added'));
+  return saved;
 }
 function addSelected() {
   const id = $('#add-exercise').value;
@@ -830,10 +836,14 @@ async function importRoutine(file) {
       defaultName: typeof src.default_name === 'boolean' ? src.default_name : !importedRoutineName,
       days: days.length ? days : [{ name: `${t('session')} 1`, defaultName: true, items: [] }],
     };
-    db.routines.push(r);
-    db.current = r.id;
-    selectedDay = 0;
-    if (saveDB()) toast(t('imported'));
+    if (
+      commitDBChange(() => {
+        db.routines.push(r);
+        db.current = r.id;
+        selectedDay = 0;
+      })
+    )
+      toast(t('imported'));
   } catch (err) {
     console.error(err);
     toast(err.message === 'routine-file-too-large' ? t('importTooLarge') : t('errorImport'));
@@ -897,26 +907,31 @@ $('#new-routine').onclick = () => {
     defaultName: true,
     days: [{ name: `${t('session')} 1`, defaultName: true, items: [] }],
   };
-  db.routines.push(r);
-  db.current = r.id;
-  selectedDay = 0;
-  if (saveDB()) {
+  if (
+    commitDBChange(() => {
+      db.routines.push(r);
+      db.current = r.id;
+      selectedDay = 0;
+    })
+  ) {
     $('#routine-name').focus();
     $('#routine-name').select();
   }
 };
 $('#routine-select').onchange = (e) => {
-  db.current = e.target.value;
-  selectedDay = 0;
-  saveDB();
+  const selectedRoutineId = e.target.value;
+  commitDBChange(() => {
+    db.current = selectedRoutineId;
+    selectedDay = 0;
+  });
 };
 $('#routine-name').onchange = (e) => {
-  setRoutineName(currentRoutine(), e.target.value);
-  saveDB();
+  const name = e.target.value;
+  commitDBChange(() => setRoutineName(currentRoutine(), name));
 };
 $('#save-routine').onclick = () => {
-  setRoutineName(currentRoutine(), $('#routine-name').value);
-  if (saveDB()) toast(t('saved'));
+  const name = $('#routine-name').value;
+  if (commitDBChange(() => setRoutineName(currentRoutine(), name))) toast(t('saved'));
 };
 function setRoutineName(routine, value) {
   const name = String(value || '').trim();
@@ -929,10 +944,15 @@ function setRoutineName(routine, value) {
   routine.defaultName = name === routineDisplayName(routine) || name === t('untitled');
 }
 $('#add-day').onclick = () => {
-  const r = currentRoutine();
-  r.days.push({ name: `${t('session')} ${r.days.length + 1}`, defaultName: true, items: [] });
-  selectedDay = r.days.length - 1;
-  saveDB();
+  commitDBChange(() => {
+    const routine = currentRoutine();
+    routine.days.push({
+      name: `${t('session')} ${routine.days.length + 1}`,
+      defaultName: true,
+      items: [],
+    });
+    selectedDay = routine.days.length - 1;
+  });
 };
 $('#add-exercise-button').onclick = addSelected;
 $('#export-routine').onclick = exportRoutine;
