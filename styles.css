@@ -317,7 +317,6 @@ a {
 }
 .search-box input {
   border: 0;
-  outline: 0;
   background: transparent;
   width: 100%;
   font-size: 14px;
@@ -700,7 +699,6 @@ a {
 .routine-name-row input {
   border: 0;
   background: transparent;
-  outline: 0;
   flex: 1;
   font: 500 12px var(--sans);
   color: #778178;
