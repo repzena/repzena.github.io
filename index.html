@@ -4,16 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f6f5ef" />
-    <script>
-      try {
-        const saved = localStorage.getItem('repzena-theme');
-        const preference = ['light', 'dark', 'system'].includes(saved) ? saved : 'system';
-        const dark =
-          preference === 'dark' ||
-          (preference === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-      } catch {}
-    </script>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    />
+    <script src="theme.js"></script>
     <meta
       name="description"
       content="A clear, bilingual exercise guide and personal routine builder."

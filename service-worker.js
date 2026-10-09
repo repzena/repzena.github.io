@@ -1,6 +1,13 @@
 const CACHE_PREFIX = 'repzena-static-';
-const CACHE_NAME = `${CACHE_PREFIX}v1`;
-const CORE_FILES = ['./', './index.html', './styles.css', './app.js', './data/exercises.json'];
+const CACHE_NAME = `${CACHE_PREFIX}v2`;
+const CORE_FILES = [
+  './',
+  './index.html',
+  './styles.css',
+  './app.js',
+  './theme.js',
+  './data/exercises.json',
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
