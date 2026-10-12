@@ -1493,6 +1493,7 @@ window.addEventListener('resize', () => {
   }, 120);
 });
 $('#dialog-close').onclick = () => $('#exercise-dialog').close();
+$('#close-add-dialog').onclick = () => $('#add-dialog').close();
 $('#image-viewer').querySelector('[data-viewer-close]').onclick = () => $('#image-viewer').close();
 $('#exercise-dialog').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) e.currentTarget.close();

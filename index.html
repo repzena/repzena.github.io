@@ -354,12 +354,18 @@
       <div id="image-viewer-content"></div>
     </dialog>
     <dialog id="add-dialog" class="add-dialog" aria-labelledby="add-dialog-title">
-      <form method="dialog" class="add-dialog-top">
+      <div class="add-dialog-top">
         <h2 id="add-dialog-title" data-i18n="addToRoutineTitle">Choose where it goes</h2>
-        <button class="dialog-close" value="cancel" data-i18n-aria-label="close" aria-label="Close">
+        <button
+          class="dialog-close"
+          id="close-add-dialog"
+          type="button"
+          data-i18n-aria-label="close"
+          aria-label="Close"
+        >
           ×
         </button>
-      </form>
+      </div>
       <div class="add-dialog-fields">
         <label
           ><span data-i18n="chooseRoutine">Choose a routine</span
