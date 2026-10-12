@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'repzena-static-';
-const CACHE_NAME = `${CACHE_PREFIX}v4`;
+const CACHE_NAME = `${CACHE_PREFIX}v5`;
 const CORE_FILES = [
   './',
   './index.html',
@@ -13,7 +13,25 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => cache.addAll(CORE_FILES))
+      .then((cache) => cache.addAll(CORE_FILES).then(() => cache))
+      .then(async (cache) => {
+        const scopeUrl = new URL(self.registration.scope);
+        const catalogResponse = await cache.match(new URL('./data/exercises.json', scopeUrl).href);
+        const catalog = await catalogResponse.json();
+        const imageUrls = [
+          ...new Set(
+            catalog
+              .flatMap((exercise) => (Array.isArray(exercise.images) ? exercise.images : []))
+              .map((image) => new URL(image.src, scopeUrl))
+              .filter(
+                (url) =>
+                  url.origin === scopeUrl.origin && url.pathname.startsWith(scopeUrl.pathname),
+              )
+              .map((url) => url.href),
+          ),
+        ];
+        await cache.addAll(imageUrls);
+      })
       .then(() => self.skipWaiting()),
   );
 });

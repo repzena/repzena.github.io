@@ -645,7 +645,7 @@ function renderSectionTypeOptions() {
 function imageMarkup(ex) {
   if (Array.isArray(ex.images) && ex.images.length) {
     const first = ex.images[0];
-    return `<div class="exercise-art exercise-photo-art"><button class="exercise-photo-open" type="button" data-detail="${escapeHtml(ex.id)}" aria-label="${escapeHtml(lang === 'es' ? `Ampliar imagen: ${localized(ex.name)}` : `Enlarge image: ${localized(ex.name)}`)}"><img src="${escapeHtml(first.src)}" alt="" loading="lazy" decoding="async" width="1103" height="578"></button></div>`;
+    return `<div class="exercise-art exercise-photo-art"><img src="${escapeHtml(first.src)}" alt="" loading="lazy" decoding="async" width="1103" height="578"></div>`;
   }
   return `<div class="exercise-art art-${escapeHtml(ex.image)}" aria-hidden="true"><div class="art-index">${String(ex.id.length).padStart(2, '0')}</div><svg viewBox="0 0 280 180"><path class="art-floor" d="M20 151h240"/><circle class="art-head" cx="142" cy="42" r="16"/><path class="art-limb" d="M142 59l-9 45 34 17m-34-17-30 26m30-26-5 30 35 17m-35-17-28 18m37-76 31 12 20-15m-82 4-25-13"/><path class="art-equip" d="M212 76v29m-9-24h18m-18 19h18"/><path class="art-arrow" d="M224 125c8-16 8-29 1-41m-3 7 3-8 6 5"/></svg><span class="art-label">${escapeHtml(label('pattern', ex.pattern))}</span></div>`;
 }
@@ -764,14 +764,11 @@ function renderExercises() {
     ? pageExercises
         .map(
           (e, i) =>
-            `<article class="exercise-card" style="--delay:${i * 35}ms">${imageMarkup(e)}<div class="card-body"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))} <span>·</span> ${escapeHtml(focusLabels(e))} <span>·</span> ${e.level === 'beginner' ? t('beginner') : e.level === 'advanced' ? t('advanced') : t('intermediate')}</div><h3>${escapeHtml(localized(e.name))}</h3><div class="tag-row">${e.primaryMuscles?.length ? `<span class="primary-muscle">${escapeHtml(t('primaryMuscle'))}: ${escapeHtml(e.primaryMuscles.map((x) => label('muscles', x)).join(', '))}</span>` : ''}${e.secondaryMuscles?.length ? `<span class="additional-muscles">${escapeHtml(t('secondaryMuscle'))}: ${escapeHtml(e.secondaryMuscles.map((x) => label('muscles', x)).join(', '))}</span>` : ''}</div><div class="card-actions"><button class="detail-link" data-detail="${escapeHtml(e.id)}">${lang === 'es' ? 'Ver guía' : 'View guide'} <span aria-hidden="true">↗</span></button><button class="quick-add" data-add="${escapeHtml(e.id)}" aria-label="${escapeHtml(t('addToRoutine'))}: ${escapeHtml(localized(e.name))}" title="${escapeHtml(t('add'))}">＋</button></div></div></article>`,
+            `<article class="exercise-card" style="--delay:${i * 35}ms"><a class="exercise-card-link" data-detail="${escapeHtml(e.id)}" href="#exercise/${encodeURIComponent(e.id)}" aria-label="${escapeHtml(lang === 'es' ? `Abrir guía: ${localized(e.name)}` : `Open guide: ${localized(e.name)}`)}"></a>${imageMarkup(e)}<div class="card-body"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))} <span>·</span> ${escapeHtml(focusLabels(e))} <span>·</span> ${e.level === 'beginner' ? t('beginner') : e.level === 'advanced' ? t('advanced') : t('intermediate')}</div><h3>${escapeHtml(localized(e.name))}</h3><div class="tag-row">${e.primaryMuscles?.length ? `<span class="primary-muscle">${escapeHtml(t('primaryMuscle'))}: ${escapeHtml(e.primaryMuscles.map((x) => label('muscles', x)).join(', '))}</span>` : ''}${e.secondaryMuscles?.length ? `<span class="additional-muscles">${escapeHtml(t('secondaryMuscle'))}: ${escapeHtml(e.secondaryMuscles.map((x) => label('muscles', x)).join(', '))}</span>` : ''}</div><div class="card-actions"><span class="detail-link" aria-hidden="true">${lang === 'es' ? 'Ver guía' : 'View guide'} <span aria-hidden="true">↗</span></span><button class="quick-add" data-add="${escapeHtml(e.id)}" aria-label="${escapeHtml(t('addToRoutine'))}: ${escapeHtml(localized(e.name))}" title="${escapeHtml(t('add'))}">＋</button></div></div></article>`,
         )
         .join('')
     : `<div class="no-results">${t('emptySearch')}</div>`;
   renderPagination(filtered.length, pageSize, pageCount, startIndex, pageExercises.length);
-  grid
-    .querySelectorAll('[data-detail]')
-    .forEach((b) => (b.onclick = () => openDetail(b.dataset.detail)));
   grid.querySelectorAll('[data-add]').forEach((b) => (b.onclick = () => addById(b.dataset.add)));
   renderFilterChips();
 }
