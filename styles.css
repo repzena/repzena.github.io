@@ -1111,34 +1111,34 @@ a {
   flex-direction: column;
   gap: 4px;
 }
-.item-info b,
-.routine-exercise-link {
+.item-info b {
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.routine-exercise-link {
-  width: fit-content;
-  max-width: 100%;
+.routine-item-open {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 0;
   border: 0;
   background: transparent;
   color: inherit;
   text-align: left;
   cursor: pointer;
-  text-decoration: underline;
-  text-decoration-color: #aeb8b0;
-  text-underline-offset: 3px;
+  border-radius: 3px;
+  transition: color 0.18s;
 }
-.routine-exercise-link:hover {
-  text-decoration-color: var(--orange);
+.routine-item-open:hover .item-info b {
+  color: var(--orange);
 }
-.routine-exercise-link:focus-visible {
+.routine-item-open:focus-visible {
   outline: 2px solid var(--orange);
   outline-offset: 2px;
-  border-radius: 2px;
 }
 .item-info small {
   font-size: 12px;
@@ -1193,6 +1193,9 @@ a {
   color: #68756c;
   font-size: 13px;
   font-weight: 600;
+}
+.section-target[hidden] {
+  display: none;
 }
 .section-target select {
   appearance: none;
@@ -1964,12 +1967,8 @@ a {
   color: var(--ink);
 }
 :root[data-theme='dark'] .item-info b,
-:root[data-theme='dark'] .routine-exercise-link,
 :root[data-theme='dark'] .routine-empty strong {
   color: var(--ink);
-}
-:root[data-theme='dark'] .routine-exercise-link {
-  text-decoration-color: #718078;
 }
 :root[data-theme='dark'] .routine-empty {
   color: #aab8ae;

@@ -9,6 +9,7 @@ const UI = {
     routineName: 'Routine name',
     addExercise: 'Add exercise',
     close: 'Close',
+    openGuide: 'Open exercise guide',
     navLibrary: 'Exercise library',
     navLibraryShort: 'Exercises',
     navRoutines: 'My routines',
@@ -152,6 +153,7 @@ const UI = {
     routineName: 'Nombre de la rutina',
     addExercise: 'Agregar ejercicio',
     close: 'Cerrar',
+    openGuide: 'Abrir la guía del ejercicio',
     navLibrary: 'Ejercicios',
     navLibraryShort: 'Ejercicios',
     navRoutines: 'Mis rutinas',
@@ -1057,13 +1059,26 @@ function renderSectionTarget(day) {
   select.value = selectedSectionId || '';
   select.closest('label').hidden = !day.sections.length;
 }
+function routineGuideId(item) {
+  if (item.exerciseId && exercises.some((exercise) => exercise.id === item.exerciseId))
+    return item.exerciseId;
+  const itemNames = [item.name, item.names?.en, item.names?.es]
+    .filter((name) => typeof name === 'string' && name.trim())
+    .map(searchText);
+  return (
+    exercises.find((exercise) =>
+      [exercise.name.en, exercise.name.es].some((name) => itemNames.includes(searchText(name))),
+    )?.id || null
+  );
+}
 function renderRoutineItem(item, itemIndex, sectionId = '', itemCount = 0) {
   const itemName = escapeHtml(localized(item.names) || item.name);
-  const hasGuide = item.exerciseId && exercises.some((exercise) => exercise.id === item.exerciseId);
-  const nameMarkup = hasGuide
-    ? `<button type="button" class="routine-exercise-link" data-routine-detail="${escapeHtml(item.exerciseId)}">${itemName}</button>`
-    : `<b>${itemName}</b>`;
-  return `<div class="routine-item"><span class="item-order">${String(itemIndex + 1).padStart(2, '0')}</span><div class="item-info">${nameMarkup}<small>${escapeHtml(item.sets)} ${escapeHtml(t('sets').toLowerCase())} <span>·</span> ${escapeHtml(item.reps || '—')}</small></div><button type="button" class="item-action" data-item-up="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveUp'))}" ${itemIndex === 0 ? 'disabled' : ''}>↑</button><button type="button" class="item-action" data-item-down="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveDown'))}" ${itemIndex === itemCount - 1 ? 'disabled' : ''}>↓</button><button type="button" class="item-action remove" data-remove-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('delete'))}">×</button></div>`;
+  const guideId = routineGuideId(item);
+  const open = guideId
+    ? `<button type="button" class="routine-item-open" data-routine-detail="${escapeHtml(guideId)}" aria-label="${escapeHtml(t('openGuide'))}: ${itemName}">`
+    : '<div class="routine-item-open">';
+  const close = guideId ? '</button>' : '</div>';
+  return `<div class="routine-item">${open}<span class="item-order">${String(itemIndex + 1).padStart(2, '0')}</span><div class="item-info"><b>${itemName}</b><small>${escapeHtml(item.sets)} ${escapeHtml(t('sets').toLowerCase())} <span>·</span> ${escapeHtml(item.reps || '—')}</small></div>${close}<button type="button" class="item-action" data-item-up="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveUp'))}" ${itemIndex === 0 ? 'disabled' : ''}>↑</button><button type="button" class="item-action" data-item-down="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveDown'))}" ${itemIndex === itemCount - 1 ? 'disabled' : ''}>↓</button><button type="button" class="item-action remove" data-remove-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('delete'))}">×</button></div>`;
 }
 function renderRoutineSection(section, index, sectionCount) {
   const isCollapsed = collapsedSectionIds.has(section.id);
