@@ -7,9 +7,7 @@
     },
     "pattern": "horizontal-push",
     "equipment": ["barbell", "bench"],
-    "muscles": ["chest", "triceps", "shoulders"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "bench",
     "how": {
       "en": [
@@ -36,7 +34,10 @@
     "aliases": {
       "en": [],
       "es": ["Press banca con barra"]
-    }
+    },
+    "primaryMuscles": ["chest"],
+    "secondaryMuscles": ["triceps", "shoulders"],
+    "focus": ["strength"]
   },
   {
     "id": "barbell-row",
@@ -46,9 +47,7 @@
     },
     "pattern": "horizontal-pull",
     "equipment": ["barbell"],
-    "muscles": ["back", "biceps", "shoulders"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "row",
     "how": {
       "en": [
@@ -75,7 +74,10 @@
     "aliases": {
       "en": ["Barbell row"],
       "es": ["Remo con barra"]
-    }
+    },
+    "primaryMuscles": ["back"],
+    "secondaryMuscles": ["biceps", "shoulders"],
+    "focus": ["strength"]
   },
   {
     "id": "dumbbell-shoulder-press",
@@ -85,9 +87,7 @@
     },
     "pattern": "vertical-push",
     "equipment": ["dumbbells", "bench"],
-    "muscles": ["shoulders", "triceps"],
     "level": "beginner",
-    "kind": "strength",
     "image": "press",
     "how": {
       "en": [
@@ -107,7 +107,10 @@
         "Mantené las costillas controladas y evitá arquear la espalda.",
         "Pará si sentís un dolor agudo."
       ]
-    }
+    },
+    "primaryMuscles": ["shoulders"],
+    "secondaryMuscles": ["triceps"],
+    "focus": ["strength"]
   },
   {
     "id": "barbell-squat",
@@ -117,9 +120,7 @@
     },
     "pattern": "squat",
     "equipment": ["barbell", "rack"],
-    "muscles": ["quads", "glutes", "core"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "squat",
     "how": {
       "en": [
@@ -142,7 +143,10 @@
         "Evitá que las rodillas se vayan hacia adentro.",
         "Usá los seguros de la jaula y un peso que puedas controlar."
       ]
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["glutes"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "romanian-deadlift",
@@ -152,9 +156,7 @@
     },
     "pattern": "hinge",
     "equipment": ["barbell"],
-    "muscles": ["hamstrings", "glutes", "back"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "hinge",
     "how": {
       "en": [
@@ -177,7 +179,10 @@
         "Es una bisagra de cadera, no una sentadilla profunda.",
         "No redondees la espalda ni fuerces el recorrido."
       ]
-    }
+    },
+    "primaryMuscles": ["hamstrings"],
+    "secondaryMuscles": ["glutes", "back"],
+    "focus": ["strength"]
   },
   {
     "id": "lat-pulldown",
@@ -187,9 +192,7 @@
     },
     "pattern": "vertical-pull",
     "equipment": ["cable", "machine"],
-    "muscles": ["back", "biceps"],
     "level": "beginner",
-    "kind": "strength",
     "image": "row",
     "how": {
       "en": [
@@ -213,7 +216,10 @@
     "aliases": {
       "en": [],
       "es": ["Tiron al pecho"]
-    }
+    },
+    "primaryMuscles": ["back"],
+    "secondaryMuscles": ["biceps"],
+    "focus": ["strength"]
   },
   {
     "id": "hip-thrust",
@@ -223,9 +229,7 @@
     },
     "pattern": "hinge",
     "equipment": ["barbell", "bench"],
-    "muscles": ["glutes", "hamstrings"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "hinge",
     "how": {
       "en": [
@@ -252,7 +256,10 @@
     "aliases": {
       "en": [],
       "es": ["Hip thrust"]
-    }
+    },
+    "primaryMuscles": ["glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "focus": ["strength"]
   },
   {
     "id": "bulgarian-split-squat",
@@ -262,9 +269,7 @@
     },
     "pattern": "lunge",
     "equipment": ["dumbbells", "bench"],
-    "muscles": ["quads", "glutes"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "squat",
     "how": {
       "en": [
@@ -287,7 +292,10 @@
         "Usá un banco firme y empezá sin peso si todavía te cuesta mantener el equilibrio.",
         "Mantené la mayor parte del peso sobre el pie delantero."
       ]
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["glutes"],
+    "focus": ["strength"]
   },
   {
     "id": "plank",
@@ -295,11 +303,9 @@
       "en": "Forearm plank",
       "es": "Plancha con antebrazos"
     },
-    "pattern": "core",
+    "pattern": "isometric-stability",
     "equipment": ["bodyweight"],
-    "muscles": ["core", "shoulders"],
     "level": "beginner",
-    "kind": "strength",
     "image": "core",
     "how": {
       "en": [
@@ -323,7 +329,10 @@
     "aliases": {
       "en": [],
       "es": ["Plancha sobre antebrazos"]
-    }
+    },
+    "primaryMuscles": [],
+    "secondaryMuscles": ["shoulders"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "goblet-squat",
@@ -333,9 +342,7 @@
     },
     "pattern": "squat",
     "equipment": ["dumbbells"],
-    "muscles": ["quads", "glutes", "core"],
     "level": "beginner",
-    "kind": "strength",
     "image": "squat",
     "how": {
       "en": [
@@ -362,7 +369,10 @@
     "aliases": {
       "en": [],
       "es": ["Sentadilla Goblet pesada"]
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["glutes"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "mountain-climber",
@@ -370,11 +380,9 @@
       "en": "Mountain climbers",
       "es": "Escaladores (mountain climbers)"
     },
-    "pattern": "core",
+    "pattern": "knee-drive",
     "equipment": ["bodyweight"],
-    "muscles": ["core", "shoulders", "hip-flexors"],
     "level": "beginner",
-    "kind": "conditioning",
     "image": "core",
     "how": {
       "en": [
@@ -398,7 +406,10 @@
     "aliases": {
       "en": [],
       "es": ["Mountain climbers"]
-    }
+    },
+    "primaryMuscles": [],
+    "secondaryMuscles": ["shoulders", "hip-flexors"],
+    "focus": ["conditioning", "core"]
   },
   {
     "id": "hip-90-90",
@@ -406,11 +417,9 @@
       "en": "90/90 hip switches",
       "es": "Movilidad de cadera 90/90"
     },
-    "pattern": "mobility",
+    "pattern": "hip-rotation",
     "equipment": ["bodyweight"],
-    "muscles": ["glutes", "adductors"],
     "level": "beginner",
-    "kind": "mobility",
     "image": "core",
     "how": {
       "en": [
@@ -425,7 +434,10 @@
     "cues": {
       "en": ["Use your hands for support and stay within a comfortable range."],
       "es": ["Apoyá las manos si lo necesitás y movete dentro de un recorrido cómodo."]
-    }
+    },
+    "primaryMuscles": ["glutes"],
+    "secondaryMuscles": ["adductors"],
+    "focus": ["mobility"]
   },
   {
     "id": "cat-cow",
@@ -433,11 +445,9 @@
       "en": "Cat-cow stretch",
       "es": "Gato-vaca"
     },
-    "pattern": "mobility",
+    "pattern": "spinal-flexion",
     "equipment": ["bodyweight"],
-    "muscles": ["back", "core"],
     "level": "beginner",
-    "kind": "mobility",
     "image": "core",
     "how": {
       "en": [
@@ -456,7 +466,10 @@
     "aliases": {
       "en": ["Cat-cow"],
       "es": ["Gato contento / Gato enojado"]
-    }
+    },
+    "primaryMuscles": ["back"],
+    "secondaryMuscles": [],
+    "focus": ["mobility", "core"]
   },
   {
     "id": "shoulder-pass-through",
@@ -464,11 +477,9 @@
       "en": "Shoulder pass-throughs",
       "es": "Pasadas de hombros con banda o bastón"
     },
-    "pattern": "mobility",
+    "pattern": "shoulder-flexion",
     "equipment": ["band", "stick"],
-    "muscles": ["shoulders", "back"],
     "level": "beginner",
-    "kind": "mobility",
     "image": "press",
     "how": {
       "en": [
@@ -492,7 +503,10 @@
         "Dislocaciones de hombro con banda/bastón",
         "Dislocaciones de hombro con banda o bastón"
       ]
-    }
+    },
+    "primaryMuscles": ["shoulders"],
+    "secondaryMuscles": ["back"],
+    "focus": ["mobility"]
   },
   {
     "id": "high-plank",
@@ -500,11 +514,9 @@
       "en": "High plank",
       "es": "Plancha alta"
     },
-    "pattern": "core",
+    "pattern": "isometric-stability",
     "equipment": ["bodyweight"],
-    "muscles": ["core", "shoulders"],
     "level": "beginner",
-    "kind": "strength",
     "image": "core",
     "how": {
       "en": [
@@ -525,7 +537,10 @@
     "aliases": {
       "en": [],
       "es": ["Plancha tradicional"]
-    }
+    },
+    "primaryMuscles": [],
+    "secondaryMuscles": ["shoulders"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "hanging-leg-raise",
@@ -533,11 +548,9 @@
       "en": "Hanging knee raise",
       "es": "Elevación de rodillas en barra"
     },
-    "pattern": "core",
+    "pattern": "trunk-flexion",
     "equipment": ["pull-up-bar"],
-    "muscles": ["core", "hip-flexors"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "core",
     "how": {
       "en": [
@@ -558,7 +571,10 @@
     "aliases": {
       "en": [],
       "es": ["Elevación de piernas en barra", "Elevación de rodillas colgado"]
-    }
+    },
+    "primaryMuscles": [],
+    "secondaryMuscles": ["hip-flexors"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "dumbbell-overhead-press",
@@ -568,9 +584,7 @@
     },
     "pattern": "vertical-push",
     "equipment": ["dumbbells"],
-    "muscles": ["shoulders", "triceps"],
     "level": "beginner",
-    "kind": "strength",
     "image": "press",
     "how": {
       "en": [
@@ -585,7 +599,10 @@
     "cues": {
       "en": ["Keep your ribs over your hips and avoid leaning back to finish the press."],
       "es": ["Mantené las costillas sobre las caderas y evitá inclinarte hacia atrás al empujar."]
-    }
+    },
+    "primaryMuscles": ["shoulders"],
+    "secondaryMuscles": ["triceps"],
+    "focus": ["strength"]
   },
   {
     "id": "ez-bar-curl",
@@ -595,9 +612,7 @@
     },
     "pattern": "elbow-flexion",
     "equipment": ["ez-bar"],
-    "muscles": ["biceps"],
     "level": "beginner",
-    "kind": "strength",
     "image": "row",
     "how": {
       "en": [
@@ -616,7 +631,10 @@
     "aliases": {
       "en": [],
       "es": ["Curl con barra Z"]
-    }
+    },
+    "primaryMuscles": ["biceps"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "rope-triceps-pushdown",
@@ -626,9 +644,7 @@
     },
     "pattern": "elbow-extension",
     "equipment": ["cable"],
-    "muscles": ["triceps"],
     "level": "beginner",
-    "kind": "strength",
     "image": "press",
     "how": {
       "en": [
@@ -643,7 +659,10 @@
     "cues": {
       "en": ["Use a load you can control and keep your shoulders relaxed."],
       "es": ["Elegí un peso que puedas controlar y mantené los hombros relajados."]
-    }
+    },
+    "primaryMuscles": ["triceps"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "incline-leg-press",
@@ -653,9 +672,7 @@
     },
     "pattern": "squat",
     "equipment": ["machine"],
-    "muscles": ["quads", "glutes"],
     "level": "beginner",
-    "kind": "strength",
     "image": "squat",
     "how": {
       "en": [
@@ -670,7 +687,10 @@
     "cues": {
       "en": ["Keep your lower back against the pad and use a range you can control."],
       "es": ["Mantené la zona lumbar apoyada y usá un recorrido que puedas controlar."]
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["glutes"],
+    "focus": ["strength"]
   },
   {
     "id": "seated-leg-curl",
@@ -680,9 +700,7 @@
     },
     "pattern": "knee-flexion",
     "equipment": ["machine"],
-    "muscles": ["hamstrings"],
     "level": "beginner",
-    "kind": "strength",
     "image": "hinge",
     "how": {
       "en": [
@@ -697,7 +715,10 @@
     "cues": {
       "en": ["Keep your hips against the seat and avoid jerking the weight."],
       "es": ["Mantené las caderas apoyadas y evitá dar tirones al peso."]
-    }
+    },
+    "primaryMuscles": ["hamstrings"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "standing-calf-raise",
@@ -707,9 +728,7 @@
     },
     "pattern": "ankle-plantar-flexion",
     "equipment": ["machine"],
-    "muscles": ["calves"],
     "level": "beginner",
-    "kind": "strength",
     "image": "squat",
     "how": {
       "en": [
@@ -728,7 +747,10 @@
     "aliases": {
       "en": [],
       "es": ["Elevación de talones de pie"]
-    }
+    },
+    "primaryMuscles": ["calves"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "quadruped-thoracic-rotation",
@@ -736,11 +758,9 @@
       "en": "Quadruped thoracic rotation",
       "es": "Rotación torácica en cuadrupedia"
     },
-    "pattern": "mobility",
+    "pattern": "trunk-rotation",
     "equipment": ["bodyweight"],
-    "muscles": ["back", "shoulders"],
     "level": "beginner",
-    "kind": "mobility",
     "image": "core",
     "how": {
       "en": [
@@ -759,7 +779,10 @@
     "aliases": {
       "en": [],
       "es": ["Apertura torácica en cuadrupedia"]
-    }
+    },
+    "primaryMuscles": ["back"],
+    "secondaryMuscles": ["shoulders"],
+    "focus": ["mobility"]
   },
   {
     "id": "rotational-lunge",
@@ -767,11 +790,9 @@
       "en": "Lunge with rotation",
       "es": "Estocada con rotación"
     },
-    "pattern": "mobility",
+    "pattern": "lunge",
     "equipment": ["bodyweight"],
-    "muscles": ["quads", "glutes", "core"],
     "level": "beginner",
-    "kind": "mobility",
     "image": "squat",
     "how": {
       "en": [
@@ -790,7 +811,10 @@
     "aliases": {
       "en": [],
       "es": ["Estocadas con rotación"]
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["glutes"],
+    "focus": ["mobility", "core"]
   },
   {
     "id": "ankle-knee-circles",
@@ -798,11 +822,9 @@
       "en": "Ankle circles and knee bends",
       "es": "Círculos de tobillo y flexiones de rodilla"
     },
-    "pattern": "mobility",
+    "pattern": "ankle-circles",
     "equipment": ["bodyweight"],
-    "muscles": ["quads", "calves"],
     "level": "beginner",
-    "kind": "mobility",
     "image": "core",
     "how": {
       "en": [
@@ -825,7 +847,10 @@
     "aliases": {
       "en": ["Ankle and knee mobility circles"],
       "es": ["Movilidad circular de tobillos y rodillas"]
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["calves"],
+    "focus": ["mobility"]
   },
   {
     "id": "side-plank",
@@ -833,11 +858,9 @@
       "en": "Side plank",
       "es": "Plancha lateral (ambos lados)"
     },
-    "pattern": "core",
+    "pattern": "lateral-stability",
     "equipment": ["bodyweight"],
-    "muscles": ["obliques", "shoulders"],
     "level": "beginner",
-    "kind": "strength",
     "image": "core",
     "how": {
       "en": [
@@ -852,7 +875,10 @@
     "cues": {
       "en": ["Bend your knees for an easier version and do not let the shoulder collapse."],
       "es": ["Flexioná las rodillas para facilitar la postura y no dejes que el hombro se hunda."]
-    }
+    },
+    "primaryMuscles": ["obliques"],
+    "secondaryMuscles": ["shoulders"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "reverse-crunch",
@@ -860,11 +886,9 @@
       "en": "Reverse crunch",
       "es": "Crunch inverso"
     },
-    "pattern": "core",
+    "pattern": "trunk-flexion",
     "equipment": ["bodyweight"],
-    "muscles": ["core"],
     "level": "beginner",
-    "kind": "strength",
     "image": "core",
     "how": {
       "en": [
@@ -879,7 +903,10 @@
     "cues": {
       "en": ["Use a small controlled movement rather than swinging your legs."],
       "es": ["Hacé un movimiento corto y controlado, sin balancear las piernas."]
-    }
+    },
+    "primaryMuscles": [],
+    "secondaryMuscles": [],
+    "focus": ["strength", "core"]
   },
   {
     "id": "russian-twist",
@@ -887,11 +914,9 @@
       "en": "Russian twist",
       "es": "Giros rusos"
     },
-    "pattern": "core",
+    "pattern": "trunk-rotation",
     "equipment": ["bodyweight"],
-    "muscles": ["obliques", "core"],
     "level": "beginner",
-    "kind": "strength",
     "image": "core",
     "how": {
       "en": [
@@ -910,7 +935,10 @@
     "aliases": {
       "en": [],
       "es": ["Russian twists (Giros rusos)"]
-    }
+    },
+    "primaryMuscles": ["obliques"],
+    "secondaryMuscles": [],
+    "focus": ["strength", "core"]
   },
   {
     "id": "incline-dumbbell-press",
@@ -920,9 +948,7 @@
     },
     "pattern": "horizontal-push",
     "equipment": ["dumbbells", "bench"],
-    "muscles": ["chest", "triceps", "shoulders"],
     "level": "beginner",
-    "kind": "strength",
     "image": "press",
     "how": {
       "en": [
@@ -937,7 +963,10 @@
     "cues": {
       "en": ["Keep your head and back supported and do not bounce at the bottom."],
       "es": ["Mantené la cabeza y la espalda apoyadas y no rebotes abajo."]
-    }
+    },
+    "primaryMuscles": ["chest"],
+    "secondaryMuscles": ["triceps", "shoulders"],
+    "focus": ["strength"]
   },
   {
     "id": "dumbbell-lateral-raise",
@@ -947,9 +976,7 @@
     },
     "pattern": "shoulder-abduction",
     "equipment": ["dumbbells"],
-    "muscles": ["shoulders"],
     "level": "beginner",
-    "kind": "strength",
     "image": "press",
     "how": {
       "en": [
@@ -968,7 +995,10 @@
     "aliases": {
       "en": [],
       "es": ["Elevaciones laterales para hombros"]
-    }
+    },
+    "primaryMuscles": ["shoulders"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "hammer-curl",
@@ -978,9 +1008,7 @@
     },
     "pattern": "elbow-flexion",
     "equipment": ["dumbbells"],
-    "muscles": ["biceps"],
     "level": "beginner",
-    "kind": "strength",
     "image": "row",
     "how": {
       "en": [
@@ -995,7 +1023,10 @@
     "cues": {
       "en": ["Keep wrists neutral and elbows close to your body."],
       "es": ["Mantené las muñecas rectas y los codos cerca del cuerpo."]
-    }
+    },
+    "primaryMuscles": ["biceps"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "dumbbell-french-press",
@@ -1005,9 +1036,7 @@
     },
     "pattern": "elbow-extension",
     "equipment": ["dumbbells", "bench"],
-    "muscles": ["triceps"],
     "level": "beginner",
-    "kind": "strength",
     "image": "press",
     "how": {
       "en": [
@@ -1026,7 +1055,10 @@
     "aliases": {
       "en": [],
       "es": ["Press francés con mancuernas", "Extensión de tríceps acostado con mancuernas"]
-    }
+    },
+    "primaryMuscles": ["triceps"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "conventional-deadlift",
@@ -1036,9 +1068,7 @@
     },
     "pattern": "hinge",
     "equipment": ["barbell"],
-    "muscles": ["hamstrings", "glutes", "quads", "back", "core"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "hinge",
     "how": {
       "en": [
@@ -1057,7 +1087,10 @@
       "es": [
         "Usá un peso que puedas levantar con suavidad y el torso controlado; evitá dar tirones con la barra."
       ]
-    }
+    },
+    "primaryMuscles": ["hamstrings"],
+    "secondaryMuscles": ["glutes", "quads", "back"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "leg-extension-machine",
@@ -1067,9 +1100,7 @@
     },
     "pattern": "knee-extension",
     "equipment": ["machine"],
-    "muscles": ["quads"],
     "level": "beginner",
-    "kind": "strength",
     "image": "squat",
     "how": {
       "en": [
@@ -1088,7 +1119,10 @@
     "aliases": {
       "en": ["Machine leg extension", "Leg extension machine"],
       "es": []
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "seated-calf-raise",
@@ -1098,9 +1132,7 @@
     },
     "pattern": "ankle-plantar-flexion",
     "equipment": ["machine"],
-    "muscles": ["calves"],
     "level": "beginner",
-    "kind": "strength",
     "image": "squat",
     "how": {
       "en": [
@@ -1119,7 +1151,10 @@
     "aliases": {
       "en": [],
       "es": ["Elevación de talones sentado"]
-    }
+    },
+    "primaryMuscles": ["calves"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "deep-squat-pry",
@@ -1127,11 +1162,9 @@
       "en": "Deep squat pry",
       "es": "Sentadilla profunda con apertura de rodillas"
     },
-    "pattern": "mobility",
+    "pattern": "squat",
     "equipment": ["bodyweight"],
-    "muscles": ["quads", "glutes", "adductors"],
     "level": "beginner",
-    "kind": "mobility",
     "image": "squat",
     "how": {
       "en": [
@@ -1152,7 +1185,10 @@
     "aliases": {
       "en": ["Deep squat hold with elbow pry"],
       "es": ["Sentadilla profunda isométrica con empuje de codos"]
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["glutes", "adductors"],
+    "focus": ["mobility"]
   },
   {
     "id": "dynamic-hurdle-step",
@@ -1160,11 +1196,9 @@
       "en": "Dynamic hurdle step (heel-to-toe)",
       "es": "Paso de valla dinámico (talón-punta)"
     },
-    "pattern": "mobility",
+    "pattern": "lunge",
     "equipment": ["bodyweight"],
-    "muscles": ["quads", "glutes", "calves"],
     "level": "beginner",
-    "kind": "mobility",
     "image": "squat",
     "how": {
       "en": [
@@ -1179,7 +1213,10 @@
     "cues": {
       "en": ["Use a small, controlled step and hold support if balance is uncertain."],
       "es": ["Hacé un paso corto y controlado, y sujetate si no estás seguro del equilibrio."]
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["glutes", "calves"],
+    "focus": ["mobility"]
   },
   {
     "id": "prone-ytw",
@@ -1187,11 +1224,9 @@
       "en": "Prone Y-T-W raises",
       "es": "Elevaciones Y-T-W boca abajo"
     },
-    "pattern": "mobility",
+    "pattern": "shoulder-abduction",
     "equipment": ["bodyweight"],
-    "muscles": ["shoulders", "back"],
     "level": "beginner",
-    "kind": "mobility",
     "image": "core",
     "how": {
       "en": [
@@ -1210,7 +1245,10 @@
     "aliases": {
       "en": [],
       "es": ["Y-T-W extensiones escapulares prone", "Extensiones escapulares Y-T-W boca abajo"]
-    }
+    },
+    "primaryMuscles": ["shoulders"],
+    "secondaryMuscles": ["back"],
+    "focus": ["mobility"]
   },
   {
     "id": "ab-wheel-rollout",
@@ -1218,11 +1256,9 @@
       "en": "Ab wheel rollout",
       "es": "Rueda abdominal"
     },
-    "pattern": "core",
+    "pattern": "anti-extension",
     "equipment": ["ab-wheel"],
-    "muscles": ["core", "shoulders"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "core",
     "how": {
       "en": [
@@ -1241,7 +1277,10 @@
     "aliases": {
       "en": ["Ab-wheel rollout"],
       "es": ["Rodillo abdominal (ab wheel rollout)"]
-    }
+    },
+    "primaryMuscles": [],
+    "secondaryMuscles": ["shoulders"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "hollow-hold",
@@ -1249,11 +1288,9 @@
       "en": "Hollow hold",
       "es": "Hollow hold (posición hollow)"
     },
-    "pattern": "core",
+    "pattern": "isometric-stability",
     "equipment": ["bodyweight"],
-    "muscles": ["core"],
     "level": "beginner",
-    "kind": "strength",
     "image": "core",
     "how": {
       "en": [
@@ -1272,7 +1309,10 @@
     "aliases": {
       "en": ["Hollow-body hold"],
       "es": ["Hollow hold (mantención en canoa)"]
-    }
+    },
+    "primaryMuscles": [],
+    "secondaryMuscles": [],
+    "focus": ["strength", "core"]
   },
   {
     "id": "bird-dog",
@@ -1280,11 +1320,9 @@
       "en": "Bird-dog",
       "es": "Bird dog (extensión alternada)"
     },
-    "pattern": "core",
+    "pattern": "anti-rotation",
     "equipment": ["bodyweight"],
-    "muscles": ["core", "back", "glutes"],
     "level": "beginner",
-    "kind": "strength",
     "image": "core",
     "how": {
       "en": [
@@ -1303,7 +1341,10 @@
     "aliases": {
       "en": [],
       "es": ["Bird dog (alternado controlado)"]
-    }
+    },
+    "primaryMuscles": [],
+    "secondaryMuscles": ["back", "glutes"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "arnold-press",
@@ -1313,9 +1354,7 @@
     },
     "pattern": "vertical-push",
     "equipment": ["dumbbells"],
-    "muscles": ["shoulders", "triceps"],
     "level": "intermediate",
-    "kind": "strength",
     "image": "press",
     "how": {
       "en": [
@@ -1330,7 +1369,10 @@
     "cues": {
       "en": ["Keep the rotation smooth and avoid leaning back."],
       "es": ["Hacé el giro con suavidad y evitá inclinarte hacia atrás."]
-    }
+    },
+    "primaryMuscles": ["shoulders"],
+    "secondaryMuscles": ["triceps"],
+    "focus": ["strength"]
   },
   {
     "id": "seated-cable-row-neutral",
@@ -1340,9 +1382,7 @@
     },
     "pattern": "horizontal-pull",
     "equipment": ["cable", "machine"],
-    "muscles": ["back", "biceps"],
     "level": "beginner",
-    "kind": "strength",
     "image": "row",
     "how": {
       "en": [
@@ -1361,7 +1401,10 @@
     "aliases": {
       "en": ["Seated neutral-grip cable row"],
       "es": ["Remo en polea baja (Grip neutro)", "Remo en polea baja con agarre neutro"]
-    }
+    },
+    "primaryMuscles": ["back"],
+    "secondaryMuscles": ["biceps"],
+    "focus": ["strength"]
   },
   {
     "id": "high-cable-crossover",
@@ -1371,9 +1414,7 @@
     },
     "pattern": "horizontal-adduction",
     "equipment": ["cable"],
-    "muscles": ["chest", "shoulders"],
     "level": "beginner",
-    "kind": "strength",
     "image": "press",
     "how": {
       "en": [
@@ -1392,7 +1433,10 @@
     "aliases": {
       "en": [],
       "es": ["Cruces en polea alta (Pecho)"]
-    }
+    },
+    "primaryMuscles": ["chest"],
+    "secondaryMuscles": ["shoulders"],
+    "focus": ["strength"]
   },
   {
     "id": "concentration-curl",
@@ -1402,9 +1446,7 @@
     },
     "pattern": "elbow-flexion",
     "equipment": ["dumbbells", "bench"],
-    "muscles": ["biceps"],
     "level": "beginner",
-    "kind": "strength",
     "image": "row",
     "how": {
       "en": [
@@ -1423,7 +1465,10 @@
     "aliases": {
       "en": [],
       "es": ["Curl concentrado unilateral"]
-    }
+    },
+    "primaryMuscles": ["biceps"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "bench-dip",
@@ -1433,9 +1478,7 @@
     },
     "pattern": "elbow-extension",
     "equipment": ["bench"],
-    "muscles": ["triceps", "shoulders"],
     "level": "beginner",
-    "kind": "strength",
     "image": "press",
     "how": {
       "en": [
@@ -1458,7 +1501,10 @@
     "aliases": {
       "en": [],
       "es": ["Fondos en banco/cajon", "Fondos en banco o cajón"]
-    }
+    },
+    "primaryMuscles": ["triceps"],
+    "secondaryMuscles": ["shoulders"],
+    "focus": ["strength"]
   },
   {
     "id": "walking-lunge",
@@ -1468,9 +1514,7 @@
     },
     "pattern": "lunge",
     "equipment": ["bodyweight"],
-    "muscles": ["quads", "glutes"],
     "level": "beginner",
-    "kind": "strength",
     "image": "squat",
     "how": {
       "en": [
@@ -1485,7 +1529,10 @@
     "cues": {
       "en": ["Keep the front knee tracking with your toes and use a shorter step if needed."],
       "es": ["Alineá la rodilla delantera con los pies y acortá el paso si hace falta."]
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["glutes"],
+    "focus": ["strength"]
   },
   {
     "id": "lying-leg-curl",
@@ -1495,9 +1542,7 @@
     },
     "pattern": "knee-flexion",
     "equipment": ["machine"],
-    "muscles": ["hamstrings"],
     "level": "beginner",
-    "kind": "strength",
     "image": "hinge",
     "how": {
       "en": [
@@ -1512,7 +1557,10 @@
     "cues": {
       "en": ["Keep your hips on the pad and avoid lifting them to move the load."],
       "es": ["Mantené las caderas apoyadas y evitá levantarlas para mover el peso."]
-    }
+    },
+    "primaryMuscles": ["hamstrings"],
+    "secondaryMuscles": [],
+    "focus": ["strength"]
   },
   {
     "id": "glute-bridge",
@@ -1522,9 +1570,7 @@
     },
     "pattern": "hinge",
     "equipment": ["bodyweight"],
-    "muscles": ["glutes", "hamstrings", "core"],
     "level": "beginner",
-    "kind": "strength",
     "image": "hinge",
     "how": {
       "en": [
@@ -1539,7 +1585,10 @@
     "cues": {
       "en": ["Keep ribs down and avoid arching your lower back at the top."],
       "es": ["Mantené las costillas controladas y evitá arquear la zona lumbar arriba."]
-    }
+    },
+    "primaryMuscles": ["glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "focus": ["strength", "core"]
   },
   {
     "id": "dumbbell-step-up",
@@ -1549,9 +1598,7 @@
     },
     "pattern": "lunge",
     "equipment": ["dumbbells", "step"],
-    "muscles": ["quads", "glutes"],
     "level": "beginner",
-    "kind": "strength",
     "image": "squat",
     "how": {
       "en": [
@@ -1574,6 +1621,9 @@
     "aliases": {
       "en": [],
       "es": []
-    }
+    },
+    "primaryMuscles": ["quads"],
+    "secondaryMuscles": ["glutes"],
+    "focus": ["strength"]
   }
 ]

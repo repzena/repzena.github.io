@@ -163,6 +163,11 @@
                 ><select id="muscle-filter">
                   <option value="" data-i18n="allMuscles">All muscles</option>
                 </select></label
+              ><label
+                ><span class="sr-only" data-i18n="filterFocus">Focus</span
+                ><select id="focus-filter">
+                  <option value="" data-i18n="allFocuses">All focuses</option>
+                </select></label
               >
             </div>
           </div>
@@ -240,7 +245,33 @@
                 <span data-i18n="export">Export</span> ↗
               </button>
             </div>
-            <div class="routine-items" id="routine-items"></div>
+            <div class="routine-section-tools">
+              <button class="text-button muted" id="use-starter-layout" hidden>
+                <span data-i18n="useStarterLayout">Add mobility + core sections</span>
+              </button>
+              <button
+                class="text-button muted"
+                id="toggle-section-form"
+                aria-expanded="false"
+                aria-controls="section-form"
+              >
+                ＋ <span data-i18n="addSection">Add section</span>
+              </button>
+            </div>
+            <div class="section-form" id="section-form" hidden>
+              <label
+                ><span data-i18n="sectionType">Section type</span
+                ><select id="section-type"></select></label
+              ><label id="custom-section-name-wrap" hidden
+                ><span data-i18n="sectionName">Section name</span
+                ><input id="custom-section-name" type="text" maxlength="60" /></label
+              ><button class="text-button" id="add-section-button" data-i18n="addSection">
+                Add section</button
+              ><button class="text-button muted" id="cancel-section-button" data-i18n="cancel">
+                Cancel
+              </button>
+            </div>
+            <div class="routine-items" id="routine-sections"></div>
             <div class="routine-empty" id="routine-empty">
               <span class="empty-symbol">✳</span
               ><strong data-i18n="emptyRoutine">Start with one exercise.</strong
@@ -250,6 +281,10 @@
             </div>
             <div class="routine-add-form">
               <div class="add-label" data-i18n="addToSession">ADD TO THIS SESSION</div>
+              <label class="section-target"
+                ><span data-i18n="targetSection">Add to section</span
+                ><select id="section-target"></select
+              ></label>
               <div class="form-grid">
                 <label
                   ><span data-i18n="exercise">Exercise</span
@@ -305,6 +340,39 @@
         ×
       </button>
       <div id="dialog-content"></div>
+    </dialog>
+    <dialog id="add-dialog" class="add-dialog" aria-labelledby="add-dialog-title">
+      <form method="dialog" class="add-dialog-top">
+        <h2 id="add-dialog-title" data-i18n="addToRoutineTitle">Choose where it goes</h2>
+        <button class="dialog-close" value="cancel" data-i18n-aria-label="close" aria-label="Close">
+          ×
+        </button>
+      </form>
+      <div class="add-dialog-fields">
+        <label
+          ><span data-i18n="chooseRoutine">Choose a routine</span
+          ><select id="add-routine-target"></select
+        ></label>
+        <label
+          ><span data-i18n="chooseSession">Choose a session</span
+          ><select id="add-session-target"></select
+        ></label>
+        <label
+          ><span data-i18n="chooseSection">Choose a section</span
+          ><select id="add-section-target"></select
+        ></label>
+      </div>
+      <button
+        class="text-button muted chooser-add-section"
+        id="create-section-from-chooser"
+        data-i18n="createMainSection"
+        hidden
+      >
+        Add a Main work section
+      </button>
+      <button class="button button-dark" id="confirm-add-to-routine" data-i18n="confirmAddExercise">
+        Add exercise
+      </button>
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script type="module" src="app.js"></script>
