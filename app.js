@@ -130,11 +130,13 @@ const UI = {
     sectionNameRequired: 'Enter a name for this section.',
     confirmRemoveSection: 'Remove “{section}” and its {count} exercises?',
     addedToSection: 'Added to {section}',
+    exerciseAdded: 'Added to this session',
     addExerciseToSection: 'Add {exercise} to {section}',
     addToRoutine: 'Add to a routine',
     chooseRoutine: 'Choose a routine',
     chooseSession: 'Choose a session',
     chooseSection: 'Choose a section',
+    noSection: 'No section',
     noSections: 'No sections yet',
     addToRoutineTitle: 'Choose where it goes',
     confirmAddExercise: 'Add exercise',
@@ -272,11 +274,13 @@ const UI = {
     sectionNameRequired: 'Escribí un nombre para la sección.',
     confirmRemoveSection: '¿Eliminar “{section}” y sus {count} ejercicios?',
     addedToSection: 'Se agregó a {section}',
+    exerciseAdded: 'Se agregó a esta sesión',
     addExerciseToSection: 'Agregar {exercise} a {section}',
     addToRoutine: 'Agregar a una rutina',
     chooseRoutine: 'Elegí una rutina',
     chooseSession: 'Elegí una sesión',
     chooseSection: 'Elegí una sección',
+    noSection: 'Sin sección',
     noSections: 'Todavía no hay secciones',
     addToRoutineTitle: 'Elegí dónde agregarlo',
     confirmAddExercise: 'Agregar ejercicio',
@@ -423,15 +427,19 @@ function makeRoutineItem(item) {
     reps: String(item.reps || '').slice(0, 80),
   };
 }
-function makeRoutineDay(name, defaultName, sections) {
+function makeRoutineDay(name, defaultName, sections = [], items = []) {
   return {
     name,
     defaultName,
     sections,
+    items,
   };
 }
 function sectionItemCount(day) {
-  return day.sections.reduce((total, section) => total + section.items.length, 0);
+  return (
+    (day.items?.length || 0) +
+    day.sections.reduce((total, section) => total + section.items.length, 0)
+  );
 }
 function loadDB() {
   try {
@@ -464,22 +472,18 @@ function loadDB() {
                       : [];
                     return makeSection(type, section.name, items);
                   })
-              : [
-                  makeSection(
-                    'main-work',
-                    '',
-                    Array.isArray(d.items)
-                      ? d.items
-                          .slice(0, 500)
-                          .filter((item) => item && typeof item === 'object')
-                          .map(makeRoutineItem)
-                      : [],
-                  ),
-                ];
+              : [];
+            const items = Array.isArray(d.items)
+              ? d.items
+                  .slice(0, 500)
+                  .filter((item) => item && typeof item === 'object')
+                  .map(makeRoutineItem)
+              : [];
             return makeRoutineDay(
               savedName,
               typeof d.defaultName === 'boolean' ? d.defaultName : isDefaultSessionName(savedName),
               sections,
+              items,
             );
           }),
       }));
@@ -917,7 +921,7 @@ function ensureRoutine() {
       id: crypto.randomUUID(),
       name: t('untitled'),
       defaultName: true,
-      days: [makeRoutineDay(`${t('session')} 1`, true, [makeSection()])],
+      days: [makeRoutineDay(`${t('session')} 1`, true)],
     };
     db.routines = [r];
     db.current = r.id;
@@ -925,7 +929,7 @@ function ensureRoutine() {
   if (!currentRoutine()) db.current = db.routines[0].id;
   const routine = currentRoutine();
   if (!routine.days.length) {
-    routine.days.push(makeRoutineDay(`${t('session')} 1`, true, [makeSection()]));
+    routine.days.push(makeRoutineDay(`${t('session')} 1`, true));
   }
   if (selectedDay >= routine.days.length) selectedDay = 0;
 }
@@ -956,16 +960,26 @@ function renderRoutines() {
     );
   const day = r.days[selectedDay] || r.days[0];
   if (!day) return;
-  $('#routine-sections').innerHTML = day.sections
-    .map((section, sectionIndex) =>
-      renderRoutineSection(section, sectionIndex, day.sections.length),
-    )
-    .join('');
+  const directItems = day.items.length
+    ? `<div class="unsectioned-items">${day.items.map((item, itemIndex) => renderRoutineItem(item, itemIndex, '', day.items.length)).join('')}</div>`
+    : '';
+  $('#routine-sections').innerHTML =
+    directItems +
+    day.sections
+      .map((section, sectionIndex) =>
+        renderRoutineSection(section, sectionIndex, day.sections.length),
+      )
+      .join('');
+  $('#routine-sections')
+    .querySelectorAll('[data-routine-detail]')
+    .forEach((button) => {
+      button.onclick = () => openDetail(button.dataset.routineDetail);
+    });
   renderSectionTarget(day);
   const empty = sectionItemCount(day) === 0;
   $('#routine-empty').hidden = !empty;
-  $('#add-exercise-button').disabled = !day.sections.length;
-  $('#use-starter-layout').hidden = !empty;
+  $('#add-exercise-button').disabled = false;
+  $('#use-starter-layout').hidden = Boolean(day.sections.length || !empty);
   $('#routine-sections')
     .querySelectorAll('[data-toggle-section]')
     .forEach((button) => {
@@ -981,8 +995,8 @@ function renderRoutines() {
     .forEach((button) => {
       button.onclick = () => {
         const section = day.sections.find((item) => item.id === button.dataset.sectionId);
-        if (!section) return;
-        commitDBChange(() => section.items.splice(Number(button.dataset.removeItem), 1));
+        const items = section ? section.items : day.items;
+        commitDBChange(() => items.splice(Number(button.dataset.removeItem), 1));
       };
     });
   $('#routine-sections')
@@ -990,9 +1004,9 @@ function renderRoutines() {
     .forEach((button) => {
       button.onclick = () => {
         const section = day.sections.find((item) => item.id === button.dataset.sectionId);
-        if (!section) return;
+        const items = section ? section.items : day.items;
         const index = Number(button.dataset.itemUp ?? button.dataset.itemDown);
-        moveItem(section, index, button.hasAttribute('data-item-up') ? -1 : 1);
+        moveItem(items, index, button.hasAttribute('data-item-up') ? -1 : 1);
       };
     });
   $('#routine-sections')
@@ -1032,18 +1046,27 @@ function renderRoutines() {
 }
 function renderSectionTarget(day) {
   const select = $('#section-target');
-  if (!day.sections.some((section) => section.id === selectedSectionId))
+  if (
+    selectedSectionId === null ||
+    (selectedSectionId && !day.sections.some((section) => section.id === selectedSectionId))
+  )
     selectedSectionId = day.sections[0]?.id || null;
-  select.innerHTML = day.sections.length
-    ? day.sections
-        .map(
-          (section) =>
-            `<option value="${escapeHtml(section.id)}">${escapeHtml(sectionTitle(section))}</option>`,
-        )
-        .join('')
-    : `<option value="">${escapeHtml(t('noSections'))}</option>`;
+  select.innerHTML = `<option value="">${escapeHtml(t('noSection'))}</option>${day.sections
+    .map(
+      (section) =>
+        `<option value="${escapeHtml(section.id)}">${escapeHtml(sectionTitle(section))}</option>`,
+    )
+    .join('')}`;
   select.value = selectedSectionId || '';
-  select.disabled = !day.sections.length;
+  select.closest('label').hidden = !day.sections.length;
+}
+function renderRoutineItem(item, itemIndex, sectionId = '', itemCount = 0) {
+  const itemName = escapeHtml(localized(item.names) || item.name);
+  const hasGuide = item.exerciseId && exercises.some((exercise) => exercise.id === item.exerciseId);
+  const nameMarkup = hasGuide
+    ? `<button type="button" class="routine-exercise-link" data-routine-detail="${escapeHtml(item.exerciseId)}">${itemName}</button>`
+    : `<b>${itemName}</b>`;
+  return `<div class="routine-item"><span class="item-order">${String(itemIndex + 1).padStart(2, '0')}</span><div class="item-info">${nameMarkup}<small>${escapeHtml(item.sets)} ${escapeHtml(t('sets').toLowerCase())} <span>·</span> ${escapeHtml(item.reps || '—')}</small></div><button type="button" class="item-action" data-item-up="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveUp'))}" ${itemIndex === 0 ? 'disabled' : ''}>↑</button><button type="button" class="item-action" data-item-down="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveDown'))}" ${itemIndex === itemCount - 1 ? 'disabled' : ''}>↓</button><button type="button" class="item-action remove" data-remove-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('delete'))}">×</button></div>`;
 }
 function renderRoutineSection(section, index, sectionCount) {
   const isCollapsed = collapsedSectionIds.has(section.id);
@@ -1056,17 +1079,17 @@ function renderRoutineSection(section, index, sectionCount) {
     ? ''
     : section.items.length
       ? section.items
-          .map(
-            (item, itemIndex) =>
-              `<div class="routine-item"><span class="item-order">${String(itemIndex + 1).padStart(2, '0')}</span><div class="item-info"><b>${escapeHtml(localized(item.names) || item.name)}</b><small>${escapeHtml(item.sets)} ${escapeHtml(t('sets').toLowerCase())} <span>·</span> ${escapeHtml(item.reps || '—')}</small></div><button type="button" class="item-action" data-item-up="${itemIndex}" data-section-id="${escapeHtml(section.id)}" aria-label="${escapeHtml(t('moveUp'))}" ${itemIndex === 0 ? 'disabled' : ''}>↑</button><button type="button" class="item-action" data-item-down="${itemIndex}" data-section-id="${escapeHtml(section.id)}" aria-label="${escapeHtml(t('moveDown'))}" ${itemIndex === section.items.length - 1 ? 'disabled' : ''}>↓</button><button type="button" class="item-action remove" data-remove-item="${itemIndex}" data-section-id="${escapeHtml(section.id)}" aria-label="${escapeHtml(t('delete'))}">×</button></div>`,
+          .map((item, itemIndex) =>
+            renderRoutineItem(item, itemIndex, section.id, section.items.length),
           )
           .join('')
       : `<p class="section-empty">${escapeHtml(t('noExercisesInSection'))}</p>`;
   return `<section class="routine-group"><header class="routine-group-header">${title}<div class="section-actions"><button type="button" class="section-action" data-move-section="${index}" data-delta="-1" aria-label="${escapeHtml(t('moveSectionUp'))}" ${index === 0 ? 'disabled' : ''}>↑</button><button type="button" class="section-action" data-move-section="${index}" data-delta="1" aria-label="${escapeHtml(t('moveSectionDown'))}" ${index === sectionCount - 1 ? 'disabled' : ''}>↓</button><button type="button" class="section-action" data-edit-section="${escapeHtml(section.id)}" aria-label="${escapeHtml(t('renameSection'))}">✎</button><button type="button" class="section-action remove" data-delete-section="${escapeHtml(section.id)}" aria-label="${escapeHtml(t('removeSection'))}">×</button></div></header><div class="section-items" id="section-items-${escapeHtml(section.id)}" ${isCollapsed ? 'hidden' : ''}>${content}</div></section>`;
 }
-function moveItem(section, i, delta) {
+function moveItem(items, i, delta) {
+  if (i + delta < 0 || i + delta >= items.length) return;
   commitDBChange(() => {
-    [section.items[i], section.items[i + delta]] = [section.items[i + delta], section.items[i]];
+    [items[i], items[i + delta]] = [items[i + delta], items[i]];
   });
 }
 function moveSection(day, i, delta) {
@@ -1147,15 +1170,17 @@ function fillAddSessionTargets() {
 function fillAddSectionTargets() {
   const routine = db.routines.find((item) => item.id === $('#add-routine-target').value);
   const day = routine?.days[Number($('#add-session-target').value)];
-  $('#add-section-target').innerHTML = day?.sections.length
-    ? day.sections
+  $('#add-section-target').innerHTML = day
+    ? `<option value="">${escapeHtml(t('noSection'))}</option>${day.sections
         .map(
           (section) =>
             `<option value="${escapeHtml(section.id)}">${escapeHtml(sectionTitle(section))}</option>`,
         )
-        .join('')
-    : `<option value="">${escapeHtml(t('noSections'))}</option>`;
-  $('#confirm-add-to-routine').disabled = !day?.sections.length;
+        .join('')}`
+    : '';
+  $('#add-section-target').closest('label').hidden = !day?.sections.length;
+  $('#add-section-target').disabled = !day?.sections.length;
+  $('#confirm-add-to-routine').disabled = !day;
   $('#create-section-from-chooser').hidden = Boolean(day?.sections.length);
 }
 function openAddDialog(id) {
@@ -1188,23 +1213,31 @@ function addExerciseToRoutine(id, sets = 3, reps = '8–12', target = {}) {
     routine?.days[Number.isInteger(target.dayIndex) ? target.dayIndex : selectedDay] ||
     routine?.days[0];
   if (!day) return false;
-  const defaultSectionId =
-    target.sectionId || (routine.id === currentRoutine()?.id ? $('#section-target').value : '');
-  const section = day.sections.find((item) => item.id === defaultSectionId) || day.sections[0];
-  if (!section) {
-    toast(t('noSections'));
-    return false;
-  }
+  const defaultSectionId = Object.hasOwn(target, 'sectionId')
+    ? String(target.sectionId || '')
+    : routine.id === currentRoutine()?.id
+      ? $('#section-target').value
+      : '';
+  const section = defaultSectionId
+    ? day.sections.find((item) => item.id === defaultSectionId)
+    : null;
   const saved = commitDBChange(() => {
-    section.items.push({
+    const item = {
       exerciseId: id,
       name: localized(e.name),
       names: e.name,
       sets: Number(sets) || 3,
       reps: String(reps || ''),
-    });
+    };
+    if (section) section.items.push(item);
+    else day.items.push(item);
   });
-  if (saved) toast(t('addedToSection').replace('{section}', sectionTitle(section)));
+  if (saved)
+    toast(
+      section
+        ? t('addedToSection').replace('{section}', sectionTitle(section))
+        : t('exerciseAdded'),
+    );
   return saved;
 }
 function createSectionForChooser() {
@@ -1212,7 +1245,10 @@ function createSectionForChooser() {
   const day = routine?.days[Number($('#add-session-target').value)];
   if (!day || day.sections.length) return;
   const section = makeSection('main-work');
-  if (commitDBChange(() => day.sections.push(section))) fillAddSessionTargets();
+  if (commitDBChange(() => day.sections.push(section))) {
+    fillAddSessionTargets();
+    $('#add-section-target').value = section.id;
+  }
 }
 function addSelected() {
   const id = $('#add-exercise').value;
@@ -1245,7 +1281,7 @@ function addSection(type, name = '') {
 }
 function useStarterLayout() {
   const day = currentRoutine()?.days[selectedDay];
-  if (!day || sectionItemCount(day)) return;
+  if (!day || day.sections.length || sectionItemCount(day)) return;
   if (
     commitDBChange(() => {
       day.sections = [makeSection('mobility'), makeSection('core'), makeSection('main-work')];
@@ -1270,12 +1306,14 @@ function exportRoutine() {
       name: { [lang]: routineDisplayName(r) },
       default_name: r.defaultName,
       days: r.days.map((d, i) => {
-        const serializeItem = (item, section) => ({
+        const serializeItem = (item, section = null) => ({
           name: item.names || { [lang]: item.name },
           exercise_id: item.exerciseId || null,
           sets: Number(item.sets) || 3,
           reps_or_time: { [lang]: item.reps || '' },
-          section: { type: section.type, name: section.type === 'custom' ? section.name : '' },
+          section: section
+            ? { type: section.type, name: section.type === 'custom' ? section.name : '' }
+            : null,
         });
         return {
           name: { [lang]: sessionDisplayName(d, i) },
@@ -1285,9 +1323,13 @@ function exportRoutine() {
             name: section.type === 'custom' ? { [lang]: section.name } : null,
             exercises: section.items.map((item) => serializeItem(item, section)),
           })),
-          exercises: d.sections.flatMap((section) =>
-            section.items.map((item) => serializeItem(item, section)),
-          ),
+          unsectioned_exercises: d.items.map((item) => serializeItem(item)),
+          exercises: [
+            ...d.items.map((item) => serializeItem(item)),
+            ...d.sections.flatMap((section) =>
+              section.items.map((item) => serializeItem(item, section)),
+            ),
+          ],
         };
       }),
     },
@@ -1353,11 +1395,13 @@ async function importRoutine(file) {
         typeof d !== 'object' ||
         Array.isArray(d) ||
         (d.exercises !== undefined && !Array.isArray(d.exercises)) ||
-        (d.sections !== undefined && !Array.isArray(d.sections))
+        (d.sections !== undefined && !Array.isArray(d.sections)) ||
+        (d.unsectioned_exercises !== undefined && !Array.isArray(d.unsectioned_exercises))
       )
         throw new Error('invalid-routine-day');
       const importedDayName = importText(d.name);
       let sections;
+      let items;
       if (Array.isArray(d.sections)) {
         if (d.sections.length > 30) throw new Error('too-many-sections');
         sections = d.sections.map((rawSection) => {
@@ -1367,13 +1411,18 @@ async function importRoutine(file) {
           const name = type === 'custom' ? importText(rawSection.name).slice(0, 60) : '';
           return makeSection(type, name, parseExercises(rawSection.exercises || []));
         });
+        items = parseExercises(
+          d.unsectioned_exercises || (sections.length ? [] : d.exercises || []),
+        );
       } else {
-        sections = [makeSection('main-work', '', parseExercises(d.exercises || []))];
+        sections = [];
+        items = parseExercises(d.exercises || []);
       }
       return {
         name: (importedDayName || `${t('session')} ${i + 1}`).slice(0, 120),
         defaultName: typeof d.default_name === 'boolean' ? d.default_name : !importedDayName,
         sections,
+        items,
       };
     });
     const importedRoutineName = importText(src.name);
@@ -1381,7 +1430,7 @@ async function importRoutine(file) {
       id: crypto.randomUUID(),
       name: (importedRoutineName || t('untitled')).slice(0, 60),
       defaultName: typeof src.default_name === 'boolean' ? src.default_name : !importedRoutineName,
-      days: days.length ? days : [makeRoutineDay(`${t('session')} 1`, true, [makeSection()])],
+      days: days.length ? days : [makeRoutineDay(`${t('session')} 1`, true)],
     };
     if (
       commitDBChange(() => {
@@ -1470,7 +1519,7 @@ $('#new-routine').onclick = () => {
     id: crypto.randomUUID(),
     name: t('untitled'),
     defaultName: true,
-    days: [makeRoutineDay(`${t('session')} 1`, true, [makeSection()])],
+    days: [makeRoutineDay(`${t('session')} 1`, true)],
   };
   if (
     commitDBChange(() => {
@@ -1515,9 +1564,7 @@ function setRoutineName(routine, value) {
 $('#add-day').onclick = () => {
   commitDBChange(() => {
     const routine = currentRoutine();
-    routine.days.push(
-      makeRoutineDay(`${t('session')} ${routine.days.length + 1}`, true, [makeSection()]),
-    );
+    routine.days.push(makeRoutineDay(`${t('session')} ${routine.days.length + 1}`, true));
     selectedDay = routine.days.length - 1;
     selectedSectionId = null;
     editingSectionId = null;
