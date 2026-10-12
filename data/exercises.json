@@ -1356,6 +1356,15 @@
     "equipment": ["dumbbells"],
     "level": "intermediate",
     "image": "press",
+    "images": [
+      {
+        "src": "./assets/press-arnold/press-arnold.webp",
+        "alt": {
+          "en": "Two positions of the Arnold press: dumbbells start in front of the shoulders, then press overhead.",
+          "es": "Dos posiciones del press Arnold: las mancuernas empiezan frente a los hombros y luego se elevan por encima de la cabeza."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Hold dumbbells at shoulder height with palms facing you.",

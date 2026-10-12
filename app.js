@@ -639,7 +639,84 @@ function renderSectionTypeOptions() {
   $('#custom-section-name-wrap').hidden = select.value !== 'custom';
 }
 function imageMarkup(ex) {
+  if (Array.isArray(ex.images) && ex.images.length) {
+    const first = ex.images[0];
+    return `<div class="exercise-art exercise-photo-art"><button class="exercise-photo-open" type="button" data-detail="${escapeHtml(ex.id)}" aria-label="${escapeHtml(lang === 'es' ? `Ampliar imagen: ${localized(ex.name)}` : `Enlarge image: ${localized(ex.name)}`)}"><img src="${escapeHtml(first.src)}" alt="" loading="lazy" decoding="async" width="1103" height="578"></button></div>`;
+  }
   return `<div class="exercise-art art-${escapeHtml(ex.image)}" aria-hidden="true"><div class="art-index">${String(ex.id.length).padStart(2, '0')}</div><svg viewBox="0 0 280 180"><path class="art-floor" d="M20 151h240"/><circle class="art-head" cx="142" cy="42" r="16"/><path class="art-limb" d="M142 59l-9 45 34 17m-34-17-30 26m30-26-5 30 35 17m-35-17-28 18m37-76 31 12 20-15m-82 4-25-13"/><path class="art-equip" d="M212 76v29m-9-24h18m-18 19h18"/><path class="art-arrow" d="M224 125c8-16 8-29 1-41m-3 7 3-8 6 5"/></svg><span class="art-label">${escapeHtml(label('pattern', ex.pattern))}</span></div>`;
+}
+function renderExerciseGallery(ex, container, { enlarged = false } = {}) {
+  const images = Array.isArray(ex.images) ? ex.images : [];
+  if (!images.length) return;
+  let activeIndex = 0;
+  const render = () => {
+    const image = images[activeIndex];
+    const alt = image.alt?.[lang] || localized(ex.name);
+    container.innerHTML = `<div class="exercise-gallery${enlarged ? ' exercise-gallery-large' : ''}" data-gallery-swipe><button class="gallery-image-button" type="button" data-gallery-enlarge aria-label="${escapeHtml(lang === 'es' ? 'Ampliar imagen' : 'Enlarge image')}"><img class="gallery-image" src="${escapeHtml(image.src)}" alt="${escapeHtml(alt)}" decoding="async"></button>${images.length > 1 ? `<div class="gallery-dots" role="group" aria-label="${escapeHtml(lang === 'es' ? 'Imágenes del ejercicio' : 'Exercise images')}">${images.map((_, index) => `<button type="button" class="gallery-dot${index === activeIndex ? ' is-active' : ''}" data-gallery-index="${index}" aria-label="${escapeHtml(lang === 'es' ? `Imagen ${index + 1} de ${images.length}` : `Image ${index + 1} of ${images.length}`)}" aria-pressed="${index === activeIndex}"></button>`).join('')}</div>` : ''}</div>`;
+    container.querySelector('[data-gallery-enlarge]').onclick = () =>
+      openImageViewer(ex, activeIndex);
+    container.querySelectorAll('[data-gallery-index]').forEach((dot) => {
+      dot.onclick = () => {
+        activeIndex = Number(dot.dataset.galleryIndex);
+        render();
+      };
+    });
+    const swipeArea = container.querySelector('[data-gallery-swipe]');
+    let startX = null;
+    swipeArea.addEventListener('pointerdown', (event) => {
+      startX = event.clientX;
+    });
+    swipeArea.addEventListener('pointerup', (event) => {
+      if (startX === null || images.length < 2) return;
+      const delta = event.clientX - startX;
+      startX = null;
+      if (Math.abs(delta) < 45) return;
+      activeIndex = (activeIndex + (delta < 0 ? 1 : images.length - 1)) % images.length;
+      render();
+    });
+    swipeArea.addEventListener('pointercancel', () => {
+      startX = null;
+    });
+  };
+  render();
+}
+function openImageViewer(ex, initialIndex = 0) {
+  const viewer = $('#image-viewer');
+  const content = $('#image-viewer-content');
+  const close = viewer.querySelector('[data-viewer-close]');
+  viewer.setAttribute('aria-label', lang === 'es' ? 'Imágenes del ejercicio' : 'Exercise images');
+  close.setAttribute('aria-label', t('close'));
+  let activeIndex = Math.max(0, Math.min(initialIndex, ex.images.length - 1));
+  const render = () => {
+    const image = ex.images[activeIndex];
+    const alt = image.alt?.[lang] || localized(ex.name);
+    content.innerHTML = `<div class="exercise-gallery exercise-gallery-large" data-gallery-swipe><button class="gallery-image-button" type="button" data-viewer-zoom aria-label="${escapeHtml(lang === 'es' ? 'Cerrar imagen ampliada' : 'Close enlarged image')}"><img class="gallery-image" src="${escapeHtml(image.src)}" alt="${escapeHtml(alt)}" decoding="async"></button>${ex.images.length > 1 ? `<div class="gallery-dots" role="group" aria-label="${escapeHtml(lang === 'es' ? 'Imágenes del ejercicio' : 'Exercise images')}">${ex.images.map((_, index) => `<button type="button" class="gallery-dot${index === activeIndex ? ' is-active' : ''}" data-viewer-index="${index}" aria-label="${escapeHtml(lang === 'es' ? `Imagen ${index + 1} de ${ex.images.length}` : `Image ${index + 1} of ${ex.images.length}`)}" aria-pressed="${index === activeIndex}"></button>`).join('')}</div>` : ''}</div>`;
+    content.querySelector('[data-viewer-zoom]').onclick = () => viewer.close();
+    content.querySelectorAll('[data-viewer-index]').forEach((dot) => {
+      dot.onclick = () => {
+        activeIndex = Number(dot.dataset.viewerIndex);
+        render();
+      };
+    });
+    const swipeArea = content.querySelector('[data-gallery-swipe]');
+    let startX = null;
+    swipeArea.addEventListener('pointerdown', (event) => {
+      startX = event.clientX;
+    });
+    swipeArea.addEventListener('pointerup', (event) => {
+      if (startX === null || ex.images.length < 2) return;
+      const delta = event.clientX - startX;
+      startX = null;
+      if (Math.abs(delta) < 45) return;
+      activeIndex = (activeIndex + (delta < 0 ? 1 : ex.images.length - 1)) % ex.images.length;
+      render();
+    });
+    swipeArea.addEventListener('pointercancel', () => {
+      startX = null;
+    });
+  };
+  render();
+  if (!viewer.open) viewer.showModal();
 }
 function renderExercises() {
   const q = searchText($('#search').value.trim());
@@ -780,7 +857,9 @@ function openDetail(id, updateUrl = true) {
     );
   }
   $('#dialog-content').innerHTML =
-    `${imageMarkup(e)}<div class="dialog-copy"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))} · ${escapeHtml(focusLabels(e))}</div><h2 id="exercise-dialog-title">${escapeHtml(localized(e.name))}</h2><button class="guide-link" type="button" data-copy-guide>${escapeHtml(t('copyGuideLink'))}</button><div class="detail-facts"><div><small>${escapeHtml(t('equipment'))}</small><b>${e.equipment.map((x) => escapeHtml(label('equipment', x))).join(', ')}</b></div><div><small>${escapeHtml(t('primaryMuscle'))}</small><b>${(e.primaryMuscles || []).map((x) => escapeHtml(label('muscles', x))).join(', ') || '—'}</b></div><div><small>${escapeHtml(t('secondaryMuscle'))}</small><b>${e.secondaryMuscles.map((x) => escapeHtml(label('muscles', x))).join(', ') || '—'}</b></div></div><h3>${escapeHtml(t('howTo'))}</h3><ol>${e.how[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ol><h3>${escapeHtml(t('watchFor'))}</h3><ul class="cue-list">${e.cues[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ul><button class="button button-dark detail-add" data-detail-add="${escapeHtml(e.id)}">${escapeHtml(t('addToRoutine'))} <span aria-hidden="true">＋</span></button></div>`;
+    `${e.images?.length ? '<div data-exercise-gallery></div>' : imageMarkup(e)}<div class="dialog-copy"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))} · ${escapeHtml(focusLabels(e))}</div><h2 id="exercise-dialog-title">${escapeHtml(localized(e.name))}</h2><button class="guide-link" type="button" data-copy-guide>${escapeHtml(t('copyGuideLink'))}</button><div class="detail-facts"><div><small>${escapeHtml(t('equipment'))}</small><b>${e.equipment.map((x) => escapeHtml(label('equipment', x))).join(', ')}</b></div><div><small>${escapeHtml(t('primaryMuscle'))}</small><b>${(e.primaryMuscles || []).map((x) => escapeHtml(label('muscles', x))).join(', ') || '—'}</b></div><div><small>${escapeHtml(t('secondaryMuscle'))}</small><b>${e.secondaryMuscles.map((x) => escapeHtml(label('muscles', x))).join(', ') || '—'}</b></div></div><h3>${escapeHtml(t('howTo'))}</h3><ol>${e.how[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ol><h3>${escapeHtml(t('watchFor'))}</h3><ul class="cue-list">${e.cues[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ul><button class="button button-dark detail-add" data-detail-add="${escapeHtml(e.id)}">${escapeHtml(t('addToRoutine'))} <span aria-hidden="true">＋</span></button></div>`;
+  if (e.images?.length)
+    renderExerciseGallery(e, $('#dialog-content [data-exercise-gallery]'), { enlarged: true });
   $('#dialog-content').querySelector('[data-detail-add]').onclick = () => addById(id);
   $('#dialog-content').querySelector('[data-copy-guide]').onclick = copyGuideLink;
   if (!$('#exercise-dialog').open) $('#exercise-dialog').showModal();
@@ -1365,7 +1444,11 @@ window.addEventListener('resize', () => {
   }, 120);
 });
 $('#dialog-close').onclick = () => $('#exercise-dialog').close();
+$('#image-viewer').querySelector('[data-viewer-close]').onclick = () => $('#image-viewer').close();
 $('#exercise-dialog').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) e.currentTarget.close();
+});
+$('#image-viewer').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) e.currentTarget.close();
 });
 $('#exercise-dialog').addEventListener('close', () => {
@@ -1509,7 +1592,19 @@ function validCatalog(data) {
         Array.isArray(exercise.how?.en) &&
         Array.isArray(exercise.how?.es) &&
         Array.isArray(exercise.cues?.en) &&
-        Array.isArray(exercise.cues?.es),
+        Array.isArray(exercise.cues?.es) &&
+        (exercise.images === undefined ||
+          (Array.isArray(exercise.images) &&
+            exercise.images.length > 0 &&
+            exercise.images.every(
+              (image) =>
+                image &&
+                typeof image.src === 'string' &&
+                /^\.\/assets\/[a-zA-Z0-9/_-]+\.(?:webp|png|jpe?g)$/i.test(image.src) &&
+                !image.src.split('/').includes('..') &&
+                typeof image.alt?.en === 'string' &&
+                typeof image.alt?.es === 'string',
+            ))),
     )
   );
 }
