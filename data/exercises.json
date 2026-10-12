@@ -307,6 +307,15 @@
     "equipment": ["bodyweight"],
     "level": "beginner",
     "image": "core",
+    "images": [
+      {
+        "src": "./assets/forearm-plank/forearm-plank.webp",
+        "alt": {
+          "en": "A straight-arm plank: the athlete holds a long line from head to heels with hands under the shoulders.",
+          "es": "Plancha con brazos extendidos: la persona mantiene el cuerpo alineado desde la cabeza hasta los talones, con las manos debajo de los hombros."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Place forearms on the floor with elbows under shoulders and legs extended.",
@@ -1292,6 +1301,15 @@
     "equipment": ["bodyweight"],
     "level": "beginner",
     "image": "core",
+    "images": [
+      {
+        "src": "./assets/hollow-hold/hollow-hold.webp",
+        "alt": {
+          "en": "Hollow hold: the athlete lies on the back with shoulders and straight legs raised, arms reaching overhead, and lower back pressed into the mat.",
+          "es": "Hollow hold: la persona está boca arriba, con los hombros y las piernas extendidas elevados, los brazos sobre la cabeza y la zona lumbar apoyada en la colchoneta."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Lie on your back and gently brace so your lower back stays in contact with the floor.",
