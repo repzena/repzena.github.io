@@ -307,15 +307,6 @@
     "equipment": ["bodyweight"],
     "level": "beginner",
     "image": "core",
-    "images": [
-      {
-        "src": "./assets/forearm-plank/forearm-plank.webp",
-        "alt": {
-          "en": "A straight-arm plank: the athlete holds a long line from head to heels with hands under the shoulders.",
-          "es": "Plancha con brazos extendidos: la persona mantiene el cuerpo alineado desde la cabeza hasta los talones, con las manos debajo de los hombros."
-        }
-      }
-    ],
     "how": {
       "en": [
         "Place forearms on the floor with elbows under shoulders and legs extended.",
@@ -527,6 +518,15 @@
     "equipment": ["bodyweight"],
     "level": "beginner",
     "image": "core",
+    "images": [
+      {
+        "src": "./assets/high-plank/high-plank.webp",
+        "alt": {
+          "en": "A high plank: the athlete holds a straight line from head to heels with hands under the shoulders and arms extended.",
+          "es": "Plancha alta: la persona mantiene el cuerpo alineado desde la cabeza hasta los talones, con las manos debajo de los hombros y los brazos extendidos."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Place your hands under your shoulders and extend your legs behind you.",
