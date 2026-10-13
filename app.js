@@ -104,6 +104,8 @@ const UI = {
     pagination: 'Exercise pages',
     previousPage: 'Previous page',
     nextPage: 'Next page',
+    previousImage: 'Previous image',
+    nextImage: 'Next image',
     pageLabel: 'Page',
     showingExercises: 'Showing {start}–{end} of {total}',
     primaryMuscle: 'Primary muscle',
@@ -253,6 +255,8 @@ const UI = {
     pagination: 'Páginas de ejercicios',
     previousPage: 'Página anterior',
     nextPage: 'Página siguiente',
+    previousImage: 'Imagen anterior',
+    nextImage: 'Imagen siguiente',
     pageLabel: 'Página',
     showingExercises: 'Mostrando {start}–{end} de {total}',
     primaryMuscle: 'Músculo principal',
@@ -666,18 +670,31 @@ function renderExerciseGallery(ex, container, { enlarged = false } = {}) {
   const images = Array.isArray(ex.images) ? ex.images : [];
   if (!images.length) return;
   let activeIndex = 0;
+  const showImage = (index, focusSelector) => {
+    activeIndex = (index + images.length) % images.length;
+    render();
+    if (focusSelector) container.querySelector(focusSelector)?.focus();
+  };
   const render = () => {
     const image = images[activeIndex];
     const alt = image.alt?.[lang] || localized(ex.name);
-    container.innerHTML = `<div class="exercise-gallery${enlarged ? ' exercise-gallery-large' : ''}" data-gallery-swipe><button class="gallery-image-button" type="button" data-gallery-enlarge aria-label="${escapeHtml(lang === 'es' ? 'Ampliar imagen' : 'Enlarge image')}"><img class="gallery-image" src="${escapeHtml(image.src)}" alt="${escapeHtml(alt)}" decoding="async"></button>${images.length > 1 ? `<div class="gallery-dots" role="group" aria-label="${escapeHtml(lang === 'es' ? 'Imágenes del ejercicio' : 'Exercise images')}">${images.map((_, index) => `<button type="button" class="gallery-dot${index === activeIndex ? ' is-active' : ''}" data-gallery-index="${index}" aria-label="${escapeHtml(lang === 'es' ? `Imagen ${index + 1} de ${images.length}` : `Image ${index + 1} of ${images.length}`)}" aria-pressed="${index === activeIndex}"></button>`).join('')}</div>` : ''}</div>`;
+    container.innerHTML = `<div class="exercise-gallery${enlarged ? ' exercise-gallery-large' : ''}" data-gallery-swipe><button class="gallery-image-button" type="button" data-gallery-enlarge aria-label="${escapeHtml(lang === 'es' ? 'Ampliar imagen' : 'Enlarge image')}"><img class="gallery-image" src="${escapeHtml(image.src)}" alt="${escapeHtml(alt)}" decoding="async"></button>${images.length > 1 ? `<button type="button" class="gallery-arrow gallery-arrow-prev" data-gallery-prev aria-label="${escapeHtml(t('previousImage'))}">‹</button><button type="button" class="gallery-arrow gallery-arrow-next" data-gallery-next aria-label="${escapeHtml(t('nextImage'))}">›</button><div class="gallery-dots" role="group" aria-label="${escapeHtml(lang === 'es' ? 'Imágenes del ejercicio' : 'Exercise images')}">${images.map((_, index) => `<button type="button" class="gallery-dot${index === activeIndex ? ' is-active' : ''}" data-gallery-index="${index}" aria-label="${escapeHtml(lang === 'es' ? `Imagen ${index + 1} de ${images.length}` : `Image ${index + 1} of ${images.length}`)}" aria-pressed="${index === activeIndex}"></button>`).join('')}</div>` : ''}</div>`;
     container.querySelector('[data-gallery-enlarge]').onclick = () =>
       openImageViewer(ex, activeIndex);
     container.querySelectorAll('[data-gallery-index]').forEach((dot) => {
       dot.onclick = () => {
-        activeIndex = Number(dot.dataset.galleryIndex);
-        render();
+        showImage(
+          Number(dot.dataset.galleryIndex),
+          `[data-gallery-index="${dot.dataset.galleryIndex}"]`,
+        );
       };
     });
+    container
+      .querySelector('[data-gallery-prev]')
+      ?.addEventListener('click', () => showImage(activeIndex - 1, '[data-gallery-prev]'));
+    container
+      .querySelector('[data-gallery-next]')
+      ?.addEventListener('click', () => showImage(activeIndex + 1, '[data-gallery-next]'));
     const swipeArea = container.querySelector('[data-gallery-swipe]');
     let startX = null;
     swipeArea.addEventListener('pointerdown', (event) => {
@@ -688,8 +705,19 @@ function renderExerciseGallery(ex, container, { enlarged = false } = {}) {
       const delta = event.clientX - startX;
       startX = null;
       if (Math.abs(delta) < 45) return;
-      activeIndex = (activeIndex + (delta < 0 ? 1 : images.length - 1)) % images.length;
-      render();
+      showImage(activeIndex + (delta < 0 ? 1 : -1));
+    });
+    swipeArea.addEventListener('keydown', (event) => {
+      if (images.length < 2 || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      const selector = event.target.closest('[data-gallery-prev]')
+        ? '[data-gallery-prev]'
+        : event.target.closest('[data-gallery-index]')
+          ? `[data-gallery-index="${(activeIndex + (event.key === 'ArrowRight' ? 1 : -1) + images.length) % images.length}"]`
+          : event.target.closest('[data-gallery-next]')
+            ? '[data-gallery-next]'
+            : '[data-gallery-enlarge]';
+      showImage(activeIndex + (event.key === 'ArrowRight' ? 1 : -1), selector);
     });
     swipeArea.addEventListener('pointercancel', () => {
       startX = null;
@@ -704,17 +732,30 @@ function openImageViewer(ex, initialIndex = 0) {
   viewer.setAttribute('aria-label', lang === 'es' ? 'Imágenes del ejercicio' : 'Exercise images');
   close.setAttribute('aria-label', t('close'));
   let activeIndex = Math.max(0, Math.min(initialIndex, ex.images.length - 1));
+  const showImage = (index, focusSelector) => {
+    activeIndex = (index + ex.images.length) % ex.images.length;
+    render();
+    if (focusSelector) content.querySelector(focusSelector)?.focus();
+  };
   const render = () => {
     const image = ex.images[activeIndex];
     const alt = image.alt?.[lang] || localized(ex.name);
-    content.innerHTML = `<div class="exercise-gallery exercise-gallery-large" data-gallery-swipe><button class="gallery-image-button" type="button" data-viewer-zoom aria-label="${escapeHtml(lang === 'es' ? 'Cerrar imagen ampliada' : 'Close enlarged image')}"><img class="gallery-image" src="${escapeHtml(image.src)}" alt="${escapeHtml(alt)}" decoding="async"></button>${ex.images.length > 1 ? `<div class="gallery-dots" role="group" aria-label="${escapeHtml(lang === 'es' ? 'Imágenes del ejercicio' : 'Exercise images')}">${ex.images.map((_, index) => `<button type="button" class="gallery-dot${index === activeIndex ? ' is-active' : ''}" data-viewer-index="${index}" aria-label="${escapeHtml(lang === 'es' ? `Imagen ${index + 1} de ${ex.images.length}` : `Image ${index + 1} of ${ex.images.length}`)}" aria-pressed="${index === activeIndex}"></button>`).join('')}</div>` : ''}</div>`;
+    content.innerHTML = `<div class="exercise-gallery exercise-gallery-large" data-gallery-swipe><button class="gallery-image-button" type="button" data-viewer-zoom aria-label="${escapeHtml(lang === 'es' ? 'Cerrar imagen ampliada' : 'Close enlarged image')}"><img class="gallery-image" src="${escapeHtml(image.src)}" alt="${escapeHtml(alt)}" decoding="async"></button>${ex.images.length > 1 ? `<button type="button" class="gallery-arrow gallery-arrow-prev" data-viewer-prev aria-label="${escapeHtml(t('previousImage'))}">‹</button><button type="button" class="gallery-arrow gallery-arrow-next" data-viewer-next aria-label="${escapeHtml(t('nextImage'))}">›</button><div class="gallery-dots" role="group" aria-label="${escapeHtml(lang === 'es' ? 'Imágenes del ejercicio' : 'Exercise images')}">${ex.images.map((_, index) => `<button type="button" class="gallery-dot${index === activeIndex ? ' is-active' : ''}" data-viewer-index="${index}" aria-label="${escapeHtml(lang === 'es' ? `Imagen ${index + 1} de ${ex.images.length}` : `Image ${index + 1} of ${ex.images.length}`)}" aria-pressed="${index === activeIndex}"></button>`).join('')}</div>` : ''}</div>`;
     content.querySelector('[data-viewer-zoom]').onclick = () => viewer.close();
     content.querySelectorAll('[data-viewer-index]').forEach((dot) => {
       dot.onclick = () => {
-        activeIndex = Number(dot.dataset.viewerIndex);
-        render();
+        showImage(
+          Number(dot.dataset.viewerIndex),
+          `[data-viewer-index="${dot.dataset.viewerIndex}"]`,
+        );
       };
     });
+    content
+      .querySelector('[data-viewer-prev]')
+      ?.addEventListener('click', () => showImage(activeIndex - 1, '[data-viewer-prev]'));
+    content
+      .querySelector('[data-viewer-next]')
+      ?.addEventListener('click', () => showImage(activeIndex + 1, '[data-viewer-next]'));
     const swipeArea = content.querySelector('[data-gallery-swipe]');
     let startX = null;
     swipeArea.addEventListener('pointerdown', (event) => {
@@ -725,8 +766,19 @@ function openImageViewer(ex, initialIndex = 0) {
       const delta = event.clientX - startX;
       startX = null;
       if (Math.abs(delta) < 45) return;
-      activeIndex = (activeIndex + (delta < 0 ? 1 : ex.images.length - 1)) % ex.images.length;
-      render();
+      showImage(activeIndex + (delta < 0 ? 1 : -1));
+    });
+    swipeArea.addEventListener('keydown', (event) => {
+      if (ex.images.length < 2 || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      const selector = event.target.closest('[data-viewer-prev]')
+        ? '[data-viewer-prev]'
+        : event.target.closest('[data-viewer-index]')
+          ? `[data-viewer-index="${(activeIndex + (event.key === 'ArrowRight' ? 1 : -1) + ex.images.length) % ex.images.length}"]`
+          : event.target.closest('[data-viewer-next]')
+            ? '[data-viewer-next]'
+            : '[data-viewer-zoom]';
+      showImage(activeIndex + (event.key === 'ArrowRight' ? 1 : -1), selector);
     });
     swipeArea.addEventListener('pointercancel', () => {
       startX = null;

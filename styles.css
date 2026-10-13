@@ -571,6 +571,40 @@ a {
   height: 100%;
   object-fit: contain;
 }
+.gallery-arrow {
+  position: absolute;
+  z-index: 1;
+  top: calc((100% - 34px) / 2);
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  padding: 0 0 4px;
+  border: 1px solid #ffffff70;
+  border-radius: 50%;
+  background: #10231fc9;
+  color: #fff;
+  font: 400 36px/1 var(--body);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background 0.18s,
+    scale 0.18s;
+}
+.gallery-arrow:hover {
+  background: var(--orange);
+  scale: 1.06;
+}
+.gallery-arrow:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+.gallery-arrow-prev {
+  left: 12px;
+}
+.gallery-arrow-next {
+  right: 12px;
+}
 .gallery-dots {
   display: flex;
   align-items: center;
@@ -1693,6 +1727,10 @@ a {
   }
   .exercise-art {
     height: 150px;
+  }
+  .exercise-photo-art > img {
+    object-fit: cover;
+    object-position: center;
   }
   .card-body {
     padding: 15px 13px 13px;
