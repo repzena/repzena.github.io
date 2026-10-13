@@ -1237,6 +1237,36 @@
     "equipment": ["bodyweight"],
     "level": "beginner",
     "image": "core",
+    "images": [
+      {
+        "src": "./assets/prone-ytw/1-start-position.webp",
+        "alt": {
+          "en": "Starting position for prone Y-T-W raises, lying face down with arms relaxed.",
+          "es": "Posición inicial de las elevaciones Y-T-W boca abajo, acostado con los brazos relajados."
+        }
+      },
+      {
+        "src": "./assets/prone-ytw/2-y-position.webp",
+        "alt": {
+          "en": "Prone Y-T-W raise in the Y position, with arms lifted diagonally overhead.",
+          "es": "Elevación Y-T-W boca abajo en posición de Y, con los brazos elevados en diagonal."
+        }
+      },
+      {
+        "src": "./assets/prone-ytw/3-t-position.webp",
+        "alt": {
+          "en": "Prone Y-T-W raise in the T position, with arms extended out to the sides.",
+          "es": "Elevación Y-T-W boca abajo en posición de T, con los brazos extendidos hacia los lados."
+        }
+      },
+      {
+        "src": "./assets/prone-ytw/4-w-position.webp",
+        "alt": {
+          "en": "Prone Y-T-W raise in the W position, with elbows bent and shoulder blades drawn together.",
+          "es": "Elevación Y-T-W boca abajo en posición de W, con los codos flexionados y las escápulas juntas."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Lie face down with your forehead supported and arms relaxed.",
@@ -1376,7 +1406,7 @@
     "image": "press",
     "images": [
       {
-        "src": "./assets/press-arnold/press-arnold.webp",
+        "src": "./assets/arnold-press/press-arnold.webp",
         "alt": {
           "en": "Two positions of the Arnold press: dumbbells start in front of the shoulders, then press overhead.",
           "es": "Dos posiciones del press Arnold: las mancuernas empiezan frente a los hombros y luego se elevan por encima de la cabeza."

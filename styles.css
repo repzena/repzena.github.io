@@ -1409,6 +1409,32 @@ a {
   letter-spacing: -0.04em;
   margin: 10px 0 19px;
 }
+.routine-guide-linker > p {
+  margin: -6px 0 20px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.routine-guide-match {
+  display: grid;
+  gap: 7px;
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.routine-guide-match select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+}
+.routine-guide-match select:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
 .guide-link {
   border: 0;
   padding: 0;

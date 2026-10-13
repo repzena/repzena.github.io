@@ -81,6 +81,10 @@ const UI = {
     advanced: 'Advanced',
     added: 'Added to current session',
     chooseExercise: 'Choose an exercise',
+    matchRoutineExercise: 'Link this item to an exercise',
+    matchRoutineExerciseHelp:
+      'Choose the matching library exercise. Its guide will open and this link will be saved.',
+    openMatchedGuide: 'Open selected guide',
     confirmDelete: 'Delete this routine?',
     untitled: 'My routine',
     routineLabel: 'Routine',
@@ -225,6 +229,10 @@ const UI = {
     advanced: 'Avanzado',
     added: 'Se agregó a la sesión actual',
     chooseExercise: 'Elegí un ejercicio',
+    matchRoutineExercise: 'Vincular este ejercicio',
+    matchRoutineExerciseHelp:
+      'Elegí el ejercicio correspondiente de la biblioteca. Se abrirá su guía y guardaremos el vínculo.',
+    openMatchedGuide: 'Abrir la guía elegida',
     confirmDelete: '¿Querés eliminar esta rutina?',
     untitled: 'Mi rutina',
     routineLabel: 'Rutina',
@@ -415,7 +423,10 @@ function sectionTitle(section) {
 }
 function makeRoutineItem(item) {
   return {
-    exerciseId: typeof item.exerciseId === 'string' ? item.exerciseId.slice(0, 120) : null,
+    exerciseId:
+      typeof (item.exerciseId || item.exercise_id || item.id) === 'string'
+        ? (item.exerciseId || item.exercise_id || item.id).slice(0, 120)
+        : null,
     name: String(item.name || '').slice(0, 200),
     names:
       item.names && typeof item.names === 'object' && !Array.isArray(item.names)
@@ -974,6 +985,16 @@ function renderRoutines() {
     .forEach((button) => {
       button.onclick = () => openDetail(button.dataset.routineDetail);
     });
+  $('#routine-sections')
+    .querySelectorAll('[data-routine-match]')
+    .forEach((button) => {
+      button.onclick = () => {
+        const section = day.sections.find((item) => item.id === button.dataset.sectionId);
+        const items = section ? section.items : day.items;
+        const item = items[Number(button.dataset.routineItem)];
+        if (item) openRoutineGuideMatcher(item);
+      };
+    });
   renderSectionTarget(day);
   const empty = sectionItemCount(day) === 0;
   $('#routine-empty').hidden = !empty;
@@ -1059,25 +1080,102 @@ function renderSectionTarget(day) {
   select.value = selectedSectionId || '';
   select.closest('label').hidden = !day.sections.length;
 }
-function routineGuideId(item) {
-  if (item.exerciseId && exercises.some((exercise) => exercise.id === item.exerciseId))
-    return item.exerciseId;
+function exerciseNameKey(value) {
+  return searchText(value)
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+function routineExercise(item) {
+  const id = item.exerciseId || item.exercise_id || item.id;
+  const byId = exercises.find((exercise) => exercise.id === id);
+  if (byId) return byId;
+
   const itemNames = [item.name, item.names?.en, item.names?.es]
     .filter((name) => typeof name === 'string' && name.trim())
-    .map(searchText);
+    .map(exerciseNameKey);
+  if (!itemNames.length) return null;
   return (
-    exercises.find((exercise) =>
-      [exercise.name.en, exercise.name.es].some((name) => itemNames.includes(searchText(name))),
-    )?.id || null
+    exercises.find((exercise) => {
+      const catalogueNames = [
+        exercise.name.en,
+        exercise.name.es,
+        ...(exercise.aliases?.en || []),
+        ...(exercise.aliases?.es || []),
+      ].map(exerciseNameKey);
+      return catalogueNames.some((name) => itemNames.includes(name));
+    }) || null
   );
 }
+function openRoutineGuideMatcher(item) {
+  const options = exercises
+    .map(
+      (exercise) =>
+        `<option value="${escapeHtml(exercise.id)}">${escapeHtml(localized(exercise.name))}</option>`,
+    )
+    .join('');
+  $('#dialog-content').innerHTML =
+    `<div class="dialog-copy routine-guide-linker"><div class="card-kicker">${escapeHtml(t('matchRoutineExercise'))}</div><h2 id="exercise-dialog-title">${escapeHtml(localized(item.names) || item.name || t('exercise'))}</h2><p>${escapeHtml(t('matchRoutineExerciseHelp'))}</p><label class="routine-guide-match"><span>${escapeHtml(t('exercise'))}</span><select id="routine-guide-match-select"><option value="">${escapeHtml(t('chooseExercise'))}</option>${options}</select></label><button class="button button-dark" type="button" data-open-matched-guide>${escapeHtml(t('openMatchedGuide'))}</button></div>`;
+  $('#dialog-content').querySelector('[data-open-matched-guide]').onclick = () => {
+    const exercise = exercises.find(
+      (candidate) => candidate.id === $('#routine-guide-match-select').value,
+    );
+    if (!exercise) {
+      $('#routine-guide-match-select').focus();
+      return;
+    }
+    if (
+      commitDBChange(() => {
+        item.exerciseId = exercise.id;
+        item.name = exercise.name.en;
+        item.names = { en: exercise.name.en, es: exercise.name.es };
+      })
+    )
+      openDetail(exercise.id, false);
+  };
+  if (!$('#exercise-dialog').open) $('#exercise-dialog').showModal();
+}
+function migrateRoutineExerciseIds() {
+  let changed = false;
+  for (const routine of db.routines) {
+    for (const day of routine.days) {
+      const items = [...day.items, ...day.sections.flatMap((section) => section.items)];
+      for (const item of items) {
+        const exercise = routineExercise(item);
+        if (!exercise) continue;
+        if (
+          item.exerciseId !== exercise.id ||
+          item.name !== exercise.name.en ||
+          item.names?.en !== exercise.name.en ||
+          item.names?.es !== exercise.name.es
+        ) {
+          item.exerciseId = exercise.id;
+          item.name = exercise.name.en;
+          item.names = { en: exercise.name.en, es: exercise.name.es };
+          changed = true;
+        }
+      }
+    }
+  }
+  if (changed) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+    } catch (error) {
+      console.warn('Could not save exercise ID updates for this routine', error);
+    }
+  }
+}
 function renderRoutineItem(item, itemIndex, sectionId = '', itemCount = 0) {
-  const itemName = escapeHtml(localized(item.names) || item.name);
-  const guideId = routineGuideId(item);
-  const open = guideId
-    ? `<button type="button" class="routine-item-open" data-routine-detail="${escapeHtml(guideId)}" aria-label="${escapeHtml(t('openGuide'))}: ${itemName}">`
-    : '<div class="routine-item-open">';
-  const close = guideId ? '</button>' : '</div>';
+  const exercise = routineExercise(item);
+  const itemName = escapeHtml(
+    exercise ? localized(exercise.name) : localized(item.names) || item.name,
+  );
+  const guideId = exercise?.id || null;
+  const itemTarget = guideId
+    ? `data-routine-detail="${escapeHtml(guideId)}"`
+    : `data-routine-match data-routine-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}"`;
+  const actionLabel = guideId ? t('openGuide') : t('matchRoutineExercise');
+  const open = `<button type="button" class="routine-item-open" ${itemTarget} aria-label="${escapeHtml(actionLabel)}: ${itemName}">`;
+  const close = '</button>';
   return `<div class="routine-item">${open}<span class="item-order">${String(itemIndex + 1).padStart(2, '0')}</span><div class="item-info"><b>${itemName}</b><small>${escapeHtml(item.sets)} ${escapeHtml(t('sets').toLowerCase())} <span>·</span> ${escapeHtml(item.reps || '—')}</small></div>${close}<button type="button" class="item-action" data-item-up="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveUp'))}" ${itemIndex === 0 ? 'disabled' : ''}>↑</button><button type="button" class="item-action" data-item-down="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveDown'))}" ${itemIndex === itemCount - 1 ? 'disabled' : ''}>↓</button><button type="button" class="item-action remove" data-remove-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('delete'))}">×</button></div>`;
 }
 function renderRoutineSection(section, index, sectionCount) {
@@ -1319,8 +1417,8 @@ function exportRoutine() {
       default_name: r.defaultName,
       days: r.days.map((d, i) => {
         const serializeItem = (item, section = null) => ({
-          name: item.names || { [lang]: item.name },
-          exercise_id: item.exerciseId || null,
+          name: routineExercise(item)?.name || item.names || { [lang]: item.name },
+          exercise_id: routineExercise(item)?.id || item.exerciseId || null,
           sets: Number(item.sets) || 3,
           reps_or_time: { [lang]: item.reps || '' },
           section: section
@@ -1691,6 +1789,7 @@ function readCachedCatalog() {
 }
 function showCatalog(data) {
   exercises = data;
+  migrateRoutineExerciseIds();
   applyLanguage();
   syncGuideWithUrl();
 }
