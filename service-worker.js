@@ -1,8 +1,9 @@
 const CACHE_PREFIX = 'repzena-static-';
-const CACHE_NAME = `${CACHE_PREFIX}v7`;
+const CACHE_NAME = `${CACHE_PREFIX}v8`;
 const CORE_FILES = [
   './',
   './index.html',
+  './favicon.svg',
   './styles.css',
   './app.js',
   './theme.js',
