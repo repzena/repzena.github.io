@@ -6,7 +6,17 @@ const UI = {
     sessions: 'Routine sessions',
     heroImageAlt: 'Illustration of a goblet squat',
     newRoutine: 'New routine',
+    removeRoutine: 'Remove routine',
+    removeSession: 'Remove session',
+    confirmRemoveRoutine: 'Delete “{routine}” and all of its sessions and exercises?',
+    confirmRemoveSession: 'Delete “{session}” and all of its exercises and sections?',
+    routineRemoved: 'Routine removed',
+    sessionRemoved: 'Session removed',
     routineName: 'Routine name',
+    editExercise: 'Edit exercise details',
+    saveExercise: 'Save exercise details',
+    editSets: 'Sets',
+    editReps: 'Reps / time',
     addExercise: 'Add exercise',
     close: 'Close',
     openGuide: 'Open exercise guide',
@@ -156,7 +166,17 @@ const UI = {
     sessions: 'Sesiones de la rutina',
     heroImageAlt: 'Ilustración de una sentadilla goblet',
     newRoutine: 'Nueva rutina',
+    removeRoutine: 'Eliminar rutina',
+    removeSession: 'Eliminar sesión',
+    confirmRemoveRoutine: '¿Eliminar “{routine}” y todas sus sesiones y ejercicios?',
+    confirmRemoveSession: '¿Eliminar “{session}” y todos sus ejercicios y secciones?',
+    routineRemoved: 'Se eliminó la rutina',
+    sessionRemoved: 'Se eliminó la sesión',
     routineName: 'Nombre de la rutina',
+    editExercise: 'Editar los datos del ejercicio',
+    saveExercise: 'Guardar los datos del ejercicio',
+    editSets: 'Series',
+    editReps: 'Reps / tiempo',
     addExercise: 'Agregar ejercicio',
     close: 'Cerrar',
     openGuide: 'Abrir la guía del ejercicio',
@@ -405,12 +425,13 @@ let guideHistoryEntry = false;
 let closingFromNavigation = false;
 let currentExercisePage = 1;
 let exerciseColumnCount = 0;
-let resizeTimer;
+let exerciseResizeTimer;
 let exercises = [];
 let db = loadDB();
 let selectedDay = 0;
 let selectedSectionId = null;
 let editingSectionId = null;
+let editingRoutineItem = null;
 const collapsedSectionIds = new Set();
 let toastTimer;
 function makeSection(type = 'main-work', name = '', items = []) {
@@ -815,10 +836,13 @@ function renderExercises() {
     );
   });
   const grid = $('#exercise-grid');
-  const columns = Math.max(1, getComputedStyle(grid).gridTemplateColumns.split(' ').length);
+  const columns = Math.max(
+    1,
+    getComputedStyle(grid).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
+  );
   if (exerciseColumnCount && columns !== exerciseColumnCount) currentExercisePage = 1;
   exerciseColumnCount = columns;
-  const pageSize = columns * 3;
+  const pageSize = columns * 2;
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   currentExercisePage = Math.min(currentExercisePage, pageCount);
   const startIndex = (currentExercisePage - 1) * pageSize;
@@ -922,8 +946,11 @@ function openDetail(id, updateUrl = true) {
       `${location.pathname}${location.search}${guideHash}`,
     );
   }
+  const primaryMuscles = (e.primaryMuscles || [])
+    .map((id) => escapeHtml(label('muscles', id)))
+    .join(', ');
   $('#dialog-content').innerHTML =
-    `${e.images?.length ? '<div data-exercise-gallery></div>' : imageMarkup(e)}<div class="dialog-copy"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))} · ${escapeHtml(focusLabels(e))}</div><h2 id="exercise-dialog-title">${escapeHtml(localized(e.name))}</h2><button class="guide-link" type="button" data-copy-guide>${escapeHtml(t('copyGuideLink'))}</button><div class="detail-facts"><div><small>${escapeHtml(t('equipment'))}</small><b>${e.equipment.map((x) => escapeHtml(label('equipment', x))).join(', ')}</b></div><div><small>${escapeHtml(t('primaryMuscle'))}</small><b>${(e.primaryMuscles || []).map((x) => escapeHtml(label('muscles', x))).join(', ') || '—'}</b></div><div><small>${escapeHtml(t('secondaryMuscle'))}</small><b>${e.secondaryMuscles.map((x) => escapeHtml(label('muscles', x))).join(', ') || '—'}</b></div></div><h3>${escapeHtml(t('howTo'))}</h3><ol>${e.how[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ol><h3>${escapeHtml(t('watchFor'))}</h3><ul class="cue-list">${e.cues[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ul><button class="button button-dark detail-add" data-detail-add="${escapeHtml(e.id)}">${escapeHtml(t('addToRoutine'))} <span aria-hidden="true">＋</span></button></div>`;
+    `${e.images?.length ? '<div data-exercise-gallery></div>' : imageMarkup(e)}<div class="dialog-copy"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))} · ${escapeHtml(focusLabels(e))}</div><h2 id="exercise-dialog-title">${escapeHtml(localized(e.name))}</h2><button class="guide-link" type="button" data-copy-guide>${escapeHtml(t('copyGuideLink'))}</button><div class="detail-facts"><div><small>${escapeHtml(t('equipment'))}</small><b>${e.equipment.map((x) => escapeHtml(label('equipment', x))).join(', ')}</b></div>${primaryMuscles ? `<div><small>${escapeHtml(t('primaryMuscle'))}</small><b>${primaryMuscles}</b></div>` : ''}<div><small>${escapeHtml(t('secondaryMuscle'))}</small><b>${e.secondaryMuscles.map((x) => escapeHtml(label('muscles', x))).join(', ') || '—'}</b></div></div><h3>${escapeHtml(t('howTo'))}</h3><ol>${e.how[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ol><h3>${escapeHtml(t('watchFor'))}</h3><ul class="cue-list">${e.cues[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ul><button class="button button-dark detail-add" data-detail-add="${escapeHtml(e.id)}">${escapeHtml(t('addToRoutine'))} <span aria-hidden="true">＋</span></button></div>`;
   if (e.images?.length)
     renderExerciseGallery(e, $('#dialog-content [data-exercise-gallery]'), { enlarged: true });
   $('#dialog-content').querySelector('[data-detail-add]').onclick = () => addById(id);
@@ -1006,20 +1033,27 @@ function renderRoutines() {
     .join('');
   $('#routine-name').value = routineDisplayName(r);
   $('#day-tabs').innerHTML = r.days
-    .map(
-      (d, i) =>
-        `<button class="day-tab ${i === selectedDay ? 'selected' : ''}" data-day="${i}" aria-pressed="${i === selectedDay}">${escapeHtml(sessionDisplayName(d, i))} <span>${sectionItemCount(d)}</span></button>`,
-    )
+    .map((d, i) => {
+      const name = sessionDisplayName(d, i);
+      return `<div class="day-tab-wrap"><button class="day-tab ${i === selectedDay ? 'selected' : ''}" data-day="${i}" aria-pressed="${i === selectedDay}">${escapeHtml(name)} <span>${sectionItemCount(d)}</span></button><button class="day-tab-remove" type="button" data-remove-day="${i}" aria-label="${escapeHtml(t('removeSession'))}: ${escapeHtml(name)}" title="${escapeHtml(t('removeSession'))}" ${r.days.length <= 1 ? 'disabled' : ''}>×</button></div>`;
+    })
     .join('');
+  $('#remove-routine').disabled = db.routines.length <= 1;
   $('#day-tabs')
     .querySelectorAll('[data-day]')
     .forEach(
       (b) =>
         (b.onclick = () => {
           selectedDay = +b.dataset.day;
+          editingRoutineItem = null;
           renderRoutines();
         }),
     );
+  $('#day-tabs')
+    .querySelectorAll('[data-remove-day]')
+    .forEach((button) => {
+      button.onclick = () => removeRoutineDay(r, Number(button.dataset.removeDay));
+    });
   const day = r.days[selectedDay] || r.days[0];
   if (!day) return;
   const directItems = day.items.length
@@ -1047,6 +1081,35 @@ function renderRoutines() {
         if (item) openRoutineGuideMatcher(item);
       };
     });
+  $('#routine-sections')
+    .querySelectorAll('[data-edit-item]')
+    .forEach((button) => {
+      button.onclick = () => {
+        editingRoutineItem = {
+          sectionId: button.dataset.sectionId,
+          index: Number(button.dataset.editItem),
+        };
+        renderRoutines();
+        $('#routine-sections [data-edit-sets]')?.focus();
+      };
+    });
+  $('#routine-sections')
+    .querySelectorAll('[data-edit-item-form]')
+    .forEach((form) => {
+      form.onsubmit = (event) => {
+        event.preventDefault();
+        const button = form.querySelector('[data-save-item]');
+        if (button) saveRoutineItem(day, button);
+      };
+    });
+  $('#routine-sections')
+    .querySelectorAll('[data-cancel-item]')
+    .forEach((button) => {
+      button.onclick = () => {
+        editingRoutineItem = null;
+        renderRoutines();
+      };
+    });
   renderSectionTarget(day);
   const empty = sectionItemCount(day) === 0;
   $('#routine-empty').hidden = !empty;
@@ -1068,6 +1131,7 @@ function renderRoutines() {
       button.onclick = () => {
         const section = day.sections.find((item) => item.id === button.dataset.sectionId);
         const items = section ? section.items : day.items;
+        editingRoutineItem = null;
         commitDBChange(() => items.splice(Number(button.dataset.removeItem), 1));
       };
     });
@@ -1078,6 +1142,7 @@ function renderRoutines() {
         const section = day.sections.find((item) => item.id === button.dataset.sectionId);
         const items = section ? section.items : day.items;
         const index = Number(button.dataset.itemUp ?? button.dataset.itemDown);
+        editingRoutineItem = null;
         moveItem(items, index, button.hasAttribute('data-item-up') ? -1 : 1);
       };
     });
@@ -1228,7 +1293,30 @@ function renderRoutineItem(item, itemIndex, sectionId = '', itemCount = 0) {
   const actionLabel = guideId ? t('openGuide') : t('matchRoutineExercise');
   const open = `<button type="button" class="routine-item-open" ${itemTarget} aria-label="${escapeHtml(actionLabel)}: ${itemName}">`;
   const close = '</button>';
-  return `<div class="routine-item">${open}<span class="item-order">${String(itemIndex + 1).padStart(2, '0')}</span><div class="item-info"><b>${itemName}</b><small>${escapeHtml(item.sets)} ${escapeHtml(t('sets').toLowerCase())} <span>·</span> ${escapeHtml(item.reps || '—')}</small></div>${close}<button type="button" class="item-action" data-item-up="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveUp'))}" ${itemIndex === 0 ? 'disabled' : ''}>↑</button><button type="button" class="item-action" data-item-down="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveDown'))}" ${itemIndex === itemCount - 1 ? 'disabled' : ''}>↓</button><button type="button" class="item-action remove" data-remove-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('delete'))}">×</button></div>`;
+  const isEditing =
+    editingRoutineItem?.sectionId === sectionId && editingRoutineItem.index === itemIndex;
+  const details = isEditing
+    ? `<form class="routine-item-edit" data-edit-item-form><label><span>${escapeHtml(t('editSets'))}</span><input data-edit-sets type="number" min="1" max="99" required value="${escapeHtml(item.sets)}"></label><label><span>${escapeHtml(t('editReps'))}</span><input data-edit-reps type="text" maxlength="80" value="${escapeHtml(item.reps || '')}"></label><div class="routine-item-edit-actions"><button type="submit" class="text-button" data-save-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('saveExercise'))}">${escapeHtml(t('save'))}</button><button type="button" class="text-button muted" data-cancel-item aria-label="${escapeHtml(t('cancel'))}">${escapeHtml(t('cancel'))}</button></div></form>`
+    : `${open}<span class="item-order">${String(itemIndex + 1).padStart(2, '0')}</span><div class="item-info"><b>${itemName}</b><small>${escapeHtml(item.sets)} ${escapeHtml(t('sets').toLowerCase())} <span>·</span> ${escapeHtml(item.reps || '—')}</small></div>${close}<button type="button" class="item-action" data-edit-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('editExercise'))}: ${itemName}" title="${escapeHtml(t('editExercise'))}">✎</button>`;
+  return `<div class="routine-item">${details}<button type="button" class="item-action" data-item-up="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveUp'))}" ${itemIndex === 0 ? 'disabled' : ''}>↑</button><button type="button" class="item-action" data-item-down="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveDown'))}" ${itemIndex === itemCount - 1 ? 'disabled' : ''}>↓</button><button type="button" class="item-action remove" data-remove-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('delete'))}">×</button></div>`;
+}
+function saveRoutineItem(day, button) {
+  const row = button.closest('.routine-item');
+  const setsInput = row?.querySelector('[data-edit-sets]');
+  const repsInput = row?.querySelector('[data-edit-reps]');
+  if (!setsInput?.reportValidity()) return;
+  const section = day.sections.find((item) => item.id === button.dataset.sectionId);
+  const items = section ? section.items : day.items;
+  const item = items[Number(button.dataset.saveItem)];
+  if (!item) return;
+  if (
+    commitDBChange(() => {
+      item.sets = Number(setsInput.value);
+      item.reps = String(repsInput?.value || '').slice(0, 80);
+      editingRoutineItem = null;
+    })
+  )
+    toast(t('saved'));
 }
 function renderRoutineSection(section, index, sectionCount) {
   const isCollapsed = collapsedSectionIds.has(section.id);
@@ -1300,6 +1388,7 @@ function removeSection(day, id) {
       if (selectedSectionId === id) selectedSectionId = day.sections[0]?.id || null;
       collapsedSectionIds.delete(id);
       if (editingSectionId === id) editingSectionId = null;
+      editingRoutineItem = null;
     })
   )
     renderRoutines();
@@ -1634,25 +1723,23 @@ $('#search').addEventListener('input', () => {
   currentExercisePage = 1;
   renderExercises();
 });
-['pattern-filter', 'equipment-filter', 'muscle-filter'].forEach((id) =>
+['pattern-filter', 'equipment-filter', 'muscle-filter', 'focus-filter'].forEach((id) =>
   $('#' + id).addEventListener('change', () => {
     currentExercisePage = 1;
     renderExercises();
   }),
 );
 window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
+  window.clearTimeout(exerciseResizeTimer);
+  exerciseResizeTimer = window.setTimeout(() => {
     const columns = Math.max(
       1,
-      getComputedStyle($('#exercise-grid')).gridTemplateColumns.split(' ').length,
+      getComputedStyle($('#exercise-grid')).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
     );
-    if (columns !== exerciseColumnCount) {
-      exerciseColumnCount = columns;
-      currentExercisePage = 1;
-      renderExercises();
-    }
-  }, 120);
+    if (columns === exerciseColumnCount) return;
+    currentExercisePage = 1;
+    renderExercises();
+  }, 100);
 });
 $('#dialog-close').onclick = () => $('#exercise-dialog').close();
 $('#close-add-dialog').onclick = () => $('#add-dialog').close();
@@ -1691,6 +1778,7 @@ $('#new-routine').onclick = () => {
       selectedDay = 0;
       selectedSectionId = null;
       editingSectionId = null;
+      editingRoutineItem = null;
     })
   ) {
     $('#routine-name').focus();
@@ -1704,8 +1792,10 @@ $('#routine-select').onchange = (e) => {
     selectedDay = 0;
     selectedSectionId = null;
     editingSectionId = null;
+    editingRoutineItem = null;
   });
 };
+$('#remove-routine').onclick = () => removeRoutine(currentRoutine());
 $('#routine-name').onchange = (e) => {
   const name = e.target.value;
   commitDBChange(() => setRoutineName(currentRoutine(), name));
@@ -1724,6 +1814,37 @@ function setRoutineName(routine, value) {
   routine.name = name.slice(0, 60);
   routine.defaultName = name === routineDisplayName(routine) || name === t('untitled');
 }
+function removeRoutine(routine) {
+  if (db.routines.length <= 1) return;
+  const routineName = routineDisplayName(routine);
+  if (!window.confirm(t('confirmRemoveRoutine').replace('{routine}', routineName))) return;
+  if (
+    commitDBChange(() => {
+      db.routines = db.routines.filter((item) => item.id !== routine.id);
+      if (db.current === routine.id) db.current = db.routines[0].id;
+      selectedDay = 0;
+      selectedSectionId = null;
+      editingSectionId = null;
+      editingRoutineItem = null;
+    })
+  )
+    toast(t('routineRemoved'));
+}
+function removeRoutineDay(routine, dayIndex) {
+  if (routine.days.length <= 1 || !routine.days[dayIndex]) return;
+  const sessionName = sessionDisplayName(routine.days[dayIndex], dayIndex);
+  if (!window.confirm(t('confirmRemoveSession').replace('{session}', sessionName))) return;
+  if (
+    commitDBChange(() => {
+      routine.days.splice(dayIndex, 1);
+      selectedDay = Math.min(dayIndex, routine.days.length - 1);
+      selectedSectionId = null;
+      editingSectionId = null;
+      editingRoutineItem = null;
+    })
+  )
+    toast(t('sessionRemoved'));
+}
 $('#add-day').onclick = () => {
   commitDBChange(() => {
     const routine = currentRoutine();
@@ -1731,6 +1852,7 @@ $('#add-day').onclick = () => {
     selectedDay = routine.days.length - 1;
     selectedSectionId = null;
     editingSectionId = null;
+    editingRoutineItem = null;
   });
 };
 $('#section-target').addEventListener('change', (event) => {

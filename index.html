@@ -218,16 +218,28 @@
                 <div class="mini-label" data-i18n="currentRoutine">CURRENT ROUTINE</div>
                 <select id="routine-select" class="routine-select"></select>
               </div>
-              <button
-                class="icon-button"
-                id="new-routine"
-                data-i18n-title="newRoutine"
-                data-i18n-aria-label="newRoutine"
-                title="New routine"
-                aria-label="New routine"
-              >
-                ＋
-              </button>
+              <div class="routine-actions">
+                <button
+                  class="icon-button"
+                  id="new-routine"
+                  data-i18n-title="newRoutine"
+                  data-i18n-aria-label="newRoutine"
+                  title="New routine"
+                  aria-label="New routine"
+                >
+                  ＋
+                </button>
+                <button
+                  class="icon-button routine-delete"
+                  id="remove-routine"
+                  data-i18n-title="removeRoutine"
+                  data-i18n-aria-label="removeRoutine"
+                  title="Remove routine"
+                  aria-label="Remove routine"
+                >
+                  ×
+                </button>
+              </div>
             </div>
             <div class="routine-name-row">
               <input
