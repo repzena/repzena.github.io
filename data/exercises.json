@@ -219,7 +219,23 @@
     },
     "primaryMuscles": ["back"],
     "secondaryMuscles": ["biceps"],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/lat-pulldown/1-start-position.jpeg",
+        "alt": {
+          "en": "A seated person holds the lat pull-down bar overhead with arms extended.",
+          "es": "Una persona sentada sostiene la barra del jalón por encima de la cabeza, con los brazos extendidos."
+        }
+      },
+      {
+        "src": "./assets/lat-pulldown/2-end-position.jpeg",
+        "alt": {
+          "en": "A seated person pulls the lat pull-down bar towards the upper chest.",
+          "es": "Una persona sentada baja la barra del jalón hacia la parte alta del pecho."
+        }
+      }
+    ]
   },
   {
     "id": "hip-thrust",
@@ -332,7 +348,16 @@
     },
     "primaryMuscles": [],
     "secondaryMuscles": ["shoulders"],
-    "focus": ["strength", "core"]
+    "focus": ["strength", "core"],
+    "images": [
+      {
+        "src": "./assets/plank/plank.png",
+        "alt": {
+          "en": "A person holds a forearm plank with the body aligned from head to heels.",
+          "es": "Una persona sostiene una plancha sobre los antebrazos, con el cuerpo alineado desde la cabeza hasta los talones."
+        }
+      }
+    ]
   },
   {
     "id": "goblet-squat",
@@ -520,10 +545,10 @@
     "image": "core",
     "images": [
       {
-        "src": "./assets/high-plank/high-plank.webp",
+        "src": "./assets/high-plank/high-plank.jpeg",
         "alt": {
-          "en": "A high plank: the athlete holds a straight line from head to heels with hands under the shoulders and arms extended.",
-          "es": "Plancha alta: la persona mantiene el cuerpo alineado desde la cabeza hasta los talones, con las manos debajo de los hombros y los brazos extendidos."
+          "en": "A person holds a high plank with straight arms, hands under the shoulders and body aligned.",
+          "es": "Una persona sostiene una plancha alta con los brazos extendidos, las manos debajo de los hombros y el cuerpo alineado."
         }
       }
     ],
@@ -823,7 +848,23 @@
     },
     "primaryMuscles": ["quads"],
     "secondaryMuscles": ["glutes"],
-    "focus": ["mobility", "core"]
+    "focus": ["mobility", "core"],
+    "images": [
+      {
+        "src": "./assets/rotational-lunge/1-start-position.png",
+        "alt": {
+          "en": "A person stands upright on a mat before stepping into a lunge.",
+          "es": "Una persona está de pie sobre una colchoneta antes de dar un paso hacia la estocada."
+        }
+      },
+      {
+        "src": "./assets/rotational-lunge/2-lunge.png",
+        "alt": {
+          "en": "A person holds a forward lunge with the front knee bent and rear leg extended.",
+          "es": "Una persona sostiene una estocada hacia adelante, con la rodilla delantera flexionada y la pierna trasera extendida."
+        }
+      }
+    ]
   },
   {
     "id": "ankle-knee-circles",
@@ -887,7 +928,16 @@
     },
     "primaryMuscles": ["obliques"],
     "secondaryMuscles": ["shoulders"],
-    "focus": ["strength", "core"]
+    "focus": ["strength", "core"],
+    "images": [
+      {
+        "src": "./assets/side-plank/side-plank.png",
+        "alt": {
+          "en": "A person holds a side plank on one forearm with hips lifted and body aligned.",
+          "es": "Una persona sostiene una plancha lateral sobre un antebrazo, con las caderas elevadas y el cuerpo alineado."
+        }
+      }
+    ]
   },
   {
     "id": "reverse-crunch",
@@ -915,7 +965,30 @@
     },
     "primaryMuscles": [],
     "secondaryMuscles": [],
-    "focus": ["strength", "core"]
+    "focus": ["strength", "core"],
+    "images": [
+      {
+        "src": "./assets/reverse-crunch/1-start-position.jpeg",
+        "alt": {
+          "en": "A person lies on their back with knees bent and feet on the mat.",
+          "es": "Una persona está acostada boca arriba, con las rodillas flexionadas y los pies apoyados en la colchoneta."
+        }
+      },
+      {
+        "src": "./assets/reverse-crunch/2-mid-position.jpeg",
+        "alt": {
+          "en": "A person lies on their back with knees bent and raised above the hips.",
+          "es": "Una persona está acostada boca arriba, con las rodillas flexionadas y elevadas sobre las caderas."
+        }
+      },
+      {
+        "src": "./assets/reverse-crunch/3-end-position.jpeg",
+        "alt": {
+          "en": "A person curls the pelvis up, drawing bent knees towards the chest.",
+          "es": "Una persona enrolla la pelvis hacia arriba y acerca las rodillas flexionadas al pecho."
+        }
+      }
+    ]
   },
   {
     "id": "russian-twist",
@@ -1239,28 +1312,28 @@
     "image": "core",
     "images": [
       {
-        "src": "./assets/prone-ytw/1-start-position.webp",
+        "src": "./assets/prone-ytw/1-start-position.jpeg",
         "alt": {
-          "en": "Starting position for prone Y-T-W raises, lying face down with arms relaxed.",
-          "es": "Posición inicial de las elevaciones Y-T-W boca abajo, acostado con los brazos relajados."
+          "en": "Starting position for prone Y-T-W raises: lying face down with arms relaxed alongside the body.",
+          "es": "Posición inicial de las elevaciones Y-T-W boca abajo: acostado con los brazos relajados junto al cuerpo."
         }
       },
       {
-        "src": "./assets/prone-ytw/2-y-position.webp",
+        "src": "./assets/prone-ytw/2-y-position.jpeg",
         "alt": {
           "en": "Prone Y-T-W raise in the Y position, with arms lifted diagonally overhead.",
           "es": "Elevación Y-T-W boca abajo en posición de Y, con los brazos elevados en diagonal."
         }
       },
       {
-        "src": "./assets/prone-ytw/3-t-position.webp",
+        "src": "./assets/prone-ytw/3-t-position.jpeg",
         "alt": {
           "en": "Prone Y-T-W raise in the T position, with arms extended out to the sides.",
           "es": "Elevación Y-T-W boca abajo en posición de T, con los brazos extendidos hacia los lados."
         }
       },
       {
-        "src": "./assets/prone-ytw/4-w-position.webp",
+        "src": "./assets/prone-ytw/4-w-position.jpeg",
         "alt": {
           "en": "Prone Y-T-W raise in the W position, with elbows bent and shoulder blades drawn together.",
           "es": "Elevación Y-T-W boca abajo en posición de W, con los codos flexionados y las escápulas juntas."
@@ -1333,10 +1406,10 @@
     "image": "core",
     "images": [
       {
-        "src": "./assets/hollow-hold/hollow-hold.webp",
+        "src": "./assets/hollow-hold/hollow-hold.jpeg",
         "alt": {
-          "en": "Hollow hold: the athlete lies on the back with shoulders and straight legs raised, arms reaching overhead, and lower back pressed into the mat.",
-          "es": "Hollow hold: la persona está boca arriba, con los hombros y las piernas extendidas elevados, los brazos sobre la cabeza y la zona lumbar apoyada en la colchoneta."
+          "en": "Hollow hold: a person lies on their back with shoulders and straight legs raised, arms reaching overhead.",
+          "es": "Hollow hold: una persona está boca arriba, con los hombros y las piernas extendidas elevados y los brazos sobre la cabeza."
         }
       }
     ],
@@ -1406,10 +1479,17 @@
     "image": "press",
     "images": [
       {
-        "src": "./assets/arnold-press/press-arnold.webp",
+        "src": "./assets/arnold-press/1-start-position.jpeg",
         "alt": {
-          "en": "Two positions of the Arnold press: dumbbells start in front of the shoulders, then press overhead.",
-          "es": "Dos posiciones del press Arnold: las mancuernas empiezan frente a los hombros y luego se elevan por encima de la cabeza."
+          "en": "Arnold press starting position: dumbbells held in front of the shoulders with palms facing the body.",
+          "es": "Posición inicial del press Arnold: mancuernas frente a los hombros y palmas hacia el cuerpo."
+        }
+      },
+      {
+        "src": "./assets/arnold-press/2-end-position.jpeg",
+        "alt": {
+          "en": "Arnold press top position: both dumbbells pressed overhead with arms extended.",
+          "es": "Posición final del press Arnold: las dos mancuernas elevadas sobre la cabeza y los brazos extendidos."
         }
       }
     ],
@@ -1589,7 +1669,23 @@
     },
     "primaryMuscles": ["quads"],
     "secondaryMuscles": ["glutes"],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/walking-lunge/1-start-position.png",
+        "alt": {
+          "en": "A person stands upright on a mat before taking a step forward.",
+          "es": "Una persona está de pie sobre una colchoneta antes de dar un paso hacia adelante."
+        }
+      },
+      {
+        "src": "./assets/walking-lunge/2-lunge.png",
+        "alt": {
+          "en": "A person holds a forward lunge with the front knee bent and rear leg extended.",
+          "es": "Una persona sostiene una estocada hacia adelante, con la rodilla delantera flexionada y la pierna trasera extendida."
+        }
+      }
+    ]
   },
   {
     "id": "lying-leg-curl",
