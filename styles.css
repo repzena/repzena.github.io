@@ -1799,7 +1799,7 @@ a {
     height: 150px;
   }
   .exercise-photo-art > img {
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
   }
   .card-body {
