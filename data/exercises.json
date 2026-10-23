@@ -37,7 +37,23 @@
     },
     "primaryMuscles": ["chest"],
     "secondaryMuscles": ["triceps", "shoulders"],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/barbell-bench-press/1-initial-position.jpeg",
+        "alt": {
+          "en": "A person lies on a bench holding a barbell above the chest with elbows bent.",
+          "es": "Una persona está acostada en un banco y sostiene la barra sobre el pecho, con los codos flexionados."
+        }
+      },
+      {
+        "src": "./assets/barbell-bench-press/2-final-position.jpeg",
+        "alt": {
+          "en": "A person presses a barbell above the chest with arms extended.",
+          "es": "Una persona empuja la barra sobre el pecho con los brazos extendidos."
+        }
+      }
+    ]
   },
   {
     "id": "barbell-row",
@@ -351,7 +367,7 @@
     "focus": ["strength", "core"],
     "images": [
       {
-        "src": "./assets/plank/plank.png",
+        "src": "./assets/plank/plank.jpeg",
         "alt": {
           "en": "A person holds a forearm plank with the body aligned from head to heels.",
           "es": "Una persona sostiene una plancha sobre los antebrazos, con el cuerpo alineado desde la cabeza hasta los talones."
@@ -851,14 +867,14 @@
     "focus": ["mobility", "core"],
     "images": [
       {
-        "src": "./assets/rotational-lunge/1-start-position.png",
+        "src": "./assets/rotational-lunge/1-start-position.jpeg",
         "alt": {
           "en": "A person stands upright on a mat before stepping into a lunge.",
           "es": "Una persona está de pie sobre una colchoneta antes de dar un paso hacia la estocada."
         }
       },
       {
-        "src": "./assets/rotational-lunge/2-lunge.png",
+        "src": "./assets/rotational-lunge/2-lunge.jpeg",
         "alt": {
           "en": "A person holds a forward lunge with the front knee bent and rear leg extended.",
           "es": "Una persona sostiene una estocada hacia adelante, con la rodilla delantera flexionada y la pierna trasera extendida."
@@ -931,7 +947,7 @@
     "focus": ["strength", "core"],
     "images": [
       {
-        "src": "./assets/side-plank/side-plank.png",
+        "src": "./assets/side-plank/side-plank.jpeg",
         "alt": {
           "en": "A person holds a side plank on one forearm with hips lifted and body aligned.",
           "es": "Una persona sostiene una plancha lateral sobre un antebrazo, con las caderas elevadas y el cuerpo alineado."
@@ -970,15 +986,8 @@
       {
         "src": "./assets/reverse-crunch/1-start-position.jpeg",
         "alt": {
-          "en": "A person lies on their back with knees bent and feet on the mat.",
-          "es": "Una persona está acostada boca arriba, con las rodillas flexionadas y los pies apoyados en la colchoneta."
-        }
-      },
-      {
-        "src": "./assets/reverse-crunch/2-mid-position.jpeg",
-        "alt": {
-          "en": "A person lies on their back with knees bent and raised above the hips.",
-          "es": "Una persona está acostada boca arriba, con las rodillas flexionadas y elevadas sobre las caderas."
+          "en": "A person lies on their back with knees bent and feet on the floor.",
+          "es": "Una persona está acostada boca arriba, con las rodillas flexionadas y los pies apoyados en el piso."
         }
       },
       {
@@ -1140,7 +1149,23 @@
     },
     "primaryMuscles": ["triceps"],
     "secondaryMuscles": [],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/dumbbell-french-press/1-initial-position.jpeg",
+        "alt": {
+          "en": "A person lies on a bench holding two dumbbells above the chest with arms extended.",
+          "es": "Una persona está acostada en un banco y sostiene dos mancuernas sobre el pecho con los brazos extendidos."
+        }
+      },
+      {
+        "src": "./assets/dumbbell-french-press/2-final-position.jpeg",
+        "alt": {
+          "en": "A person bends the elbows to lower two dumbbells beside the head.",
+          "es": "Una persona flexiona los codos para bajar dos mancuernas junto a la cabeza."
+        }
+      }
+    ]
   },
   {
     "id": "conventional-deadlift",
@@ -1326,14 +1351,14 @@
         }
       },
       {
-        "src": "./assets/prone-ytw/3-t-position.jpeg",
+        "src": "./assets/prone-ytw/4-t-position.jpeg",
         "alt": {
           "en": "Prone Y-T-W raise in the T position, with arms extended out to the sides.",
           "es": "Elevación Y-T-W boca abajo en posición de T, con los brazos extendidos hacia los lados."
         }
       },
       {
-        "src": "./assets/prone-ytw/4-w-position.jpeg",
+        "src": "./assets/prone-ytw/3-w-position.jpeg",
         "alt": {
           "en": "Prone Y-T-W raise in the W position, with elbows bent and shoulder blades drawn together.",
           "es": "Elevación Y-T-W boca abajo en posición de W, con los codos flexionados y las escápulas juntas."
@@ -1541,7 +1566,23 @@
     },
     "primaryMuscles": ["back"],
     "secondaryMuscles": ["biceps"],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/seated-cable-row-neutral/1-start-position.jpeg",
+        "alt": {
+          "en": "A person sits facing a cable machine with arms extended while holding a close-grip handle.",
+          "es": "Una persona está sentada frente a una polea, con los brazos extendidos y sosteniendo un agarre cerrado."
+        }
+      },
+      {
+        "src": "./assets/seated-cable-row-neutral/2-start-position.jpeg",
+        "alt": {
+          "en": "A person pulls a close-grip cable handle towards the abdomen with elbows bent.",
+          "es": "Una persona lleva un agarre cerrado hacia el abdomen con los codos flexionados."
+        }
+      }
+    ]
   },
   {
     "id": "high-cable-crossover",
@@ -1672,17 +1713,24 @@
     "focus": ["strength"],
     "images": [
       {
-        "src": "./assets/walking-lunge/1-start-position.png",
+        "src": "./assets/walking-lunge/1-3-first-third-positions.jpeg",
         "alt": {
-          "en": "A person stands upright on a mat before taking a step forward.",
-          "es": "Una persona está de pie sobre una colchoneta antes de dar un paso hacia adelante."
+          "en": "A person stands upright before taking a step forwards.",
+          "es": "Una persona está de pie antes de dar un paso hacia adelante."
         }
       },
       {
-        "src": "./assets/walking-lunge/2-lunge.png",
+        "src": "./assets/walking-lunge/2-second-position.jpeg",
         "alt": {
           "en": "A person holds a forward lunge with the front knee bent and rear leg extended.",
           "es": "Una persona sostiene una estocada hacia adelante, con la rodilla delantera flexionada y la pierna trasera extendida."
+        }
+      },
+      {
+        "src": "./assets/walking-lunge/4-fourth-position.jpeg",
+        "alt": {
+          "en": "A person holds a forward lunge with the other leg leading.",
+          "es": "Una persona sostiene una estocada hacia adelante con la otra pierna al frente."
         }
       }
     ]

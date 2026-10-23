@@ -683,7 +683,7 @@ function renderSectionTypeOptions() {
 function imageMarkup(ex) {
   if (Array.isArray(ex.images) && ex.images.length) {
     const first = ex.images[0];
-    return `<div class="exercise-art exercise-photo-art"><img src="${escapeHtml(first.src)}" alt="" loading="lazy" decoding="async" width="1103" height="578"></div>`;
+    return `<div class="exercise-art exercise-photo-art"><img src="${escapeHtml(first.src)}" alt="" loading="lazy" decoding="async" width="1024" height="1024"></div>`;
   }
   return `<div class="exercise-art art-${escapeHtml(ex.image)}" aria-hidden="true"><div class="art-index">${String(ex.id.length).padStart(2, '0')}</div><svg viewBox="0 0 280 180"><path class="art-floor" d="M20 151h240"/><circle class="art-head" cx="142" cy="42" r="16"/><path class="art-limb" d="M142 59l-9 45 34 17m-34-17-30 26m30-26-5 30 35 17m-35-17-28 18m37-76 31 12 20-15m-82 4-25-13"/><path class="art-equip" d="M212 76v29m-9-24h18m-18 19h18"/><path class="art-arrow" d="M224 125c8-16 8-29 1-41m-3 7 3-8 6 5"/></svg><span class="art-label">${escapeHtml(label('pattern', ex.pattern))}</span></div>`;
 }
