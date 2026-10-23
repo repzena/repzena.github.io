@@ -4,7 +4,8 @@ const UI = {
     brandHome: 'Repzena home',
     navLabel: 'Main navigation',
     sessions: 'Routine sessions',
-    heroImageAlt: 'Illustration of a goblet squat',
+    heroImageAlt:
+      'Two people exercise in a gym: one presses dumbbells overhead while another holds a plank.',
     newRoutine: 'New routine',
     removeRoutine: 'Remove routine',
     removeSession: 'Remove session',
@@ -35,7 +36,6 @@ const UI = {
       'Clear, visual exercise guides and routines that stay yours. No noise, just what you need between sets.',
     explore: 'Explore exercises',
     heroNote: 'Built for real gym floors',
-    artCaption: 'SQUAT · CONTROL · REPEAT',
     libraryEyebrow: 'YOUR MOVEMENT LIBRARY',
     libraryTitle: 'Find your next <em>move.</em>',
     levelNote: 'Experience levels are rough guides, not personal assessments.',
@@ -164,7 +164,8 @@ const UI = {
     brandHome: 'Inicio de Repzena',
     navLabel: 'Navegación principal',
     sessions: 'Sesiones de la rutina',
-    heroImageAlt: 'Ilustración de una sentadilla goblet',
+    heroImageAlt:
+      'Dos personas entrenan en un gimnasio: una levanta mancuernas por encima de la cabeza y otra sostiene una plancha.',
     newRoutine: 'Nueva rutina',
     removeRoutine: 'Eliminar rutina',
     removeSession: 'Eliminar sesión',
@@ -195,7 +196,6 @@ const UI = {
       'Guías visuales para aprender ejercicios y armar rutinas a tu manera. Sin distracciones: solo lo que necesitás entre series.',
     explore: 'Ver ejercicios',
     heroNote: 'Pensado para entrenar en el gimnasio',
-    artCaption: 'SENTADILLA · CONTROL · REPETICIÓN',
     libraryEyebrow: 'BIBLIOTECA DE MOVIMIENTOS',
     libraryTitle: 'Encontrá tu próximo <em>ejercicio.</em>',
     levelNote: 'El nivel es orientativo y no reemplaza una evaluación personal.',
@@ -622,6 +622,7 @@ function applyLanguage() {
   document
     .querySelectorAll('[data-i18n-placeholder]')
     .forEach((el) => (el.placeholder = t(el.dataset.i18nPlaceholder)));
+  document.querySelectorAll('[data-i18n-alt]').forEach((el) => (el.alt = t(el.dataset.i18nAlt)));
   document
     .querySelectorAll('[data-i18n-aria-label]')
     .forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nAriaLabel)));
