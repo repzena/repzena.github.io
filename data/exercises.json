@@ -462,6 +462,29 @@
     "equipment": ["bodyweight"],
     "level": "beginner",
     "image": "core",
+    "images": [
+      {
+        "src": "./assets/hip-90-90/1-first-side.jpeg",
+        "alt": {
+          "en": "A person sits in a 90/90 hip position with one leg in front and one to the side.",
+          "es": "Una persona está sentada en posición 90/90, con una pierna adelante y la otra hacia un costado."
+        }
+      },
+      {
+        "src": "./assets/hip-90-90/2-switching.jpeg",
+        "alt": {
+          "en": "A person rotates both knees through the middle while switching sides in a 90/90 hip movement.",
+          "es": "Una persona lleva ambas rodillas por el centro para cambiar de lado en un movimiento 90/90."
+        }
+      },
+      {
+        "src": "./assets/hip-90-90/3-second-side.jpeg",
+        "alt": {
+          "en": "A person sits in the 90/90 hip position on the opposite side.",
+          "es": "Una persona está sentada en posición 90/90 del lado opuesto."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Sit with both knees bent at roughly 90 degrees, one leg in front and one to the side.",
@@ -490,6 +513,22 @@
     "equipment": ["bodyweight"],
     "level": "beginner",
     "image": "core",
+    "images": [
+      {
+        "src": "./assets/cat-cow/cat-position.jpeg",
+        "alt": {
+          "en": "A person rounds their back in the cat position on hands and knees.",
+          "es": "Una persona redondea la espalda en la posición de gato, en cuatro apoyos."
+        }
+      },
+      {
+        "src": "./assets/cat-cow/cow-position.jpeg",
+        "alt": {
+          "en": "A person gently extends their back in the cow position on hands and knees.",
+          "es": "Una persona extiende suavemente la espalda en la posición de vaca, en cuatro apoyos."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Start on hands and knees with hands under shoulders.",
@@ -522,6 +561,29 @@
     "equipment": ["band", "stick"],
     "level": "beginner",
     "image": "press",
+    "images": [
+      {
+        "src": "./assets/shoulder-pass-through/1-front.jpeg",
+        "alt": {
+          "en": "A person holds a stick in front of their body with a wide grip to begin a shoulder pass-through.",
+          "es": "Una persona sostiene un bastón delante del cuerpo con un agarre amplio para iniciar la pasada de hombros."
+        }
+      },
+      {
+        "src": "./assets/shoulder-pass-through/2-middle.jpeg",
+        "alt": {
+          "en": "A person moves a stick overhead during a shoulder pass-through.",
+          "es": "Una persona pasa un bastón por encima de la cabeza durante una pasada de hombros."
+        }
+      },
+      {
+        "src": "./assets/shoulder-pass-through/3-back.jpeg",
+        "alt": {
+          "en": "A person holds a stick behind their body at the end of a shoulder pass-through.",
+          "es": "Una persona sostiene un bastón detrás del cuerpo al final de una pasada de hombros."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Stand tall and hold a light band or stick with a wide, comfortable grip.",
@@ -602,6 +664,22 @@
     "equipment": ["pull-up-bar"],
     "level": "intermediate",
     "image": "core",
+    "images": [
+      {
+        "src": "./assets/hanging-leg-raise/1-initial.jpeg",
+        "alt": {
+          "en": "A person hangs from a bar with arms extended and legs straight below them.",
+          "es": "Una persona está colgada de una barra, con los brazos extendidos y las piernas rectas hacia abajo."
+        }
+      },
+      {
+        "src": "./assets/hanging-leg-raise/2-final.jpeg",
+        "alt": {
+          "en": "A person raises their knees towards their hips while hanging from a bar.",
+          "es": "Una persona eleva las rodillas hacia las caderas mientras está colgada de una barra."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Hang from a secure bar with a comfortable grip and shoulders gently engaged.",
