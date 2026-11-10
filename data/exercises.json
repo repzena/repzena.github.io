@@ -65,6 +65,22 @@
     "equipment": ["barbell"],
     "level": "intermediate",
     "image": "row",
+    "images": [
+      {
+        "src": "./assets/barbell-row/1-initial-position.jpeg",
+        "alt": {
+          "en": "A person hinges forward while holding a barbell below the shoulders with arms extended.",
+          "es": "Una persona inclina el torso y sostiene una barra debajo de los hombros con los brazos extendidos."
+        }
+      },
+      {
+        "src": "./assets/barbell-row/2-end-position.jpeg",
+        "alt": {
+          "en": "A person pulls a barbell towards the lower ribs in a bent-over row.",
+          "es": "Una persona lleva la barra hacia las costillas inferiores durante un remo inclinado."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Stand hip-width apart and hinge forward with a steady, neutral back.",
@@ -105,6 +121,22 @@
     "equipment": ["dumbbells", "bench"],
     "level": "beginner",
     "image": "press",
+    "images": [
+      {
+        "src": "./assets/dumbbell-shoulder-press/1-low-position.jpeg",
+        "alt": {
+          "en": "A seated person holds dumbbells beside the shoulders with elbows bent.",
+          "es": "Una persona sentada sostiene las mancuernas junto a los hombros, con los codos flexionados."
+        }
+      },
+      {
+        "src": "./assets/dumbbell-shoulder-press/2-high-position.jpeg",
+        "alt": {
+          "en": "A seated person presses dumbbells overhead with arms extended.",
+          "es": "Una persona sentada empuja las mancuernas por encima de la cabeza con los brazos extendidos."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Sit tall with back support and hold dumbbells beside your shoulders.",
@@ -138,6 +170,22 @@
     "equipment": ["barbell", "rack"],
     "level": "intermediate",
     "image": "squat",
+    "images": [
+      {
+        "src": "./assets/barbell-squat/1-high.jpeg",
+        "alt": {
+          "en": "A person stands upright with a barbell across the upper back before squatting.",
+          "es": "Una persona está erguida con una barra sobre la parte alta de la espalda antes de hacer la sentadilla."
+        }
+      },
+      {
+        "src": "./assets/barbell-squat/2-low.jpeg",
+        "alt": {
+          "en": "A person lowers into a barbell back squat with knees bent and hips lowered.",
+          "es": "Una persona baja en una sentadilla con barra, con las rodillas flexionadas y las caderas abajo."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Set the bar securely across your upper back and stand with feet about shoulder-width.",
@@ -174,6 +222,22 @@
     "equipment": ["barbell"],
     "level": "intermediate",
     "image": "hinge",
+    "images": [
+      {
+        "src": "./assets/romanian-deadlift/1-up.jpeg",
+        "alt": {
+          "en": "A person stands tall holding a barbell in front of the thighs to begin a Romanian deadlift.",
+          "es": "Una persona está erguida con una barra delante de los muslos para iniciar el peso muerto rumano."
+        }
+      },
+      {
+        "src": "./assets/romanian-deadlift/2-down.jpeg",
+        "alt": {
+          "en": "A person hinges at the hips and lowers a barbell close to the legs in a Romanian deadlift.",
+          "es": "Una persona lleva las caderas hacia atrás y baja la barra cerca de las piernas durante el peso muerto rumano."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Stand tall holding the bar in front of your thighs, knees softly bent.",
@@ -425,6 +489,15 @@
     "equipment": ["bodyweight"],
     "level": "beginner",
     "image": "core",
+    "images": [
+      {
+        "src": "./assets/mountain-climber/climb-position.jpeg",
+        "alt": {
+          "en": "A person holds a high plank while driving one knee towards the chest in a mountain climber.",
+          "es": "Una persona sostiene una plancha alta y lleva una rodilla hacia el pecho durante un escalador."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Start in a high plank with hands under shoulders.",
@@ -742,6 +815,22 @@
     "equipment": ["ez-bar"],
     "level": "beginner",
     "image": "row",
+    "images": [
+      {
+        "src": "./assets/ez-bar-curl/1-low.jpeg",
+        "alt": {
+          "en": "A person holds an EZ bar with arms extended at the bottom of a curl.",
+          "es": "Una persona sostiene una barra Z con los brazos extendidos al inicio del curl."
+        }
+      },
+      {
+        "src": "./assets/ez-bar-curl/2-high.jpeg",
+        "alt": {
+          "en": "A person curls an EZ bar towards the shoulders with elbows bent.",
+          "es": "Una persona flexiona los codos para llevar la barra Z hacia los hombros."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Stand tall and hold the EZ bar with a comfortable underhand grip.",
@@ -774,6 +863,22 @@
     "equipment": ["cable"],
     "level": "beginner",
     "image": "press",
+    "images": [
+      {
+        "src": "./assets/rope-triceps-pushdown/1-high.jpeg",
+        "alt": {
+          "en": "A person holds a cable rope near the chest with elbows bent to begin a triceps push-down.",
+          "es": "Una persona sostiene la cuerda de la polea cerca del pecho, con los codos flexionados, para iniciar la extensión de tríceps."
+        }
+      },
+      {
+        "src": "./assets/rope-triceps-pushdown/2-low.jpeg",
+        "alt": {
+          "en": "A person presses a cable rope down until the arms are extended in a triceps push-down.",
+          "es": "Una persona empuja la cuerda de la polea hacia abajo hasta extender los brazos durante la extensión de tríceps."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Stand facing a high cable with the rope held near your chest and elbows by your sides.",
@@ -802,6 +907,22 @@
     "equipment": ["machine"],
     "level": "beginner",
     "image": "squat",
+    "images": [
+      {
+        "src": "./assets/incline-leg-press/1-down.jpeg",
+        "alt": {
+          "en": "A person lowers the leg press platform towards the body with knees bent.",
+          "es": "Una persona acerca la plataforma de la prensa inclinada al cuerpo, con las rodillas flexionadas."
+        }
+      },
+      {
+        "src": "./assets/incline-leg-press/2-up.jpeg",
+        "alt": {
+          "en": "A person presses the leg press platform away with legs extended without locking the knees.",
+          "es": "Una persona aleja la plataforma de la prensa inclinada al extender las piernas sin trabar las rodillas."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Sit against the back support and place your feet about shoulder-width on the platform.",
@@ -830,6 +951,22 @@
     "equipment": ["machine"],
     "level": "beginner",
     "image": "hinge",
+    "images": [
+      {
+        "src": "./assets/seated-leg-curl/1-legs-up.jpeg",
+        "alt": {
+          "en": "A person sits at a leg curl machine with the lower legs raised and knees bent.",
+          "es": "Una persona está sentada en la máquina de curl femoral, con las piernas flexionadas y el apoyo elevado."
+        }
+      },
+      {
+        "src": "./assets/seated-leg-curl/2-legs-down.jpeg",
+        "alt": {
+          "en": "A person extends the legs forward against the seated leg curl machine pad.",
+          "es": "Una persona extiende las piernas hacia adelante contra el apoyo de la máquina de curl femoral sentado."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Adjust the seat and pads so your knees line up with the machine pivot.",
@@ -858,6 +995,15 @@
     "equipment": ["machine"],
     "level": "beginner",
     "image": "squat",
+    "images": [
+      {
+        "src": "./assets/standing-calf-raise/1-up.jpeg",
+        "alt": {
+          "en": "A person rises onto the balls of the feet during a standing calf raise.",
+          "es": "Una persona se eleva sobre la parte delantera de los pies durante una elevación de gemelos de pie."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Stand with the balls of your feet on the platform and heels free, using the handles for balance.",
@@ -1255,6 +1401,22 @@
     "equipment": ["barbell"],
     "level": "intermediate",
     "image": "hinge",
+    "images": [
+      {
+        "src": "./assets/conventional-deadlift/1-down.jpeg",
+        "alt": {
+          "en": "A person bends at the hips and knees to grip a barbell near the floor before a deadlift.",
+          "es": "Una persona flexiona las caderas y las rodillas para agarrar una barra cerca del piso antes del peso muerto."
+        }
+      },
+      {
+        "src": "./assets/conventional-deadlift/2-up.jpeg",
+        "alt": {
+          "en": "A person stands upright holding a barbell after lifting it from the floor.",
+          "es": "Una persona está erguida y sostiene una barra después de levantarla del piso."
+        }
+      }
+    ],
     "how": {
       "en": [
         "Stand with the bar over mid-foot. Bend your hips and knees to take a secure grip just outside your legs.",
