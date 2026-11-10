@@ -156,6 +156,10 @@
         "Pará si sentís un dolor agudo."
       ]
     },
+    "aliases": {
+      "en": ["Dumbbell shoulder press"],
+      "es": ["Press militar con mancuernas"]
+    },
     "primaryMuscles": ["shoulders"],
     "secondaryMuscles": ["triceps"],
     "focus": ["strength"]
