@@ -20,14 +20,22 @@
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="#top" data-i18n-aria-label="brandHome" aria-label="Repzena home"
+      <a
+        class="brand"
+        href="#home"
+        data-page-link="home"
+        data-i18n-aria-label="brandHome"
+        aria-label="Repzena home"
         ><span class="brand-mark">r</span><span>repzena<span class="brand-dot">.</span></span></a
       >
       <nav class="nav-links" data-i18n-aria-label="navLabel" aria-label="Main navigation">
-        <a href="#library"
+        <a href="#home" data-page-link="home" aria-current="page"
+          ><span class="nav-label-full" data-i18n="navHome">Home</span
+          ><span class="nav-label-short" data-i18n="navHomeShort">Home</span></a
+        ><a href="#exercises" data-page-link="exercises"
           ><span class="nav-label-full" data-i18n="navLibrary">Exercise library</span
           ><span class="nav-label-short" data-i18n="navLibraryShort">Exercises</span></a
-        ><a href="#routines"
+        ><a href="#routines" data-page-link="routines"
           ><span class="nav-label-full" data-i18n="navRoutines">My routines</span
           ><span class="nav-label-short" data-i18n="navRoutinesShort">Routines</span></a
         >
@@ -52,7 +60,7 @@
       </div>
     </header>
     <main id="top">
-      <section class="hero wrap">
+      <section class="hero wrap page-view" id="home" data-page="home">
         <div class="hero-copy">
           <div class="eyebrow">
             <span class="pulse"></span><span data-i18n="eyebrow">THE GYM, MADE CLEAR</span>
@@ -62,9 +70,16 @@
             Clear, visual exercise guides and routines that stay yours. No noise, just what you need
             between sets.
           </p>
-          <a class="button button-dark" href="#library"
-            ><span data-i18n="explore">Explore exercises</span><span aria-hidden="true">↘</span></a
-          >
+          <div class="hero-actions">
+            <a class="button button-dark" href="#exercises" data-page-link="exercises"
+              ><span data-i18n="explore">Explore exercises</span></a
+            ><a
+              class="button button-light hero-secondary"
+              href="#routines"
+              data-page-link="routines"
+              ><span data-i18n="buildWorkout">Build your workout</span></a
+            >
+          </div>
           <div class="hero-note">
             <span class="note-line"></span
             ><span data-i18n="heroNote">Built for real gym floors</span>
@@ -81,13 +96,12 @@
           />
         </div>
       </section>
-      <section class="library-section" id="library">
+      <section class="library-section page-view" id="library" data-page="exercises" hidden>
         <div class="wrap">
           <div class="section-heading">
             <div>
               <div class="eyebrow">
-                <span class="section-number">01</span
-                ><span data-i18n="libraryEyebrow">YOUR MOVEMENT LIBRARY</span>
+                <span data-i18n="libraryEyebrow">YOUR MOVEMENT LIBRARY</span>
               </div>
               <h2 data-i18n="libraryTitle">Find your next <em>move.</em></h2>
               <p class="library-note" data-i18n="levelNote">
@@ -151,12 +165,11 @@
           </nav>
         </div>
       </section>
-      <section class="routine-section" id="routines">
+      <section class="routine-section page-view" id="routines" data-page="routines" hidden>
         <div class="wrap routine-layout">
           <div class="routine-intro">
             <div class="eyebrow">
-              <span class="section-number">02</span
-              ><span data-i18n="routineEyebrow">YOUR TRAINING, YOUR WAY</span>
+              <span data-i18n="routineEyebrow">YOUR TRAINING, YOUR WAY</span>
             </div>
             <h2 data-i18n="routineTitle">Build a routine<br />that <em>sticks.</em></h2>
             <p data-i18n="routineIntro">
@@ -281,7 +294,7 @@
           </div>
         </div>
       </section>
-      <section class="principles wrap">
+      <section class="principles wrap page-view" data-page="home" hidden>
         <div class="principle">
           <span>01</span><strong data-i18n="principleOne">Learn the movement</strong>
           <p data-i18n="principleOneText">One clear visual. Cues that matter.</p>
@@ -298,7 +311,7 @@
     </main>
     <footer class="footer">
       <div class="wrap footer-inner">
-        <a class="brand" href="#top"
+        <a class="brand" href="#home" data-page-link="home"
           ><span class="brand-mark">r</span><span>repzena<span class="brand-dot">.</span></span></a
         ><span data-i18n="footer">A little more confident, every rep.</span><span>© 2026</span>
       </div>

@@ -3,6 +3,8 @@ const UI = {
   en: {
     brandHome: 'Repzena home',
     navLabel: 'Main navigation',
+    navHome: 'Home',
+    navHomeShort: 'Home',
     sessions: 'Routine sessions',
     heroImageAlt:
       'Two people exercise in a gym: one presses dumbbells overhead while another holds a plank.',
@@ -35,6 +37,10 @@ const UI = {
     intro:
       'Clear, visual exercise guides and routines that stay yours. No noise, just what you need between sets.',
     explore: 'Explore exercises',
+    buildWorkout: 'Build your workout',
+    pageTitleHome: 'Repzena — Home',
+    pageTitleExercises: 'Repzena — Exercise library',
+    pageTitleRoutines: 'Repzena — Routine builder',
     heroNote: 'Built for real gym floors',
     libraryEyebrow: 'YOUR MOVEMENT LIBRARY',
     libraryTitle: 'Find your next <em>move.</em>',
@@ -163,6 +169,8 @@ const UI = {
   es: {
     brandHome: 'Inicio de Repzena',
     navLabel: 'Navegación principal',
+    navHome: 'Inicio',
+    navHomeShort: 'Inicio',
     sessions: 'Sesiones de la rutina',
     heroImageAlt:
       'Dos personas entrenan en un gimnasio: una levanta mancuernas por encima de la cabeza y otra sostiene una plancha.',
@@ -195,6 +203,10 @@ const UI = {
     intro:
       'Guías visuales para aprender ejercicios y armar rutinas a tu manera. Sin distracciones: solo lo que necesitás entre series.',
     explore: 'Ver ejercicios',
+    buildWorkout: 'Armá tu rutina',
+    pageTitleHome: 'Repzena — Inicio',
+    pageTitleExercises: 'Repzena — Ejercicios',
+    pageTitleRoutines: 'Repzena — Rutinas',
     heroNote: 'Pensado para entrenar en el gimnasio',
     libraryEyebrow: 'BIBLIOTECA DE MOVIMIENTOS',
     libraryTitle: 'Encontrá tu próximo <em>ejercicio.</em>',
@@ -423,9 +435,12 @@ let themePreference = ['light', 'dark', 'system'].includes(readStorage(THEME_KEY
   : 'system';
 let guideHistoryEntry = false;
 let closingFromNavigation = false;
+let guideReturnState = null;
+let activePage = 'home';
 let currentExercisePage = 1;
 let exerciseColumnCount = 0;
 let exerciseResizeTimer;
+let scrollSaveTimer;
 let exercises = [];
 let db = loadDB();
 let selectedDay = 0;
@@ -609,6 +624,58 @@ function searchText(value) {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLocaleLowerCase();
+}
+const PAGE_NAMES = new Set(['home', 'exercises', 'routines']);
+function pageTitle(page) {
+  const titleKey = {
+    home: 'pageTitleHome',
+    exercises: 'pageTitleExercises',
+    routines: 'pageTitleRoutines',
+  }[page];
+  return t(titleKey);
+}
+function setActivePage(page) {
+  activePage = PAGE_NAMES.has(page) ? page : 'home';
+  document.querySelectorAll('[data-page]').forEach((view) => {
+    view.hidden = view.dataset.page !== activePage;
+  });
+  document.querySelectorAll('[data-page-link]').forEach((link) => {
+    if (link.dataset.pageLink === activePage) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+  if (activePage === 'exercises') renderExercises();
+  if (!$('#exercise-dialog').open) document.title = pageTitle(activePage);
+}
+function setScrollPosition(position) {
+  const root = document.documentElement;
+  const currentBehavior = root.style.scrollBehavior;
+  root.style.scrollBehavior = 'auto';
+  window.scrollTo(0, Math.max(0, position));
+  root.style.scrollBehavior = currentBehavior;
+}
+function saveCurrentScrollPosition() {
+  if (exerciseIdFromHash()) return;
+  history.replaceState(
+    { ...history.state, repzenaPage: activePage, scrollY: window.scrollY },
+    '',
+    location.href,
+  );
+}
+history.scrollRestoration = 'manual';
+function navigateToPage(page) {
+  if (!PAGE_NAMES.has(page) || (page === activePage && !$('#exercise-dialog').open)) return;
+  saveCurrentScrollPosition();
+  history.pushState({ repzenaPage: page, scrollY: 0 }, '', `#${page}`);
+  guideHistoryEntry = false;
+  guideReturnState = null;
+  setActivePage(page);
+  setScrollPosition(0);
+}
+function pageFromHash() {
+  const hash = location.hash.slice(1);
+  if (hash === 'top') return 'home';
+  if (hash === 'library') return 'exercises';
+  return PAGE_NAMES.has(hash) ? hash : 'home';
 }
 function applyLanguage() {
   document.documentElement.lang = lang === 'en' ? 'en-GB' : 'es-AR';
@@ -940,12 +1007,28 @@ function openDetail(id, updateUrl = true) {
   document.title = `Repzena — ${localized(e.name)} | ${lang === 'es' ? 'Guía de ejercicios' : 'Exercise guide'}`;
   const guideHash = `#exercise/${encodeURIComponent(id)}`;
   if (updateUrl && location.hash !== guideHash) {
+    saveCurrentScrollPosition();
+    guideReturnState = { page: activePage, scrollY: window.scrollY };
     guideHistoryEntry = true;
     history.pushState(
-      { repzenaGuide: true },
+      {
+        repzenaGuide: true,
+        repzenaReturnPage: activePage,
+        repzenaReturnScrollY: guideReturnState.scrollY,
+      },
       '',
       `${location.pathname}${location.search}${guideHash}`,
     );
+  } else if (exerciseIdFromHash() === id) {
+    guideHistoryEntry = history.state?.repzenaGuide === true;
+    guideReturnState = {
+      page: PAGE_NAMES.has(history.state?.repzenaReturnPage)
+        ? history.state.repzenaReturnPage
+        : 'exercises',
+      scrollY: Number.isFinite(history.state?.repzenaReturnScrollY)
+        ? history.state.repzenaReturnScrollY
+        : 0,
+    };
   }
   const primaryMuscles = (e.primaryMuscles || [])
     .map((id) => escapeHtml(label('muscles', id)))
@@ -967,18 +1050,33 @@ function exerciseIdFromHash() {
     return null;
   }
 }
-function syncGuideWithUrl() {
+function syncRouteWithUrl() {
   const id = exerciseIdFromHash();
   if (id && exercises.some((exercise) => exercise.id === id)) {
-    guideHistoryEntry = false;
+    activePage = PAGE_NAMES.has(history.state?.repzenaReturnPage)
+      ? history.state.repzenaReturnPage
+      : 'exercises';
+    setActivePage(activePage);
     openDetail(id, false);
     return;
   }
-  if (id) history.replaceState(history.state, '', `${location.pathname}${location.search}#library`);
+  const page = pageFromHash();
+  const canonicalHash = `#${page}`;
+  if (location.hash !== canonicalHash) {
+    history.replaceState(
+      { ...history.state, repzenaPage: page, scrollY: history.state?.scrollY || 0 },
+      '',
+      canonicalHash,
+    );
+  }
+  guideHistoryEntry = false;
+  guideReturnState = null;
+  setActivePage(page);
   if ($('#exercise-dialog').open) {
     closingFromNavigation = true;
     $('#exercise-dialog').close();
   }
+  setScrollPosition(history.state?.scrollY || 0);
 }
 async function copyGuideLink() {
   const url = location.href;
@@ -1711,6 +1809,28 @@ $('#theme').addEventListener('change', (e) => {
   }
 });
 applyTheme();
+document.querySelectorAll('[data-page-link]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    navigateToPage(link.dataset.pageLink);
+  });
+});
+document.addEventListener('click', (event) => {
+  const detailLink =
+    event.target instanceof window.Element ? event.target.closest('[data-detail]') : null;
+  if (!detailLink || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  openDetail(detailLink.dataset.detail);
+});
+window.addEventListener(
+  'scroll',
+  () => {
+    window.clearTimeout(scrollSaveTimer);
+    scrollSaveTimer = window.setTimeout(saveCurrentScrollPosition, 120);
+  },
+  { passive: true },
+);
 $('#language').addEventListener('change', (e) => {
   lang = e.target.value;
   try {
@@ -1752,7 +1872,6 @@ $('#image-viewer').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) e.currentTarget.close();
 });
 $('#exercise-dialog').addEventListener('close', () => {
-  document.title = lang === 'es' ? 'Repzena — Guía de ejercicios' : 'Repzena — Exercise guide';
   if (closingFromNavigation) {
     closingFromNavigation = false;
     return;
@@ -1761,10 +1880,22 @@ $('#exercise-dialog').addEventListener('close', () => {
     guideHistoryEntry = false;
     history.back();
   } else if (exerciseIdFromHash()) {
-    history.replaceState(history.state, '', `${location.pathname}${location.search}#library`);
+    const returnPage = guideReturnState?.page || 'exercises';
+    const scrollY = guideReturnState?.scrollY || 0;
+    history.replaceState(
+      { repzenaPage: returnPage, scrollY },
+      '',
+      `${location.pathname}${location.search}#${returnPage}`,
+    );
+    guideReturnState = null;
+    setActivePage(returnPage);
+    setScrollPosition(scrollY);
+  } else {
+    document.title = pageTitle(activePage);
   }
 });
-window.addEventListener('hashchange', syncGuideWithUrl);
+window.addEventListener('popstate', syncRouteWithUrl);
+window.addEventListener('hashchange', syncRouteWithUrl);
 $('#new-routine').onclick = () => {
   const r = {
     id: crypto.randomUUID(),
@@ -1966,7 +2097,7 @@ function showCatalog(data) {
   exercises = data;
   migrateRoutineExerciseIds();
   applyLanguage();
-  syncGuideWithUrl();
+  syncRouteWithUrl();
 }
 loadCatalog()
   .then(showCatalog)
