@@ -38,6 +38,28 @@ const UI = {
       'Clear, visual exercise guides and routines that stay yours. No noise, just what you need between sets.',
     explore: 'Explore exercises',
     buildWorkout: 'Build your workout',
+    offlineEyebrow: 'TRAIN WITH OR WITHOUT SIGNAL',
+    offlineTitle: 'Take Repzena to the gym',
+    offlineDescription:
+      'Save the exercise guides and images on this device for offline use. About 9 MB; routines stay on this device too.',
+    offlineChecking: 'Checking offline files…',
+    offlineDownload: 'Make available offline',
+    offlineRemove: 'Remove offline files',
+    offlineProgress: 'Saving images {done} of {total}…',
+    offlineProgressLabel: 'Offline download progress',
+    offlinePartial: '{saved} of {total} images are saved on this device.',
+    offlineReady: 'Ready offline. {count} exercise images are saved on this device.',
+    offlineRemoved: 'Offline images removed. They are still available when you are online.',
+    offlineFailed: 'Some images could not be saved. Check your connection and try again.',
+    offlineUnsupported: 'Offline downloads are not supported in this browser.',
+    offlineStartupFailed: 'Offline support could not start. Check your connection and try again.',
+    offlineRetry: 'Retry offline setup',
+    installApp: 'Install Repzena',
+    installHelpTitle: 'Install Repzena',
+    installHelpIos:
+      'Open your browser’s Share or menu button, then choose “Add to Home Screen”. After adding Repzena, open it from your Home Screen while online to save the exercise library for offline use.',
+    installHelpGeneric:
+      'Use your browser’s Install or Add to Home Screen option. After installing Repzena, open it while online to save the exercise library for offline use.',
     pageTitleHome: 'Repzena — Home',
     pageTitleExercises: 'Repzena — Exercise library',
     pageTitleRoutines: 'Repzena — Routine builder',
@@ -204,6 +226,33 @@ const UI = {
       'Guías visuales para aprender ejercicios y armar rutinas a tu manera. Sin distracciones: solo lo que necesitás entre series.',
     explore: 'Ver ejercicios',
     buildWorkout: 'Armá tu rutina',
+    offlineEyebrow: 'ENTRENÁ CON O SIN SEÑAL',
+    offlineTitle: 'Llevá Repzena al gimnasio',
+    offlineDescription:
+      'Guardá las guías y sus imágenes en este dispositivo para usarlas sin conexión. Ocupan aproximadamente 9 MB; tus rutinas también quedan acá.',
+    offlineChecking: 'Revisando los archivos sin conexión…',
+    offlineDownload: 'Dejar disponible sin conexión',
+    offlineRemove: 'Quitar archivos sin conexión',
+    offlineProgress: 'Guardando imágenes: {done} de {total}…',
+    offlineProgressLabel: 'Progreso de descarga para usar sin conexión',
+    offlinePartial: 'Hay {saved} de {total} imágenes guardadas en este dispositivo.',
+    offlineReady:
+      'Listo para usar sin conexión. Hay {count} imágenes guardadas en este dispositivo.',
+    offlineRemoved:
+      'Se quitaron las imágenes sin conexión. Vas a poder verlas cuando tengas conexión.',
+    offlineFailed:
+      'No se pudieron guardar algunas imágenes. Revisá tu conexión e intentá de nuevo.',
+    offlineUnsupported:
+      'Este navegador no permite descargar el contenido para usarlo sin conexión.',
+    offlineStartupFailed:
+      'No se pudo iniciar el uso sin conexión. Revisá tu conexión e intentá de nuevo.',
+    offlineRetry: 'Reintentar la configuración sin conexión',
+    installApp: 'Instalar Repzena',
+    installHelpTitle: 'Instalar Repzena',
+    installHelpIos:
+      'Abrí el botón Compartir o el menú de tu navegador y elegí “Agregar a pantalla de inicio”. Después, abrí Repzena desde la pantalla de inicio con conexión para guardar la biblioteca y usarla sin conexión.',
+    installHelpGeneric:
+      'Usá la opción Instalar o Agregar a pantalla de inicio de tu navegador. Después, abrí Repzena con conexión para guardar la biblioteca y usarla sin conexión.',
     pageTitleHome: 'Repzena — Inicio',
     pageTitleExercises: 'Repzena — Ejercicios',
     pageTitleRoutines: 'Repzena — Rutinas',
@@ -429,7 +478,12 @@ function readStorage(key) {
     return null;
   }
 }
-let lang = readStorage(LANGUAGE_KEY) === 'es' ? 'es' : 'en';
+function initialLanguage() {
+  const savedLanguage = readStorage(LANGUAGE_KEY);
+  if (savedLanguage === 'en' || savedLanguage === 'es') return savedLanguage;
+  return /^es(?:-|$)/i.test(navigator.language || '') ? 'es' : 'en';
+}
+let lang = initialLanguage();
 let themePreference = ['light', 'dark', 'system'].includes(readStorage(THEME_KEY))
   ? readStorage(THEME_KEY)
   : 'system';
@@ -699,6 +753,8 @@ function applyLanguage() {
   renderFilters();
   renderExercises();
   renderRoutines();
+  if ($('#offline-download')) updateOfflineControls();
+  if (pwaRegistration) refreshOfflineStatus();
   if ($('#exercise-dialog').open) {
     const id = exerciseIdFromHash();
     if (id && exercises.some((exercise) => exercise.id === id)) openDetail(id, false);
@@ -2111,8 +2167,268 @@ loadCatalog()
     $('#exercise-grid').innerHTML = `<div class="no-results">${t('loadError')}</div>`;
   });
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js').catch((error) => {
-    console.warn('Offline support could not be installed', error);
+let pwaRegistration = null;
+let deferredInstallPrompt = null;
+let offlineReady = false;
+let offlineBusy = false;
+let offlineStarting = false;
+let offlineStartupFailed = false;
+let offlineRefreshQueued = false;
+
+function offlineText(key, values = {}) {
+  return Object.entries(values).reduce(
+    (message, [name, value]) => message.replaceAll(`{${name}}`, String(value)),
+    t(key),
+  );
+}
+function setOfflineStatus(message) {
+  $('#offline-status').textContent = message;
+}
+function updateOfflineControls() {
+  const button = $('#offline-download');
+  button.disabled = offlineBusy || offlineStarting || (!pwaRegistration && !offlineStartupFailed);
+  button.textContent = offlineStartupFailed
+    ? t('offlineRetry')
+    : offlineReady
+      ? t('offlineRemove')
+      : t('offlineDownload');
+  button.dataset.action = offlineStartupFailed ? 'retry' : offlineReady ? 'remove' : 'download';
+}
+function requestServiceWorker(type, onMessage = () => {}) {
+  return new Promise((resolve, reject) => {
+    const worker = pwaRegistration?.active;
+    if (!worker || !('MessageChannel' in window)) {
+      reject(new Error('service-worker-unavailable'));
+      return;
+    }
+    const channel = new window.MessageChannel();
+    const timeout = window.setTimeout(() => {
+      channel.port1.close();
+      reject(new Error('service-worker-timeout'));
+    }, 180_000);
+    channel.port1.onmessage = ({ data }) => {
+      onMessage(data);
+      if (['STATUS', 'COMPLETE', 'REMOVED', 'ERROR'].includes(data?.type)) {
+        window.clearTimeout(timeout);
+        channel.port1.close();
+        if (data.type === 'ERROR') reject(new Error('service-worker-operation-failed'));
+        else resolve(data);
+      }
+    };
+    worker.postMessage({ type }, [channel.port2]);
   });
 }
+async function refreshOfflineStatus() {
+  try {
+    const status = await requestServiceWorker('OFFLINE_STATUS');
+    offlineReady = status.ready;
+    if (status.ready) setOfflineStatus(offlineText('offlineReady', { count: status.total - 1 }));
+    else if (status.saved) {
+      setOfflineStatus(offlineText('offlinePartial', { saved: status.saved, total: status.total }));
+    } else setOfflineStatus(t('offlineDescription'));
+    updateOfflineControls();
+    return status;
+  } catch {
+    setOfflineStatus(t('offlineUnsupported'));
+    return null;
+  }
+}
+async function startOfflineDownload() {
+  if (!pwaRegistration || offlineBusy) return;
+  offlineBusy = true;
+  offlineReady = false;
+  const progress = $('#offline-progress');
+  progress.hidden = false;
+  progress.value = 0;
+  updateOfflineControls();
+  try {
+    const result = await requestServiceWorker('DOWNLOAD_OFFLINE', (message) => {
+      if (message.type !== 'PROGRESS') return;
+      progress.max = message.total;
+      progress.value = message.completed;
+      setOfflineStatus(
+        offlineText('offlineProgress', { done: message.completed, total: message.total }),
+      );
+    });
+    offlineReady = result.ready;
+    if (offlineReady) {
+      setOfflineStatus(offlineText('offlineReady', { count: result.total - 1 }));
+    } else {
+      setOfflineStatus(t('offlineFailed'));
+    }
+  } catch {
+    setOfflineStatus(t('offlineFailed'));
+  } finally {
+    offlineBusy = false;
+    progress.hidden = true;
+    updateOfflineControls();
+    if (offlineRefreshQueued) {
+      offlineRefreshQueued = false;
+      refreshOfflineStatus();
+    }
+  }
+}
+async function removeOfflineDownload() {
+  if (!pwaRegistration || offlineBusy) return;
+  offlineBusy = true;
+  updateOfflineControls();
+  try {
+    await requestServiceWorker('REMOVE_OFFLINE');
+    offlineReady = false;
+    setOfflineStatus(t('offlineRemoved'));
+  } catch {
+    setOfflineStatus(t('offlineFailed'));
+  } finally {
+    offlineBusy = false;
+    updateOfflineControls();
+    if (offlineRefreshQueued) {
+      offlineRefreshQueued = false;
+      refreshOfflineStatus();
+    }
+  }
+}
+function withTimeout(promise, timeoutMs, errorCode) {
+  let timeout;
+  const timeoutPromise = new Promise((resolve, reject) => {
+    timeout = window.setTimeout(() => reject(new Error(errorCode)), timeoutMs);
+  });
+  return Promise.race([promise, timeoutPromise]).finally(() => window.clearTimeout(timeout));
+}
+function waitForActiveWorker(registration, timeoutMs) {
+  if (registration.active) return Promise.resolve(registration);
+  return new Promise((resolve, reject) => {
+    let observedWorker = null;
+    let pollTimer = null;
+    const cleanup = () => {
+      window.clearTimeout(timeout);
+      window.clearInterval(pollTimer);
+      registration.removeEventListener('updatefound', observe);
+      observedWorker?.removeEventListener('statechange', observe);
+    };
+    const fail = (error) => {
+      cleanup();
+      reject(error);
+    };
+    const observe = () => {
+      if (registration.active) {
+        cleanup();
+        resolve(registration);
+        return;
+      }
+      const worker = registration.installing || registration.waiting;
+      if (worker && worker !== observedWorker) {
+        observedWorker?.removeEventListener('statechange', observe);
+        observedWorker = worker;
+        observedWorker.addEventListener('statechange', observe);
+      }
+      if (observedWorker?.state === 'redundant') {
+        fail(new Error('service-worker-install-failed'));
+      }
+    };
+    const timeout = window.setTimeout(
+      () => fail(new Error('service-worker-install-timeout')),
+      timeoutMs,
+    );
+    pollTimer = window.setInterval(observe, 50);
+    registration.addEventListener('updatefound', observe);
+    observe();
+  });
+}
+async function initializeServiceWorker() {
+  if (offlineStarting || !('serviceWorker' in navigator) || !window.isSecureContext) return;
+  offlineStarting = true;
+  offlineStartupFailed = false;
+  setOfflineStatus(t('offlineChecking'));
+  updateOfflineControls();
+  // Keep the initial state check short enough that a failed or hung worker
+  // cannot leave the controls stuck on "Checking" beyond the UI's retry window.
+  const startupDeadline = window.performance.now() + 2_500;
+  const remainingStartupTime = () => Math.max(1, startupDeadline - window.performance.now());
+  try {
+    const registration = await withTimeout(
+      Promise.resolve().then(() => navigator.serviceWorker.register('./service-worker.js')),
+      remainingStartupTime(),
+      'service-worker-registration-timeout',
+    );
+    pwaRegistration = await waitForActiveWorker(registration, remainingStartupTime());
+    await withTimeout(
+      refreshOfflineStatus(),
+      remainingStartupTime(),
+      'service-worker-status-timeout',
+    );
+    if (isStandaloneApp() && !offlineReady) startOfflineDownload();
+  } catch (error) {
+    console.warn('Offline support could not be installed', error);
+    pwaRegistration = null;
+    offlineStartupFailed = true;
+    setOfflineStatus(t('offlineStartupFailed'));
+  } finally {
+    offlineStarting = false;
+    updateOfflineControls();
+  }
+}
+function isStandaloneApp() {
+  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+}
+function showInstallHelp() {
+  const isAppleMobile =
+    /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  $('#install-help-message').textContent = t(
+    isAppleMobile ? 'installHelpIos' : 'installHelpGeneric',
+  );
+  $('#install-dialog').showModal();
+}
+async function installApp() {
+  if (!deferredInstallPrompt) {
+    showInstallHelp();
+    return;
+  }
+  const promptEvent = deferredInstallPrompt;
+  deferredInstallPrompt = null;
+  $('#install-app').disabled = true;
+  try {
+    await promptEvent.prompt();
+    const choice = await promptEvent.userChoice;
+    if (choice.outcome === 'dismissed') $('#install-app').disabled = false;
+  } catch {
+    $('#install-app').disabled = false;
+    showInstallHelp();
+  }
+}
+$('#offline-download').addEventListener('click', () => {
+  const action = $('#offline-download').dataset.action;
+  if (action === 'retry') initializeServiceWorker();
+  else if (action === 'remove') removeOfflineDownload();
+  else startOfflineDownload();
+});
+$('#install-app').addEventListener('click', installApp);
+$('#close-install-dialog').addEventListener('click', () => $('#install-dialog').close());
+$('#install-dialog').addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) event.currentTarget.close();
+});
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+});
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  $('#install-app').hidden = true;
+  if (pwaRegistration) startOfflineDownload();
+});
+
+if ('serviceWorker' in navigator && window.isSecureContext) {
+  initializeServiceWorker();
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    if (event.data?.type !== 'OFFLINE_CACHE_CHANGED') return;
+    if (offlineBusy) offlineRefreshQueued = true;
+    else refreshOfflineStatus();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && pwaRegistration) refreshOfflineStatus();
+  });
+} else {
+  setOfflineStatus(t('offlineUnsupported'));
+  updateOfflineControls();
+}
+if (isStandaloneApp()) $('#install-app').hidden = true;

@@ -4,7 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f6f5ef" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Repzena" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
@@ -94,6 +99,51 @@
             width="1024"
             height="1024"
           />
+        </div>
+      </section>
+      <section
+        class="offline-panel wrap page-view"
+        data-page="home"
+        aria-labelledby="offline-title"
+      >
+        <div class="offline-copy">
+          <div class="mini-label" data-i18n="offlineEyebrow">TRAIN WITH OR WITHOUT SIGNAL</div>
+          <h2 id="offline-title" data-i18n="offlineTitle">Take Repzena to the gym</h2>
+          <p data-i18n="offlineDescription">
+            Save the exercise guides and images on this device for offline use. About 9 MB; routines
+            stay on this device too.
+          </p>
+          <p
+            id="offline-status"
+            class="offline-status"
+            role="status"
+            aria-live="polite"
+            data-i18n="offlineChecking"
+          >
+            Checking offline files…
+          </p>
+          <progress
+            id="offline-progress"
+            max="100"
+            value="0"
+            data-i18n-aria-label="offlineProgressLabel"
+            aria-label="Offline download progress"
+            hidden
+          ></progress>
+        </div>
+        <div class="offline-actions">
+          <button
+            class="button button-dark"
+            id="offline-download"
+            type="button"
+            data-i18n="offlineDownload"
+            disabled
+          >
+            Make available offline
+          </button>
+          <button class="button button-light" id="install-app" type="button" data-i18n="installApp">
+            Install Repzena
+          </button>
         </div>
       </section>
       <section class="library-section page-view" id="library" data-page="exercises" hidden>
@@ -377,6 +427,21 @@
       <button class="button button-dark" id="confirm-add-to-routine" data-i18n="confirmAddExercise">
         Add exercise
       </button>
+    </dialog>
+    <dialog id="install-dialog" class="install-dialog" aria-labelledby="install-dialog-title">
+      <div class="add-dialog-top">
+        <h2 id="install-dialog-title" data-i18n="installHelpTitle">Install Repzena</h2>
+        <button
+          class="dialog-close"
+          id="close-install-dialog"
+          type="button"
+          data-i18n-aria-label="close"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+      <p id="install-help-message"></p>
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script type="module" src="app.js"></script>
