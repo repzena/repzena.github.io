@@ -1060,7 +1060,23 @@
     },
     "primaryMuscles": ["back"],
     "secondaryMuscles": ["shoulders"],
-    "focus": ["mobility"]
+    "focus": ["mobility"],
+    "images": [
+      {
+        "src": "./assets/quadruped-thoracic-rotation/1-down.jpeg",
+        "alt": {
+          "en": "On hands and knees, the person rotates one elbow down towards the floor.",
+          "es": "En cuatro apoyos, la persona lleva un codo hacia el piso."
+        }
+      },
+      {
+        "src": "./assets/quadruped-thoracic-rotation/2-up.jpeg",
+        "alt": {
+          "en": "On hands and knees, the person rotates one elbow up towards the ceiling.",
+          "es": "En cuatro apoyos, la persona gira un codo hacia el techo."
+        }
+      }
+    ]
   },
   {
     "id": "rotational-lunge",
@@ -1139,8 +1155,8 @@
       ]
     },
     "aliases": {
-      "en": ["Ankle and knee mobility circles"],
-      "es": ["Movilidad circular de tobillos y rodillas"]
+      "en": ["Ankle and knee mobility circles", "Ankle and knee circles"],
+      "es": ["Movilidad circular de tobillos y rodillas", "Circunducciones de tobillo y rodilla"]
     },
     "primaryMuscles": ["quads"],
     "secondaryMuscles": ["calves"],
@@ -1257,7 +1273,30 @@
     },
     "primaryMuscles": ["obliques"],
     "secondaryMuscles": [],
-    "focus": ["strength", "core"]
+    "focus": ["strength", "core"],
+    "images": [
+      {
+        "src": "./assets/russian-twist/1-initial.jpeg",
+        "alt": {
+          "en": "The person sits leaning back slightly with knees bent and hands together at the chest.",
+          "es": "La persona se sienta con las rodillas flexionadas, se inclina un poco hacia atrás y junta las manos frente al pecho."
+        }
+      },
+      {
+        "src": "./assets/russian-twist/2-left.jpeg",
+        "alt": {
+          "en": "The person rotates the torso to the left while keeping the legs bent.",
+          "es": "La persona gira el torso hacia la izquierda y mantiene las piernas flexionadas."
+        }
+      },
+      {
+        "src": "./assets/russian-twist/3-right.jpeg",
+        "alt": {
+          "en": "The person rotates the torso to the right while keeping the legs bent.",
+          "es": "La persona gira el torso hacia la derecha y mantiene las piernas flexionadas."
+        }
+      }
+    ]
   },
   {
     "id": "incline-dumbbell-press",
@@ -1285,7 +1324,23 @@
     },
     "primaryMuscles": ["chest"],
     "secondaryMuscles": ["triceps", "shoulders"],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/incline-dumbbell-press/1-low.jpeg",
+        "alt": {
+          "en": "On an inclined bench, the person lowers both dumbbells beside the upper chest.",
+          "es": "En un banco inclinado, la persona baja las dos mancuernas junto a la parte alta del pecho."
+        }
+      },
+      {
+        "src": "./assets/incline-dumbbell-press/2-high.jpeg",
+        "alt": {
+          "en": "On an inclined bench, the person presses both dumbbells overhead with arms extended.",
+          "es": "En un banco inclinado, la persona empuja las dos mancuernas hacia arriba hasta extender los brazos."
+        }
+      }
+    ]
   },
   {
     "id": "dumbbell-lateral-raise",
@@ -1317,7 +1372,23 @@
     },
     "primaryMuscles": ["shoulders"],
     "secondaryMuscles": [],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/dumbbell-lateral-raise/1-low.jpeg",
+        "alt": {
+          "en": "The person stands with dumbbells held by their sides and elbows slightly bent.",
+          "es": "La persona está de pie con las mancuernas a los costados y los codos apenas flexionados."
+        }
+      },
+      {
+        "src": "./assets/dumbbell-lateral-raise/2-high.jpeg",
+        "alt": {
+          "en": "The person raises both arms out to the sides to shoulder height.",
+          "es": "La persona eleva ambos brazos hacia los costados hasta la altura de los hombros."
+        }
+      }
+    ]
   },
   {
     "id": "hammer-curl",
@@ -1345,7 +1416,23 @@
     },
     "primaryMuscles": ["biceps"],
     "secondaryMuscles": [],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/hammer-curl/1-low.jpeg",
+        "alt": {
+          "en": "The person stands holding dumbbells by their sides with palms facing inwards.",
+          "es": "La persona está de pie con las mancuernas a los costados y las palmas enfrentadas."
+        }
+      },
+      {
+        "src": "./assets/hammer-curl/2-high.jpeg",
+        "alt": {
+          "en": "The person bends both elbows to bring the dumbbells towards the shoulders.",
+          "es": "La persona flexiona ambos codos y acerca las mancuernas a los hombros."
+        }
+      }
+    ]
   },
   {
     "id": "dumbbell-french-press",

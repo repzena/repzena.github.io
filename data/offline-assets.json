@@ -1,5 +1,5 @@
 {
-  "version": "1c37bbf114b3deda9b1efec639d831b3016a4cd7e42d0abb0314d3350b907aba",
+  "version": "7202f14aa0861329f1faec5cebb9096bae8cbfaa54c64d710619035f00ddbc73",
   "assets": [
     {
       "url": "./assets/arnold-press/1-start-position.jpeg",
@@ -58,6 +58,14 @@
       "sha256": "dde902eff8b2862eb364e593b5e2985fc8f65221019f3eace1e124d74681caa2"
     },
     {
+      "url": "./assets/dumbbell-lateral-raise/1-low.jpeg",
+      "sha256": "51a9056d6f80a3a8b5805063fded5b4e85fb0e3878979e7e8411bc5d4f59c084"
+    },
+    {
+      "url": "./assets/dumbbell-lateral-raise/2-high.jpeg",
+      "sha256": "9fa0a45fc103d0b928bd3a02f62a5f5d5e69e3d17f42325f908ec0543bce2007"
+    },
+    {
       "url": "./assets/dumbbell-shoulder-press/1-low-position.jpeg",
       "sha256": "f332d2e082a8d47835994c48e384f6e0872ba432e3997557594f3cd80d9dfbe3"
     },
@@ -72,6 +80,14 @@
     {
       "url": "./assets/ez-bar-curl/2-high.jpeg",
       "sha256": "717a27180c8987ea2dc9825a775b90b0c4d41578c9ac472d9be0f534e6cbd1f0"
+    },
+    {
+      "url": "./assets/hammer-curl/1-low.jpeg",
+      "sha256": "478f6b3e69f9ecb6f1bf458d5d03fe843c3c198c0bb318c43404e49ea317d2eb"
+    },
+    {
+      "url": "./assets/hammer-curl/2-high.jpeg",
+      "sha256": "00282209bbce319a6c5f1897a05d55fbd652c138c1656c263efffe65466f4f14"
     },
     {
       "url": "./assets/hanging-leg-raise/1-initial.jpeg",
@@ -104,6 +120,14 @@
     {
       "url": "./assets/hollow-hold/hollow-hold.jpeg",
       "sha256": "02efc3f707759fbb2ad2f5ed7ebbd8e6eaf5c442c23772bdb484bd2d931ace7a"
+    },
+    {
+      "url": "./assets/incline-dumbbell-press/1-low.jpeg",
+      "sha256": "c8c2bd38d5ad1f853542f8d973c17889fa3ac1eec2ec58b33229441119564c4f"
+    },
+    {
+      "url": "./assets/incline-dumbbell-press/2-high.jpeg",
+      "sha256": "621464f47778066ced443933906f49132749dd99904e2a4ce79b0e2a97a1fb6f"
     },
     {
       "url": "./assets/incline-leg-press/1-down.jpeg",
@@ -146,6 +170,14 @@
       "sha256": "dab2152d4a8011200d3543d84620d7358bebb0a5b3daef9e493ec76738b9e6f2"
     },
     {
+      "url": "./assets/quadruped-thoracic-rotation/1-down.jpeg",
+      "sha256": "65f840603df8700be04d0cd17cb408e766883e3b2ede7e4e74cd21ce3cd5cf09"
+    },
+    {
+      "url": "./assets/quadruped-thoracic-rotation/2-up.jpeg",
+      "sha256": "04893c035079e1b81a0f983f13c3bb08bb139ecfae9f12585cb8c421e29c6095"
+    },
+    {
       "url": "./assets/reverse-crunch/1-start-position.jpeg",
       "sha256": "f75d4117d8fab2dc0764170fca4cd558767839c005c87a643c0dce65f028c8c8"
     },
@@ -176,6 +208,18 @@
     {
       "url": "./assets/rotational-lunge/2-lunge.jpeg",
       "sha256": "7b7217bd7496d3a757edd62f16e4f1ccc0834ad9a809c1fba75d9b893d0836ab"
+    },
+    {
+      "url": "./assets/russian-twist/1-initial.jpeg",
+      "sha256": "a3178ac08809ecbf7a51bcf15923a07fb51d32cf55d327113e066518d821453c"
+    },
+    {
+      "url": "./assets/russian-twist/2-left.jpeg",
+      "sha256": "87291c934a56d2a7111b4b7373c6f748e27984e3c0c67b41c5e8ab67acd7673b"
+    },
+    {
+      "url": "./assets/russian-twist/3-right.jpeg",
+      "sha256": "08e570450616f7bb782416ddba98ac0eca458b164cd61308530b4f6750b7270f"
     },
     {
       "url": "./assets/seated-cable-row-neutral/1-start-position.jpeg",
