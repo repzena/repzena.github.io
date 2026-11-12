@@ -807,9 +807,29 @@ function renderSectionTypeOptions() {
 function imageMarkup(ex) {
   if (Array.isArray(ex.images) && ex.images.length) {
     const first = ex.images[0];
-    return `<div class="exercise-art exercise-photo-art"><img src="${escapeHtml(first.src)}" alt="" loading="lazy" decoding="async" width="1024" height="1024"></div>`;
+    const imageCount = ex.images.length;
+    return `<div class="exercise-art exercise-photo-art" data-card-gallery data-exercise-id="${escapeHtml(ex.id)}" data-image-index="0"><img data-card-image src="${escapeHtml(first.src)}" alt="${escapeHtml(first.alt?.[lang] || localized(ex.name))}" loading="lazy" decoding="async" width="1024" height="1024">${imageCount > 1 ? `<button class="card-image-arrow card-image-arrow-prev" type="button" data-card-image-change="-1" aria-label="${escapeHtml(t('previousImage'))}">‹</button><button class="card-image-arrow card-image-arrow-next" type="button" data-card-image-change="1" aria-label="${escapeHtml(t('nextImage'))}">›</button><span class="card-image-count" data-card-image-count aria-live="polite" aria-atomic="true" aria-label="${escapeHtml(lang === 'es' ? `Imagen 1 de ${imageCount}` : `Image 1 of ${imageCount}`)}">1 / ${imageCount}</span>` : ''}</div>`;
   }
   return `<div class="exercise-art art-${escapeHtml(ex.image)}" aria-hidden="true"><div class="art-index">${String(ex.id.length).padStart(2, '0')}</div><svg viewBox="0 0 280 180"><path class="art-floor" d="M20 151h240"/><circle class="art-head" cx="142" cy="42" r="16"/><path class="art-limb" d="M142 59l-9 45 34 17m-34-17-30 26m30-26-5 30 35 17m-35-17-28 18m37-76 31 12 20-15m-82 4-25-13"/><path class="art-equip" d="M212 76v29m-9-24h18m-18 19h18"/><path class="art-arrow" d="M224 125c8-16 8-29 1-41m-3 7 3-8 6 5"/></svg><span class="art-label">${escapeHtml(label('pattern', ex.pattern))}</span></div>`;
+}
+function changeCardThumbnail(gallery, direction) {
+  const exercise = exercises.find((item) => item.id === gallery?.dataset.exerciseId);
+  if (!exercise?.images?.length) return;
+  const currentIndex = Number(gallery.dataset.imageIndex) || 0;
+  const nextIndex = (currentIndex + direction + exercise.images.length) % exercise.images.length;
+  const image = exercise.images[nextIndex];
+  gallery.dataset.imageIndex = String(nextIndex);
+  const thumbnail = gallery.querySelector('[data-card-image]');
+  thumbnail.src = image.src;
+  thumbnail.alt = image.alt?.[lang] || localized(exercise.name);
+  const count = gallery.querySelector('[data-card-image-count]');
+  count.textContent = `${nextIndex + 1} / ${exercise.images.length}`;
+  count.setAttribute(
+    'aria-label',
+    lang === 'es'
+      ? `Imagen ${nextIndex + 1} de ${exercise.images.length}`
+      : `Image ${nextIndex + 1} of ${exercise.images.length}`,
+  );
 }
 function renderExerciseGallery(ex, container, { enlarged = false } = {}) {
   const images = Array.isArray(ex.images) ? ex.images : [];
@@ -983,6 +1003,51 @@ function renderExercises() {
     : `<div class="no-results">${t('emptySearch')}</div>`;
   renderPagination(filtered.length, pageSize, pageCount, startIndex, pageExercises.length);
   grid.querySelectorAll('[data-add]').forEach((b) => (b.onclick = () => addById(b.dataset.add)));
+  grid.querySelectorAll('[data-card-image-change]').forEach((button) => {
+    button.onclick = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      changeCardThumbnail(
+        button.closest('[data-card-gallery]'),
+        Number(button.dataset.cardImageChange),
+      );
+    };
+  });
+  grid.querySelectorAll('.exercise-card').forEach((card) => {
+    let touchStart = null;
+    let suppressGuideClick = false;
+    card.addEventListener('pointerdown', (event) => {
+      suppressGuideClick = false;
+      if (event.pointerType !== 'touch' || event.target.closest('[data-card-image-change]')) return;
+      const gallery = card.querySelector('[data-card-gallery]');
+      const bounds = gallery?.getBoundingClientRect();
+      if (!bounds || event.clientX < bounds.left || event.clientX > bounds.right) return;
+      if (event.clientY < bounds.top || event.clientY > bounds.bottom) return;
+      touchStart = { x: event.clientX, y: event.clientY };
+    });
+    card.addEventListener('pointerup', (event) => {
+      if (!touchStart) return;
+      const deltaX = event.clientX - touchStart.x;
+      const deltaY = event.clientY - touchStart.y;
+      touchStart = null;
+      if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+      changeCardThumbnail(card.querySelector('[data-card-gallery]'), deltaX < 0 ? 1 : -1);
+      suppressGuideClick = true;
+    });
+    card.addEventListener('pointercancel', () => {
+      touchStart = null;
+    });
+    card.addEventListener(
+      'click',
+      (event) => {
+        if (!suppressGuideClick || !event.target.closest('.exercise-card-link')) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        suppressGuideClick = false;
+      },
+      true,
+    );
+  });
   renderFilterChips();
 }
 function renderPagination(total, pageSize, pageCount, startIndex, visibleCount) {

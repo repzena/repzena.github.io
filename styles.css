@@ -515,6 +515,7 @@ a {
   z-index: 1;
   border-radius: inherit;
   cursor: pointer;
+  touch-action: pan-y;
 }
 .exercise-card-link:focus-visible {
   outline: 3px solid var(--orange);
@@ -583,6 +584,7 @@ a {
   height: auto;
   aspect-ratio: 1;
   background: #fff;
+  touch-action: pan-y;
 }
 .exercise-photo-art::before,
 .exercise-photo-art::after {
@@ -603,6 +605,53 @@ a {
   height: 100%;
   object-fit: contain;
   object-position: center;
+}
+.card-image-arrow {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0 0 4px;
+  border: 1px solid #ffffff70;
+  border-radius: 50%;
+  background: #10231fc9;
+  color: #fff;
+  font: 400 34px/1 var(--body);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background 0.18s,
+    scale 0.18s;
+}
+.card-image-arrow:hover {
+  background: var(--orange);
+  scale: 1.06;
+}
+.card-image-arrow:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+.card-image-arrow-prev {
+  left: 10px;
+}
+.card-image-arrow-next {
+  right: 10px;
+}
+.card-image-count {
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  bottom: 10px;
+  padding: 4px 8px;
+  border-radius: 99px;
+  background: #10231fc9;
+  color: #fff;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
 }
 .gallery-image-button:focus-visible,
 .gallery-dot:focus-visible {
