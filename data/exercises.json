@@ -359,7 +359,23 @@
     },
     "primaryMuscles": ["glutes"],
     "secondaryMuscles": ["hamstrings"],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/hip-thrust/1-high.jpeg",
+        "alt": {
+          "en": "At the top of a barbell hip thrust, the person drives their hips up with their shoulders supported on a bench.",
+          "es": "Arriba del hip thrust con barra, la persona eleva las caderas con los hombros apoyados en un banco."
+        }
+      },
+      {
+        "src": "./assets/hip-thrust/2-low.jpeg",
+        "alt": {
+          "en": "The person lowers their hips towards the floor while keeping their shoulders on the bench.",
+          "es": "La persona baja las caderas hacia el piso y mantiene los hombros apoyados en el banco."
+        }
+      }
+    ]
   },
   {
     "id": "bulgarian-split-squat",
@@ -395,7 +411,23 @@
     },
     "primaryMuscles": ["quads"],
     "secondaryMuscles": ["glutes"],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/bulgarian-split-squat/1-up.jpeg",
+        "alt": {
+          "en": "The person stands in a split stance with their rear foot resting on a bench.",
+          "es": "La persona se mantiene en posición dividida con el pie trasero apoyado en un banco."
+        }
+      },
+      {
+        "src": "./assets/bulgarian-split-squat/2-down.jpeg",
+        "alt": {
+          "en": "The person lowers into the split squat with the front knee bent and the rear knee close to the floor.",
+          "es": "La persona baja en la sentadilla dividida, con la rodilla delantera flexionada y la trasera cerca del piso."
+        }
+      }
+    ]
   },
   {
     "id": "plank",
@@ -1560,39 +1592,71 @@
     },
     "primaryMuscles": ["quads"],
     "secondaryMuscles": [],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/leg-extension-machine/1-low.jpeg",
+        "alt": {
+          "en": "Seated at the leg extension machine, the person holds their knees bent with the ankle pad lowered.",
+          "es": "Sentada en la máquina de extensión de piernas, la persona mantiene las rodillas flexionadas y el rodillo abajo."
+        }
+      },
+      {
+        "src": "./assets/leg-extension-machine/2-high.jpeg",
+        "alt": {
+          "en": "The seated person extends both knees to raise the ankle pad in front of them.",
+          "es": "La persona extiende ambas rodillas para elevar el rodillo frente a ella."
+        }
+      }
+    ]
   },
   {
     "id": "seated-calf-raise",
     "name": {
-      "en": "Seated calf raise",
-      "es": "Elevación de gemelos sentado"
+      "en": "Barbell seated calf raise",
+      "es": "Elevación de gemelos sentado con barra"
     },
     "pattern": "ankle-plantar-flexion",
-    "equipment": ["machine"],
+    "equipment": ["barbell", "bench"],
     "level": "beginner",
     "image": "squat",
     "how": {
       "en": [
-        "Sit with the balls of your feet on the platform and the pad resting comfortably above your knees.",
-        "Raise your heels, pause briefly, then lower them slowly."
+        "Sit near the end of a bench with the bar padded across your lower thighs and the balls of your feet on a stable raised surface.",
+        "Raise your heels, pause briefly, then lower them with control."
       ],
       "es": [
-        "Sentate con la parte delantera de los pies sobre la plataforma y el apoyo cómodo sobre las rodillas.",
-        "Elevá los talones, hacé una pausa breve y bajalos despacio."
+        "Sentate cerca del borde de un banco, con la barra acolchada sobre la parte baja de los muslos y la parte delantera de los pies sobre un apoyo firme y elevado.",
+        "Elevá los talones, hacé una pausa breve y bajalos con control."
       ]
     },
     "cues": {
-      "en": ["Move through a comfortable ankle range without bouncing."],
-      "es": ["Usá un recorrido cómodo para los tobillos y evitá rebotar."]
+      "en": ["Pad the bar, keep it clear of your kneecaps and avoid bouncing."],
+      "es": ["Acolchá la barra, mantenela alejada de las rótulas y evitá rebotar."]
     },
     "aliases": {
-      "en": [],
-      "es": ["Elevación de talones sentado"]
+      "en": ["Seated calf raise"],
+      "es": ["Elevación de gemelos sentado", "Elevación de talones sentado"]
     },
     "primaryMuscles": ["calves"],
     "secondaryMuscles": [],
-    "focus": ["strength"]
+    "focus": ["strength"],
+    "images": [
+      {
+        "src": "./assets/seated-calf-raise/1-low.jpeg",
+        "alt": {
+          "en": "The person sits on a bench with a barbell across their thighs and their heels lowered.",
+          "es": "La persona se sienta en un banco con una barra sobre los muslos y los talones bajos."
+        }
+      },
+      {
+        "src": "./assets/seated-calf-raise/2-high.jpeg",
+        "alt": {
+          "en": "The seated person raises their heels while keeping the barbell across their thighs.",
+          "es": "La persona eleva los talones mientras mantiene la barra sobre los muslos."
+        }
+      }
+    ]
   },
   {
     "id": "deep-squat-pry",

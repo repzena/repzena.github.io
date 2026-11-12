@@ -1,5 +1,5 @@
 {
-  "version": "7202f14aa0861329f1faec5cebb9096bae8cbfaa54c64d710619035f00ddbc73",
+  "version": "8d6785c567ae6b459a29cbe7e292b2255d911dda9f768b66f8164ac7252dbae4",
   "assets": [
     {
       "url": "./assets/arnold-press/1-start-position.jpeg",
@@ -32,6 +32,14 @@
     {
       "url": "./assets/barbell-squat/2-low.jpeg",
       "sha256": "cde2419ed41a5fc201c4fbd3fc98f1b810bb8d9ea00d531be9b494948e938b65"
+    },
+    {
+      "url": "./assets/bulgarian-split-squat/1-up.jpeg",
+      "sha256": "a881dc880194d0a97a3159cdc32931d5feb16e47975c9abf73f33cd3a5b00578"
+    },
+    {
+      "url": "./assets/bulgarian-split-squat/2-down.jpeg",
+      "sha256": "38eeddf599a71b280a3ce3504babd11b947a207ea26e33be46de59bddce4d209"
     },
     {
       "url": "./assets/cat-cow/cat-position.jpeg",
@@ -118,6 +126,14 @@
       "sha256": "23b4d90a218332910a79cd4282beae07f7ed69ecb1d97c177cfb99a3d0f329e8"
     },
     {
+      "url": "./assets/hip-thrust/1-high.jpeg",
+      "sha256": "9ce31220cb95b7c9a8bf1620f0312167b2a781e77d16c1e98cf41a0928fd3417"
+    },
+    {
+      "url": "./assets/hip-thrust/2-low.jpeg",
+      "sha256": "f3ec1b6ed493fa31850623360c05c7410770a09f013ccc3da1d6859bbd5db0c3"
+    },
+    {
       "url": "./assets/hollow-hold/hollow-hold.jpeg",
       "sha256": "02efc3f707759fbb2ad2f5ed7ebbd8e6eaf5c442c23772bdb484bd2d931ace7a"
     },
@@ -144,6 +160,14 @@
     {
       "url": "./assets/lat-pulldown/2-end-position.jpeg",
       "sha256": "488632f9d08b8af5bb0753f8f79b0f355b0df79eff0d8f0d0703939637905af9"
+    },
+    {
+      "url": "./assets/leg-extension-machine/1-low.jpeg",
+      "sha256": "0d2aa9f76322e9e5c53c5ec8956eb1721c46fa85e850971c9a9f7e7870f872f4"
+    },
+    {
+      "url": "./assets/leg-extension-machine/2-high.jpeg",
+      "sha256": "2ff4a8d6c0c55631719cd16e3033e7b468fccf28566cb716593a7346fe65ea92"
     },
     {
       "url": "./assets/mountain-climber/climb-position.jpeg",
@@ -228,6 +252,14 @@
     {
       "url": "./assets/seated-cable-row-neutral/2-start-position.jpeg",
       "sha256": "33ea62922f0c493087f88dbb22f7224fc801a19e0314cdb319e8a2facf2430d6"
+    },
+    {
+      "url": "./assets/seated-calf-raise/1-low.jpeg",
+      "sha256": "a9ec959ea9634feeb21b32e2fd4ea09600a87579d8e15155771c7971f9a351c3"
+    },
+    {
+      "url": "./assets/seated-calf-raise/2-high.jpeg",
+      "sha256": "8789bb644665e251c718d4fef7de0f4afe0bf1d0ddae1ada1a7c8bd9edfa1c98"
     },
     {
       "url": "./assets/seated-leg-curl/1-legs-up.jpeg",
