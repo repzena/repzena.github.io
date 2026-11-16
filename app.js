@@ -56,10 +56,61 @@ const UI = {
     offlineRetry: 'Retry offline setup',
     installApp: 'Install Repzena',
     installHelpTitle: 'Install Repzena',
-    installHelpIos:
-      'Open your browser’s Share or menu button, then choose “Add to Home Screen”. After adding Repzena, open it from your Home Screen while online to save the exercise library for offline use.',
-    installHelpGeneric:
-      'Use your browser’s Install or Add to Home Screen option. After installing Repzena, open it while online to save the exercise library for offline use.',
+    installHelpIosSafariSteps: [
+      'Open repzena.github.io directly in Safari. If you opened it inside another app, open the page in Safari first.',
+      'Tap Share. If Safari shows a page menu instead, tap it and then tap Share.',
+      'Scroll through the Share options and tap “Add to Home Screen”. If it is missing, scroll to the bottom, tap “Edit Actions”, then add “Add to Home Screen”.',
+      'Turn on “Open as Web App” if that option appears, then tap “Add”.',
+    ],
+    installHelpIosChromeSteps: [
+      'Open Repzena in Chrome on your iPhone.',
+      'Tap Share to the right of the address bar, then tap “Add to Home Screen”.',
+      'Review or edit the name and details, then tap “Add”.',
+      'Open Repzena from the new Home Screen icon. Keep the phone online while you save the exercise library for offline use.',
+    ],
+    installHelpIosFirefoxSteps: [
+      'Open Repzena in Firefox on your iPhone.',
+      'Tap the Share icon in the address bar, then tap “Add to Home Screen”.',
+      'Review or edit the shortcut name, then tap “Add”.',
+      'Open Repzena from the new Home Screen icon. Keep the phone online while you save the exercise library for offline use.',
+    ],
+    installHelpIosOtherSteps: [
+      'Open Repzena in your iPhone browser, then tap its Share icon.',
+      'Tap “Add to Home Screen” and confirm. The button location can vary by browser.',
+      'If that option is missing, open Repzena in Safari and use Safari’s Share menu.',
+      'Open Repzena from the Home Screen icon while online to save the exercise library for offline use.',
+    ],
+    installHelpAndroidChromeSteps: [
+      'Open Repzena in Chrome on your Android phone.',
+      'Tap More (⋮) beside the address bar, then choose “Install and create shortcut” (or “Install app” in some versions).',
+      'Tap “Install” and follow the confirmation shown by your phone.',
+      'Open Repzena from the new app icon while online to save the exercise library for offline use.',
+    ],
+    installHelpAndroidSamsungSteps: [
+      'Open Repzena in Samsung Internet.',
+      'Open the browser menu (☰), then tap “Add page to” and “Home screen”.',
+      'Review the shortcut name and tap “Add”. If Samsung Internet offers an install prompt or a + icon, you can use that instead.',
+      'Open Repzena from the new Home Screen icon while online to save the exercise library for offline use.',
+    ],
+    installHelpAndroidFirefoxSteps: [
+      'Open Repzena in Firefox on your Android phone.',
+      'Tap the three-dot menu, then tap “Install”.',
+      'In the Add to Home Screen panel, tap “Add automatically” or drag the icon to your preferred place.',
+      'Open Repzena from the new icon while online to save the exercise library for offline use.',
+    ],
+    installHelpAndroidOtherSteps: [
+      'Open Repzena in your browser and open its menu (⋮ or ☰).',
+      'Look for “Install app”, “Install”, or “Add to Home screen”, then follow the phone’s confirmation.',
+      'If the browser only offers a shortcut, it may open Repzena in that browser instead of a separate app window.',
+      'Open Repzena while online to save the exercise library for offline use.',
+    ],
+    installHelpDesktopSteps: [
+      'Look for an install icon in the address bar or an “Install Repzena” command in your browser menu.',
+      'If your browser does not offer installation, bookmark Repzena and continue using it in the browser.',
+      'You can save the exercise library for offline use from the page without installing the app.',
+    ],
+    installHelpOfflineNote:
+      'Installing is optional. You can save the exercise library for offline use from the page without adding an app icon.',
     pageTitleHome: 'Repzena — Home',
     pageTitleExercises: 'Repzena — Exercise library',
     pageTitleRoutines: 'Repzena — Routine builder',
@@ -255,10 +306,61 @@ const UI = {
     offlineRetry: 'Reintentar la configuración sin conexión',
     installApp: 'Instalar Repzena',
     installHelpTitle: 'Instalar Repzena',
-    installHelpIos:
-      'Abrí el botón Compartir o el menú de tu navegador y elegí “Agregar a pantalla de inicio”. Después, abrí Repzena desde la pantalla de inicio con conexión para guardar la biblioteca y usarla sin conexión.',
-    installHelpGeneric:
-      'Usá la opción Instalar o Agregar a pantalla de inicio de tu navegador. Después, abrí Repzena con conexión para guardar la biblioteca y usarla sin conexión.',
+    installHelpIosSafariSteps: [
+      'Abrí repzena.github.io directamente en Safari. Si lo abriste dentro de otra app, primero abrí la página en Safari.',
+      'Tocá Compartir. Si Safari muestra primero el menú de página, tocá ahí y después Compartir.',
+      'Desplazate por las opciones y tocá “Agregar a pantalla de inicio”. Si no aparece, bajá hasta el final, tocá “Editar acciones” y agregá esa opción.',
+      'Activá “Abrir como app web” si aparece y tocá “Agregar”.',
+    ],
+    installHelpIosChromeSteps: [
+      'Abrí Repzena en Chrome desde tu iPhone.',
+      'Tocá Compartir, a la derecha de la barra de direcciones, y después “Agregar a pantalla de inicio”.',
+      'Revisá o cambiá el nombre y los detalles, y tocá “Agregar”.',
+      'Abrí Repzena desde el nuevo ícono de inicio. Mantené el teléfono conectado mientras guardás la biblioteca para usarla sin conexión.',
+    ],
+    installHelpIosFirefoxSteps: [
+      'Abrí Repzena en Firefox desde tu iPhone.',
+      'Tocá el ícono Compartir de la barra de direcciones y después “Agregar a pantalla de inicio”.',
+      'Revisá o cambiá el nombre del acceso directo y tocá “Agregar”.',
+      'Abrí Repzena desde el nuevo ícono de inicio. Mantené el teléfono conectado mientras guardás la biblioteca para usarla sin conexión.',
+    ],
+    installHelpIosOtherSteps: [
+      'Abrí Repzena en el navegador de tu iPhone y tocá el ícono Compartir.',
+      'Tocá “Agregar a pantalla de inicio” y confirmá. La ubicación puede variar según el navegador.',
+      'Si no aparece esa opción, abrí Repzena en Safari y usá su menú Compartir.',
+      'Abrí Repzena desde el nuevo ícono mientras tengas conexión para guardar la biblioteca y usarla sin conexión.',
+    ],
+    installHelpAndroidChromeSteps: [
+      'Abrí Repzena en Chrome desde tu teléfono Android.',
+      'Tocá Más (⋮), junto a la barra de direcciones, y elegí “Instalar y crear acceso directo” (en algunas versiones aparece como “Instalar app”).',
+      'Tocá “Instalar” y seguí la confirmación del teléfono.',
+      'Abrí Repzena desde el nuevo ícono mientras tengas conexión para guardar la biblioteca y usarla sin conexión.',
+    ],
+    installHelpAndroidSamsungSteps: [
+      'Abrí Repzena en Samsung Internet.',
+      'Abrí el menú del navegador (☰), tocá “Agregar página a” y después “Pantalla de inicio”.',
+      'Revisá el nombre del acceso directo y tocá “Agregar”. Si Samsung Internet muestra una opción de instalación o un ícono +, también podés usarla.',
+      'Abrí Repzena desde el nuevo ícono mientras tengas conexión para guardar la biblioteca y usarla sin conexión.',
+    ],
+    installHelpAndroidFirefoxSteps: [
+      'Abrí Repzena en Firefox desde tu teléfono Android.',
+      'Tocá el menú de tres puntos y después “Instalar”.',
+      'En el panel Agregar a pantalla de inicio, tocá “Agregar automáticamente” o arrastrá el ícono al lugar que prefieras.',
+      'Abrí Repzena desde el nuevo ícono mientras tengas conexión para guardar la biblioteca y usarla sin conexión.',
+    ],
+    installHelpAndroidOtherSteps: [
+      'Abrí Repzena en tu navegador y abrí el menú (⋮ o ☰).',
+      'Buscá “Instalar app”, “Instalar” o “Agregar a pantalla de inicio” y seguí la confirmación del teléfono.',
+      'Si el navegador solo ofrece un acceso directo, puede abrir Repzena dentro del navegador y no en una ventana separada.',
+      'Abrí Repzena con conexión para guardar la biblioteca y usarla sin conexión.',
+    ],
+    installHelpDesktopSteps: [
+      'Buscá un ícono de instalación en la barra de direcciones o la opción “Instalar Repzena” en el menú del navegador.',
+      'Si tu navegador no permite instalarla, guardá Repzena en favoritos y seguí usándola en el navegador.',
+      'Podés guardar la biblioteca para usarla sin conexión desde la página, sin instalar la app.',
+    ],
+    installHelpOfflineNote:
+      'Instalarla es opcional. Podés guardar la biblioteca para usarla sin conexión desde la página, sin agregar un ícono de app.',
     pageTitleHome: 'Repzena — Inicio',
     pageTitleExercises: 'Repzena — Ejercicios',
     pageTitleRoutines: 'Repzena — Rutinas',
@@ -2464,12 +2566,34 @@ function isStandaloneApp() {
   return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 }
 function showInstallHelp() {
+  const userAgent = navigator.userAgent;
   const isAppleMobile =
-    /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+    /iPhone|iPad|iPod/.test(userAgent) ||
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  $('#install-help-message').textContent = t(
-    isAppleMobile ? 'installHelpIos' : 'installHelpGeneric',
+  const isAndroid = /Android/i.test(userAgent);
+  let stepsKey = 'installHelpDesktopSteps';
+  if (isAppleMobile) {
+    if (/CriOS/i.test(userAgent)) stepsKey = 'installHelpIosChromeSteps';
+    else if (/FxiOS/i.test(userAgent)) stepsKey = 'installHelpIosFirefoxSteps';
+    else if (/EdgiOS|OPiOS|DuckDuckGo/i.test(userAgent)) stepsKey = 'installHelpIosOtherSteps';
+    else stepsKey = 'installHelpIosSafariSteps';
+  } else if (isAndroid) {
+    if (/SamsungBrowser/i.test(userAgent)) stepsKey = 'installHelpAndroidSamsungSteps';
+    else if (/Firefox|Fennec/i.test(userAgent)) stepsKey = 'installHelpAndroidFirefoxSteps';
+    else if (/EdgA|OPR|Opera|Brave/i.test(userAgent) || navigator.brave) {
+      stepsKey = 'installHelpAndroidOtherSteps';
+    } else if (/Chrome/i.test(userAgent)) stepsKey = 'installHelpAndroidChromeSteps';
+    else stepsKey = 'installHelpAndroidOtherSteps';
+  }
+  const steps = UI[lang][stepsKey];
+  $('#install-help-steps').replaceChildren(
+    ...steps.map((step) => {
+      const item = document.createElement('li');
+      item.textContent = step;
+      return item;
+    }),
   );
+  $('#install-help-offline-note').textContent = t('installHelpOfflineNote');
   $('#install-dialog').showModal();
 }
 async function installApp() {
