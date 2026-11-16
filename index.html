@@ -12,7 +12,7 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
     />
     <script src="theme.js"></script>
     <meta
@@ -364,7 +364,42 @@
         <a class="brand" href="#home" data-page-link="home"
           ><span class="brand-mark">r</span><span>repzena<span class="brand-dot">.</span></span></a
         ><span data-i18n="footer">A little more confident, every rep.</span><span>© 2026</span>
+        <button
+          class="privacy-settings-button"
+          id="privacy-settings"
+          type="button"
+          data-i18n="privacySettings"
+        >
+          Privacy settings
+        </button>
       </div>
+      <aside class="privacy-panel wrap" id="privacy-panel" aria-labelledby="privacy-title" hidden>
+        <div class="privacy-copy">
+          <h2 id="privacy-title" data-i18n="privacyTitle">Your privacy matters</h2>
+          <p data-i18n="privacyDescription">
+            Optional Google Analytics helps us understand visits and popular pages. It only loads if
+            you allow it. Change your choice here at any time.
+          </p>
+        </div>
+        <div class="privacy-actions">
+          <button
+            class="button button-light"
+            id="analytics-reject"
+            type="button"
+            data-i18n="analyticsReject"
+          >
+            Decline
+          </button>
+          <button
+            class="button button-primary"
+            id="analytics-accept"
+            type="button"
+            data-i18n="analyticsAccept"
+          >
+            Allow analytics
+          </button>
+        </div>
+      </aside>
     </footer>
     <dialog id="exercise-dialog" class="exercise-dialog" aria-labelledby="exercise-dialog-title">
       <button
@@ -444,6 +479,7 @@
       <p id="install-help-message"></p>
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="analytics.js"></script>
     <script type="module" src="app.js"></script>
   </body>
 </html>

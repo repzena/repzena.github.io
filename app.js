@@ -99,6 +99,12 @@ const UI = {
     principleThree: 'Keep it simple',
     principleThreeText: 'No accounts. No clutter. Just training.',
     footer: 'A little more confident, every rep.',
+    privacySettings: 'Privacy settings',
+    privacyTitle: 'Your privacy matters',
+    privacyDescription:
+      'Optional Google Analytics helps us understand visits and popular pages. It only loads if you allow it. Change your choice here at any time.',
+    analyticsAccept: 'Allow analytics',
+    analyticsReject: 'Decline',
     add: 'Add',
     howTo: 'How to do it',
     watchFor: 'Pay attention to',
@@ -292,6 +298,12 @@ const UI = {
     principleThree: 'Sin complicaciones',
     principleThreeText: 'Sin cuentas ni distracciones.',
     footer: 'Un poco más de confianza, en cada repetición.',
+    privacySettings: 'Privacidad',
+    privacyTitle: 'Tu privacidad importa',
+    privacyDescription:
+      'Google Analytics es opcional y nos ayuda a conocer las visitas y las páginas más consultadas. Solo se carga si lo aceptás. Podés cambiar tu decisión acá cuando quieras.',
+    analyticsAccept: 'Aceptar Analytics',
+    analyticsReject: 'Rechazar',
     add: 'Agregar',
     howTo: 'Cómo hacerlo',
     watchFor: 'Qué tener en cuenta',
@@ -699,6 +711,14 @@ function setActivePage(page) {
   });
   if (activePage === 'exercises') renderExercises();
   if (!$('#exercise-dialog').open) document.title = pageTitle(activePage);
+  window.dispatchEvent(
+    new window.CustomEvent('repzena:pageview', {
+      detail: {
+        path: `${location.pathname}${location.search}${location.hash}`,
+        title: document.title,
+      },
+    }),
+  );
 }
 function setScrollPosition(position) {
   const root = document.documentElement;
@@ -1151,6 +1171,14 @@ function openDetail(id, updateUrl = true) {
         : 0,
     };
   }
+  window.dispatchEvent(
+    new window.CustomEvent('repzena:pageview', {
+      detail: {
+        path: `${location.pathname}${location.search}${location.hash}`,
+        title: document.title,
+      },
+    }),
+  );
   const primaryMuscles = (e.primaryMuscles || [])
     .map((id) => escapeHtml(label('muscles', id)))
     .join(', ');

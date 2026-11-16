@@ -1526,6 +1526,57 @@ a {
   background: #d7e3d9;
   color: #172d26;
 }
+.privacy-settings-button {
+  border: 0;
+  padding: 8px 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.privacy-settings-button:focus-visible,
+.privacy-actions button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.privacy-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #52645a;
+  border-radius: 14px;
+  background: #20372e;
+  color: #f3f6f1;
+}
+.privacy-panel[hidden] {
+  display: none;
+}
+.privacy-copy h2 {
+  margin: 0 0 5px;
+  font-size: 16px;
+}
+.privacy-copy p {
+  max-width: 620px;
+  margin: 0;
+  color: #d1ddd4;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.privacy-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+}
+.privacy-actions .button {
+  min-height: 42px;
+  padding-inline: 14px;
+  font-size: 12px;
+}
 .exercise-dialog {
   padding: 0;
   border: 0;
@@ -2004,6 +2055,21 @@ a {
     width: 100%;
     text-align: center;
   }
+  .footer-inner > span:nth-child(3) {
+    order: 2;
+  }
+  .privacy-settings-button {
+    order: 4;
+  }
+  .privacy-panel {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+    padding: 17px;
+  }
+  .privacy-actions .button {
+    flex: 1;
+  }
   .dialog-copy {
     padding: 20px 20px 26px;
   }
@@ -2232,6 +2298,13 @@ a {
 }
 :root[data-theme='dark'] .footer-inner {
   color: #aebbb2;
+}
+:root[data-theme='dark'] .privacy-panel {
+  border-color: #405249;
+  background: #18251f;
+}
+:root[data-theme='dark'] .privacy-copy p {
+  color: #c2cec5;
 }
 :root[data-theme='dark'] .brand-mark {
   background: #d7e5dc;

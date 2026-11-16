@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'repzena-static-';
-const CACHE_NAME = `${CACHE_PREFIX}v14`;
+const CACHE_NAME = `${CACHE_PREFIX}v15`;
 const OFFLINE_CACHE_NAME = 'repzena-offline-v1';
 const OFFLINE_METADATA_URL = './__repzena_offline_metadata__.json';
 const CORE_FILES = [
@@ -9,8 +9,10 @@ const CORE_FILES = [
   './favicon.svg',
   './styles.css',
   './app.js',
+  './analytics.js',
   './theme.js',
   './data/exercises.json',
+  './data/analytics-config.json',
   './data/offline-assets.json',
   './assets/icons/app-icon-192.png',
   './assets/icons/app-icon-512.png',
