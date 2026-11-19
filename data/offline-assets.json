@@ -1,5 +1,5 @@
 {
-  "version": "1d2a2d431136449c798073fd2e1b08dd1923850bafb805908ba427b0b0219f50",
+  "version": "e46f9e7a35ddefa08970fab87dcb9c9ef90264cdedf85bd26e388e69929fff9e",
   "assets": [
     {
       "url": "./assets/ab-wheel-rollout/1-high.jpeg",
@@ -48,6 +48,14 @@
     {
       "url": "./assets/bench-dip/2-down.jpeg",
       "sha256": "ebedc4230dd76bd916fd0794cac1f72278aa6cdeaebd7e82cbd0b87a411b291d"
+    },
+    {
+      "url": "./assets/bird-dog/1-relax.jpeg",
+      "sha256": "98fecf9f95c09ab1bf059e862299c23ccf403fe192b0222a0ac339e6ebd7b750"
+    },
+    {
+      "url": "./assets/bird-dog/2-stretch.jpeg",
+      "sha256": "6d3d542dbfbf9be2dd95bc4bff21da8f5c512d5ba27119adcaf15b2d34651176"
     },
     {
       "url": "./assets/bulgarian-split-squat/1-up.jpeg",

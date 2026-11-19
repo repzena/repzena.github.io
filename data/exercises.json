@@ -1949,7 +1949,23 @@
       },
       "primaryMuscles": [],
       "secondaryMuscles": ["back", "glutes"],
-      "focus": ["strength", "core"]
+      "focus": ["strength", "core"],
+      "images": [
+        {
+          "src": "./assets/bird-dog/1-relax.jpeg",
+          "alt": {
+            "en": "Tucked bird-dog position with one arm and the opposite knee bent beneath the torso.",
+            "es": "Posición recogida del bird dog, con un brazo y la rodilla contraria flexionados bajo el torso."
+          }
+        },
+        {
+          "src": "./assets/bird-dog/2-stretch.jpeg",
+          "alt": {
+            "en": "Bird-dog extension with the opposite arm and leg raised in line with the torso.",
+            "es": "Extensión de bird dog, con el brazo y la pierna contrarios elevados y alineados con el torso."
+          }
+        }
+      ]
     },
     {
       "id": "arnold-press",
