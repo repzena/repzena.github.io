@@ -1,6 +1,14 @@
 {
-  "version": "8d6785c567ae6b459a29cbe7e292b2255d911dda9f768b66f8164ac7252dbae4",
+  "version": "1d2a2d431136449c798073fd2e1b08dd1923850bafb805908ba427b0b0219f50",
   "assets": [
+    {
+      "url": "./assets/ab-wheel-rollout/1-high.jpeg",
+      "sha256": "53461ff7aa7521f5e8a7a06042c36e0c5a2bc3ca0bacdb4bca6ea5415e63788d"
+    },
+    {
+      "url": "./assets/ab-wheel-rollout/2-low.jpeg",
+      "sha256": "c44825aa7e3d108b380c83298a95f790d091ef7eb675fd52c63a1bf8870bf6ac"
+    },
     {
       "url": "./assets/arnold-press/1-start-position.jpeg",
       "sha256": "48571e220a5a08cf3240fa94e39ba4dcff1fa3f9f03c38d7dbb1f3e57a6112b1"
@@ -34,6 +42,14 @@
       "sha256": "cde2419ed41a5fc201c4fbd3fc98f1b810bb8d9ea00d531be9b494948e938b65"
     },
     {
+      "url": "./assets/bench-dip/1-up.jpeg",
+      "sha256": "466d9d5dfd34d0e35ef777a1ea8c633b6e564916ccb38f73a9a93293cf61557f"
+    },
+    {
+      "url": "./assets/bench-dip/2-down.jpeg",
+      "sha256": "ebedc4230dd76bd916fd0794cac1f72278aa6cdeaebd7e82cbd0b87a411b291d"
+    },
+    {
       "url": "./assets/bulgarian-split-squat/1-up.jpeg",
       "sha256": "a881dc880194d0a97a3159cdc32931d5feb16e47975c9abf73f33cd3a5b00578"
     },
@@ -48,6 +64,14 @@
     {
       "url": "./assets/cat-cow/cow-position.jpeg",
       "sha256": "828897080a6f42a81ba930d6d370ce27460f793e5dd36afe81768269e4ba9e20"
+    },
+    {
+      "url": "./assets/concentration-curl/1-low.jpeg",
+      "sha256": "a333291853deedeabbd64322c91e8798844d8e55bc93e5109365703105efd16c"
+    },
+    {
+      "url": "./assets/concentration-curl/2-high.jpeg",
+      "sha256": "919d7f3dfe4eec0b4ab7de02a8155a0a21da52e211829034228faac94fd9c0f5"
     },
     {
       "url": "./assets/conventional-deadlift/1-down.jpeg",
@@ -74,6 +98,14 @@
       "sha256": "9fa0a45fc103d0b928bd3a02f62a5f5d5e69e3d17f42325f908ec0543bce2007"
     },
     {
+      "url": "./assets/dumbbell-overhead-press/1-low.jpeg",
+      "sha256": "1e3cbbe88c4f47ff962f00d33f3cf0b4cf23e63bb62ce57f8c291a17c4c04564"
+    },
+    {
+      "url": "./assets/dumbbell-overhead-press/2-high.jpeg",
+      "sha256": "7b3d50b13bb65350cbe0b43491c1994164afdd185b833f28cc9ffb52ede13da3"
+    },
+    {
       "url": "./assets/dumbbell-shoulder-press/1-low-position.jpeg",
       "sha256": "f332d2e082a8d47835994c48e384f6e0872ba432e3997557594f3cd80d9dfbe3"
     },
@@ -82,12 +114,36 @@
       "sha256": "3e080665e9a7a30616af55b425cbffc185b58908128a3a10c8e998edd1298dad"
     },
     {
+      "url": "./assets/dumbbell-step-up/1-down.jpeg",
+      "sha256": "d7ee2a1380102f2fb8443a1e7501ceb94ef736143edcee1149c0ffe8bc2c3acf"
+    },
+    {
+      "url": "./assets/dumbbell-step-up/2-up.jpeg",
+      "sha256": "239f256c3a6adc67ac2c448d1d1b3903ba875eecdff3939b09c34d5b554f8da6"
+    },
+    {
       "url": "./assets/ez-bar-curl/1-low.jpeg",
       "sha256": "d0445128c6cdfc6a3732ab7ffb8b6f4c5f931a87f3e85020f41610c2bd42deae"
     },
     {
       "url": "./assets/ez-bar-curl/2-high.jpeg",
       "sha256": "717a27180c8987ea2dc9825a775b90b0c4d41578c9ac472d9be0f534e6cbd1f0"
+    },
+    {
+      "url": "./assets/glute-bridge/1-down.jpeg",
+      "sha256": "08e275811212c0d8a23197abeb698247b4f6f917689af2a46d6990e241dfa164"
+    },
+    {
+      "url": "./assets/glute-bridge/2-up.jpeg",
+      "sha256": "3108ffe715ed4233746ad35f3e7aee0b1c8411324d354c55a7585dfd7426b015"
+    },
+    {
+      "url": "./assets/goblet-squat/1-high.jpeg",
+      "sha256": "1681f1c8e7d99a30b13ae748a0009c66c2bc1906eb5e97184d5b0eaaf21ee177"
+    },
+    {
+      "url": "./assets/goblet-squat/2-low.jpeg",
+      "sha256": "ff6c304e4cbcb7e583d1c2af7a1421e961c2bd8ef4e7b24d8642bb28f613ed29"
     },
     {
       "url": "./assets/hammer-curl/1-low.jpeg",
@@ -108,6 +164,14 @@
     {
       "url": "./assets/hero/hero.jpeg",
       "sha256": "a2bb52a4b74e61eebff52da6d99e65a4701f6b41c0413d1086a56154b498065c"
+    },
+    {
+      "url": "./assets/high-cable-crossover/1-open.jpeg",
+      "sha256": "6934b4db2e9e11073404229709b517da76723b9d3d47e9151eea0983c07ea2fc"
+    },
+    {
+      "url": "./assets/high-cable-crossover/2-close.jpeg",
+      "sha256": "9fdf113867466dc98a58baff7c0ea7f05f8f1a129eb4a877443c49a865a09170"
     },
     {
       "url": "./assets/high-plank/high-plank.jpeg",
@@ -168,6 +232,14 @@
     {
       "url": "./assets/leg-extension-machine/2-high.jpeg",
       "sha256": "2ff4a8d6c0c55631719cd16e3033e7b468fccf28566cb716593a7346fe65ea92"
+    },
+    {
+      "url": "./assets/lying-leg-curl/1-low.jpeg",
+      "sha256": "7d1fc173d941c1ab26636bc1a56e18f909960d7aa3cc8de9ad2189e2ad5c97df"
+    },
+    {
+      "url": "./assets/lying-leg-curl/2-up.jpeg",
+      "sha256": "e3b5472ea0e78ab104b2c23e0d581c2f995f169967a27770805e0ed587ff9162"
     },
     {
       "url": "./assets/mountain-climber/climb-position.jpeg",

@@ -522,7 +522,23 @@
       },
       "primaryMuscles": ["quads"],
       "secondaryMuscles": ["glutes"],
-      "focus": ["strength", "core"]
+      "focus": ["strength", "core"],
+      "images": [
+        {
+          "src": "./assets/goblet-squat/1-high.jpeg",
+          "alt": {
+            "en": "Standing position of a goblet squat holding a dumbbell at the chest.",
+            "es": "Posición de pie de la sentadilla goblet, con la mancuerna frente al pecho."
+          }
+        },
+        {
+          "src": "./assets/goblet-squat/2-low.jpeg",
+          "alt": {
+            "en": "Lowered goblet squat position with hips between the legs.",
+            "es": "Posición baja de la sentadilla goblet, con las caderas entre las piernas."
+          }
+        }
+      ]
     },
     {
       "id": "mountain-climber",
@@ -851,7 +867,23 @@
       },
       "primaryMuscles": ["shoulders"],
       "secondaryMuscles": ["triceps"],
-      "focus": ["strength"]
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/dumbbell-overhead-press/1-low.jpeg",
+          "alt": {
+            "en": "Starting position of a standing dumbbell shoulder press with weights at shoulder height.",
+            "es": "Posición inicial del press militar de pie, con las mancuernas a la altura de los hombros."
+          }
+        },
+        {
+          "src": "./assets/dumbbell-overhead-press/2-high.jpeg",
+          "alt": {
+            "en": "Top position of a standing dumbbell shoulder press with both weights overhead.",
+            "es": "Posición final del press militar de pie, con ambas mancuernas sobre la cabeza."
+          }
+        }
+      ]
     },
     {
       "id": "ez-bar-curl",
@@ -1828,7 +1860,23 @@
       },
       "primaryMuscles": [],
       "secondaryMuscles": ["shoulders"],
-      "focus": ["strength", "core"]
+      "focus": ["strength", "core"],
+      "images": [
+        {
+          "src": "./assets/ab-wheel-rollout/1-high.jpeg",
+          "alt": {
+            "en": "Ab wheel rollout start position with the wheel close beneath the shoulders.",
+            "es": "Posición inicial de la rueda abdominal, con la rueda cerca de los hombros."
+          }
+        },
+        {
+          "src": "./assets/ab-wheel-rollout/2-low.jpeg",
+          "alt": {
+            "en": "Extended rollout position with arms reaching forward and the trunk braced.",
+            "es": "Posición extendida, con los brazos hacia delante y el abdomen firme."
+          }
+        }
+      ]
     },
     {
       "id": "hollow-hold",
@@ -2025,7 +2073,23 @@
       },
       "primaryMuscles": ["chest"],
       "secondaryMuscles": ["shoulders"],
-      "focus": ["strength"]
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/high-cable-crossover/1-open.jpeg",
+          "alt": {
+            "en": "Starting position of a high-cable chest fly with arms open.",
+            "es": "Posición inicial del cruce de poleas altas, con los brazos abiertos."
+          }
+        },
+        {
+          "src": "./assets/high-cable-crossover/2-close.jpeg",
+          "alt": {
+            "en": "Closing position of a high-cable chest fly with hands together in front of the torso.",
+            "es": "Posición de cierre del cruce de poleas altas, con las manos juntas delante del torso."
+          }
+        }
+      ]
     },
     {
       "id": "concentration-curl",
@@ -2057,7 +2121,23 @@
       },
       "primaryMuscles": ["biceps"],
       "secondaryMuscles": [],
-      "focus": ["strength"]
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/concentration-curl/1-low.jpeg",
+          "alt": {
+            "en": "Starting position of a concentration curl with the working arm lowered.",
+            "es": "Posición inicial del curl concentrado, con el brazo de trabajo abajo."
+          }
+        },
+        {
+          "src": "./assets/concentration-curl/2-high.jpeg",
+          "alt": {
+            "en": "Top position of a concentration curl with the dumbbell raised toward the shoulder.",
+            "es": "Posición alta del curl concentrado, con la mancuerna cerca del hombro."
+          }
+        }
+      ]
     },
     {
       "id": "bench-dip",
@@ -2093,7 +2173,23 @@
       },
       "primaryMuscles": ["triceps"],
       "secondaryMuscles": ["shoulders"],
-      "focus": ["strength"]
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/bench-dip/1-up.jpeg",
+          "alt": {
+            "en": "Top position of a bench dip with the elbows extended.",
+            "es": "Posición alta de fondos en banco, con los codos extendidos."
+          }
+        },
+        {
+          "src": "./assets/bench-dip/2-down.jpeg",
+          "alt": {
+            "en": "Lowered bench dip position with the elbows bent.",
+            "es": "Posición baja de fondos en banco, con los codos flexionados."
+          }
+        }
+      ]
     },
     {
       "id": "walking-lunge",
@@ -2172,7 +2268,23 @@
       },
       "primaryMuscles": ["hamstrings"],
       "secondaryMuscles": [],
-      "focus": ["strength"]
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/lying-leg-curl/1-low.jpeg",
+          "alt": {
+            "en": "Starting position of a lying leg curl with legs extended.",
+            "es": "Posición inicial del curl femoral tumbado, con las piernas extendidas."
+          }
+        },
+        {
+          "src": "./assets/lying-leg-curl/2-up.jpeg",
+          "alt": {
+            "en": "Top position of a lying leg curl with the heels curled toward the body.",
+            "es": "Posición alta del curl femoral tumbado, con los talones acercándose al cuerpo."
+          }
+        }
+      ]
     },
     {
       "id": "glute-bridge",
@@ -2200,7 +2312,23 @@
       },
       "primaryMuscles": ["glutes"],
       "secondaryMuscles": ["hamstrings"],
-      "focus": ["strength", "core"]
+      "focus": ["strength", "core"],
+      "images": [
+        {
+          "src": "./assets/glute-bridge/1-down.jpeg",
+          "alt": {
+            "en": "Starting position of a glute bridge with hips lowered to the floor.",
+            "es": "Posición inicial del puente de glúteos, con las caderas apoyadas en el suelo."
+          }
+        },
+        {
+          "src": "./assets/glute-bridge/2-up.jpeg",
+          "alt": {
+            "en": "Top position of a glute bridge with hips lifted.",
+            "es": "Posición alta del puente de glúteos, con las caderas elevadas."
+          }
+        }
+      ]
     },
     {
       "id": "dumbbell-step-up",
@@ -2236,7 +2364,23 @@
       },
       "primaryMuscles": ["quads"],
       "secondaryMuscles": ["glutes"],
-      "focus": ["strength"]
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/dumbbell-step-up/1-down.jpeg",
+          "alt": {
+            "en": "Starting position of a dumbbell step-up beside the step.",
+            "es": "Posición inicial del step-up con mancuernas, de pie junto al escalón."
+          }
+        },
+        {
+          "src": "./assets/dumbbell-step-up/2-up.jpeg",
+          "alt": {
+            "en": "Top position of a dumbbell step-up standing on the step.",
+            "es": "Posición alta del step-up con mancuernas, de pie sobre el escalón."
+          }
+        }
+      ]
     }
   ]
 }
