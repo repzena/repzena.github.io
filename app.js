@@ -1,582 +1,20 @@
+import { UI, lang, names, setLanguage, t } from './modules/language.js';
+import { searchText } from './modules/exercise-search.js';
+import { loadCatalog, readCachedCatalog } from './modules/exercise-catalog.js';
+import { parseRoutineFile, serializeRoutine } from './modules/routine-transfer.js';
+import { PAGE_NAMES, pageFromHash, exerciseIdFromHash } from './modules/routing.js';
+import {
+  makeRoutineDay,
+  normalizeRoutineDB,
+  sectionItemCount,
+  SECTION_TYPES,
+} from './modules/routine-storage.js';
+import { updateOfflineLanguage } from './modules/offline.js';
+
 const $ = (s) => document.querySelector(s);
-const UI = {
-  en: {
-    brandHome: 'Repzena home',
-    navLabel: 'Main navigation',
-    navHome: 'Home',
-    navHomeShort: 'Home',
-    sessions: 'Routine sessions',
-    heroImageAlt:
-      'Two people exercise in a gym: one presses dumbbells overhead while another holds a plank.',
-    newRoutine: 'New routine',
-    removeRoutine: 'Remove routine',
-    removeSession: 'Remove session',
-    confirmRemoveRoutine: 'Delete “{routine}” and all of its sessions and exercises?',
-    confirmRemoveSession: 'Delete “{session}” and all of its exercises and sections?',
-    routineRemoved: 'Routine removed',
-    sessionRemoved: 'Session removed',
-    routineName: 'Routine name',
-    editExercise: 'Edit exercise details',
-    saveExercise: 'Save exercise details',
-    editSets: 'Sets',
-    editReps: 'Reps / time',
-    addExercise: 'Add exercise',
-    close: 'Close',
-    openGuide: 'Open exercise guide',
-    navLibrary: 'Exercise library',
-    navLibraryShort: 'Exercises',
-    navRoutines: 'My routines',
-    navRoutinesShort: 'Routines',
-    language: 'Language',
-    theme: 'Theme',
-    themeSystem: 'System',
-    themeLight: 'Light',
-    themeDark: 'Dark',
-    eyebrow: 'THE GYM, MADE CLEAR',
-    headline: 'Know the move.<br><em>Own your workout.</em>',
-    intro:
-      'Clear, visual exercise guides and routines that stay yours. No noise, just what you need between sets.',
-    explore: 'Explore exercises',
-    buildWorkout: 'Build your workout',
-    offlineEyebrow: 'TRAIN WITH OR WITHOUT SIGNAL',
-    offlineTitle: 'Take Repzena to the gym',
-    offlineDescription:
-      'Save the exercise guides and images on this device for offline use. About 9 MB; routines stay on this device too.',
-    offlineChecking: 'Checking offline files…',
-    offlineDownload: 'Make available offline',
-    offlineRemove: 'Remove offline files',
-    offlineProgress: 'Saving images {done} of {total}…',
-    offlineProgressLabel: 'Offline download progress',
-    offlinePartial: '{saved} of {total} images are saved on this device.',
-    offlineReady: 'Ready offline. {count} exercise images are saved on this device.',
-    offlineRemoved: 'Offline images removed. They are still available when you are online.',
-    offlineFailed: 'Some images could not be saved. Check your connection and try again.',
-    offlineUnsupported: 'Offline downloads are not supported in this browser.',
-    offlineStartupFailed: 'Offline support could not start. Check your connection and try again.',
-    offlineRetry: 'Retry offline setup',
-    installApp: 'Install Repzena',
-    installHelpTitle: 'Install Repzena',
-    installHelpIosSafariSteps: [
-      'Open repzena.github.io directly in Safari. If you opened it inside another app, open the page in Safari first.',
-      'Tap Share. If Safari shows a page menu instead, tap it and then tap Share.',
-      'Scroll through the Share options and tap “Add to Home Screen”. If it is missing, scroll to the bottom, tap “Edit Actions”, then add “Add to Home Screen”.',
-      'Turn on “Open as Web App” if that option appears, then tap “Add”.',
-    ],
-    installHelpIosChromeSteps: [
-      'Open Repzena in Chrome on your iPhone.',
-      'Tap Share to the right of the address bar, then tap “Add to Home Screen”.',
-      'Review or edit the name and details, then tap “Add”.',
-      'Open Repzena from the new Home Screen icon. Keep the phone online while you save the exercise library for offline use.',
-    ],
-    installHelpIosFirefoxSteps: [
-      'Open Repzena in Firefox on your iPhone.',
-      'Tap the Share icon in the address bar, then tap “Add to Home Screen”.',
-      'Review or edit the shortcut name, then tap “Add”.',
-      'Open Repzena from the new Home Screen icon. Keep the phone online while you save the exercise library for offline use.',
-    ],
-    installHelpIosOtherSteps: [
-      'Open Repzena in your iPhone browser, then tap its Share icon.',
-      'Tap “Add to Home Screen” and confirm. The button location can vary by browser.',
-      'If that option is missing, open Repzena in Safari and use Safari’s Share menu.',
-      'Open Repzena from the Home Screen icon while online to save the exercise library for offline use.',
-    ],
-    installHelpAndroidChromeSteps: [
-      'Open Repzena in Chrome on your Android phone.',
-      'Tap More (⋮) beside the address bar, then choose “Install and create shortcut” (or “Install app” in some versions).',
-      'Tap “Install” and follow the confirmation shown by your phone.',
-      'Open Repzena from the new app icon while online to save the exercise library for offline use.',
-    ],
-    installHelpAndroidSamsungSteps: [
-      'Open Repzena in Samsung Internet.',
-      'Open the browser menu (☰), then tap “Add page to” and “Home screen”.',
-      'Review the shortcut name and tap “Add”. If Samsung Internet offers an install prompt or a + icon, you can use that instead.',
-      'Open Repzena from the new Home Screen icon while online to save the exercise library for offline use.',
-    ],
-    installHelpAndroidFirefoxSteps: [
-      'Open Repzena in Firefox on your Android phone.',
-      'Tap the three-dot menu, then tap “Install”.',
-      'In the Add to Home Screen panel, tap “Add automatically” or drag the icon to your preferred place.',
-      'Open Repzena from the new icon while online to save the exercise library for offline use.',
-    ],
-    installHelpAndroidOtherSteps: [
-      'Open Repzena in your browser and open its menu (⋮ or ☰).',
-      'Look for “Install app”, “Install”, or “Add to Home screen”, then follow the phone’s confirmation.',
-      'If the browser only offers a shortcut, it may open Repzena in that browser instead of a separate app window.',
-      'Open Repzena while online to save the exercise library for offline use.',
-    ],
-    installHelpDesktopSteps: [
-      'Look for an install icon in the address bar or an “Install Repzena” command in your browser menu.',
-      'If your browser does not offer installation, bookmark Repzena and continue using it in the browser.',
-      'You can save the exercise library for offline use from the page without installing the app.',
-    ],
-    installHelpOfflineNote:
-      'Installing is optional. You can save the exercise library for offline use from the page without adding an app icon.',
-    pageTitleHome: 'Repzena — Home',
-    pageTitleExercises: 'Repzena — Exercise library',
-    pageTitleRoutines: 'Repzena — Routine builder',
-    heroNote: 'Built for real gym floors',
-    libraryEyebrow: 'YOUR MOVEMENT LIBRARY',
-    libraryTitle: 'Find your next <em>move.</em>',
-    levelNote: 'Experience levels are rough guides, not personal assessments.',
-    searchPlaceholder: 'Search exercise, muscle or equipment',
-    allPatterns: 'All movements',
-    allEquipment: 'All equipment',
-    allMuscles: 'All muscles',
-    allFocuses: 'All focuses',
-    filterMovement: 'Movement',
-    filterEquipment: 'Equipment',
-    filterMuscle: 'Muscles',
-    filterFocus: 'Focus',
-    routineEyebrow: 'YOUR TRAINING, YOUR WAY',
-    routineTitle: 'Build a routine<br>that <em>sticks.</em>',
-    routineIntro:
-      'Create a separate routine for each training day. Name each one, add its exercises and keep them saved on this device.',
-    localNote: 'Private by default. Routines are stored in this browser.',
-    importRoutine: 'Import routine',
-    currentRoutine: 'YOUR ROUTINES',
-    save: 'Save',
-    addDay: 'Add session',
-    export: 'Export',
-    emptyRoutine: 'Start with one exercise.',
-    emptyRoutineHint: 'Use the + button on an exercise card to add it to this session.',
-    addToSession: 'ADD TO THIS SESSION',
-    exercise: 'Exercise',
-    sets: 'Sets',
-    repsTime: 'Reps / time',
-    principleOne: 'Learn the movement',
-    principleOneText: 'One clear visual. Cues that matter.',
-    principleTwo: 'Make it your plan',
-    principleTwoText: 'Your sessions, your order, your pace.',
-    principleThree: 'Keep it simple',
-    principleThreeText: 'No accounts. No clutter. Just training.',
-    footer: 'A little more confident, every rep.',
-    privacySettings: 'Privacy settings',
-    privacyTitle: 'Your privacy matters',
-    privacyDescription:
-      'Optional Google Analytics helps us understand visits and popular pages. It only loads if you allow it. Change your choice here at any time.',
-    analyticsAccept: 'Allow analytics',
-    analyticsReject: 'Decline',
-    add: 'Add',
-    howTo: 'How to do it',
-    watchFor: 'Pay attention to',
-    equipment: 'Equipment',
-    muscles: 'Muscles involved',
-    movement: 'Movement',
-    level: 'Suggested level',
-    related: 'In the routine',
-    day: 'Session',
-    delete: 'Remove',
-    imported: 'Routine imported',
-    saved: 'Saved on this device',
-    exported: 'Routine exported',
-    emptySearch: 'No matches. Try another search or clear a filter.',
-    all: 'All',
-    beginner: 'Beginner',
-    intermediate: 'Intermediate',
-    advanced: 'Advanced',
-    added: 'Added to current session',
-    chooseExercise: 'Choose an exercise',
-    matchRoutineExercise: 'Link this item to an exercise',
-    matchRoutineExerciseHelp:
-      'Choose the matching library exercise. Its guide will open and this link will be saved.',
-    openMatchedGuide: 'Open selected guide',
-    confirmDelete: 'Delete this routine?',
-    untitled: 'My routine',
-    routineLabel: 'Routine',
-    session: 'Session',
-    errorImport: 'Could not read that routine file.',
-    sourceRoutine: 'Imported from your personal routine file',
-    storageError: 'Could not save on this device. Check available browser storage.',
-    moveUp: 'Move exercise up',
-    moveDown: 'Move exercise down',
-    importTooLarge: 'That routine file is too large to import.',
-    loadError:
-      'The exercise library could not be loaded and no offline copy is available. Check your connection and reload. If you opened a file directly, use a local web server.',
-    clearFilter: 'Clear filter',
-    copyGuideLink: 'Copy guide link',
-    linkCopied: 'Guide link copied',
-    linkCopyError: 'Could not copy the link. Copy it from the address bar.',
-    pagination: 'Exercise pages',
-    previousPage: 'Previous page',
-    nextPage: 'Next page',
-    previousImage: 'Previous image',
-    nextImage: 'Next image',
-    pageLabel: 'Page',
-    showingExercises: 'Showing {start}–{end} of {total}',
-    primaryMuscle: 'Primary muscle',
-    secondaryMuscle: 'Secondary muscles',
-    alsoInvolved: 'Also involved',
-    moreMuscles: '+{count} more',
-    targetSection: 'Add to section',
-    sectionMain: 'Main work',
-    sectionMobility: 'Mobility',
-    sectionCore: 'Core',
-    sectionAccessories: 'Accessories',
-    sectionFinisher: 'Finisher',
-    sectionCooldown: 'Cool-down',
-    sectionCustom: 'Custom section',
-    sectionType: 'Section type',
-    sectionName: 'Section name',
-    addSection: 'Add section',
-    cancel: 'Cancel',
-    renameSection: 'Rename section',
-    removeSection: 'Remove section',
-    moveSectionUp: 'Move section up',
-    moveSectionDown: 'Move section down',
-    collapseSection: 'Collapse section',
-    expandSection: 'Expand section',
-    noExercisesInSection: 'No exercises in this section yet.',
-    useStarterLayout: 'Add mobility + core sections',
-    starterLayoutAdded: 'Starter sections added',
-    sectionAdded: 'Section added',
-    sectionNameRequired: 'Enter a name for this section.',
-    confirmRemoveSection: 'Remove “{section}” and its {count} exercises?',
-    addedToSection: 'Added to {section}',
-    exerciseAdded: 'Added to this session',
-    addExerciseToSection: 'Add {exercise} to {section}',
-    addToRoutine: 'Add to a routine',
-    chooseRoutine: 'Choose a routine',
-    chooseSession: 'Choose a session',
-    chooseSection: 'Choose a section',
-    noSection: 'No section',
-    noSections: 'No sections yet',
-    addToRoutineTitle: 'Choose where it goes',
-    confirmAddExercise: 'Add exercise',
-    focusCore: 'Core',
-    createMainSection: 'Add a Main work section',
-  },
-  es: {
-    brandHome: 'Inicio de Repzena',
-    navLabel: 'Navegación principal',
-    navHome: 'Inicio',
-    navHomeShort: 'Inicio',
-    sessions: 'Sesiones de la rutina',
-    heroImageAlt:
-      'Dos personas entrenan en un gimnasio: una levanta mancuernas por encima de la cabeza y otra sostiene una plancha.',
-    newRoutine: 'Nueva rutina',
-    removeRoutine: 'Eliminar rutina',
-    removeSession: 'Eliminar sesión',
-    confirmRemoveRoutine: '¿Eliminar “{routine}” y todas sus sesiones y ejercicios?',
-    confirmRemoveSession: '¿Eliminar “{session}” y todos sus ejercicios y secciones?',
-    routineRemoved: 'Se eliminó la rutina',
-    sessionRemoved: 'Se eliminó la sesión',
-    routineName: 'Nombre de la rutina',
-    editExercise: 'Editar los datos del ejercicio',
-    saveExercise: 'Guardar los datos del ejercicio',
-    editSets: 'Series',
-    editReps: 'Reps / tiempo',
-    addExercise: 'Agregar ejercicio',
-    close: 'Cerrar',
-    openGuide: 'Abrir la guía del ejercicio',
-    navLibrary: 'Ejercicios',
-    navLibraryShort: 'Ejercicios',
-    navRoutines: 'Mis rutinas',
-    navRoutinesShort: 'Rutinas',
-    language: 'Idioma',
-    theme: 'Apariencia',
-    themeSystem: 'Sistema',
-    themeLight: 'Claro',
-    themeDark: 'Oscuro',
-    eyebrow: 'EL GIMNASIO, MÁS CLARO',
-    headline: 'Entendé el movimiento.<br><em>Entrená con confianza.</em>',
-    intro:
-      'Guías visuales para aprender ejercicios y armar rutinas a tu manera. Sin distracciones: solo lo que necesitás entre series.',
-    explore: 'Ver ejercicios',
-    buildWorkout: 'Armá tu rutina',
-    offlineEyebrow: 'ENTRENÁ CON O SIN SEÑAL',
-    offlineTitle: 'Llevá Repzena al gimnasio',
-    offlineDescription:
-      'Guardá las guías y sus imágenes en este dispositivo para usarlas sin conexión. Ocupan aproximadamente 9 MB; tus rutinas también quedan acá.',
-    offlineChecking: 'Revisando los archivos sin conexión…',
-    offlineDownload: 'Dejar disponible sin conexión',
-    offlineRemove: 'Quitar archivos sin conexión',
-    offlineProgress: 'Guardando imágenes: {done} de {total}…',
-    offlineProgressLabel: 'Progreso de descarga para usar sin conexión',
-    offlinePartial: 'Hay {saved} de {total} imágenes guardadas en este dispositivo.',
-    offlineReady:
-      'Listo para usar sin conexión. Hay {count} imágenes guardadas en este dispositivo.',
-    offlineRemoved:
-      'Se quitaron las imágenes sin conexión. Vas a poder verlas cuando tengas conexión.',
-    offlineFailed:
-      'No se pudieron guardar algunas imágenes. Revisá tu conexión e intentá de nuevo.',
-    offlineUnsupported:
-      'Este navegador no permite descargar el contenido para usarlo sin conexión.',
-    offlineStartupFailed:
-      'No se pudo iniciar el uso sin conexión. Revisá tu conexión e intentá de nuevo.',
-    offlineRetry: 'Reintentar la configuración sin conexión',
-    installApp: 'Instalar Repzena',
-    installHelpTitle: 'Instalar Repzena',
-    installHelpIosSafariSteps: [
-      'Abrí repzena.github.io directamente en Safari. Si lo abriste dentro de otra app, primero abrí la página en Safari.',
-      'Tocá Compartir. Si Safari muestra primero el menú de página, tocá ahí y después Compartir.',
-      'Desplazate por las opciones y tocá “Agregar a pantalla de inicio”. Si no aparece, bajá hasta el final, tocá “Editar acciones” y agregá esa opción.',
-      'Activá “Abrir como app web” si aparece y tocá “Agregar”.',
-    ],
-    installHelpIosChromeSteps: [
-      'Abrí Repzena en Chrome desde tu iPhone.',
-      'Tocá Compartir, a la derecha de la barra de direcciones, y después “Agregar a pantalla de inicio”.',
-      'Revisá o cambiá el nombre y los detalles, y tocá “Agregar”.',
-      'Abrí Repzena desde el nuevo ícono de inicio. Mantené el teléfono conectado mientras guardás la biblioteca para usarla sin conexión.',
-    ],
-    installHelpIosFirefoxSteps: [
-      'Abrí Repzena en Firefox desde tu iPhone.',
-      'Tocá el ícono Compartir de la barra de direcciones y después “Agregar a pantalla de inicio”.',
-      'Revisá o cambiá el nombre del acceso directo y tocá “Agregar”.',
-      'Abrí Repzena desde el nuevo ícono de inicio. Mantené el teléfono conectado mientras guardás la biblioteca para usarla sin conexión.',
-    ],
-    installHelpIosOtherSteps: [
-      'Abrí Repzena en el navegador de tu iPhone y tocá el ícono Compartir.',
-      'Tocá “Agregar a pantalla de inicio” y confirmá. La ubicación puede variar según el navegador.',
-      'Si no aparece esa opción, abrí Repzena en Safari y usá su menú Compartir.',
-      'Abrí Repzena desde el nuevo ícono mientras tengas conexión para guardar la biblioteca y usarla sin conexión.',
-    ],
-    installHelpAndroidChromeSteps: [
-      'Abrí Repzena en Chrome desde tu teléfono Android.',
-      'Tocá Más (⋮), junto a la barra de direcciones, y elegí “Instalar y crear acceso directo” (en algunas versiones aparece como “Instalar app”).',
-      'Tocá “Instalar” y seguí la confirmación del teléfono.',
-      'Abrí Repzena desde el nuevo ícono mientras tengas conexión para guardar la biblioteca y usarla sin conexión.',
-    ],
-    installHelpAndroidSamsungSteps: [
-      'Abrí Repzena en Samsung Internet.',
-      'Abrí el menú del navegador (☰), tocá “Agregar página a” y después “Pantalla de inicio”.',
-      'Revisá el nombre del acceso directo y tocá “Agregar”. Si Samsung Internet muestra una opción de instalación o un ícono +, también podés usarla.',
-      'Abrí Repzena desde el nuevo ícono mientras tengas conexión para guardar la biblioteca y usarla sin conexión.',
-    ],
-    installHelpAndroidFirefoxSteps: [
-      'Abrí Repzena en Firefox desde tu teléfono Android.',
-      'Tocá el menú de tres puntos y después “Instalar”.',
-      'En el panel Agregar a pantalla de inicio, tocá “Agregar automáticamente” o arrastrá el ícono al lugar que prefieras.',
-      'Abrí Repzena desde el nuevo ícono mientras tengas conexión para guardar la biblioteca y usarla sin conexión.',
-    ],
-    installHelpAndroidOtherSteps: [
-      'Abrí Repzena en tu navegador y abrí el menú (⋮ o ☰).',
-      'Buscá “Instalar app”, “Instalar” o “Agregar a pantalla de inicio” y seguí la confirmación del teléfono.',
-      'Si el navegador solo ofrece un acceso directo, puede abrir Repzena dentro del navegador y no en una ventana separada.',
-      'Abrí Repzena con conexión para guardar la biblioteca y usarla sin conexión.',
-    ],
-    installHelpDesktopSteps: [
-      'Buscá un ícono de instalación en la barra de direcciones o la opción “Instalar Repzena” en el menú del navegador.',
-      'Si tu navegador no permite instalarla, guardá Repzena en favoritos y seguí usándola en el navegador.',
-      'Podés guardar la biblioteca para usarla sin conexión desde la página, sin instalar la app.',
-    ],
-    installHelpOfflineNote:
-      'Instalarla es opcional. Podés guardar la biblioteca para usarla sin conexión desde la página, sin agregar un ícono de app.',
-    pageTitleHome: 'Repzena — Inicio',
-    pageTitleExercises: 'Repzena — Ejercicios',
-    pageTitleRoutines: 'Repzena — Rutinas',
-    heroNote: 'Pensado para entrenar en el gimnasio',
-    libraryEyebrow: 'BIBLIOTECA DE MOVIMIENTOS',
-    libraryTitle: 'Encontrá tu próximo <em>ejercicio.</em>',
-    levelNote: 'El nivel es orientativo y no reemplaza una evaluación personal.',
-    searchPlaceholder: 'Buscá por ejercicio, músculo o equipo',
-    allPatterns: 'Todos los movimientos',
-    allEquipment: 'Todo el equipamiento',
-    allMuscles: 'Todos los músculos',
-    allFocuses: 'Todos los enfoques',
-    filterMovement: 'Movimiento',
-    filterEquipment: 'Equipamiento',
-    filterMuscle: 'Músculos',
-    filterFocus: 'Enfoque',
-    routineEyebrow: 'TU ENTRENAMIENTO, A TU MANERA',
-    routineTitle: 'Creá una rutina<br>que <em>te sirva.</em>',
-    routineIntro:
-      'Creá una rutina distinta para cada día de entrenamiento. Poneles un nombre, agregá sus ejercicios y guardá todo en este dispositivo.',
-    localNote: 'Tus rutinas quedan guardadas en este navegador.',
-    importRoutine: 'Importá una rutina',
-    currentRoutine: 'TUS RUTINAS',
-    save: 'Guardá',
-    addDay: 'Agregá una sesión',
-    export: 'Exportá',
-    emptyRoutine: 'Empezá con un ejercicio.',
-    emptyRoutineHint: 'Usá el botón + de una tarjeta para agregarlo a esta sesión.',
-    addToSession: 'AGREGAR A ESTA SESIÓN',
-    exercise: 'Ejercicio',
-    sets: 'Series',
-    repsTime: 'Reps / tiempo',
-    principleOne: 'Aprendé el movimiento',
-    principleOneText: 'Una imagen clara. Consejos útiles.',
-    principleTwo: 'Armá tu rutina a tu manera',
-    principleTwoText: 'Tus sesiones, tu orden, tu ritmo.',
-    principleThree: 'Sin complicaciones',
-    principleThreeText: 'Sin cuentas ni distracciones.',
-    footer: 'Un poco más de confianza, en cada repetición.',
-    privacySettings: 'Privacidad',
-    privacyTitle: 'Tu privacidad importa',
-    privacyDescription:
-      'Google Analytics es opcional y nos ayuda a conocer las visitas y las páginas más consultadas. Solo se carga si lo aceptás. Podés cambiar tu decisión acá cuando quieras.',
-    analyticsAccept: 'Aceptar Analytics',
-    analyticsReject: 'Rechazar',
-    add: 'Agregar',
-    howTo: 'Cómo hacerlo',
-    watchFor: 'Qué tener en cuenta',
-    equipment: 'Equipo',
-    muscles: 'Músculos involucrados',
-    movement: 'Movimiento',
-    level: 'Nivel orientativo',
-    related: 'En la rutina',
-    day: 'Sesión',
-    delete: 'Eliminar',
-    imported: 'Rutina importada',
-    saved: 'Guardada en este dispositivo',
-    exported: 'Rutina exportada',
-    emptySearch: 'No encontramos resultados. Probá otra búsqueda o sacá algún filtro.',
-    all: 'Todos',
-    beginner: 'Principiante',
-    intermediate: 'Intermedio',
-    advanced: 'Avanzado',
-    added: 'Se agregó a la sesión actual',
-    chooseExercise: 'Elegí un ejercicio',
-    matchRoutineExercise: 'Vincular este ejercicio',
-    matchRoutineExerciseHelp:
-      'Elegí el ejercicio correspondiente de la biblioteca. Se abrirá su guía y guardaremos el vínculo.',
-    openMatchedGuide: 'Abrir la guía elegida',
-    confirmDelete: '¿Querés eliminar esta rutina?',
-    untitled: 'Mi rutina',
-    routineLabel: 'Rutina',
-    session: 'Sesión',
-    errorImport: 'No se pudo leer el archivo de rutina.',
-    sourceRoutine: 'Importada desde tu archivo personal',
-    storageError:
-      'No se pudo guardar en este dispositivo. Revisá el espacio disponible del navegador.',
-    moveUp: 'Mover ejercicio hacia arriba',
-    moveDown: 'Mover ejercicio hacia abajo',
-    importTooLarge: 'El archivo de rutina es demasiado grande para importarlo.',
-    loadError:
-      'No se pudo cargar la biblioteca y no hay una copia sin conexión disponible. Revisá tu conexión y volvé a cargar la página. Si abriste un archivo directamente, usá un servidor web local.',
-    clearFilter: 'Quitar filtro',
-    copyGuideLink: 'Copiar enlace de la guía',
-    linkCopied: 'Se copió el enlace de la guía',
-    linkCopyError: 'No se pudo copiar el enlace. Copialo desde la barra de direcciones.',
-    pagination: 'Páginas de ejercicios',
-    previousPage: 'Página anterior',
-    nextPage: 'Página siguiente',
-    previousImage: 'Imagen anterior',
-    nextImage: 'Imagen siguiente',
-    pageLabel: 'Página',
-    showingExercises: 'Mostrando {start}–{end} de {total}',
-    primaryMuscle: 'Músculo principal',
-    secondaryMuscle: 'Músculos secundarios',
-    alsoInvolved: 'También participan',
-    moreMuscles: '+{count} más',
-    targetSection: 'Agregar a la sección',
-    sectionMain: 'Trabajo principal',
-    sectionMobility: 'Movilidad',
-    sectionCore: 'Zona media',
-    sectionAccessories: 'Accesorios',
-    sectionFinisher: 'Final',
-    sectionCooldown: 'Vuelta a la calma',
-    sectionCustom: 'Sección personalizada',
-    sectionType: 'Tipo de sección',
-    sectionName: 'Nombre de la sección',
-    addSection: 'Agregar sección',
-    cancel: 'Cancelar',
-    renameSection: 'Renombrar sección',
-    removeSection: 'Eliminar sección',
-    moveSectionUp: 'Mover sección hacia arriba',
-    moveSectionDown: 'Mover sección hacia abajo',
-    collapseSection: 'Contraer sección',
-    expandSection: 'Expandir sección',
-    noExercisesInSection: 'Todavía no hay ejercicios en esta sección.',
-    useStarterLayout: 'Agregar secciones de movilidad y zona media',
-    starterLayoutAdded: 'Se agregaron las secciones iniciales',
-    sectionAdded: 'Se agregó la sección',
-    sectionNameRequired: 'Escribí un nombre para la sección.',
-    confirmRemoveSection: '¿Eliminar “{section}” y sus {count} ejercicios?',
-    addedToSection: 'Se agregó a {section}',
-    exerciseAdded: 'Se agregó a esta sesión',
-    addExerciseToSection: 'Agregar {exercise} a {section}',
-    addToRoutine: 'Agregar a una rutina',
-    chooseRoutine: 'Elegí una rutina',
-    chooseSession: 'Elegí una sesión',
-    chooseSection: 'Elegí una sección',
-    noSection: 'Sin sección',
-    noSections: 'Todavía no hay secciones',
-    addToRoutineTitle: 'Elegí dónde agregarlo',
-    confirmAddExercise: 'Agregar ejercicio',
-    focusCore: 'Zona media',
-    createMainSection: 'Agregar una sección de trabajo principal',
-  },
-};
-const names = {
-  pattern: {
-    'horizontal-push': { en: 'Horizontal push', es: 'Empuje horizontal' },
-    'horizontal-pull': { en: 'Horizontal pull', es: 'Tracción horizontal' },
-    'vertical-push': { en: 'Vertical push', es: 'Empuje vertical' },
-    'vertical-pull': { en: 'Vertical pull', es: 'Tracción vertical' },
-    squat: { en: 'Squat', es: 'Sentadilla' },
-    hinge: { en: 'Hip hinge', es: 'Bisagra de cadera' },
-    lunge: { en: 'Lunge', es: 'Estocada' },
-    'hip-rotation': { en: 'Hip rotation', es: 'Rotación de cadera' },
-    'spinal-flexion': { en: 'Spinal flexion', es: 'Flexión de columna' },
-    'shoulder-flexion': { en: 'Shoulder flexion', es: 'Flexión de hombro' },
-    'trunk-rotation': { en: 'Trunk rotation', es: 'Rotación del torso' },
-    'ankle-circles': { en: 'Ankle circles', es: 'Círculos de tobillo' },
-    'isometric-stability': { en: 'Isometric stability', es: 'Estabilidad isométrica' },
-    'lateral-stability': { en: 'Lateral stability', es: 'Estabilidad lateral' },
-    'knee-drive': { en: 'Knee drive', es: 'Elevación de rodilla' },
-    'trunk-flexion': { en: 'Trunk flexion', es: 'Flexión del torso' },
-    'anti-extension': { en: 'Anti-extension', es: 'Antiextensión' },
-    'anti-rotation': { en: 'Anti-rotation', es: 'Antirrotación' },
-    'elbow-flexion': { en: 'Elbow flexion', es: 'Flexión de codo' },
-    'elbow-extension': { en: 'Elbow extension', es: 'Extensión de codo' },
-    'knee-flexion': { en: 'Knee flexion', es: 'Flexión de rodilla' },
-    'knee-extension': { en: 'Knee extension', es: 'Extensión de rodilla' },
-    'ankle-plantar-flexion': { en: 'Ankle plantar flexion', es: 'Flexión plantar del tobillo' },
-    'shoulder-abduction': { en: 'Shoulder abduction', es: 'Abducción de hombro' },
-    'horizontal-adduction': {
-      en: 'Horizontal shoulder adduction',
-      es: 'Aducción horizontal de hombro',
-    },
-  },
-  equipment: {
-    barbell: { en: 'Barbell', es: 'Barra' },
-    'ez-bar': { en: 'EZ bar', es: 'Barra EZ' },
-    step: { en: 'Step or platform', es: 'Escalón o plataforma' },
-    bench: { en: 'Bench', es: 'Banco' },
-    rack: { en: 'Rack', es: 'Soporte' },
-    dumbbells: { en: 'Dumbbells', es: 'Mancuernas' },
-    cable: { en: 'Cable', es: 'Polea' },
-    machine: { en: 'Machine', es: 'Máquina' },
-    bodyweight: { en: 'Bodyweight / no equipment', es: 'Peso corporal / sin equipamiento' },
-    band: { en: 'Resistance band', es: 'Banda elástica' },
-    stick: { en: 'Stick', es: 'Bastón' },
-    'pull-up-bar': { en: 'Pull-up bar', es: 'Barra fija' },
-    'ab-wheel': { en: 'Ab wheel', es: 'Rueda abdominal' },
-  },
-  muscles: {
-    chest: { en: 'Chest', es: 'Pectorales' },
-    triceps: { en: 'Triceps', es: 'Tríceps' },
-    shoulders: { en: 'Shoulders', es: 'Hombros' },
-    back: { en: 'Back', es: 'Espalda' },
-    biceps: { en: 'Biceps', es: 'Bíceps' },
-    quads: { en: 'Quadriceps', es: 'Cuádriceps' },
-    glutes: { en: 'Glutes', es: 'Glúteos' },
-    hamstrings: { en: 'Hamstrings', es: 'Isquiotibiales' },
-    calves: { en: 'Calves', es: 'Gemelos' },
-    'hip-flexors': { en: 'Hip flexors', es: 'Flexores de cadera' },
-    obliques: { en: 'Obliques', es: 'Oblicuos' },
-    adductors: { en: 'Adductors', es: 'Aductores' },
-  },
-  focus: {
-    strength: { en: 'Strength', es: 'Fuerza' },
-    conditioning: { en: 'Conditioning', es: 'Acondicionamiento' },
-    mobility: { en: 'Mobility', es: 'Movilidad' },
-    core: { en: 'Core', es: 'Zona media' },
-  },
-};
 const STORAGE_KEY = 'form-routines-v1';
 const LANGUAGE_KEY = 'form-language';
 const THEME_KEY = 'repzena-theme';
-const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
-const SECTION_TYPES = [
-  'mobility',
-  'core',
-  'main-work',
-  'accessories',
-  'finisher',
-  'cooldown',
-  'custom',
-];
 const SECTION_LABEL_KEYS = {
   mobility: 'sectionMobility',
   core: 'sectionCore',
@@ -592,12 +30,6 @@ function readStorage(key) {
     return null;
   }
 }
-function initialLanguage() {
-  const savedLanguage = readStorage(LANGUAGE_KEY);
-  if (savedLanguage === 'en' || savedLanguage === 'es') return savedLanguage;
-  return /^es(?:-|$)/i.test(navigator.language || '') ? 'es' : 'en';
-}
-let lang = initialLanguage();
 let themePreference = ['light', 'dark', 'system'].includes(readStorage(THEME_KEY))
   ? readStorage(THEME_KEY)
   : 'system';
@@ -629,91 +61,13 @@ function sectionTitle(section) {
   if (section.type === 'custom') return section.name || t('sectionCustom');
   return t(SECTION_LABEL_KEYS[section.type]);
 }
-function makeRoutineItem(item) {
-  return {
-    exerciseId:
-      typeof (item.exerciseId || item.exercise_id || item.id) === 'string'
-        ? (item.exerciseId || item.exercise_id || item.id).slice(0, 120)
-        : null,
-    name: String(item.name || '').slice(0, 200),
-    names:
-      item.names && typeof item.names === 'object' && !Array.isArray(item.names)
-        ? {
-            en: typeof item.names.en === 'string' ? item.names.en.slice(0, 200) : '',
-            es: typeof item.names.es === 'string' ? item.names.es.slice(0, 200) : '',
-          }
-        : null,
-    block: String(item.block || '').slice(0, 120),
-    sets: Math.min(99, Math.max(1, Number(item.sets) || 3)),
-    reps: String(item.reps || '').slice(0, 80),
-  };
-}
-function makeRoutineDay(name, defaultName, sections = [], items = []) {
-  return {
-    name,
-    defaultName,
-    sections,
-    items,
-  };
-}
-function sectionItemCount(day) {
-  return (
-    (day.items?.length || 0) +
-    day.sections.reduce((total, section) => total + section.items.length, 0)
-  );
-}
 function loadDB() {
   try {
-    const parsed = JSON.parse(readStorage(STORAGE_KEY) || 'null');
-    if (!parsed || !Array.isArray(parsed.routines)) return { routines: [], current: null };
-    const routines = parsed.routines
-      .filter(
-        (r) => r && typeof r.id === 'string' && typeof r.name === 'string' && Array.isArray(r.days),
-      )
-      .map((r) => ({
-        id: r.id,
-        name: r.name.slice(0, 120),
-        defaultName:
-          typeof r.defaultName === 'boolean' ? r.defaultName : isDefaultRoutineName(r.name),
-        days: r.days
-          .filter((d) => d && typeof d === 'object')
-          .map((d, i) => {
-            const savedName = String(d.name || `${UI.en.session} ${i + 1}`).slice(0, 120);
-            const sections = Array.isArray(d.sections)
-              ? d.sections
-                  .slice(0, 30)
-                  .filter((section) => section && typeof section === 'object')
-                  .map((section) => {
-                    const type = SECTION_TYPES.includes(section.type) ? section.type : 'custom';
-                    const items = Array.isArray(section.items)
-                      ? section.items
-                          .slice(0, 500)
-                          .filter((item) => item && typeof item === 'object')
-                          .map(makeRoutineItem)
-                      : [];
-                    return makeSection(type, section.name, items);
-                  })
-              : [];
-            const items = Array.isArray(d.items)
-              ? d.items
-                  .slice(0, 500)
-                  .filter((item) => item && typeof item === 'object')
-                  .map(makeRoutineItem)
-              : [];
-            return makeRoutineDay(
-              savedName,
-              typeof d.defaultName === 'boolean' ? d.defaultName : isDefaultSessionName(savedName),
-              sections,
-              items,
-            );
-          }),
-      }));
-    return {
-      routines,
-      current: routines.some((r) => r.id === parsed.current)
-        ? parsed.current
-        : routines[0]?.id || null,
-    };
+    return normalizeRoutineDB(JSON.parse(readStorage(STORAGE_KEY) || 'null'), {
+      sectionTypes: SECTION_TYPES,
+      makeSection,
+      defaultSessionName: UI.en.session,
+    });
   } catch {
     return { routines: [], current: null };
   }
@@ -750,15 +104,6 @@ function applyTheme() {
     .querySelector('meta[name="theme-color"]')
     ?.setAttribute('content', resolvedTheme === 'dark' ? '#101714' : '#f6f5ef');
 }
-function t(key) {
-  return UI[lang][key] || key;
-}
-function isDefaultRoutineName(name) {
-  return ['My routine', 'Mi rutina'].includes(String(name || '').trim());
-}
-function isDefaultSessionName(name) {
-  return /^(?:session|sesión)\s+\d+$/i.test(String(name || '').trim());
-}
 function routineDisplayName(routine) {
   if (!routine.defaultName) return routine.name;
   const index = db.routines.indexOf(routine);
@@ -770,14 +115,6 @@ function sessionDisplayName(day, index) {
 function localized(obj) {
   return obj?.[lang] || obj?.en || '';
 }
-function importText(value, fallback = '') {
-  if (typeof value === 'string') return value;
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return fallback;
-  for (const locale of [lang, 'en', 'es']) {
-    if (typeof value[locale] === 'string' && value[locale].trim()) return value[locale];
-  }
-  return fallback;
-}
 function label(kind, id) {
   return names[kind]?.[id]?.[lang] || id;
 }
@@ -787,13 +124,6 @@ function allMuscles(exercise) {
 function focusLabels(exercise) {
   return exercise.focus.map((id) => label('focus', id)).join(', ');
 }
-function searchText(value) {
-  return String(value ?? '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLocaleLowerCase();
-}
-const PAGE_NAMES = new Set(['home', 'exercises', 'routines']);
 function pageTitle(page) {
   const titleKey = {
     home: 'pageTitleHome',
@@ -830,7 +160,7 @@ function setScrollPosition(position) {
   root.style.scrollBehavior = currentBehavior;
 }
 function saveCurrentScrollPosition() {
-  if (exerciseIdFromHash()) return;
+  if (exerciseIdFromHash(location.hash)) return;
   history.replaceState(
     { ...history.state, repzenaPage: activePage, scrollY: window.scrollY },
     '',
@@ -846,12 +176,6 @@ function navigateToPage(page) {
   guideReturnState = null;
   setActivePage(page);
   setScrollPosition(0);
-}
-function pageFromHash() {
-  const hash = location.hash.slice(1);
-  if (hash === 'top') return 'home';
-  if (hash === 'library') return 'exercises';
-  return PAGE_NAMES.has(hash) ? hash : 'home';
 }
 function applyLanguage() {
   document.documentElement.lang = lang === 'en' ? 'en-GB' : 'es-AR';
@@ -875,10 +199,9 @@ function applyLanguage() {
   renderFilters();
   renderExercises();
   renderRoutines();
-  if ($('#offline-download')) updateOfflineControls();
-  if (pwaRegistration) refreshOfflineStatus();
+  updateOfflineLanguage();
   if ($('#exercise-dialog').open) {
-    const id = exerciseIdFromHash();
+    const id = exerciseIdFromHash(location.hash);
     if (id && exercises.some((exercise) => exercise.id === id)) openDetail(id, false);
   }
 }
@@ -1262,7 +585,7 @@ function openDetail(id, updateUrl = true) {
       '',
       `${location.pathname}${location.search}${guideHash}`,
     );
-  } else if (exerciseIdFromHash() === id) {
+  } else if (exerciseIdFromHash(location.hash) === id) {
     guideHistoryEntry = history.state?.repzenaGuide === true;
     guideReturnState = {
       page: PAGE_NAMES.has(history.state?.repzenaReturnPage)
@@ -1292,17 +615,8 @@ function openDetail(id, updateUrl = true) {
   $('#dialog-content').querySelector('[data-copy-guide]').onclick = copyGuideLink;
   if (!$('#exercise-dialog').open) $('#exercise-dialog').showModal();
 }
-function exerciseIdFromHash() {
-  const match = location.hash.match(/^#exercise\/(.+)$/);
-  if (!match) return null;
-  try {
-    return decodeURIComponent(match[1]);
-  } catch {
-    return null;
-  }
-}
 function syncRouteWithUrl() {
-  const id = exerciseIdFromHash();
+  const id = exerciseIdFromHash(location.hash);
   if (id && exercises.some((exercise) => exercise.id === id)) {
     activePage = PAGE_NAMES.has(history.state?.repzenaReturnPage)
       ? history.state.repzenaReturnPage
@@ -1311,7 +625,7 @@ function syncRouteWithUrl() {
     openDetail(id, false);
     return;
   }
-  const page = pageFromHash();
+  const page = pageFromHash(location.hash);
   const canonicalHash = `#${page}`;
   if (location.hash !== canonicalHash) {
     history.replaceState(
@@ -1900,41 +1214,12 @@ function toast(msg) {
 }
 function exportRoutine() {
   const r = currentRoutine();
-  const out = {
-    format: 'gym-exercise-routine',
-    version: 2,
-    routine: {
-      name: { [lang]: routineDisplayName(r) },
-      default_name: r.defaultName,
-      days: r.days.map((d, i) => {
-        const serializeItem = (item, section = null) => ({
-          name: routineExercise(item)?.name || item.names || { [lang]: item.name },
-          exercise_id: routineExercise(item)?.id || item.exerciseId || null,
-          sets: Number(item.sets) || 3,
-          reps_or_time: { [lang]: item.reps || '' },
-          section: section
-            ? { type: section.type, name: section.type === 'custom' ? section.name : '' }
-            : null,
-        });
-        return {
-          name: { [lang]: sessionDisplayName(d, i) },
-          default_name: d.defaultName,
-          sections: d.sections.map((section) => ({
-            type: section.type,
-            name: section.type === 'custom' ? { [lang]: section.name } : null,
-            exercises: section.items.map((item) => serializeItem(item, section)),
-          })),
-          unsectioned_exercises: d.items.map((item) => serializeItem(item)),
-          exercises: [
-            ...d.items.map((item) => serializeItem(item)),
-            ...d.sections.flatMap((section) =>
-              section.items.map((item) => serializeItem(item, section)),
-            ),
-          ],
-        };
-      }),
-    },
-  };
+  const out = serializeRoutine(r, {
+    language: lang,
+    displayName: routineDisplayName,
+    displaySessionName: sessionDisplayName,
+    resolveExercise: routineExercise,
+  });
   const a = document.createElement('a');
   const url = URL.createObjectURL(
     new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' }),
@@ -1953,90 +1238,17 @@ function exportRoutine() {
 }
 async function importRoutine(file) {
   try {
-    if (!file || file.size > MAX_IMPORT_BYTES) throw new Error('routine-file-too-large');
-    const data = JSON.parse(await file.text());
-    if (!data || typeof data !== 'object' || Array.isArray(data))
-      throw new Error('invalid-routine');
-    const src = data.routine || data;
-    if (!src || !Array.isArray(src.days) || src.days.length > 50)
-      throw new Error('invalid-routine-days');
-    let totalImportedExercises = 0;
-    const parseExercises = (items) => {
-      if (!Array.isArray(items)) throw new Error('invalid-routine-exercises');
-      totalImportedExercises += items.length;
-      if (totalImportedExercises > 500) throw new Error('too-many-exercises');
-      return items.map((ex) => {
-        if (!ex || typeof ex !== 'object' || Array.isArray(ex)) throw new Error('invalid-exercise');
-        const rawSets = Number(ex.sets);
-        const rawName = importText(ex.name, 'Exercise');
-        return {
-          name: rawName.slice(0, 200),
-          names:
-            ex.name && typeof ex.name === 'object' && !Array.isArray(ex.name)
-              ? {
-                  en: String(ex.name.en || '').slice(0, 200),
-                  es: String(ex.name.es || '').slice(0, 200),
-                }
-              : null,
-          block: importText(ex.block).slice(0, 120),
-          exerciseId:
-            typeof ex.exercise_id === 'string'
-              ? ex.exercise_id.slice(0, 120)
-              : typeof ex.id === 'string'
-                ? ex.id.slice(0, 120)
-                : null,
-          sets: Number.isFinite(rawSets) ? Math.min(99, Math.max(1, Math.round(rawSets))) : 3,
-          reps: importText(ex.reps_or_time).slice(0, 80),
-        };
-      });
-    };
-    const days = src.days.map((d, i) => {
-      if (
-        !d ||
-        typeof d !== 'object' ||
-        Array.isArray(d) ||
-        (d.exercises !== undefined && !Array.isArray(d.exercises)) ||
-        (d.sections !== undefined && !Array.isArray(d.sections)) ||
-        (d.unsectioned_exercises !== undefined && !Array.isArray(d.unsectioned_exercises))
-      )
-        throw new Error('invalid-routine-day');
-      const importedDayName = importText(d.name);
-      let sections;
-      let items;
-      if (Array.isArray(d.sections)) {
-        if (d.sections.length > 30) throw new Error('too-many-sections');
-        sections = d.sections.map((rawSection) => {
-          if (!rawSection || typeof rawSection !== 'object' || Array.isArray(rawSection))
-            throw new Error('invalid-routine-section');
-          const type = SECTION_TYPES.includes(rawSection.type) ? rawSection.type : 'custom';
-          const name = type === 'custom' ? importText(rawSection.name).slice(0, 60) : '';
-          return makeSection(type, name, parseExercises(rawSection.exercises || []));
-        });
-        items = parseExercises(
-          d.unsectioned_exercises || (sections.length ? [] : d.exercises || []),
-        );
-      } else {
-        sections = [];
-        items = parseExercises(d.exercises || []);
-      }
-      return {
-        name: (importedDayName || `${t('session')} ${i + 1}`).slice(0, 120),
-        defaultName: typeof d.default_name === 'boolean' ? d.default_name : !importedDayName,
-        sections,
-        items,
-      };
+    const routine = await parseRoutineFile(file, {
+      language: lang,
+      translate: t,
+      sectionTypes: SECTION_TYPES,
+      makeSection,
+      makeRoutineDay,
     });
-    const importedRoutineName = importText(src.name);
-    const r = {
-      id: crypto.randomUUID(),
-      name: (importedRoutineName || t('untitled')).slice(0, 60),
-      defaultName: typeof src.default_name === 'boolean' ? src.default_name : !importedRoutineName,
-      days: days.length ? days : [makeRoutineDay(`${t('session')} 1`, true)],
-    };
     if (
       commitDBChange(() => {
-        db.routines.push(r);
-        db.current = r.id;
+        db.routines.push(routine);
+        db.current = routine.id;
         selectedDay = 0;
       })
     )
@@ -2046,6 +1258,7 @@ async function importRoutine(file) {
     toast(err.message === 'routine-file-too-large' ? t('importTooLarge') : t('errorImport'));
   }
 }
+
 const systemThemeQuery = window.matchMedia?.('(prefers-color-scheme: dark)');
 systemThemeQuery?.addEventListener('change', () => {
   if (themePreference === 'system') applyTheme();
@@ -2083,7 +1296,7 @@ window.addEventListener(
   { passive: true },
 );
 $('#language').addEventListener('change', (e) => {
-  lang = e.target.value;
+  setLanguage(e.target.value);
   try {
     localStorage.setItem(LANGUAGE_KEY, lang);
   } catch (error) {
@@ -2130,7 +1343,7 @@ $('#exercise-dialog').addEventListener('close', () => {
   if (guideHistoryEntry) {
     guideHistoryEntry = false;
     history.back();
-  } else if (exerciseIdFromHash()) {
+  } else if (exerciseIdFromHash(location.hash)) {
     const returnPage = guideReturnState?.page || 'exercises';
     const scrollY = guideReturnState?.scrollY || 0;
     history.replaceState(
@@ -2287,63 +1500,6 @@ $('#search').addEventListener('keydown', (e) => {
     e.target.focus();
   }
 });
-const CATALOG_CACHE_KEY = 'repzena.exerciseCatalog.v2';
-function validCatalog(data) {
-  return (
-    Array.isArray(data) &&
-    data.length > 0 &&
-    data.every(
-      (exercise) =>
-        exercise &&
-        typeof exercise === 'object' &&
-        typeof exercise.id === 'string' &&
-        typeof exercise.name?.en === 'string' &&
-        typeof exercise.name?.es === 'string' &&
-        typeof exercise.pattern === 'string' &&
-        Array.isArray(exercise.equipment) &&
-        Array.isArray(exercise.primaryMuscles) &&
-        Array.isArray(exercise.secondaryMuscles) &&
-        Array.isArray(exercise.focus) &&
-        Array.isArray(exercise.how?.en) &&
-        Array.isArray(exercise.how?.es) &&
-        Array.isArray(exercise.cues?.en) &&
-        Array.isArray(exercise.cues?.es) &&
-        (exercise.images === undefined ||
-          (Array.isArray(exercise.images) &&
-            exercise.images.length > 0 &&
-            exercise.images.every(
-              (image) =>
-                image &&
-                typeof image.src === 'string' &&
-                /^\.\/assets\/[a-zA-Z0-9/_-]+\.(?:webp|png|jpe?g)$/i.test(image.src) &&
-                !image.src.split('/').includes('..') &&
-                typeof image.alt?.en === 'string' &&
-                typeof image.alt?.es === 'string',
-            ))),
-    )
-  );
-}
-async function loadCatalog() {
-  const response = await fetch('./data/exercises.json');
-  if (!response.ok) throw Error(`Could not load exercise data (${response.status})`);
-  const data = await response.json();
-  if (!validCatalog(data)) throw Error('Exercise data is empty or invalid');
-  try {
-    localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(data));
-  } catch (error) {
-    console.warn('Could not save an offline copy of exercise data', error);
-  }
-  return data;
-}
-function readCachedCatalog() {
-  try {
-    const data = JSON.parse(localStorage.getItem(CATALOG_CACHE_KEY));
-    return validCatalog(data) ? data : null;
-  } catch (error) {
-    console.warn('Could not read the offline exercise data', error);
-    return null;
-  }
-}
 function showCatalog(data) {
   exercises = data;
   migrateRoutineExerciseIds();
@@ -2361,291 +1517,3 @@ loadCatalog()
     }
     $('#exercise-grid').innerHTML = `<div class="no-results">${t('loadError')}</div>`;
   });
-
-let pwaRegistration = null;
-let deferredInstallPrompt = null;
-let offlineReady = false;
-let offlineBusy = false;
-let offlineStarting = false;
-let offlineStartupFailed = false;
-let offlineRefreshQueued = false;
-
-function offlineText(key, values = {}) {
-  return Object.entries(values).reduce(
-    (message, [name, value]) => message.replaceAll(`{${name}}`, String(value)),
-    t(key),
-  );
-}
-function setOfflineStatus(message) {
-  $('#offline-status').textContent = message;
-}
-function updateOfflineControls() {
-  const button = $('#offline-download');
-  button.disabled = offlineBusy || offlineStarting || (!pwaRegistration && !offlineStartupFailed);
-  button.textContent = offlineStartupFailed
-    ? t('offlineRetry')
-    : offlineReady
-      ? t('offlineRemove')
-      : t('offlineDownload');
-  button.dataset.action = offlineStartupFailed ? 'retry' : offlineReady ? 'remove' : 'download';
-}
-function requestServiceWorker(type, onMessage = () => {}) {
-  return new Promise((resolve, reject) => {
-    const worker = pwaRegistration?.active;
-    if (!worker || !('MessageChannel' in window)) {
-      reject(new Error('service-worker-unavailable'));
-      return;
-    }
-    const channel = new window.MessageChannel();
-    const timeout = window.setTimeout(() => {
-      channel.port1.close();
-      reject(new Error('service-worker-timeout'));
-    }, 180_000);
-    channel.port1.onmessage = ({ data }) => {
-      onMessage(data);
-      if (['STATUS', 'COMPLETE', 'REMOVED', 'ERROR'].includes(data?.type)) {
-        window.clearTimeout(timeout);
-        channel.port1.close();
-        if (data.type === 'ERROR') reject(new Error('service-worker-operation-failed'));
-        else resolve(data);
-      }
-    };
-    worker.postMessage({ type }, [channel.port2]);
-  });
-}
-async function refreshOfflineStatus() {
-  try {
-    const status = await requestServiceWorker('OFFLINE_STATUS');
-    offlineReady = status.ready;
-    if (status.ready) setOfflineStatus(offlineText('offlineReady', { count: status.total - 1 }));
-    else if (status.saved) {
-      setOfflineStatus(offlineText('offlinePartial', { saved: status.saved, total: status.total }));
-    } else setOfflineStatus(t('offlineDescription'));
-    updateOfflineControls();
-    return status;
-  } catch {
-    setOfflineStatus(t('offlineUnsupported'));
-    return null;
-  }
-}
-async function startOfflineDownload() {
-  if (!pwaRegistration || offlineBusy) return;
-  offlineBusy = true;
-  offlineReady = false;
-  const progress = $('#offline-progress');
-  progress.hidden = false;
-  progress.value = 0;
-  updateOfflineControls();
-  try {
-    const result = await requestServiceWorker('DOWNLOAD_OFFLINE', (message) => {
-      if (message.type !== 'PROGRESS') return;
-      progress.max = message.total;
-      progress.value = message.completed;
-      setOfflineStatus(
-        offlineText('offlineProgress', { done: message.completed, total: message.total }),
-      );
-    });
-    offlineReady = result.ready;
-    if (offlineReady) {
-      setOfflineStatus(offlineText('offlineReady', { count: result.total - 1 }));
-    } else {
-      setOfflineStatus(t('offlineFailed'));
-    }
-  } catch {
-    setOfflineStatus(t('offlineFailed'));
-  } finally {
-    offlineBusy = false;
-    progress.hidden = true;
-    updateOfflineControls();
-    if (offlineRefreshQueued) {
-      offlineRefreshQueued = false;
-      refreshOfflineStatus();
-    }
-  }
-}
-async function removeOfflineDownload() {
-  if (!pwaRegistration || offlineBusy) return;
-  offlineBusy = true;
-  updateOfflineControls();
-  try {
-    await requestServiceWorker('REMOVE_OFFLINE');
-    offlineReady = false;
-    setOfflineStatus(t('offlineRemoved'));
-  } catch {
-    setOfflineStatus(t('offlineFailed'));
-  } finally {
-    offlineBusy = false;
-    updateOfflineControls();
-    if (offlineRefreshQueued) {
-      offlineRefreshQueued = false;
-      refreshOfflineStatus();
-    }
-  }
-}
-function withTimeout(promise, timeoutMs, errorCode) {
-  let timeout;
-  const timeoutPromise = new Promise((resolve, reject) => {
-    timeout = window.setTimeout(() => reject(new Error(errorCode)), timeoutMs);
-  });
-  return Promise.race([promise, timeoutPromise]).finally(() => window.clearTimeout(timeout));
-}
-function waitForActiveWorker(registration, timeoutMs) {
-  if (registration.active) return Promise.resolve(registration);
-  return new Promise((resolve, reject) => {
-    let observedWorker = null;
-    let pollTimer = null;
-    const cleanup = () => {
-      window.clearTimeout(timeout);
-      window.clearInterval(pollTimer);
-      registration.removeEventListener('updatefound', observe);
-      observedWorker?.removeEventListener('statechange', observe);
-    };
-    const fail = (error) => {
-      cleanup();
-      reject(error);
-    };
-    const observe = () => {
-      if (registration.active) {
-        cleanup();
-        resolve(registration);
-        return;
-      }
-      const worker = registration.installing || registration.waiting;
-      if (worker && worker !== observedWorker) {
-        observedWorker?.removeEventListener('statechange', observe);
-        observedWorker = worker;
-        observedWorker.addEventListener('statechange', observe);
-      }
-      if (observedWorker?.state === 'redundant') {
-        fail(new Error('service-worker-install-failed'));
-      }
-    };
-    const timeout = window.setTimeout(
-      () => fail(new Error('service-worker-install-timeout')),
-      timeoutMs,
-    );
-    pollTimer = window.setInterval(observe, 50);
-    registration.addEventListener('updatefound', observe);
-    observe();
-  });
-}
-async function initializeServiceWorker() {
-  if (offlineStarting || !('serviceWorker' in navigator) || !window.isSecureContext) return;
-  offlineStarting = true;
-  offlineStartupFailed = false;
-  setOfflineStatus(t('offlineChecking'));
-  updateOfflineControls();
-  // Keep the initial state check short enough that a failed or hung worker
-  // cannot leave the controls stuck on "Checking" beyond the UI's retry window.
-  const startupDeadline = window.performance.now() + 2_500;
-  const remainingStartupTime = () => Math.max(1, startupDeadline - window.performance.now());
-  try {
-    const registration = await withTimeout(
-      Promise.resolve().then(() => navigator.serviceWorker.register('./service-worker.js')),
-      remainingStartupTime(),
-      'service-worker-registration-timeout',
-    );
-    pwaRegistration = await waitForActiveWorker(registration, remainingStartupTime());
-    await withTimeout(
-      refreshOfflineStatus(),
-      remainingStartupTime(),
-      'service-worker-status-timeout',
-    );
-    if (isStandaloneApp() && !offlineReady) startOfflineDownload();
-  } catch (error) {
-    console.warn('Offline support could not be installed', error);
-    pwaRegistration = null;
-    offlineStartupFailed = true;
-    setOfflineStatus(t('offlineStartupFailed'));
-  } finally {
-    offlineStarting = false;
-    updateOfflineControls();
-  }
-}
-function isStandaloneApp() {
-  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-}
-function showInstallHelp() {
-  const userAgent = navigator.userAgent;
-  const isAppleMobile =
-    /iPhone|iPad|iPod/.test(userAgent) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  const isAndroid = /Android/i.test(userAgent);
-  let stepsKey = 'installHelpDesktopSteps';
-  if (isAppleMobile) {
-    if (/CriOS/i.test(userAgent)) stepsKey = 'installHelpIosChromeSteps';
-    else if (/FxiOS/i.test(userAgent)) stepsKey = 'installHelpIosFirefoxSteps';
-    else if (/EdgiOS|OPiOS|DuckDuckGo/i.test(userAgent)) stepsKey = 'installHelpIosOtherSteps';
-    else stepsKey = 'installHelpIosSafariSteps';
-  } else if (isAndroid) {
-    if (/SamsungBrowser/i.test(userAgent)) stepsKey = 'installHelpAndroidSamsungSteps';
-    else if (/Firefox|Fennec/i.test(userAgent)) stepsKey = 'installHelpAndroidFirefoxSteps';
-    else if (/EdgA|OPR|Opera|Brave/i.test(userAgent) || navigator.brave) {
-      stepsKey = 'installHelpAndroidOtherSteps';
-    } else if (/Chrome/i.test(userAgent)) stepsKey = 'installHelpAndroidChromeSteps';
-    else stepsKey = 'installHelpAndroidOtherSteps';
-  }
-  const steps = UI[lang][stepsKey];
-  $('#install-help-steps').replaceChildren(
-    ...steps.map((step) => {
-      const item = document.createElement('li');
-      item.textContent = step;
-      return item;
-    }),
-  );
-  $('#install-help-offline-note').textContent = t('installHelpOfflineNote');
-  $('#install-dialog').showModal();
-}
-async function installApp() {
-  if (!deferredInstallPrompt) {
-    showInstallHelp();
-    return;
-  }
-  const promptEvent = deferredInstallPrompt;
-  deferredInstallPrompt = null;
-  $('#install-app').disabled = true;
-  try {
-    await promptEvent.prompt();
-    const choice = await promptEvent.userChoice;
-    if (choice.outcome === 'dismissed') $('#install-app').disabled = false;
-  } catch {
-    $('#install-app').disabled = false;
-    showInstallHelp();
-  }
-}
-$('#offline-download').addEventListener('click', () => {
-  const action = $('#offline-download').dataset.action;
-  if (action === 'retry') initializeServiceWorker();
-  else if (action === 'remove') removeOfflineDownload();
-  else startOfflineDownload();
-});
-$('#install-app').addEventListener('click', installApp);
-$('#close-install-dialog').addEventListener('click', () => $('#install-dialog').close());
-$('#install-dialog').addEventListener('click', (event) => {
-  if (event.target === event.currentTarget) event.currentTarget.close();
-});
-window.addEventListener('beforeinstallprompt', (event) => {
-  event.preventDefault();
-  deferredInstallPrompt = event;
-});
-window.addEventListener('appinstalled', () => {
-  deferredInstallPrompt = null;
-  $('#install-app').hidden = true;
-  if (pwaRegistration) startOfflineDownload();
-});
-
-if ('serviceWorker' in navigator && window.isSecureContext) {
-  initializeServiceWorker();
-  navigator.serviceWorker.addEventListener('message', (event) => {
-    if (event.data?.type !== 'OFFLINE_CACHE_CHANGED') return;
-    if (offlineBusy) offlineRefreshQueued = true;
-    else refreshOfflineStatus();
-  });
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && pwaRegistration) refreshOfflineStatus();
-  });
-} else {
-  setOfflineStatus(t('offlineUnsupported'));
-  updateOfflineControls();
-}
-if (isStandaloneApp()) $('#install-app').hidden = true;

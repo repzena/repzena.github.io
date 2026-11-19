@@ -1,0 +1,225 @@
+/* Exercise, add, install, and image viewer dialogs. */
+.exercise-dialog {
+  padding: 0;
+  border: 0;
+  width: min(920px, calc(100vw - 30px));
+  max-height: 92vh;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 24px 90px #091c1780;
+  overflow: auto;
+}
+.exercise-dialog::backdrop {
+  background: #10231fc0;
+  backdrop-filter: blur(3px);
+}
+.add-dialog {
+  width: min(440px, calc(100vw - 28px));
+  padding: 24px;
+  border: 0;
+  color: var(--ink);
+  background: var(--white);
+  box-shadow: 0 24px 90px #091c1780;
+}
+.add-dialog::backdrop {
+  background: #10231fc0;
+  backdrop-filter: blur(3px);
+}
+.add-dialog-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.add-dialog-top h2 {
+  margin: 4px 0 20px;
+  font: 600 23px var(--display);
+}
+.add-dialog .dialog-close {
+  position: static;
+  float: none;
+  flex: 0 0 auto;
+  margin: -4px -7px 0 0;
+}
+.add-dialog-fields {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.add-dialog-fields label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.add-dialog-fields select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+.add-dialog .button {
+  min-height: 42px;
+  padding: 0 16px;
+}
+.chooser-add-section {
+  margin: -8px 0 12px;
+}
+.add-dialog .button:disabled,
+.add-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.dialog-close {
+  position: sticky;
+  top: 11px;
+  float: right;
+  margin: 11px 11px -42px 0;
+  z-index: 3;
+  border: 0;
+  border-radius: 50%;
+  background: #fffefa;
+  width: 31px;
+  height: 31px;
+  font-size: 22px;
+  cursor: pointer;
+}
+.exercise-dialog .exercise-art {
+  height: 230px;
+}
+#dialog-content:has(> [data-exercise-gallery]) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+}
+#dialog-content > [data-exercise-gallery] {
+  position: sticky;
+  top: 0;
+  min-width: 0;
+}
+.dialog-copy {
+  padding: 25px 34px 32px;
+}
+.dialog-copy h2 {
+  font: 600 31px var(--display);
+  letter-spacing: -0.04em;
+  margin: 10px 0 19px;
+}
+.routine-guide-linker > p {
+  margin: -6px 0 20px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.routine-guide-match {
+  display: grid;
+  gap: 7px;
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.routine-guide-match select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+}
+.routine-guide-match select:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+.guide-link {
+  border: 0;
+  padding: 0;
+  margin: -10px 0 20px;
+  background: transparent;
+  color: var(--ink);
+  font: 600 13px var(--body);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.guide-link:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+.detail-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid #e8e8e0;
+  border-bottom: 1px solid #e8e8e0;
+  padding: 13px 0;
+  margin: 0 0 21px;
+  gap: 15px;
+}
+.detail-facts div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.detail-facts small {
+  font-size: 11px;
+  color: #88928a;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.detail-facts b {
+  font-size: 13px;
+  font-weight: 600;
+}
+.dialog-copy h3 {
+  font: 600 14px var(--display);
+  margin: 19px 0 9px;
+}
+.dialog-copy ol,
+.dialog-copy ul {
+  padding-left: 19px;
+  margin: 0;
+  color: #5d6960;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.dialog-copy li {
+  padding: 0 0 7px 4px;
+}
+.cue-list li::marker {
+  color: var(--orange);
+}
+.detail-add {
+  margin-top: 18px;
+  min-width: 135px;
+}
+.toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  z-index: 50;
+  transform: translate(-50%, 15px);
+  padding: 11px 16px;
+  background: #173128;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+}
+.toast.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

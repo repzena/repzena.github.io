@@ -70,7 +70,7 @@ async function loadAnalytics() {
       scriptLoading = false;
       return;
     }
-    if (!/^G-[A-Z0-9]+$/.test(config.measurementId || '')) {
+    if (config.version !== 1 || !/^G-[A-Z0-9]+$/.test(config.measurementId || '')) {
       throw new Error('Analytics measurement ID is invalid');
     }
     measurementId = config.measurementId;

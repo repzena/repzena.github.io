@@ -1,2225 +1,2242 @@
-[
-  {
-    "id": "barbell-bench-press",
-    "name": {
-      "en": "Barbell bench press",
-      "es": "Press de banca con barra"
-    },
-    "pattern": "horizontal-push",
-    "equipment": ["barbell", "bench"],
-    "level": "intermediate",
-    "image": "bench",
-    "how": {
-      "en": [
-        "Lie with your eyes under the bar and plant both feet on the floor.",
-        "Grip just wider than shoulder-width. Lower the bar to your mid-chest with wrists stacked over elbows.",
-        "Press up smoothly without bouncing the bar."
-      ],
-      "es": [
-        "Acostate con los ojos debajo de la barra y apoyá ambos pies en el piso.",
-        "Agarrá la barra un poco más allá del ancho de hombros. Bajala hasta el centro del pecho, con las muñecas alineadas sobre los codos.",
-        "Empujá la barra hacia arriba con suavidad, sin hacerla rebotar."
-      ]
-    },
-    "cues": {
-      "en": [
-        "Keep shoulder blades gently drawn back against the bench.",
-        "Ask someone to spot you or use the rack's safety catches for heavier lifts."
-      ],
-      "es": [
-        "Mantené las escápulas suavemente juntas y apoyadas contra el banco.",
-        "Si vas a levantar mucho peso, pedile a alguien que te acompañe o usá los seguros de la jaula."
-      ]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Press banca con barra"]
-    },
-    "primaryMuscles": ["chest"],
-    "secondaryMuscles": ["triceps", "shoulders"],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/barbell-bench-press/1-initial-position.jpeg",
-        "alt": {
-          "en": "A person lies on a bench holding a barbell above the chest with elbows bent.",
-          "es": "Una persona está acostada en un banco y sostiene la barra sobre el pecho, con los codos flexionados."
-        }
+{
+  "format": "repzena-exercise-catalog",
+  "version": 1,
+  "exercises": [
+    {
+      "id": "barbell-bench-press",
+      "name": {
+        "en": "Barbell bench press",
+        "es": "Press de banca con barra"
       },
-      {
-        "src": "./assets/barbell-bench-press/2-final-position.jpeg",
-        "alt": {
-          "en": "A person presses a barbell above the chest with arms extended.",
-          "es": "Una persona empuja la barra sobre el pecho con los brazos extendidos."
-        }
-      }
-    ]
-  },
-  {
-    "id": "barbell-row",
-    "name": {
-      "en": "Bent-over barbell row",
-      "es": "Remo inclinado con barra"
-    },
-    "pattern": "horizontal-pull",
-    "equipment": ["barbell"],
-    "level": "intermediate",
-    "image": "row",
-    "images": [
-      {
-        "src": "./assets/barbell-row/1-initial-position.jpeg",
-        "alt": {
-          "en": "A person hinges forward while holding a barbell below the shoulders with arms extended.",
-          "es": "Una persona inclina el torso y sostiene una barra debajo de los hombros con los brazos extendidos."
-        }
+      "pattern": "horizontal-push",
+      "equipment": ["barbell", "bench"],
+      "level": "intermediate",
+      "image": "bench",
+      "how": {
+        "en": [
+          "Lie with your eyes under the bar and plant both feet on the floor.",
+          "Grip just wider than shoulder-width. Lower the bar to your mid-chest with wrists stacked over elbows.",
+          "Press up smoothly without bouncing the bar."
+        ],
+        "es": [
+          "Acostate con los ojos debajo de la barra y apoyá ambos pies en el piso.",
+          "Agarrá la barra un poco más allá del ancho de hombros. Bajala hasta el centro del pecho, con las muñecas alineadas sobre los codos.",
+          "Empujá la barra hacia arriba con suavidad, sin hacerla rebotar."
+        ]
       },
-      {
-        "src": "./assets/barbell-row/2-end-position.jpeg",
-        "alt": {
-          "en": "A person pulls a barbell towards the lower ribs in a bent-over row.",
-          "es": "Una persona lleva la barra hacia las costillas inferiores durante un remo inclinado."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Stand hip-width apart and hinge forward with a steady, neutral back.",
-        "Let the bar hang below your shoulders. Pull it toward your lower ribs.",
-        "Lower with control, keeping your torso still."
-      ],
-      "es": [
-        "Parate con los pies al ancho de las caderas e incliná el torso manteniendo la espalda estable.",
-        "Dejá que la barra cuelgue debajo de los hombros. Llevala hacia las costillas inferiores.",
-        "Bajala con control y mantené el torso quieto."
-      ]
-    },
-    "cues": {
-      "en": [
-        "Avoid rounding your lower back or using a body swing.",
-        "Keep the bar close to your body."
-      ],
-      "es": [
-        "Evitá redondear la zona lumbar o impulsarte con el torso.",
-        "Mantené la barra cerca del cuerpo."
-      ]
-    },
-    "aliases": {
-      "en": ["Barbell row"],
-      "es": ["Remo con barra"]
-    },
-    "primaryMuscles": ["back"],
-    "secondaryMuscles": ["biceps", "shoulders"],
-    "focus": ["strength"]
-  },
-  {
-    "id": "dumbbell-shoulder-press",
-    "name": {
-      "en": "Seated dumbbell shoulder press",
-      "es": "Press militar sentado con mancuernas"
-    },
-    "pattern": "vertical-push",
-    "equipment": ["dumbbells", "bench"],
-    "level": "beginner",
-    "image": "press",
-    "images": [
-      {
-        "src": "./assets/dumbbell-shoulder-press/1-low-position.jpeg",
-        "alt": {
-          "en": "A seated person holds dumbbells beside the shoulders with elbows bent.",
-          "es": "Una persona sentada sostiene las mancuernas junto a los hombros, con los codos flexionados."
-        }
+      "cues": {
+        "en": [
+          "Keep shoulder blades gently drawn back against the bench.",
+          "Ask someone to spot you or use the rack's safety catches for heavier lifts."
+        ],
+        "es": [
+          "Mantené las escápulas suavemente juntas y apoyadas contra el banco.",
+          "Si vas a levantar mucho peso, pedile a alguien que te acompañe o usá los seguros de la jaula."
+        ]
       },
-      {
-        "src": "./assets/dumbbell-shoulder-press/2-high-position.jpeg",
-        "alt": {
-          "en": "A seated person presses dumbbells overhead with arms extended.",
-          "es": "Una persona sentada empuja las mancuernas por encima de la cabeza con los brazos extendidos."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Sit tall with back support and hold dumbbells beside your shoulders.",
-        "Press overhead until your arms are extended comfortably.",
-        "Lower slowly to the starting position."
-      ],
-      "es": [
-        "Sentate erguido, con la espalda apoyada, y sostené las mancuernas junto a los hombros.",
-        "Empujá las mancuernas hacia arriba hasta extender los brazos sin forzar.",
-        "Bajalas despacio hasta la posición inicial."
-      ]
-    },
-    "cues": {
-      "en": ["Keep ribs down rather than arching your back.", "Stop if you feel sharp pain."],
-      "es": [
-        "Mantené las costillas controladas y evitá arquear la espalda.",
-        "Pará si sentís un dolor agudo."
-      ]
-    },
-    "aliases": {
-      "en": ["Dumbbell shoulder press"],
-      "es": ["Press militar con mancuernas"]
-    },
-    "primaryMuscles": ["shoulders"],
-    "secondaryMuscles": ["triceps"],
-    "focus": ["strength"]
-  },
-  {
-    "id": "barbell-squat",
-    "name": {
-      "en": "Barbell back squat",
-      "es": "Sentadilla con barra"
-    },
-    "pattern": "squat",
-    "equipment": ["barbell", "rack"],
-    "level": "intermediate",
-    "image": "squat",
-    "images": [
-      {
-        "src": "./assets/barbell-squat/1-high.jpeg",
-        "alt": {
-          "en": "A person stands upright with a barbell across the upper back before squatting.",
-          "es": "Una persona está erguida con una barra sobre la parte alta de la espalda antes de hacer la sentadilla."
-        }
+      "aliases": {
+        "en": [],
+        "es": ["Press banca con barra"]
       },
-      {
-        "src": "./assets/barbell-squat/2-low.jpeg",
-        "alt": {
-          "en": "A person lowers into a barbell back squat with knees bent and hips lowered.",
-          "es": "Una persona baja en una sentadilla con barra, con las rodillas flexionadas y las caderas abajo."
+      "primaryMuscles": ["chest"],
+      "secondaryMuscles": ["triceps", "shoulders"],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/barbell-bench-press/1-initial-position.jpeg",
+          "alt": {
+            "en": "A person lies on a bench holding a barbell above the chest with elbows bent.",
+            "es": "Una persona está acostada en un banco y sostiene la barra sobre el pecho, con los codos flexionados."
+          }
+        },
+        {
+          "src": "./assets/barbell-bench-press/2-final-position.jpeg",
+          "alt": {
+            "en": "A person presses a barbell above the chest with arms extended.",
+            "es": "Una persona empuja la barra sobre el pecho con los brazos extendidos."
+          }
         }
-      }
-    ],
-    "how": {
-      "en": [
-        "Set the bar securely across your upper back and stand with feet about shoulder-width.",
-        "Brace your trunk and sit down between your hips, knees tracking with your toes.",
-        "Drive through the whole foot to stand, keeping balance steady."
-      ],
-      "es": [
-        "Apoyá la barra de forma segura sobre la parte alta de la espalda y parate con los pies, más o menos, al ancho de hombros.",
-        "Activá el abdomen y bajá entre las caderas. Acompañá el movimiento con las rodillas en dirección a los pies.",
-        "Empujá el piso con todo el pie para volver a pararte, sin perder el equilibrio."
       ]
     },
-    "cues": {
-      "en": [
-        "Do not let your knees collapse inward.",
-        "Use rack safety bars and a load you can control."
-      ],
-      "es": [
-        "Evitá que las rodillas se vayan hacia adentro.",
-        "Usá los seguros de la jaula y un peso que puedas controlar."
-      ]
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["glutes"],
-    "focus": ["strength", "core"]
-  },
-  {
-    "id": "romanian-deadlift",
-    "name": {
-      "en": "Romanian deadlift",
-      "es": "Peso muerto rumano"
-    },
-    "pattern": "hinge",
-    "equipment": ["barbell"],
-    "level": "intermediate",
-    "image": "hinge",
-    "images": [
-      {
-        "src": "./assets/romanian-deadlift/1-up.jpeg",
-        "alt": {
-          "en": "A person stands tall holding a barbell in front of the thighs to begin a Romanian deadlift.",
-          "es": "Una persona está erguida con una barra delante de los muslos para iniciar el peso muerto rumano."
-        }
+    {
+      "id": "barbell-row",
+      "name": {
+        "en": "Bent-over barbell row",
+        "es": "Remo inclinado con barra"
       },
-      {
-        "src": "./assets/romanian-deadlift/2-down.jpeg",
-        "alt": {
-          "en": "A person hinges at the hips and lowers a barbell close to the legs in a Romanian deadlift.",
-          "es": "Una persona lleva las caderas hacia atrás y baja la barra cerca de las piernas durante el peso muerto rumano."
+      "pattern": "horizontal-pull",
+      "equipment": ["barbell"],
+      "level": "intermediate",
+      "image": "row",
+      "images": [
+        {
+          "src": "./assets/barbell-row/1-initial-position.jpeg",
+          "alt": {
+            "en": "A person hinges forward while holding a barbell below the shoulders with arms extended.",
+            "es": "Una persona inclina el torso y sostiene una barra debajo de los hombros con los brazos extendidos."
+          }
+        },
+        {
+          "src": "./assets/barbell-row/2-end-position.jpeg",
+          "alt": {
+            "en": "A person pulls a barbell towards the lower ribs in a bent-over row.",
+            "es": "Una persona lleva la barra hacia las costillas inferiores durante un remo inclinado."
+          }
         }
-      }
-    ],
-    "how": {
-      "en": [
-        "Stand tall holding the bar in front of your thighs, knees softly bent.",
-        "Push hips back and slide the bar down close to your legs while keeping your back steady.",
-        "Stop at a comfortable hamstring stretch, then drive hips forward to stand."
       ],
-      "es": [
-        "Parate erguido y sostené la barra delante de los muslos, con las rodillas apenas flexionadas.",
-        "Llevá las caderas hacia atrás y deslizá la barra cerca de las piernas, manteniendo la espalda estable.",
-        "Bajá hasta sentir un estiramiento cómodo en la parte posterior de los muslos. Después, llevá las caderas hacia adelante para volver a pararte."
-      ]
-    },
-    "cues": {
-      "en": [
-        "This is a hip hinge, not a deep squat.",
-        "Do not round your back or force extra range."
-      ],
-      "es": [
-        "Es una bisagra de cadera, no una sentadilla profunda.",
-        "No redondees la espalda ni fuerces el recorrido."
-      ]
-    },
-    "primaryMuscles": ["hamstrings"],
-    "secondaryMuscles": ["glutes", "back"],
-    "focus": ["strength"]
-  },
-  {
-    "id": "lat-pulldown",
-    "name": {
-      "en": "Lat pull-down",
-      "es": "Jalón al pecho"
-    },
-    "pattern": "vertical-pull",
-    "equipment": ["cable", "machine"],
-    "level": "beginner",
-    "image": "row",
-    "how": {
-      "en": [
-        "Sit with thighs secured and take a comfortable overhand grip.",
-        "Lean back just a little and draw the bar toward your upper chest.",
-        "Let the arms extend slowly overhead without losing control."
-      ],
-      "es": [
-        "Sentate y ajustá el soporte para que te sujete los muslos. Agarrá la barra con las palmas hacia adelante.",
-        "Inclinate apenas hacia atrás y llevá la barra hacia la parte alta del pecho.",
-        "Volvé a extender los brazos por encima de la cabeza, despacio y con control."
-      ]
-    },
-    "cues": {
-      "en": [
-        "Avoid pulling the bar behind your neck.",
-        "Do not swing your torso to move the weight."
-      ],
-      "es": ["Evitá bajar la barra detrás de la nuca.", "No balancees el torso para mover el peso."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Tiron al pecho"]
-    },
-    "primaryMuscles": ["back"],
-    "secondaryMuscles": ["biceps"],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/lat-pulldown/1-start-position.jpeg",
-        "alt": {
-          "en": "A seated person holds the lat pull-down bar overhead with arms extended.",
-          "es": "Una persona sentada sostiene la barra del jalón por encima de la cabeza, con los brazos extendidos."
-        }
+      "how": {
+        "en": [
+          "Stand hip-width apart and hinge forward with a steady, neutral back.",
+          "Let the bar hang below your shoulders. Pull it toward your lower ribs.",
+          "Lower with control, keeping your torso still."
+        ],
+        "es": [
+          "Parate con los pies al ancho de las caderas e incliná el torso manteniendo la espalda estable.",
+          "Dejá que la barra cuelgue debajo de los hombros. Llevala hacia las costillas inferiores.",
+          "Bajala con control y mantené el torso quieto."
+        ]
       },
-      {
-        "src": "./assets/lat-pulldown/2-end-position.jpeg",
-        "alt": {
-          "en": "A seated person pulls the lat pull-down bar towards the upper chest.",
-          "es": "Una persona sentada baja la barra del jalón hacia la parte alta del pecho."
-        }
-      }
-    ]
-  },
-  {
-    "id": "hip-thrust",
-    "name": {
-      "en": "Barbell hip thrust",
-      "es": "Hip thrust con barra"
-    },
-    "pattern": "hinge",
-    "equipment": ["barbell", "bench"],
-    "level": "intermediate",
-    "image": "hinge",
-    "how": {
-      "en": [
-        "Rest your upper back against a secure bench with the bar padded across your hips.",
-        "Plant feet so shins are close to vertical at the top.",
-        "Drive hips up, pause briefly, then lower with control."
-      ],
-      "es": [
-        "Apoyá la parte alta de la espalda contra un banco firme y ubicá la barra acolchada sobre las caderas.",
-        "Apoyá los pies de modo que las tibias queden casi verticales al llegar arriba.",
-        "Empujá las caderas hacia arriba, hacé una pausa breve y bajalas con control."
-      ]
-    },
-    "cues": {
-      "en": [
-        "Keep your chin gently tucked and avoid over-arching your back.",
-        "Check that the bench cannot slide."
-      ],
-      "es": [
-        "Mantené el mentón levemente hacia el pecho y evitá arquear demasiado la espalda.",
-        "Revisá que el banco no se mueva."
-      ]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Hip thrust"]
-    },
-    "primaryMuscles": ["glutes"],
-    "secondaryMuscles": ["hamstrings"],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/hip-thrust/1-high.jpeg",
-        "alt": {
-          "en": "At the top of a barbell hip thrust, the person drives their hips up with their shoulders supported on a bench.",
-          "es": "Arriba del hip thrust con barra, la persona eleva las caderas con los hombros apoyados en un banco."
-        }
+      "cues": {
+        "en": [
+          "Avoid rounding your lower back or using a body swing.",
+          "Keep the bar close to your body."
+        ],
+        "es": [
+          "Evitá redondear la zona lumbar o impulsarte con el torso.",
+          "Mantené la barra cerca del cuerpo."
+        ]
       },
-      {
-        "src": "./assets/hip-thrust/2-low.jpeg",
-        "alt": {
-          "en": "The person lowers their hips towards the floor while keeping their shoulders on the bench.",
-          "es": "La persona baja las caderas hacia el piso y mantiene los hombros apoyados en el banco."
-        }
-      }
-    ]
-  },
-  {
-    "id": "bulgarian-split-squat",
-    "name": {
-      "en": "Bulgarian split squat",
-      "es": "Sentadilla búlgara"
-    },
-    "pattern": "lunge",
-    "equipment": ["dumbbells", "bench"],
-    "level": "intermediate",
-    "image": "squat",
-    "how": {
-      "en": [
-        "Stand a stride in front of a bench, holding dumbbells at your sides or starting with bodyweight, and rest the top of one foot behind you.",
-        "Lower in a straight line, bending the front knee in line with your foot.",
-        "Push through the front foot to rise, then repeat on the other side."
-      ],
-      "es": [
-        "Parate a un paso del banco, con mancuernas a los costados o empezá sin peso, y apoyá el empeine de un pie detrás.",
-        "Bajá en vertical y flexioná la rodilla delantera en línea con el pie.",
-        "Empujá con el pie delantero para subir y después repetí del otro lado."
-      ]
-    },
-    "cues": {
-      "en": [
-        "Use a stable bench and start with bodyweight if balance is new.",
-        "Keep most of your weight through the front foot."
-      ],
-      "es": [
-        "Usá un banco firme y empezá sin peso si todavía te cuesta mantener el equilibrio.",
-        "Mantené la mayor parte del peso sobre el pie delantero."
-      ]
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["glutes"],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/bulgarian-split-squat/1-up.jpeg",
-        "alt": {
-          "en": "The person stands in a split stance with their rear foot resting on a bench.",
-          "es": "La persona se mantiene en posición dividida con el pie trasero apoyado en un banco."
-        }
+      "aliases": {
+        "en": ["Barbell row"],
+        "es": ["Remo con barra"]
       },
-      {
-        "src": "./assets/bulgarian-split-squat/2-down.jpeg",
-        "alt": {
-          "en": "The person lowers into the split squat with the front knee bent and the rear knee close to the floor.",
-          "es": "La persona baja en la sentadilla dividida, con la rodilla delantera flexionada y la trasera cerca del piso."
-        }
-      }
-    ]
-  },
-  {
-    "id": "plank",
-    "name": {
-      "en": "Forearm plank",
-      "es": "Plancha con antebrazos"
+      "primaryMuscles": ["back"],
+      "secondaryMuscles": ["biceps", "shoulders"],
+      "focus": ["strength"]
     },
-    "pattern": "isometric-stability",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "how": {
-      "en": [
-        "Place forearms on the floor with elbows under shoulders and legs extended.",
-        "Brace gently and keep a long line from head to heels.",
-        "Hold while breathing steadily, then stop before your position changes."
-      ],
-      "es": [
-        "Apoyá los antebrazos en el piso, con los codos debajo de los hombros, y extendé las piernas.",
-        "Activá suavemente el abdomen y mantené una línea recta desde la cabeza hasta los talones.",
-        "Respirá con normalidad y terminá antes de perder la postura."
-      ]
-    },
-    "cues": {
-      "en": ["Do not let your lower back sag or hips rise high.", "Kneel to make the hold easier."],
-      "es": [
-        "Evitá que se hunda la zona lumbar o que se eleven demasiado las caderas.",
-        "Apoyá las rodillas para hacer la postura más fácil."
-      ]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Plancha sobre antebrazos"]
-    },
-    "primaryMuscles": [],
-    "secondaryMuscles": ["shoulders"],
-    "focus": ["strength", "core"],
-    "images": [
-      {
-        "src": "./assets/plank/plank.jpeg",
-        "alt": {
-          "en": "A person holds a forearm plank with the body aligned from head to heels.",
-          "es": "Una persona sostiene una plancha sobre los antebrazos, con el cuerpo alineado desde la cabeza hasta los talones."
-        }
-      }
-    ]
-  },
-  {
-    "id": "goblet-squat",
-    "name": {
-      "en": "Goblet squat",
-      "es": "Sentadilla goblet"
-    },
-    "pattern": "squat",
-    "equipment": ["dumbbells"],
-    "level": "beginner",
-    "image": "squat",
-    "how": {
-      "en": [
-        "Hold one dumbbell close to your chest and stand with feet comfortably apart.",
-        "Sit down between your hips while keeping your chest relaxed and upright.",
-        "Press through the floor to stand tall."
-      ],
-      "es": [
-        "Sostené una mancuerna cerca del pecho y separá los pies a una distancia cómoda.",
-        "Bajá entre las caderas, manteniendo el pecho erguido y relajado.",
-        "Empujá el piso para volver a pararte."
-      ]
-    },
-    "cues": {
-      "en": [
-        "Keep heels grounded and knees following your toes.",
-        "Choose a depth that feels controlled and comfortable."
-      ],
-      "es": [
-        "Mantené los talones apoyados y las rodillas en línea con los pies.",
-        "Elegí una profundidad que puedas controlar y te resulte cómoda."
-      ]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Sentadilla Goblet pesada"]
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["glutes"],
-    "focus": ["strength", "core"]
-  },
-  {
-    "id": "mountain-climber",
-    "name": {
-      "en": "Mountain climbers",
-      "es": "Escaladores (mountain climbers)"
-    },
-    "pattern": "knee-drive",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "images": [
-      {
-        "src": "./assets/mountain-climber/climb-position.jpeg",
-        "alt": {
-          "en": "A person holds a high plank while driving one knee towards the chest in a mountain climber.",
-          "es": "Una persona sostiene una plancha alta y lleva una rodilla hacia el pecho durante un escalador."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Start in a high plank with hands under shoulders.",
-        "Bring one knee towards your chest, return it, then alternate sides.",
-        "Move at a pace that lets you keep your trunk steady."
-      ],
-      "es": [
-        "Empezá en plancha alta, con las manos debajo de los hombros.",
-        "Acercá una rodilla al pecho, volvé a la posición inicial y alterná los lados.",
-        "Elegí un ritmo que te permita mantener estable el tronco."
-      ]
-    },
-    "cues": {
-      "en": ["Avoid bouncing your hips up and down.", "Slow down or elevate your hands if needed."],
-      "es": [
-        "Evitá que las caderas reboten hacia arriba y abajo.",
-        "Bajá el ritmo o apoyá las manos sobre una superficie elevada si hace falta."
-      ]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Mountain climbers"]
-    },
-    "primaryMuscles": [],
-    "secondaryMuscles": ["shoulders", "hip-flexors"],
-    "focus": ["conditioning", "core"]
-  },
-  {
-    "id": "hip-90-90",
-    "name": {
-      "en": "90/90 hip switches",
-      "es": "Movilidad de cadera 90/90"
-    },
-    "pattern": "hip-rotation",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "images": [
-      {
-        "src": "./assets/hip-90-90/1-first-side.jpeg",
-        "alt": {
-          "en": "A person sits in a 90/90 hip position with one leg in front and one to the side.",
-          "es": "Una persona está sentada en posición 90/90, con una pierna adelante y la otra hacia un costado."
-        }
+    {
+      "id": "dumbbell-shoulder-press",
+      "name": {
+        "en": "Seated dumbbell shoulder press",
+        "es": "Press militar sentado con mancuernas"
       },
-      {
-        "src": "./assets/hip-90-90/2-switching.jpeg",
-        "alt": {
-          "en": "A person rotates both knees through the middle while switching sides in a 90/90 hip movement.",
-          "es": "Una persona lleva ambas rodillas por el centro para cambiar de lado en un movimiento 90/90."
+      "pattern": "vertical-push",
+      "equipment": ["dumbbells", "bench"],
+      "level": "beginner",
+      "image": "press",
+      "images": [
+        {
+          "src": "./assets/dumbbell-shoulder-press/1-low-position.jpeg",
+          "alt": {
+            "en": "A seated person holds dumbbells beside the shoulders with elbows bent.",
+            "es": "Una persona sentada sostiene las mancuernas junto a los hombros, con los codos flexionados."
+          }
+        },
+        {
+          "src": "./assets/dumbbell-shoulder-press/2-high-position.jpeg",
+          "alt": {
+            "en": "A seated person presses dumbbells overhead with arms extended.",
+            "es": "Una persona sentada empuja las mancuernas por encima de la cabeza con los brazos extendidos."
+          }
         }
+      ],
+      "how": {
+        "en": [
+          "Sit tall with back support and hold dumbbells beside your shoulders.",
+          "Press overhead until your arms are extended comfortably.",
+          "Lower slowly to the starting position."
+        ],
+        "es": [
+          "Sentate erguido, con la espalda apoyada, y sostené las mancuernas junto a los hombros.",
+          "Empujá las mancuernas hacia arriba hasta extender los brazos sin forzar.",
+          "Bajalas despacio hasta la posición inicial."
+        ]
       },
-      {
-        "src": "./assets/hip-90-90/3-second-side.jpeg",
-        "alt": {
-          "en": "A person sits in the 90/90 hip position on the opposite side.",
-          "es": "Una persona está sentada en posición 90/90 del lado opuesto."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Sit with both knees bent at roughly 90 degrees, one leg in front and one to the side.",
-        "Rotate both knees to the other side while keeping your torso tall."
-      ],
-      "es": [
-        "Sentate con las rodillas flexionadas cerca de 90 grados, una pierna adelante y la otra hacia un costado.",
-        "Llevá ambas rodillas hacia el otro lado y mantené el torso erguido."
-      ]
-    },
-    "cues": {
-      "en": ["Use your hands for support and stay within a comfortable range."],
-      "es": ["Apoyá las manos si lo necesitás y movete dentro de un recorrido cómodo."]
-    },
-    "primaryMuscles": ["glutes"],
-    "secondaryMuscles": ["adductors"],
-    "focus": ["mobility"]
-  },
-  {
-    "id": "cat-cow",
-    "name": {
-      "en": "Cat-cow stretch",
-      "es": "Gato-vaca"
-    },
-    "pattern": "spinal-flexion",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "images": [
-      {
-        "src": "./assets/cat-cow/cat-position.jpeg",
-        "alt": {
-          "en": "A person rounds their back in the cat position on hands and knees.",
-          "es": "Una persona redondea la espalda en la posición de gato, en cuatro apoyos."
-        }
+      "cues": {
+        "en": ["Keep ribs down rather than arching your back.", "Stop if you feel sharp pain."],
+        "es": [
+          "Mantené las costillas controladas y evitá arquear la espalda.",
+          "Pará si sentís un dolor agudo."
+        ]
       },
-      {
-        "src": "./assets/cat-cow/cow-position.jpeg",
-        "alt": {
-          "en": "A person gently extends their back in the cow position on hands and knees.",
-          "es": "Una persona extiende suavemente la espalda en la posición de vaca, en cuatro apoyos."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Start on hands and knees with hands under shoulders.",
-        "Round your back gently, then move into a comfortable spinal extension while breathing steadily."
-      ],
-      "es": [
-        "Empezá en cuatro apoyos, con las manos debajo de los hombros.",
-        "Redondeá suavemente la espalda y después extendé la columna sin forzar, mientras respirás con normalidad."
-      ]
-    },
-    "cues": {
-      "en": ["Move through the spine rather than forcing the neck or lower back."],
-      "es": ["Mové la columna sin forzar el cuello ni la zona lumbar."]
-    },
-    "aliases": {
-      "en": ["Cat-cow"],
-      "es": ["Gato contento / Gato enojado"]
-    },
-    "primaryMuscles": ["back"],
-    "secondaryMuscles": [],
-    "focus": ["mobility", "core"]
-  },
-  {
-    "id": "shoulder-pass-through",
-    "name": {
-      "en": "Shoulder pass-throughs",
-      "es": "Pasadas de hombros con banda o bastón"
-    },
-    "pattern": "shoulder-flexion",
-    "equipment": ["band", "stick"],
-    "level": "beginner",
-    "image": "press",
-    "images": [
-      {
-        "src": "./assets/shoulder-pass-through/1-front.jpeg",
-        "alt": {
-          "en": "A person holds a stick in front of their body with a wide grip to begin a shoulder pass-through.",
-          "es": "Una persona sostiene un bastón delante del cuerpo con un agarre amplio para iniciar la pasada de hombros."
-        }
+      "aliases": {
+        "en": ["Dumbbell shoulder press"],
+        "es": ["Press militar con mancuernas"]
       },
-      {
-        "src": "./assets/shoulder-pass-through/2-middle.jpeg",
-        "alt": {
-          "en": "A person moves a stick overhead during a shoulder pass-through.",
-          "es": "Una persona pasa un bastón por encima de la cabeza durante una pasada de hombros."
-        }
+      "primaryMuscles": ["shoulders"],
+      "secondaryMuscles": ["triceps"],
+      "focus": ["strength"]
+    },
+    {
+      "id": "barbell-squat",
+      "name": {
+        "en": "Barbell back squat",
+        "es": "Sentadilla con barra"
       },
-      {
-        "src": "./assets/shoulder-pass-through/3-back.jpeg",
-        "alt": {
-          "en": "A person holds a stick behind their body at the end of a shoulder pass-through.",
-          "es": "Una persona sostiene un bastón detrás del cuerpo al final de una pasada de hombros."
+      "pattern": "squat",
+      "equipment": ["barbell", "rack"],
+      "level": "intermediate",
+      "image": "squat",
+      "images": [
+        {
+          "src": "./assets/barbell-squat/1-high.jpeg",
+          "alt": {
+            "en": "A person stands upright with a barbell across the upper back before squatting.",
+            "es": "Una persona está erguida con una barra sobre la parte alta de la espalda antes de hacer la sentadilla."
+          }
+        },
+        {
+          "src": "./assets/barbell-squat/2-low.jpeg",
+          "alt": {
+            "en": "A person lowers into a barbell back squat with knees bent and hips lowered.",
+            "es": "Una persona baja en una sentadilla con barra, con las rodillas flexionadas y las caderas abajo."
+          }
         }
-      }
-    ],
-    "how": {
-      "en": [
-        "Stand tall and hold a light band or stick with a wide, comfortable grip.",
-        "Raise it in front of you and overhead, then move it behind you only as far as feels easy; return the same way."
       ],
-      "es": [
-        "Parate erguido y sostené una banda suave o un bastón con un agarre amplio y cómodo.",
-        "Subilo por delante y por encima de la cabeza. Pasalo por detrás solo hasta donde resulte fácil y volvé por el mismo recorrido."
-      ]
-    },
-    "cues": {
-      "en": ["Keep your ribs stacked and widen your grip if the movement feels restricted."],
-      "es": [
-        "Mantené las costillas alineadas y separá más las manos si el movimiento se siente limitado."
-      ]
-    },
-    "aliases": {
-      "en": ["Shoulder pass-through"],
-      "es": [
-        "Dislocaciones de hombro con banda/bastón",
-        "Dislocaciones de hombro con banda o bastón"
-      ]
-    },
-    "primaryMuscles": ["shoulders"],
-    "secondaryMuscles": ["back"],
-    "focus": ["mobility"]
-  },
-  {
-    "id": "high-plank",
-    "name": {
-      "en": "High plank",
-      "es": "Plancha alta"
-    },
-    "pattern": "isometric-stability",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "images": [
-      {
-        "src": "./assets/high-plank/high-plank.jpeg",
-        "alt": {
-          "en": "A person holds a high plank with straight arms, hands under the shoulders and body aligned.",
-          "es": "Una persona sostiene una plancha alta con los brazos extendidos, las manos debajo de los hombros y el cuerpo alineado."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Place your hands under your shoulders and extend your legs behind you.",
-        "Press the floor away and hold a steady line from head to heels while breathing."
-      ],
-      "es": [
-        "Apoyá las manos debajo de los hombros y extendé las piernas hacia atrás.",
-        "Empujá el piso y mantené una línea estable desde la cabeza hasta los talones mientras respirás."
-      ]
-    },
-    "cues": {
-      "en": ["Keep hips level; use your knees down if you cannot hold the position steadily."],
-      "es": [
-        "Mantené las caderas alineadas. Apoyá las rodillas si no podés sostener la postura con control."
-      ]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Plancha tradicional"]
-    },
-    "primaryMuscles": [],
-    "secondaryMuscles": ["shoulders"],
-    "focus": ["strength", "core"]
-  },
-  {
-    "id": "hanging-leg-raise",
-    "name": {
-      "en": "Hanging knee raise",
-      "es": "Elevación de rodillas en barra"
-    },
-    "pattern": "trunk-flexion",
-    "equipment": ["pull-up-bar"],
-    "level": "intermediate",
-    "image": "core",
-    "images": [
-      {
-        "src": "./assets/hanging-leg-raise/1-initial.jpeg",
-        "alt": {
-          "en": "A person hangs from a bar with arms extended and legs straight below them.",
-          "es": "Una persona está colgada de una barra, con los brazos extendidos y las piernas rectas hacia abajo."
-        }
+      "how": {
+        "en": [
+          "Set the bar securely across your upper back and stand with feet about shoulder-width.",
+          "Brace your trunk and sit down between your hips, knees tracking with your toes.",
+          "Drive through the whole foot to stand, keeping balance steady."
+        ],
+        "es": [
+          "Apoyá la barra de forma segura sobre la parte alta de la espalda y parate con los pies, más o menos, al ancho de hombros.",
+          "Activá el abdomen y bajá entre las caderas. Acompañá el movimiento con las rodillas en dirección a los pies.",
+          "Empujá el piso con todo el pie para volver a pararte, sin perder el equilibrio."
+        ]
       },
-      {
-        "src": "./assets/hanging-leg-raise/2-final.jpeg",
-        "alt": {
-          "en": "A person raises their knees towards their hips while hanging from a bar.",
-          "es": "Una persona eleva las rodillas hacia las caderas mientras está colgada de una barra."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Hang from a secure bar with a comfortable grip and shoulders gently engaged.",
-        "Brace, raise your knees towards your hips without swinging, then lower them slowly."
-      ],
-      "es": [
-        "Colgate de una barra firme con un agarre cómodo y los hombros suavemente activos.",
-        "Activá el abdomen, acercá las rodillas a las caderas sin balancearte y bajalas despacio."
-      ]
-    },
-    "cues": {
-      "en": ["Begin with bent knees and stop the set if you cannot control the swing."],
-      "es": [
-        "Empezá con las rodillas flexionadas y terminá la serie si no podés controlar el balanceo."
-      ]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Elevación de piernas en barra", "Elevación de rodillas colgado"]
-    },
-    "primaryMuscles": [],
-    "secondaryMuscles": ["hip-flexors"],
-    "focus": ["strength", "core"]
-  },
-  {
-    "id": "dumbbell-overhead-press",
-    "name": {
-      "en": "Standing dumbbell shoulder press",
-      "es": "Press militar con mancuernas"
-    },
-    "pattern": "vertical-push",
-    "equipment": ["dumbbells"],
-    "level": "beginner",
-    "image": "press",
-    "how": {
-      "en": [
-        "Stand with feet steady and hold a dumbbell beside each shoulder.",
-        "Press both weights overhead in a controlled path, then lower them to shoulder height."
-      ],
-      "es": [
-        "Parate con una base firme y sostené una mancuerna junto a cada hombro.",
-        "Empujá ambas mancuernas por encima de la cabeza con control y bajalas hasta los hombros."
-      ]
-    },
-    "cues": {
-      "en": ["Keep your ribs over your hips and avoid leaning back to finish the press."],
-      "es": ["Mantené las costillas sobre las caderas y evitá inclinarte hacia atrás al empujar."]
-    },
-    "primaryMuscles": ["shoulders"],
-    "secondaryMuscles": ["triceps"],
-    "focus": ["strength"]
-  },
-  {
-    "id": "ez-bar-curl",
-    "name": {
-      "en": "EZ-bar curl",
-      "es": "Curl de bíceps con barra Z"
-    },
-    "pattern": "elbow-flexion",
-    "equipment": ["ez-bar"],
-    "level": "beginner",
-    "image": "row",
-    "images": [
-      {
-        "src": "./assets/ez-bar-curl/1-low.jpeg",
-        "alt": {
-          "en": "A person holds an EZ bar with arms extended at the bottom of a curl.",
-          "es": "Una persona sostiene una barra Z con los brazos extendidos al inicio del curl."
-        }
+      "cues": {
+        "en": [
+          "Do not let your knees collapse inward.",
+          "Use rack safety bars and a load you can control."
+        ],
+        "es": [
+          "Evitá que las rodillas se vayan hacia adentro.",
+          "Usá los seguros de la jaula y un peso que puedas controlar."
+        ]
       },
-      {
-        "src": "./assets/ez-bar-curl/2-high.jpeg",
-        "alt": {
-          "en": "A person curls an EZ bar towards the shoulders with elbows bent.",
-          "es": "Una persona flexiona los codos para llevar la barra Z hacia los hombros."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Stand tall and hold the EZ bar with a comfortable underhand grip.",
-        "Bend your elbows to curl the bar towards your shoulders, then lower it slowly."
-      ],
-      "es": [
-        "Parate erguido y sostené la barra Z con un agarre supino cómodo.",
-        "Flexioná los codos para acercar la barra a los hombros y bajala despacio."
-      ]
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["glutes"],
+      "focus": ["strength", "core"]
     },
-    "cues": {
-      "en": ["Keep elbows near your sides and avoid rocking your torso."],
-      "es": ["Mantené los codos cerca del cuerpo y evitá impulsarte con el torso."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Curl con barra Z"]
-    },
-    "primaryMuscles": ["biceps"],
-    "secondaryMuscles": [],
-    "focus": ["strength"]
-  },
-  {
-    "id": "rope-triceps-pushdown",
-    "name": {
-      "en": "Rope triceps push-down",
-      "es": "Extensión de tríceps en polea con cuerda"
-    },
-    "pattern": "elbow-extension",
-    "equipment": ["cable"],
-    "level": "beginner",
-    "image": "press",
-    "images": [
-      {
-        "src": "./assets/rope-triceps-pushdown/1-high.jpeg",
-        "alt": {
-          "en": "A person holds a cable rope near the chest with elbows bent to begin a triceps push-down.",
-          "es": "Una persona sostiene la cuerda de la polea cerca del pecho, con los codos flexionados, para iniciar la extensión de tríceps."
-        }
+    {
+      "id": "romanian-deadlift",
+      "name": {
+        "en": "Romanian deadlift",
+        "es": "Peso muerto rumano"
       },
-      {
-        "src": "./assets/rope-triceps-pushdown/2-low.jpeg",
-        "alt": {
-          "en": "A person presses a cable rope down until the arms are extended in a triceps push-down.",
-          "es": "Una persona empuja la cuerda de la polea hacia abajo hasta extender los brazos durante la extensión de tríceps."
+      "pattern": "hinge",
+      "equipment": ["barbell"],
+      "level": "intermediate",
+      "image": "hinge",
+      "images": [
+        {
+          "src": "./assets/romanian-deadlift/1-up.jpeg",
+          "alt": {
+            "en": "A person stands tall holding a barbell in front of the thighs to begin a Romanian deadlift.",
+            "es": "Una persona está erguida con una barra delante de los muslos para iniciar el peso muerto rumano."
+          }
+        },
+        {
+          "src": "./assets/romanian-deadlift/2-down.jpeg",
+          "alt": {
+            "en": "A person hinges at the hips and lowers a barbell close to the legs in a Romanian deadlift.",
+            "es": "Una persona lleva las caderas hacia atrás y baja la barra cerca de las piernas durante el peso muerto rumano."
+          }
         }
-      }
-    ],
-    "how": {
-      "en": [
-        "Stand facing a high cable with the rope held near your chest and elbows by your sides.",
-        "Straighten your elbows to press the rope down, then return slowly without moving your upper arms."
       ],
-      "es": [
-        "Parate frente a una polea alta, con la cuerda cerca del pecho y los codos junto al cuerpo.",
-        "Extendé los codos para empujar la cuerda hacia abajo y volvé despacio sin mover los brazos."
-      ]
-    },
-    "cues": {
-      "en": ["Use a load you can control and keep your shoulders relaxed."],
-      "es": ["Elegí un peso que puedas controlar y mantené los hombros relajados."]
-    },
-    "primaryMuscles": ["triceps"],
-    "secondaryMuscles": [],
-    "focus": ["strength"]
-  },
-  {
-    "id": "incline-leg-press",
-    "name": {
-      "en": "Incline leg press",
-      "es": "Prensa inclinada"
-    },
-    "pattern": "squat",
-    "equipment": ["machine"],
-    "level": "beginner",
-    "image": "squat",
-    "images": [
-      {
-        "src": "./assets/incline-leg-press/1-down.jpeg",
-        "alt": {
-          "en": "A person lowers the leg press platform towards the body with knees bent.",
-          "es": "Una persona acerca la plataforma de la prensa inclinada al cuerpo, con las rodillas flexionadas."
-        }
+      "how": {
+        "en": [
+          "Stand tall holding the bar in front of your thighs, knees softly bent.",
+          "Push hips back and slide the bar down close to your legs while keeping your back steady.",
+          "Stop at a comfortable hamstring stretch, then drive hips forward to stand."
+        ],
+        "es": [
+          "Parate erguido y sostené la barra delante de los muslos, con las rodillas apenas flexionadas.",
+          "Llevá las caderas hacia atrás y deslizá la barra cerca de las piernas, manteniendo la espalda estable.",
+          "Bajá hasta sentir un estiramiento cómodo en la parte posterior de los muslos. Después, llevá las caderas hacia adelante para volver a pararte."
+        ]
       },
-      {
-        "src": "./assets/incline-leg-press/2-up.jpeg",
-        "alt": {
-          "en": "A person presses the leg press platform away with legs extended without locking the knees.",
-          "es": "Una persona aleja la plataforma de la prensa inclinada al extender las piernas sin trabar las rodillas."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Sit against the back support and place your feet about shoulder-width on the platform.",
-        "Lower the platform until your knees bend comfortably, then press through your feet without locking your knees."
-      ],
-      "es": [
-        "Sentate con la espalda apoyada y ubicá los pies, más o menos, al ancho de hombros sobre la plataforma.",
-        "Bajá hasta flexionar las rodillas de forma cómoda y empujá con los pies sin trabarlas al extender."
-      ]
-    },
-    "cues": {
-      "en": ["Keep your lower back against the pad and use a range you can control."],
-      "es": ["Mantené la zona lumbar apoyada y usá un recorrido que puedas controlar."]
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["glutes"],
-    "focus": ["strength"]
-  },
-  {
-    "id": "seated-leg-curl",
-    "name": {
-      "en": "Seated leg curl",
-      "es": "Curl femoral sentado"
-    },
-    "pattern": "knee-flexion",
-    "equipment": ["machine"],
-    "level": "beginner",
-    "image": "hinge",
-    "images": [
-      {
-        "src": "./assets/seated-leg-curl/1-legs-up.jpeg",
-        "alt": {
-          "en": "A person sits at a leg curl machine with the lower legs raised and knees bent.",
-          "es": "Una persona está sentada en la máquina de curl femoral, con las piernas flexionadas y el apoyo elevado."
-        }
+      "cues": {
+        "en": [
+          "This is a hip hinge, not a deep squat.",
+          "Do not round your back or force extra range."
+        ],
+        "es": [
+          "Es una bisagra de cadera, no una sentadilla profunda.",
+          "No redondees la espalda ni fuerces el recorrido."
+        ]
       },
-      {
-        "src": "./assets/seated-leg-curl/2-legs-down.jpeg",
-        "alt": {
-          "en": "A person extends the legs forward against the seated leg curl machine pad.",
-          "es": "Una persona extiende las piernas hacia adelante contra el apoyo de la máquina de curl femoral sentado."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Adjust the seat and pads so your knees line up with the machine pivot.",
-        "Bend your knees to draw the lower-leg pad down, then return slowly."
-      ],
-      "es": [
-        "Ajustá el asiento y los apoyos para que las rodillas queden alineadas con el eje de la máquina.",
-        "Flexioná las rodillas para bajar el apoyo de las piernas y volvé despacio."
-      ]
+      "primaryMuscles": ["hamstrings"],
+      "secondaryMuscles": ["glutes", "back"],
+      "focus": ["strength"]
     },
-    "cues": {
-      "en": ["Keep your hips against the seat and avoid jerking the weight."],
-      "es": ["Mantené las caderas apoyadas y evitá dar tirones al peso."]
-    },
-    "primaryMuscles": ["hamstrings"],
-    "secondaryMuscles": [],
-    "focus": ["strength"]
-  },
-  {
-    "id": "standing-calf-raise",
-    "name": {
-      "en": "Standing calf raise",
-      "es": "Elevación de gemelos de pie"
-    },
-    "pattern": "ankle-plantar-flexion",
-    "equipment": ["machine"],
-    "level": "beginner",
-    "image": "squat",
-    "images": [
-      {
-        "src": "./assets/standing-calf-raise/1-up.jpeg",
-        "alt": {
-          "en": "A person rises onto the balls of the feet during a standing calf raise.",
-          "es": "Una persona se eleva sobre la parte delantera de los pies durante una elevación de gemelos de pie."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Stand with the balls of your feet on the platform and heels free, using the handles for balance.",
-        "Rise onto your toes, pause briefly, then lower your heels with control."
-      ],
-      "es": [
-        "Parate con la parte delantera de los pies sobre la plataforma y los talones libres; sujetate para mantener el equilibrio.",
-        "Elevá los talones, hacé una pausa breve y bajalos con control."
-      ]
-    },
-    "cues": {
-      "en": ["Use a comfortable ankle range and avoid bouncing at the bottom."],
-      "es": ["Usá un recorrido cómodo para los tobillos y evitá rebotar abajo."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Elevación de talones de pie"]
-    },
-    "primaryMuscles": ["calves"],
-    "secondaryMuscles": [],
-    "focus": ["strength"]
-  },
-  {
-    "id": "quadruped-thoracic-rotation",
-    "name": {
-      "en": "Quadruped thoracic rotation",
-      "es": "Rotación torácica en cuadrupedia"
-    },
-    "pattern": "trunk-rotation",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "how": {
-      "en": [
-        "Start on hands and knees; place one hand lightly behind your head.",
-        "Turn that elbow down towards the floor, then rotate it gently towards the ceiling; repeat both sides."
-      ],
-      "es": [
-        "Empezá en cuatro apoyos y apoyá una mano suavemente detrás de la cabeza.",
-        "Llevá ese codo hacia el piso y después giralo con suavidad hacia el techo. Repetí de ambos lados."
-      ]
-    },
-    "cues": {
-      "en": ["Keep your hips still and make the rotation through your upper back."],
-      "es": ["Mantené las caderas quietas y hacé el giro desde la parte alta de la espalda."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Apertura torácica en cuadrupedia"]
-    },
-    "primaryMuscles": ["back"],
-    "secondaryMuscles": ["shoulders"],
-    "focus": ["mobility"],
-    "images": [
-      {
-        "src": "./assets/quadruped-thoracic-rotation/1-down.jpeg",
-        "alt": {
-          "en": "On hands and knees, the person rotates one elbow down towards the floor.",
-          "es": "En cuatro apoyos, la persona lleva un codo hacia el piso."
-        }
+    {
+      "id": "lat-pulldown",
+      "name": {
+        "en": "Lat pull-down",
+        "es": "Jalón al pecho"
       },
-      {
-        "src": "./assets/quadruped-thoracic-rotation/2-up.jpeg",
-        "alt": {
-          "en": "On hands and knees, the person rotates one elbow up towards the ceiling.",
-          "es": "En cuatro apoyos, la persona gira un codo hacia el techo."
-        }
-      }
-    ]
-  },
-  {
-    "id": "rotational-lunge",
-    "name": {
-      "en": "Lunge with rotation",
-      "es": "Estocada con rotación"
-    },
-    "pattern": "lunge",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "squat",
-    "how": {
-      "en": [
-        "Step forward into a comfortable split stance and bend both knees slightly.",
-        "Rotate your trunk gently towards the forward leg, return to centre, then step back and switch sides."
-      ],
-      "es": [
-        "Dá un paso adelante y adoptá una posición de estocada cómoda, con ambas rodillas apenas flexionadas.",
-        "Girá suavemente el torso hacia la pierna adelantada, volvé al centro, retrocedé y cambiá de lado."
-      ]
-    },
-    "cues": {
-      "en": ["Keep the front foot planted and avoid twisting through the knee."],
-      "es": ["Mantené apoyado el pie delantero y evitá girar desde la rodilla."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Estocadas con rotación"]
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["glutes"],
-    "focus": ["mobility", "core"],
-    "images": [
-      {
-        "src": "./assets/rotational-lunge/1-start-position.jpeg",
-        "alt": {
-          "en": "A person stands upright on a mat before stepping into a lunge.",
-          "es": "Una persona está de pie sobre una colchoneta antes de dar un paso hacia la estocada."
-        }
+      "pattern": "vertical-pull",
+      "equipment": ["cable", "machine"],
+      "level": "beginner",
+      "image": "row",
+      "how": {
+        "en": [
+          "Sit with thighs secured and take a comfortable overhand grip.",
+          "Lean back just a little and draw the bar toward your upper chest.",
+          "Let the arms extend slowly overhead without losing control."
+        ],
+        "es": [
+          "Sentate y ajustá el soporte para que te sujete los muslos. Agarrá la barra con las palmas hacia adelante.",
+          "Inclinate apenas hacia atrás y llevá la barra hacia la parte alta del pecho.",
+          "Volvé a extender los brazos por encima de la cabeza, despacio y con control."
+        ]
       },
-      {
-        "src": "./assets/rotational-lunge/2-lunge.jpeg",
-        "alt": {
-          "en": "A person holds a forward lunge with the front knee bent and rear leg extended.",
-          "es": "Una persona sostiene una estocada hacia adelante, con la rodilla delantera flexionada y la pierna trasera extendida."
-        }
-      }
-    ]
-  },
-  {
-    "id": "ankle-knee-circles",
-    "name": {
-      "en": "Ankle circles and knee bends",
-      "es": "Círculos de tobillo y flexiones de rodilla"
-    },
-    "pattern": "ankle-circles",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "how": {
-      "en": [
-        "Stand near a support and gently circle one ankle, then the other.",
-        "With your feet pointing forwards, bend both knees a short distance and straighten them smoothly."
-      ],
-      "es": [
-        "Parate cerca de un apoyo y hacé círculos suaves con un tobillo y después con el otro.",
-        "Con los pies apuntando hacia adelante, flexioná un poco las rodillas y volvé a estirarlas con suavidad."
-      ]
-    },
-    "cues": {
-      "en": [
-        "Keep the movement small and controlled; do not twist your knees over planted feet. Stop if a joint feels painful."
-      ],
-      "es": [
-        "Hacé movimientos cortos y controlados; no gires las rodillas con los pies apoyados. Pará si sentís dolor en una articulación."
-      ]
-    },
-    "aliases": {
-      "en": ["Ankle and knee mobility circles", "Ankle and knee circles"],
-      "es": ["Movilidad circular de tobillos y rodillas", "Circunducciones de tobillo y rodilla"]
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["calves"],
-    "focus": ["mobility"]
-  },
-  {
-    "id": "side-plank",
-    "name": {
-      "en": "Side plank",
-      "es": "Plancha lateral (ambos lados)"
-    },
-    "pattern": "lateral-stability",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "how": {
-      "en": [
-        "Lie on your side with your elbow below your shoulder and legs stacked.",
-        "Lift your hips and hold a straight line; lower with control and repeat on the other side."
-      ],
-      "es": [
-        "Acostate de costado con el codo debajo del hombro y las piernas una sobre otra.",
-        "Elevá las caderas y mantené el cuerpo alineado; bajá con control y repetí del otro lado."
-      ]
-    },
-    "cues": {
-      "en": ["Bend your knees for an easier version and do not let the shoulder collapse."],
-      "es": ["Flexioná las rodillas para facilitar la postura y no dejes que el hombro se hunda."]
-    },
-    "primaryMuscles": ["obliques"],
-    "secondaryMuscles": ["shoulders"],
-    "focus": ["strength", "core"],
-    "images": [
-      {
-        "src": "./assets/side-plank/side-plank.jpeg",
-        "alt": {
-          "en": "A person holds a side plank on one forearm with hips lifted and body aligned.",
-          "es": "Una persona sostiene una plancha lateral sobre un antebrazo, con las caderas elevadas y el cuerpo alineado."
-        }
-      }
-    ]
-  },
-  {
-    "id": "reverse-crunch",
-    "name": {
-      "en": "Reverse crunch",
-      "es": "Crunch inverso"
-    },
-    "pattern": "trunk-flexion",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "how": {
-      "en": [
-        "Lie on your back with knees bent above your hips and arms resting by your sides.",
-        "Curl your pelvis to bring your knees slightly towards your chest, then lower slowly."
-      ],
-      "es": [
-        "Acostate boca arriba con las rodillas flexionadas sobre las caderas y los brazos a los costados.",
-        "Enrollá suavemente la pelvis para acercar las rodillas al pecho y bajá despacio."
-      ]
-    },
-    "cues": {
-      "en": ["Use a small controlled movement rather than swinging your legs."],
-      "es": ["Hacé un movimiento corto y controlado, sin balancear las piernas."]
-    },
-    "primaryMuscles": [],
-    "secondaryMuscles": [],
-    "focus": ["strength", "core"],
-    "images": [
-      {
-        "src": "./assets/reverse-crunch/1-start-position.jpeg",
-        "alt": {
-          "en": "A person lies on their back with knees bent and feet on the floor.",
-          "es": "Una persona está acostada boca arriba, con las rodillas flexionadas y los pies apoyados en el piso."
-        }
+      "cues": {
+        "en": [
+          "Avoid pulling the bar behind your neck.",
+          "Do not swing your torso to move the weight."
+        ],
+        "es": [
+          "Evitá bajar la barra detrás de la nuca.",
+          "No balancees el torso para mover el peso."
+        ]
       },
-      {
-        "src": "./assets/reverse-crunch/3-end-position.jpeg",
-        "alt": {
-          "en": "A person curls the pelvis up, drawing bent knees towards the chest.",
-          "es": "Una persona enrolla la pelvis hacia arriba y acerca las rodillas flexionadas al pecho."
-        }
-      }
-    ]
-  },
-  {
-    "id": "russian-twist",
-    "name": {
-      "en": "Russian twist",
-      "es": "Giros rusos"
-    },
-    "pattern": "trunk-rotation",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "how": {
-      "en": [
-        "Sit with knees bent and feet on the floor; lean back slightly while keeping your trunk long.",
-        "Rotate your ribcage gently from side to side, moving at a controlled pace."
-      ],
-      "es": [
-        "Sentate con las rodillas flexionadas y los pies apoyados; incliná el torso apenas hacia atrás y mantenelo largo.",
-        "Girá suavemente el torso de un lado al otro con un ritmo controlado."
-      ]
-    },
-    "cues": {
-      "en": ["Keep the rotation comfortable and avoid rounding your back."],
-      "es": ["Girá dentro de un recorrido cómodo y evitá encorvar la espalda."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Russian twists (Giros rusos)"]
-    },
-    "primaryMuscles": ["obliques"],
-    "secondaryMuscles": [],
-    "focus": ["strength", "core"],
-    "images": [
-      {
-        "src": "./assets/russian-twist/1-initial.jpeg",
-        "alt": {
-          "en": "The person sits leaning back slightly with knees bent and hands together at the chest.",
-          "es": "La persona se sienta con las rodillas flexionadas, se inclina un poco hacia atrás y junta las manos frente al pecho."
-        }
+      "aliases": {
+        "en": [],
+        "es": ["Tiron al pecho"]
       },
-      {
-        "src": "./assets/russian-twist/2-left.jpeg",
-        "alt": {
-          "en": "The person rotates the torso to the left while keeping the legs bent.",
-          "es": "La persona gira el torso hacia la izquierda y mantiene las piernas flexionadas."
+      "primaryMuscles": ["back"],
+      "secondaryMuscles": ["biceps"],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/lat-pulldown/1-start-position.jpeg",
+          "alt": {
+            "en": "A seated person holds the lat pull-down bar overhead with arms extended.",
+            "es": "Una persona sentada sostiene la barra del jalón por encima de la cabeza, con los brazos extendidos."
+          }
+        },
+        {
+          "src": "./assets/lat-pulldown/2-end-position.jpeg",
+          "alt": {
+            "en": "A seated person pulls the lat pull-down bar towards the upper chest.",
+            "es": "Una persona sentada baja la barra del jalón hacia la parte alta del pecho."
+          }
         }
+      ]
+    },
+    {
+      "id": "hip-thrust",
+      "name": {
+        "en": "Barbell hip thrust",
+        "es": "Hip thrust con barra"
       },
-      {
-        "src": "./assets/russian-twist/3-right.jpeg",
-        "alt": {
-          "en": "The person rotates the torso to the right while keeping the legs bent.",
-          "es": "La persona gira el torso hacia la derecha y mantiene las piernas flexionadas."
-        }
-      }
-    ]
-  },
-  {
-    "id": "incline-dumbbell-press",
-    "name": {
-      "en": "Incline dumbbell press",
-      "es": "Press inclinado con mancuernas"
-    },
-    "pattern": "horizontal-push",
-    "equipment": ["dumbbells", "bench"],
-    "level": "beginner",
-    "image": "press",
-    "how": {
-      "en": [
-        "Set a bench to a modest incline and hold the dumbbells above your upper chest.",
-        "Lower them beside your chest with wrists over elbows, then press up smoothly."
-      ],
-      "es": [
-        "Ajustá el banco con una inclinación moderada y sostené las mancuernas sobre la parte alta del pecho.",
-        "Bajalas junto al pecho, con las muñecas sobre los codos, y empujá hacia arriba con suavidad."
-      ]
-    },
-    "cues": {
-      "en": ["Keep your head and back supported and do not bounce at the bottom."],
-      "es": ["Mantené la cabeza y la espalda apoyadas y no rebotes abajo."]
-    },
-    "primaryMuscles": ["chest"],
-    "secondaryMuscles": ["triceps", "shoulders"],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/incline-dumbbell-press/1-low.jpeg",
-        "alt": {
-          "en": "On an inclined bench, the person lowers both dumbbells beside the upper chest.",
-          "es": "En un banco inclinado, la persona baja las dos mancuernas junto a la parte alta del pecho."
-        }
+      "pattern": "hinge",
+      "equipment": ["barbell", "bench"],
+      "level": "intermediate",
+      "image": "hinge",
+      "how": {
+        "en": [
+          "Rest your upper back against a secure bench with the bar padded across your hips.",
+          "Plant feet so shins are close to vertical at the top.",
+          "Drive hips up, pause briefly, then lower with control."
+        ],
+        "es": [
+          "Apoyá la parte alta de la espalda contra un banco firme y ubicá la barra acolchada sobre las caderas.",
+          "Apoyá los pies de modo que las tibias queden casi verticales al llegar arriba.",
+          "Empujá las caderas hacia arriba, hacé una pausa breve y bajalas con control."
+        ]
       },
-      {
-        "src": "./assets/incline-dumbbell-press/2-high.jpeg",
-        "alt": {
-          "en": "On an inclined bench, the person presses both dumbbells overhead with arms extended.",
-          "es": "En un banco inclinado, la persona empuja las dos mancuernas hacia arriba hasta extender los brazos."
-        }
-      }
-    ]
-  },
-  {
-    "id": "dumbbell-lateral-raise",
-    "name": {
-      "en": "Dumbbell lateral raise",
-      "es": "Elevaciones laterales con mancuernas"
-    },
-    "pattern": "shoulder-abduction",
-    "equipment": ["dumbbells"],
-    "level": "beginner",
-    "image": "press",
-    "how": {
-      "en": [
-        "Stand tall holding light dumbbells by your sides with elbows slightly bent.",
-        "Raise your arms out to the sides to about shoulder height, then lower slowly."
-      ],
-      "es": [
-        "Parate erguido con mancuernas livianas a los costados y los codos apenas flexionados.",
-        "Elevá los brazos hacia los costados hasta aproximadamente la altura de los hombros y bajalos despacio."
-      ]
-    },
-    "cues": {
-      "en": ["Keep shoulders relaxed and avoid swinging the weights."],
-      "es": ["Mantené los hombros relajados y evitá balancear las mancuernas."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Elevaciones laterales para hombros"]
-    },
-    "primaryMuscles": ["shoulders"],
-    "secondaryMuscles": [],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/dumbbell-lateral-raise/1-low.jpeg",
-        "alt": {
-          "en": "The person stands with dumbbells held by their sides and elbows slightly bent.",
-          "es": "La persona está de pie con las mancuernas a los costados y los codos apenas flexionados."
-        }
+      "cues": {
+        "en": [
+          "Keep your chin gently tucked and avoid over-arching your back.",
+          "Check that the bench cannot slide."
+        ],
+        "es": [
+          "Mantené el mentón levemente hacia el pecho y evitá arquear demasiado la espalda.",
+          "Revisá que el banco no se mueva."
+        ]
       },
-      {
-        "src": "./assets/dumbbell-lateral-raise/2-high.jpeg",
-        "alt": {
-          "en": "The person raises both arms out to the sides to shoulder height.",
-          "es": "La persona eleva ambos brazos hacia los costados hasta la altura de los hombros."
-        }
-      }
-    ]
-  },
-  {
-    "id": "hammer-curl",
-    "name": {
-      "en": "Hammer curl",
-      "es": "Curl martillo"
-    },
-    "pattern": "elbow-flexion",
-    "equipment": ["dumbbells"],
-    "level": "beginner",
-    "image": "row",
-    "how": {
-      "en": [
-        "Stand with a dumbbell in each hand and palms facing inwards.",
-        "Bend your elbows to bring the weights towards your shoulders, then lower with control."
-      ],
-      "es": [
-        "Parate con una mancuerna en cada mano y las palmas enfrentadas.",
-        "Flexioná los codos para acercar las mancuernas a los hombros y bajalas con control."
-      ]
-    },
-    "cues": {
-      "en": ["Keep wrists neutral and elbows close to your body."],
-      "es": ["Mantené las muñecas rectas y los codos cerca del cuerpo."]
-    },
-    "primaryMuscles": ["biceps"],
-    "secondaryMuscles": [],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/hammer-curl/1-low.jpeg",
-        "alt": {
-          "en": "The person stands holding dumbbells by their sides with palms facing inwards.",
-          "es": "La persona está de pie con las mancuernas a los costados y las palmas enfrentadas."
-        }
+      "aliases": {
+        "en": [],
+        "es": ["Hip thrust"]
       },
-      {
-        "src": "./assets/hammer-curl/2-high.jpeg",
-        "alt": {
-          "en": "The person bends both elbows to bring the dumbbells towards the shoulders.",
-          "es": "La persona flexiona ambos codos y acerca las mancuernas a los hombros."
+      "primaryMuscles": ["glutes"],
+      "secondaryMuscles": ["hamstrings"],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/hip-thrust/1-high.jpeg",
+          "alt": {
+            "en": "At the top of a barbell hip thrust, the person drives their hips up with their shoulders supported on a bench.",
+            "es": "Arriba del hip thrust con barra, la persona eleva las caderas con los hombros apoyados en un banco."
+          }
+        },
+        {
+          "src": "./assets/hip-thrust/2-low.jpeg",
+          "alt": {
+            "en": "The person lowers their hips towards the floor while keeping their shoulders on the bench.",
+            "es": "La persona baja las caderas hacia el piso y mantiene los hombros apoyados en el banco."
+          }
         }
-      }
-    ]
-  },
-  {
-    "id": "dumbbell-french-press",
-    "name": {
-      "en": "Lying dumbbell triceps extension",
-      "es": "Press francés con mancuernas"
-    },
-    "pattern": "elbow-extension",
-    "equipment": ["dumbbells", "bench"],
-    "level": "beginner",
-    "image": "press",
-    "how": {
-      "en": [
-        "Lie on a bench holding the dumbbells above your chest with palms facing each other.",
-        "Bend your elbows to lower the weights beside your head, then extend your arms back up."
-      ],
-      "es": [
-        "Acostate en un banco y sostené las mancuernas sobre el pecho, con las palmas enfrentadas.",
-        "Flexioná los codos para bajar las mancuernas junto a la cabeza y volvé a extender los brazos."
       ]
     },
-    "cues": {
-      "en": ["Keep upper arms steady and use a range that feels comfortable at the elbows."],
-      "es": ["Mantené quieta la parte alta de los brazos y usá un recorrido cómodo para los codos."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Press francés con mancuernas", "Extensión de tríceps acostado con mancuernas"]
-    },
-    "primaryMuscles": ["triceps"],
-    "secondaryMuscles": [],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/dumbbell-french-press/1-initial-position.jpeg",
-        "alt": {
-          "en": "A person lies on a bench holding two dumbbells above the chest with arms extended.",
-          "es": "Una persona está acostada en un banco y sostiene dos mancuernas sobre el pecho con los brazos extendidos."
-        }
+    {
+      "id": "bulgarian-split-squat",
+      "name": {
+        "en": "Bulgarian split squat",
+        "es": "Sentadilla búlgara"
       },
-      {
-        "src": "./assets/dumbbell-french-press/2-final-position.jpeg",
-        "alt": {
-          "en": "A person bends the elbows to lower two dumbbells beside the head.",
-          "es": "Una persona flexiona los codos para bajar dos mancuernas junto a la cabeza."
-        }
-      }
-    ]
-  },
-  {
-    "id": "conventional-deadlift",
-    "name": {
-      "en": "Conventional deadlift",
-      "es": "Peso muerto convencional"
-    },
-    "pattern": "hinge",
-    "equipment": ["barbell"],
-    "level": "intermediate",
-    "image": "hinge",
-    "images": [
-      {
-        "src": "./assets/conventional-deadlift/1-down.jpeg",
-        "alt": {
-          "en": "A person bends at the hips and knees to grip a barbell near the floor before a deadlift.",
-          "es": "Una persona flexiona las caderas y las rodillas para agarrar una barra cerca del piso antes del peso muerto."
-        }
+      "pattern": "lunge",
+      "equipment": ["dumbbells", "bench"],
+      "level": "intermediate",
+      "image": "squat",
+      "how": {
+        "en": [
+          "Stand a stride in front of a bench, holding dumbbells at your sides or starting with bodyweight, and rest the top of one foot behind you.",
+          "Lower in a straight line, bending the front knee in line with your foot.",
+          "Push through the front foot to rise, then repeat on the other side."
+        ],
+        "es": [
+          "Parate a un paso del banco, con mancuernas a los costados o empezá sin peso, y apoyá el empeine de un pie detrás.",
+          "Bajá en vertical y flexioná la rodilla delantera en línea con el pie.",
+          "Empujá con el pie delantero para subir y después repetí del otro lado."
+        ]
       },
-      {
-        "src": "./assets/conventional-deadlift/2-up.jpeg",
-        "alt": {
-          "en": "A person stands upright holding a barbell after lifting it from the floor.",
-          "es": "Una persona está erguida y sostiene una barra después de levantarla del piso."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Stand with the bar over mid-foot. Bend your hips and knees to take a secure grip just outside your legs.",
-        "Brace your trunk, keep the bar close, and stand by pressing the floor away; lower it under control."
-      ],
-      "es": [
-        "Parate con la barra sobre la mitad de los pies. Flexioná caderas y rodillas para agarrarla por fuera de las piernas.",
-        "Activá el abdomen, mantené la barra cerca y parate empujando el piso; bajala con control."
-      ]
-    },
-    "cues": {
-      "en": [
-        "Use a load you can lift smoothly while keeping your trunk controlled; avoid jerking the bar."
-      ],
-      "es": [
-        "Usá un peso que puedas levantar con suavidad y el torso controlado; evitá dar tirones con la barra."
-      ]
-    },
-    "primaryMuscles": ["hamstrings"],
-    "secondaryMuscles": ["glutes", "quads", "back"],
-    "focus": ["strength", "core"]
-  },
-  {
-    "id": "leg-extension-machine",
-    "name": {
-      "en": "Leg extension",
-      "es": "Extensión de cuádriceps en máquina"
-    },
-    "pattern": "knee-extension",
-    "equipment": ["machine"],
-    "level": "beginner",
-    "image": "squat",
-    "how": {
-      "en": [
-        "Adjust the seat so your knees line up with the machine pivot and the pad rests above your ankles.",
-        "Extend your knees smoothly, then lower the pad with control."
-      ],
-      "es": [
-        "Ajustá el asiento para alinear las rodillas con el eje y apoyá el rodillo sobre la parte baja de las piernas.",
-        "Extendé las rodillas con suavidad y bajá el rodillo con control."
-      ]
-    },
-    "cues": {
-      "en": ["Avoid snapping the knees straight or lifting your hips from the seat."],
-      "es": ["Evitá trabar las rodillas de golpe o levantar las caderas del asiento."]
-    },
-    "aliases": {
-      "en": ["Machine leg extension", "Leg extension machine"],
-      "es": []
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": [],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/leg-extension-machine/1-low.jpeg",
-        "alt": {
-          "en": "Seated at the leg extension machine, the person holds their knees bent with the ankle pad lowered.",
-          "es": "Sentada en la máquina de extensión de piernas, la persona mantiene las rodillas flexionadas y el rodillo abajo."
-        }
+      "cues": {
+        "en": [
+          "Use a stable bench and start with bodyweight if balance is new.",
+          "Keep most of your weight through the front foot."
+        ],
+        "es": [
+          "Usá un banco firme y empezá sin peso si todavía te cuesta mantener el equilibrio.",
+          "Mantené la mayor parte del peso sobre el pie delantero."
+        ]
       },
-      {
-        "src": "./assets/leg-extension-machine/2-high.jpeg",
-        "alt": {
-          "en": "The seated person extends both knees to raise the ankle pad in front of them.",
-          "es": "La persona extiende ambas rodillas para elevar el rodillo frente a ella."
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["glutes"],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/bulgarian-split-squat/1-up.jpeg",
+          "alt": {
+            "en": "The person stands in a split stance with their rear foot resting on a bench.",
+            "es": "La persona se mantiene en posición dividida con el pie trasero apoyado en un banco."
+          }
+        },
+        {
+          "src": "./assets/bulgarian-split-squat/2-down.jpeg",
+          "alt": {
+            "en": "The person lowers into the split squat with the front knee bent and the rear knee close to the floor.",
+            "es": "La persona baja en la sentadilla dividida, con la rodilla delantera flexionada y la trasera cerca del piso."
+          }
         }
-      }
-    ]
-  },
-  {
-    "id": "seated-calf-raise",
-    "name": {
-      "en": "Barbell seated calf raise",
-      "es": "Elevación de gemelos sentado con barra"
-    },
-    "pattern": "ankle-plantar-flexion",
-    "equipment": ["barbell", "bench"],
-    "level": "beginner",
-    "image": "squat",
-    "how": {
-      "en": [
-        "Sit near the end of a bench with the bar padded across your lower thighs and the balls of your feet on a stable raised surface.",
-        "Raise your heels, pause briefly, then lower them with control."
-      ],
-      "es": [
-        "Sentate cerca del borde de un banco, con la barra acolchada sobre la parte baja de los muslos y la parte delantera de los pies sobre un apoyo firme y elevado.",
-        "Elevá los talones, hacé una pausa breve y bajalos con control."
       ]
     },
-    "cues": {
-      "en": ["Pad the bar, keep it clear of your kneecaps and avoid bouncing."],
-      "es": ["Acolchá la barra, mantenela alejada de las rótulas y evitá rebotar."]
-    },
-    "aliases": {
-      "en": ["Seated calf raise"],
-      "es": ["Elevación de gemelos sentado", "Elevación de talones sentado"]
-    },
-    "primaryMuscles": ["calves"],
-    "secondaryMuscles": [],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/seated-calf-raise/1-low.jpeg",
-        "alt": {
-          "en": "The person sits on a bench with a barbell across their thighs and their heels lowered.",
-          "es": "La persona se sienta en un banco con una barra sobre los muslos y los talones bajos."
-        }
+    {
+      "id": "plank",
+      "name": {
+        "en": "Forearm plank",
+        "es": "Plancha con antebrazos"
       },
-      {
-        "src": "./assets/seated-calf-raise/2-high.jpeg",
-        "alt": {
-          "en": "The seated person raises their heels while keeping the barbell across their thighs.",
-          "es": "La persona eleva los talones mientras mantiene la barra sobre los muslos."
-        }
-      }
-    ]
-  },
-  {
-    "id": "deep-squat-pry",
-    "name": {
-      "en": "Deep squat pry",
-      "es": "Sentadilla profunda con apertura de rodillas"
-    },
-    "pattern": "squat",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "squat",
-    "how": {
-      "en": [
-        "Stand with feet comfortably apart and lower into a supported depth you can maintain.",
-        "Place elbows inside the knees and gently press them outward while keeping your feet grounded."
-      ],
-      "es": [
-        "Parate con los pies a una distancia cómoda y bajá hasta una profundidad que puedas sostener.",
-        "Apoyá los codos dentro de las rodillas y empujalas suavemente hacia afuera con los pies firmes."
-      ]
-    },
-    "cues": {
-      "en": ["Hold onto a support or use a shallower position if balance or comfort is limited."],
-      "es": [
-        "Agarrate de un apoyo o bajá menos si te cuesta mantener el equilibrio o la comodidad."
-      ]
-    },
-    "aliases": {
-      "en": ["Deep squat hold with elbow pry"],
-      "es": ["Sentadilla profunda isométrica con empuje de codos"]
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["glutes", "adductors"],
-    "focus": ["mobility"]
-  },
-  {
-    "id": "dynamic-hurdle-step",
-    "name": {
-      "en": "Dynamic hurdle step (heel-to-toe)",
-      "es": "Paso de valla dinámico (talón-punta)"
-    },
-    "pattern": "lunge",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "squat",
-    "how": {
-      "en": [
-        "Stand tall and imagine a low hurdle beside you.",
-        "Lift one knee, step over the imagined hurdle, place the heel then toe, and return; alternate legs."
-      ],
-      "es": [
-        "Parate erguido e imaginá una valla baja a un costado.",
-        "Elevá una rodilla, pasá la pierna por encima, apoyá primero el talón y después la punta; volvé y alterná."
-      ]
-    },
-    "cues": {
-      "en": ["Use a small, controlled step and hold support if balance is uncertain."],
-      "es": ["Hacé un paso corto y controlado, y sujetate si no estás seguro del equilibrio."]
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["glutes", "calves"],
-    "focus": ["mobility"]
-  },
-  {
-    "id": "prone-ytw",
-    "name": {
-      "en": "Prone Y-T-W raises",
-      "es": "Elevaciones Y-T-W boca abajo"
-    },
-    "pattern": "shoulder-abduction",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "images": [
-      {
-        "src": "./assets/prone-ytw/1-start-position.jpeg",
-        "alt": {
-          "en": "Starting position for prone Y-T-W raises: lying face down with arms relaxed alongside the body.",
-          "es": "Posición inicial de las elevaciones Y-T-W boca abajo: acostado con los brazos relajados junto al cuerpo."
-        }
+      "pattern": "isometric-stability",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "how": {
+        "en": [
+          "Place forearms on the floor with elbows under shoulders and legs extended.",
+          "Brace gently and keep a long line from head to heels.",
+          "Hold while breathing steadily, then stop before your position changes."
+        ],
+        "es": [
+          "Apoyá los antebrazos en el piso, con los codos debajo de los hombros, y extendé las piernas.",
+          "Activá suavemente el abdomen y mantené una línea recta desde la cabeza hasta los talones.",
+          "Respirá con normalidad y terminá antes de perder la postura."
+        ]
       },
-      {
-        "src": "./assets/prone-ytw/2-y-position.jpeg",
-        "alt": {
-          "en": "Prone Y-T-W raise in the Y position, with arms lifted diagonally overhead.",
-          "es": "Elevación Y-T-W boca abajo en posición de Y, con los brazos elevados en diagonal."
-        }
+      "cues": {
+        "en": [
+          "Do not let your lower back sag or hips rise high.",
+          "Kneel to make the hold easier."
+        ],
+        "es": [
+          "Evitá que se hunda la zona lumbar o que se eleven demasiado las caderas.",
+          "Apoyá las rodillas para hacer la postura más fácil."
+        ]
       },
-      {
-        "src": "./assets/prone-ytw/4-t-position.jpeg",
-        "alt": {
-          "en": "Prone Y-T-W raise in the T position, with arms extended out to the sides.",
-          "es": "Elevación Y-T-W boca abajo en posición de T, con los brazos extendidos hacia los lados."
-        }
+      "aliases": {
+        "en": [],
+        "es": ["Plancha sobre antebrazos"]
       },
-      {
-        "src": "./assets/prone-ytw/3-w-position.jpeg",
-        "alt": {
-          "en": "Prone Y-T-W raise in the W position, with elbows bent and shoulder blades drawn together.",
-          "es": "Elevación Y-T-W boca abajo en posición de W, con los codos flexionados y las escápulas juntas."
+      "primaryMuscles": [],
+      "secondaryMuscles": ["shoulders"],
+      "focus": ["strength", "core"],
+      "images": [
+        {
+          "src": "./assets/plank/plank.jpeg",
+          "alt": {
+            "en": "A person holds a forearm plank with the body aligned from head to heels.",
+            "es": "Una persona sostiene una plancha sobre los antebrazos, con el cuerpo alineado desde la cabeza hasta los talones."
+          }
         }
-      }
-    ],
-    "how": {
-      "en": [
-        "Lie face down with your forehead supported and arms relaxed.",
-        "Lift your arms gently in Y, T, then W shapes, drawing your shoulder blades back; lower between shapes."
-      ],
-      "es": [
-        "Acostate boca abajo con la frente apoyada y los brazos relajados.",
-        "Elevá suavemente los brazos formando una Y, una T y una W; acercá las escápulas y bajá entre cada forma."
       ]
     },
-    "cues": {
-      "en": ["Use small movements and keep your neck relaxed; bodyweight is enough."],
-      "es": ["Hacé movimientos pequeños y relajá el cuello; no hace falta agregar peso."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Y-T-W extensiones escapulares prone", "Extensiones escapulares Y-T-W boca abajo"]
-    },
-    "primaryMuscles": ["shoulders"],
-    "secondaryMuscles": ["back"],
-    "focus": ["mobility"]
-  },
-  {
-    "id": "ab-wheel-rollout",
-    "name": {
-      "en": "Ab wheel rollout",
-      "es": "Rueda abdominal"
-    },
-    "pattern": "anti-extension",
-    "equipment": ["ab-wheel"],
-    "level": "intermediate",
-    "image": "core",
-    "how": {
-      "en": [
-        "Kneel with the wheel under your shoulders and brace your trunk.",
-        "Roll forwards only as far as you can keep your body controlled, then pull the wheel back."
-      ],
-      "es": [
-        "Arrodillate con la rueda debajo de los hombros y activá el abdomen.",
-        "Avanzá solo hasta donde puedas mantener el cuerpo controlado y después acercá la rueda."
-      ]
-    },
-    "cues": {
-      "en": ["Shorten the range or use a wall stop if your lower back begins to sag."],
-      "es": ["Acortá el recorrido o frená contra una pared si se empieza a hundir la zona lumbar."]
-    },
-    "aliases": {
-      "en": ["Ab-wheel rollout"],
-      "es": ["Rodillo abdominal (ab wheel rollout)"]
-    },
-    "primaryMuscles": [],
-    "secondaryMuscles": ["shoulders"],
-    "focus": ["strength", "core"]
-  },
-  {
-    "id": "hollow-hold",
-    "name": {
-      "en": "Hollow hold",
-      "es": "Hollow hold (posición hollow)"
-    },
-    "pattern": "isometric-stability",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "images": [
-      {
-        "src": "./assets/hollow-hold/hollow-hold.jpeg",
-        "alt": {
-          "en": "Hollow hold: a person lies on their back with shoulders and straight legs raised, arms reaching overhead.",
-          "es": "Hollow hold: una persona está boca arriba, con los hombros y las piernas extendidas elevados y los brazos sobre la cabeza."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Lie on your back and gently brace so your lower back stays in contact with the floor.",
-        "Lift your shoulders and legs slightly, arms reaching overhead or forwards, and hold while breathing."
-      ],
-      "es": [
-        "Acostate boca arriba y activá suavemente el abdomen para mantener la zona lumbar en contacto con el piso.",
-        "Elevá un poco los hombros y las piernas, con los brazos hacia adelante o arriba, y sostené mientras respirás."
-      ]
-    },
-    "cues": {
-      "en": ["Bend your knees or bring your arms forwards to make the hold easier."],
-      "es": ["Flexioná las rodillas o llevá los brazos hacia adelante para facilitar la postura."]
-    },
-    "aliases": {
-      "en": ["Hollow-body hold"],
-      "es": ["Hollow hold (mantención en canoa)"]
-    },
-    "primaryMuscles": [],
-    "secondaryMuscles": [],
-    "focus": ["strength", "core"]
-  },
-  {
-    "id": "bird-dog",
-    "name": {
-      "en": "Bird-dog",
-      "es": "Bird dog (extensión alternada)"
-    },
-    "pattern": "anti-rotation",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "core",
-    "how": {
-      "en": [
-        "Start on hands and knees with your back steady.",
-        "Reach one arm forwards and the opposite leg back, return slowly, then switch sides."
-      ],
-      "es": [
-        "Empezá en cuatro apoyos y mantené la espalda estable.",
-        "Estirá un brazo hacia adelante y la pierna contraria hacia atrás; volvé despacio y cambiá de lado."
-      ]
-    },
-    "cues": {
-      "en": ["Keep hips level and avoid arching or rotating your trunk."],
-      "es": ["Mantené las caderas niveladas y evitá arquear o girar el torso."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Bird dog (alternado controlado)"]
-    },
-    "primaryMuscles": [],
-    "secondaryMuscles": ["back", "glutes"],
-    "focus": ["strength", "core"]
-  },
-  {
-    "id": "arnold-press",
-    "name": {
-      "en": "Arnold press",
-      "es": "Press Arnold"
-    },
-    "pattern": "vertical-push",
-    "equipment": ["dumbbells"],
-    "level": "intermediate",
-    "image": "press",
-    "images": [
-      {
-        "src": "./assets/arnold-press/1-start-position.jpeg",
-        "alt": {
-          "en": "Arnold press starting position: dumbbells held in front of the shoulders with palms facing the body.",
-          "es": "Posición inicial del press Arnold: mancuernas frente a los hombros y palmas hacia el cuerpo."
-        }
+    {
+      "id": "goblet-squat",
+      "name": {
+        "en": "Goblet squat",
+        "es": "Sentadilla goblet"
       },
-      {
-        "src": "./assets/arnold-press/2-end-position.jpeg",
-        "alt": {
-          "en": "Arnold press top position: both dumbbells pressed overhead with arms extended.",
-          "es": "Posición final del press Arnold: las dos mancuernas elevadas sobre la cabeza y los brazos extendidos."
-        }
-      }
-    ],
-    "how": {
-      "en": [
-        "Hold dumbbells at shoulder height with palms facing you.",
-        "Press overhead while turning your palms forwards; reverse the rotation as you lower."
-      ],
-      "es": [
-        "Sostené las mancuernas a la altura de los hombros, con las palmas hacia vos.",
-        "Empujá hacia arriba mientras girás las palmas hacia adelante; invertí el giro al bajar."
-      ]
-    },
-    "cues": {
-      "en": ["Keep the rotation smooth and avoid leaning back."],
-      "es": ["Hacé el giro con suavidad y evitá inclinarte hacia atrás."]
-    },
-    "primaryMuscles": ["shoulders"],
-    "secondaryMuscles": ["triceps"],
-    "focus": ["strength"]
-  },
-  {
-    "id": "seated-cable-row-neutral",
-    "name": {
-      "en": "Seated cable row (neutral grip)",
-      "es": "Remo sentado en polea baja con agarre neutro"
-    },
-    "pattern": "horizontal-pull",
-    "equipment": ["cable", "machine"],
-    "level": "beginner",
-    "image": "row",
-    "how": {
-      "en": [
-        "Sit facing the cable with feet braced and hold a neutral-grip handle.",
-        "Pull towards your lower ribs with elbows close, then extend your arms slowly."
-      ],
-      "es": [
-        "Sentate frente a la polea, apoyá los pies y sostené un agarre neutro.",
-        "Llevá las manos hacia las costillas bajas con los codos cerca y extendé los brazos despacio."
-      ]
-    },
-    "cues": {
-      "en": ["Keep your torso steady rather than rocking backwards."],
-      "es": ["Mantené el torso quieto en vez de balancearte hacia atrás."]
-    },
-    "aliases": {
-      "en": ["Seated neutral-grip cable row"],
-      "es": ["Remo en polea baja (Grip neutro)", "Remo en polea baja con agarre neutro"]
-    },
-    "primaryMuscles": ["back"],
-    "secondaryMuscles": ["biceps"],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/seated-cable-row-neutral/1-start-position.jpeg",
-        "alt": {
-          "en": "A person sits facing a cable machine with arms extended while holding a close-grip handle.",
-          "es": "Una persona está sentada frente a una polea, con los brazos extendidos y sosteniendo un agarre cerrado."
-        }
+      "pattern": "squat",
+      "equipment": ["dumbbells"],
+      "level": "beginner",
+      "image": "squat",
+      "how": {
+        "en": [
+          "Hold one dumbbell close to your chest and stand with feet comfortably apart.",
+          "Sit down between your hips while keeping your chest relaxed and upright.",
+          "Press through the floor to stand tall."
+        ],
+        "es": [
+          "Sostené una mancuerna cerca del pecho y separá los pies a una distancia cómoda.",
+          "Bajá entre las caderas, manteniendo el pecho erguido y relajado.",
+          "Empujá el piso para volver a pararte."
+        ]
       },
-      {
-        "src": "./assets/seated-cable-row-neutral/2-start-position.jpeg",
-        "alt": {
-          "en": "A person pulls a close-grip cable handle towards the abdomen with elbows bent.",
-          "es": "Una persona lleva un agarre cerrado hacia el abdomen con los codos flexionados."
-        }
-      }
-    ]
-  },
-  {
-    "id": "high-cable-crossover",
-    "name": {
-      "en": "High-cable chest fly",
-      "es": "Cruces en polea alta para pecho"
-    },
-    "pattern": "horizontal-adduction",
-    "equipment": ["cable"],
-    "level": "beginner",
-    "image": "press",
-    "how": {
-      "en": [
-        "Stand between high cable pulleys and hold the handles with a slight bend in your elbows.",
-        "Sweep your hands down and together in front of your torso, then return slowly."
-      ],
-      "es": [
-        "Parate entre dos poleas altas y sostené las manijas con los codos apenas flexionados.",
-        "Llevá las manos hacia abajo y juntas delante del torso; volvé despacio."
-      ]
-    },
-    "cues": {
-      "en": ["Keep the movement comfortable and avoid pulling your arms far behind your body."],
-      "es": ["Usá un recorrido cómodo y evitá llevar los brazos muy detrás del cuerpo."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Cruces en polea alta (Pecho)"]
-    },
-    "primaryMuscles": ["chest"],
-    "secondaryMuscles": ["shoulders"],
-    "focus": ["strength"]
-  },
-  {
-    "id": "concentration-curl",
-    "name": {
-      "en": "Concentration curl",
-      "es": "Curl concentrado con mancuerna"
-    },
-    "pattern": "elbow-flexion",
-    "equipment": ["dumbbells", "bench"],
-    "level": "beginner",
-    "image": "row",
-    "how": {
-      "en": [
-        "Sit on a bench and support one upper arm against the inside of your thigh.",
-        "Curl the dumbbell towards your shoulder, then lower it slowly; repeat with the other arm."
-      ],
-      "es": [
-        "Sentate en un banco y apoyá la parte alta de un brazo contra la cara interna del muslo.",
-        "Acercá la mancuerna al hombro y bajala despacio; después repetí con el otro brazo."
-      ]
-    },
-    "cues": {
-      "en": ["Keep your torso still and use a weight you can lower smoothly."],
-      "es": ["Mantené el torso quieto y elegí un peso que puedas bajar con suavidad."]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Curl concentrado unilateral"]
-    },
-    "primaryMuscles": ["biceps"],
-    "secondaryMuscles": [],
-    "focus": ["strength"]
-  },
-  {
-    "id": "bench-dip",
-    "name": {
-      "en": "Bench dip",
-      "es": "Fondos en banco"
-    },
-    "pattern": "elbow-extension",
-    "equipment": ["bench"],
-    "level": "beginner",
-    "image": "press",
-    "how": {
-      "en": [
-        "Place your hands on a stable bench behind you and set your feet comfortably on the floor.",
-        "Bend your elbows to lower a short distance, then press back up."
-      ],
-      "es": [
-        "Apoyá las manos en un banco firme detrás tuyo y ubicá los pies cómodamente en el piso.",
-        "Flexioná los codos para bajar un tramo corto y después empujá para volver arriba."
-      ]
-    },
-    "cues": {
-      "en": [
-        "Keep the range shallow and comfortable. Stop if you feel shoulder pain; use a cable triceps push-down as an alternative."
-      ],
-      "es": [
-        "Usá un recorrido corto y cómodo. Pará si te duelen los hombros; como alternativa, hacé una extensión de tríceps en polea."
-      ]
-    },
-    "aliases": {
-      "en": [],
-      "es": ["Fondos en banco/cajon", "Fondos en banco o cajón"]
-    },
-    "primaryMuscles": ["triceps"],
-    "secondaryMuscles": ["shoulders"],
-    "focus": ["strength"]
-  },
-  {
-    "id": "walking-lunge",
-    "name": {
-      "en": "Walking lunge",
-      "es": "Estocadas caminando"
-    },
-    "pattern": "lunge",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "squat",
-    "how": {
-      "en": [
-        "Stand tall and take a comfortable step forwards.",
-        "Lower under control, push through the front foot to rise, then step forwards with the other leg."
-      ],
-      "es": [
-        "Parate erguido y da un paso cómodo hacia adelante.",
-        "Bajá con control, empujá con el pie delantero para subir y avanzá con la otra pierna."
-      ]
-    },
-    "cues": {
-      "en": ["Keep the front knee tracking with your toes and use a shorter step if needed."],
-      "es": ["Alineá la rodilla delantera con los pies y acortá el paso si hace falta."]
-    },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["glutes"],
-    "focus": ["strength"],
-    "images": [
-      {
-        "src": "./assets/walking-lunge/1-3-first-third-positions.jpeg",
-        "alt": {
-          "en": "A person stands upright before taking a step forwards.",
-          "es": "Una persona está de pie antes de dar un paso hacia adelante."
-        }
+      "cues": {
+        "en": [
+          "Keep heels grounded and knees following your toes.",
+          "Choose a depth that feels controlled and comfortable."
+        ],
+        "es": [
+          "Mantené los talones apoyados y las rodillas en línea con los pies.",
+          "Elegí una profundidad que puedas controlar y te resulte cómoda."
+        ]
       },
-      {
-        "src": "./assets/walking-lunge/2-second-position.jpeg",
-        "alt": {
-          "en": "A person holds a forward lunge with the front knee bent and rear leg extended.",
-          "es": "Una persona sostiene una estocada hacia adelante, con la rodilla delantera flexionada y la pierna trasera extendida."
-        }
+      "aliases": {
+        "en": [],
+        "es": ["Sentadilla Goblet pesada"]
       },
-      {
-        "src": "./assets/walking-lunge/4-fourth-position.jpeg",
-        "alt": {
-          "en": "A person holds a forward lunge with the other leg leading.",
-          "es": "Una persona sostiene una estocada hacia adelante con la otra pierna al frente."
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["glutes"],
+      "focus": ["strength", "core"]
+    },
+    {
+      "id": "mountain-climber",
+      "name": {
+        "en": "Mountain climbers",
+        "es": "Escaladores (mountain climbers)"
+      },
+      "pattern": "knee-drive",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "images": [
+        {
+          "src": "./assets/mountain-climber/climb-position.jpeg",
+          "alt": {
+            "en": "A person holds a high plank while driving one knee towards the chest in a mountain climber.",
+            "es": "Una persona sostiene una plancha alta y lleva una rodilla hacia el pecho durante un escalador."
+          }
         }
-      }
-    ]
-  },
-  {
-    "id": "lying-leg-curl",
-    "name": {
-      "en": "Lying leg curl",
-      "es": "Curl femoral"
-    },
-    "pattern": "knee-flexion",
-    "equipment": ["machine"],
-    "level": "beginner",
-    "image": "hinge",
-    "how": {
-      "en": [
-        "Lie face down on the machine with the pad resting above your heels and knees near the pivot.",
-        "Bend your knees to curl the pad towards you, then lower it slowly."
       ],
-      "es": [
-        "Acostate boca abajo en la máquina, con el rodillo sobre los talones y las rodillas cerca del eje.",
-        "Flexioná las rodillas para acercar el rodillo y después bajalo despacio."
+      "how": {
+        "en": [
+          "Start in a high plank with hands under shoulders.",
+          "Bring one knee towards your chest, return it, then alternate sides.",
+          "Move at a pace that lets you keep your trunk steady."
+        ],
+        "es": [
+          "Empezá en plancha alta, con las manos debajo de los hombros.",
+          "Acercá una rodilla al pecho, volvé a la posición inicial y alterná los lados.",
+          "Elegí un ritmo que te permita mantener estable el tronco."
+        ]
+      },
+      "cues": {
+        "en": [
+          "Avoid bouncing your hips up and down.",
+          "Slow down or elevate your hands if needed."
+        ],
+        "es": [
+          "Evitá que las caderas reboten hacia arriba y abajo.",
+          "Bajá el ritmo o apoyá las manos sobre una superficie elevada si hace falta."
+        ]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Mountain climbers"]
+      },
+      "primaryMuscles": [],
+      "secondaryMuscles": ["shoulders", "hip-flexors"],
+      "focus": ["conditioning", "core"]
+    },
+    {
+      "id": "hip-90-90",
+      "name": {
+        "en": "90/90 hip switches",
+        "es": "Movilidad de cadera 90/90"
+      },
+      "pattern": "hip-rotation",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "images": [
+        {
+          "src": "./assets/hip-90-90/1-first-side.jpeg",
+          "alt": {
+            "en": "A person sits in a 90/90 hip position with one leg in front and one to the side.",
+            "es": "Una persona está sentada en posición 90/90, con una pierna adelante y la otra hacia un costado."
+          }
+        },
+        {
+          "src": "./assets/hip-90-90/2-switching.jpeg",
+          "alt": {
+            "en": "A person rotates both knees through the middle while switching sides in a 90/90 hip movement.",
+            "es": "Una persona lleva ambas rodillas por el centro para cambiar de lado en un movimiento 90/90."
+          }
+        },
+        {
+          "src": "./assets/hip-90-90/3-second-side.jpeg",
+          "alt": {
+            "en": "A person sits in the 90/90 hip position on the opposite side.",
+            "es": "Una persona está sentada en posición 90/90 del lado opuesto."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Sit with both knees bent at roughly 90 degrees, one leg in front and one to the side.",
+          "Rotate both knees to the other side while keeping your torso tall."
+        ],
+        "es": [
+          "Sentate con las rodillas flexionadas cerca de 90 grados, una pierna adelante y la otra hacia un costado.",
+          "Llevá ambas rodillas hacia el otro lado y mantené el torso erguido."
+        ]
+      },
+      "cues": {
+        "en": ["Use your hands for support and stay within a comfortable range."],
+        "es": ["Apoyá las manos si lo necesitás y movete dentro de un recorrido cómodo."]
+      },
+      "primaryMuscles": ["glutes"],
+      "secondaryMuscles": ["adductors"],
+      "focus": ["mobility"]
+    },
+    {
+      "id": "cat-cow",
+      "name": {
+        "en": "Cat-cow stretch",
+        "es": "Gato-vaca"
+      },
+      "pattern": "spinal-flexion",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "images": [
+        {
+          "src": "./assets/cat-cow/cat-position.jpeg",
+          "alt": {
+            "en": "A person rounds their back in the cat position on hands and knees.",
+            "es": "Una persona redondea la espalda en la posición de gato, en cuatro apoyos."
+          }
+        },
+        {
+          "src": "./assets/cat-cow/cow-position.jpeg",
+          "alt": {
+            "en": "A person gently extends their back in the cow position on hands and knees.",
+            "es": "Una persona extiende suavemente la espalda en la posición de vaca, en cuatro apoyos."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Start on hands and knees with hands under shoulders.",
+          "Round your back gently, then move into a comfortable spinal extension while breathing steadily."
+        ],
+        "es": [
+          "Empezá en cuatro apoyos, con las manos debajo de los hombros.",
+          "Redondeá suavemente la espalda y después extendé la columna sin forzar, mientras respirás con normalidad."
+        ]
+      },
+      "cues": {
+        "en": ["Move through the spine rather than forcing the neck or lower back."],
+        "es": ["Mové la columna sin forzar el cuello ni la zona lumbar."]
+      },
+      "aliases": {
+        "en": ["Cat-cow"],
+        "es": ["Gato contento / Gato enojado"]
+      },
+      "primaryMuscles": ["back"],
+      "secondaryMuscles": [],
+      "focus": ["mobility", "core"]
+    },
+    {
+      "id": "shoulder-pass-through",
+      "name": {
+        "en": "Shoulder pass-throughs",
+        "es": "Pasadas de hombros con banda o bastón"
+      },
+      "pattern": "shoulder-flexion",
+      "equipment": ["band", "stick"],
+      "level": "beginner",
+      "image": "press",
+      "images": [
+        {
+          "src": "./assets/shoulder-pass-through/1-front.jpeg",
+          "alt": {
+            "en": "A person holds a stick in front of their body with a wide grip to begin a shoulder pass-through.",
+            "es": "Una persona sostiene un bastón delante del cuerpo con un agarre amplio para iniciar la pasada de hombros."
+          }
+        },
+        {
+          "src": "./assets/shoulder-pass-through/2-middle.jpeg",
+          "alt": {
+            "en": "A person moves a stick overhead during a shoulder pass-through.",
+            "es": "Una persona pasa un bastón por encima de la cabeza durante una pasada de hombros."
+          }
+        },
+        {
+          "src": "./assets/shoulder-pass-through/3-back.jpeg",
+          "alt": {
+            "en": "A person holds a stick behind their body at the end of a shoulder pass-through.",
+            "es": "Una persona sostiene un bastón detrás del cuerpo al final de una pasada de hombros."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Stand tall and hold a light band or stick with a wide, comfortable grip.",
+          "Raise it in front of you and overhead, then move it behind you only as far as feels easy; return the same way."
+        ],
+        "es": [
+          "Parate erguido y sostené una banda suave o un bastón con un agarre amplio y cómodo.",
+          "Subilo por delante y por encima de la cabeza. Pasalo por detrás solo hasta donde resulte fácil y volvé por el mismo recorrido."
+        ]
+      },
+      "cues": {
+        "en": ["Keep your ribs stacked and widen your grip if the movement feels restricted."],
+        "es": [
+          "Mantené las costillas alineadas y separá más las manos si el movimiento se siente limitado."
+        ]
+      },
+      "aliases": {
+        "en": ["Shoulder pass-through"],
+        "es": [
+          "Dislocaciones de hombro con banda/bastón",
+          "Dislocaciones de hombro con banda o bastón"
+        ]
+      },
+      "primaryMuscles": ["shoulders"],
+      "secondaryMuscles": ["back"],
+      "focus": ["mobility"]
+    },
+    {
+      "id": "high-plank",
+      "name": {
+        "en": "High plank",
+        "es": "Plancha alta"
+      },
+      "pattern": "isometric-stability",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "images": [
+        {
+          "src": "./assets/high-plank/high-plank.jpeg",
+          "alt": {
+            "en": "A person holds a high plank with straight arms, hands under the shoulders and body aligned.",
+            "es": "Una persona sostiene una plancha alta con los brazos extendidos, las manos debajo de los hombros y el cuerpo alineado."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Place your hands under your shoulders and extend your legs behind you.",
+          "Press the floor away and hold a steady line from head to heels while breathing."
+        ],
+        "es": [
+          "Apoyá las manos debajo de los hombros y extendé las piernas hacia atrás.",
+          "Empujá el piso y mantené una línea estable desde la cabeza hasta los talones mientras respirás."
+        ]
+      },
+      "cues": {
+        "en": ["Keep hips level; use your knees down if you cannot hold the position steadily."],
+        "es": [
+          "Mantené las caderas alineadas. Apoyá las rodillas si no podés sostener la postura con control."
+        ]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Plancha tradicional"]
+      },
+      "primaryMuscles": [],
+      "secondaryMuscles": ["shoulders"],
+      "focus": ["strength", "core"]
+    },
+    {
+      "id": "hanging-leg-raise",
+      "name": {
+        "en": "Hanging knee raise",
+        "es": "Elevación de rodillas en barra"
+      },
+      "pattern": "trunk-flexion",
+      "equipment": ["pull-up-bar"],
+      "level": "intermediate",
+      "image": "core",
+      "images": [
+        {
+          "src": "./assets/hanging-leg-raise/1-initial.jpeg",
+          "alt": {
+            "en": "A person hangs from a bar with arms extended and legs straight below them.",
+            "es": "Una persona está colgada de una barra, con los brazos extendidos y las piernas rectas hacia abajo."
+          }
+        },
+        {
+          "src": "./assets/hanging-leg-raise/2-final.jpeg",
+          "alt": {
+            "en": "A person raises their knees towards their hips while hanging from a bar.",
+            "es": "Una persona eleva las rodillas hacia las caderas mientras está colgada de una barra."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Hang from a secure bar with a comfortable grip and shoulders gently engaged.",
+          "Brace, raise your knees towards your hips without swinging, then lower them slowly."
+        ],
+        "es": [
+          "Colgate de una barra firme con un agarre cómodo y los hombros suavemente activos.",
+          "Activá el abdomen, acercá las rodillas a las caderas sin balancearte y bajalas despacio."
+        ]
+      },
+      "cues": {
+        "en": ["Begin with bent knees and stop the set if you cannot control the swing."],
+        "es": [
+          "Empezá con las rodillas flexionadas y terminá la serie si no podés controlar el balanceo."
+        ]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Elevación de piernas en barra", "Elevación de rodillas colgado"]
+      },
+      "primaryMuscles": [],
+      "secondaryMuscles": ["hip-flexors"],
+      "focus": ["strength", "core"]
+    },
+    {
+      "id": "dumbbell-overhead-press",
+      "name": {
+        "en": "Standing dumbbell shoulder press",
+        "es": "Press militar con mancuernas"
+      },
+      "pattern": "vertical-push",
+      "equipment": ["dumbbells"],
+      "level": "beginner",
+      "image": "press",
+      "how": {
+        "en": [
+          "Stand with feet steady and hold a dumbbell beside each shoulder.",
+          "Press both weights overhead in a controlled path, then lower them to shoulder height."
+        ],
+        "es": [
+          "Parate con una base firme y sostené una mancuerna junto a cada hombro.",
+          "Empujá ambas mancuernas por encima de la cabeza con control y bajalas hasta los hombros."
+        ]
+      },
+      "cues": {
+        "en": ["Keep your ribs over your hips and avoid leaning back to finish the press."],
+        "es": ["Mantené las costillas sobre las caderas y evitá inclinarte hacia atrás al empujar."]
+      },
+      "primaryMuscles": ["shoulders"],
+      "secondaryMuscles": ["triceps"],
+      "focus": ["strength"]
+    },
+    {
+      "id": "ez-bar-curl",
+      "name": {
+        "en": "EZ-bar curl",
+        "es": "Curl de bíceps con barra Z"
+      },
+      "pattern": "elbow-flexion",
+      "equipment": ["ez-bar"],
+      "level": "beginner",
+      "image": "row",
+      "images": [
+        {
+          "src": "./assets/ez-bar-curl/1-low.jpeg",
+          "alt": {
+            "en": "A person holds an EZ bar with arms extended at the bottom of a curl.",
+            "es": "Una persona sostiene una barra Z con los brazos extendidos al inicio del curl."
+          }
+        },
+        {
+          "src": "./assets/ez-bar-curl/2-high.jpeg",
+          "alt": {
+            "en": "A person curls an EZ bar towards the shoulders with elbows bent.",
+            "es": "Una persona flexiona los codos para llevar la barra Z hacia los hombros."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Stand tall and hold the EZ bar with a comfortable underhand grip.",
+          "Bend your elbows to curl the bar towards your shoulders, then lower it slowly."
+        ],
+        "es": [
+          "Parate erguido y sostené la barra Z con un agarre supino cómodo.",
+          "Flexioná los codos para acercar la barra a los hombros y bajala despacio."
+        ]
+      },
+      "cues": {
+        "en": ["Keep elbows near your sides and avoid rocking your torso."],
+        "es": ["Mantené los codos cerca del cuerpo y evitá impulsarte con el torso."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Curl con barra Z"]
+      },
+      "primaryMuscles": ["biceps"],
+      "secondaryMuscles": [],
+      "focus": ["strength"]
+    },
+    {
+      "id": "rope-triceps-pushdown",
+      "name": {
+        "en": "Rope triceps push-down",
+        "es": "Extensión de tríceps en polea con cuerda"
+      },
+      "pattern": "elbow-extension",
+      "equipment": ["cable"],
+      "level": "beginner",
+      "image": "press",
+      "images": [
+        {
+          "src": "./assets/rope-triceps-pushdown/1-high.jpeg",
+          "alt": {
+            "en": "A person holds a cable rope near the chest with elbows bent to begin a triceps push-down.",
+            "es": "Una persona sostiene la cuerda de la polea cerca del pecho, con los codos flexionados, para iniciar la extensión de tríceps."
+          }
+        },
+        {
+          "src": "./assets/rope-triceps-pushdown/2-low.jpeg",
+          "alt": {
+            "en": "A person presses a cable rope down until the arms are extended in a triceps push-down.",
+            "es": "Una persona empuja la cuerda de la polea hacia abajo hasta extender los brazos durante la extensión de tríceps."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Stand facing a high cable with the rope held near your chest and elbows by your sides.",
+          "Straighten your elbows to press the rope down, then return slowly without moving your upper arms."
+        ],
+        "es": [
+          "Parate frente a una polea alta, con la cuerda cerca del pecho y los codos junto al cuerpo.",
+          "Extendé los codos para empujar la cuerda hacia abajo y volvé despacio sin mover los brazos."
+        ]
+      },
+      "cues": {
+        "en": ["Use a load you can control and keep your shoulders relaxed."],
+        "es": ["Elegí un peso que puedas controlar y mantené los hombros relajados."]
+      },
+      "primaryMuscles": ["triceps"],
+      "secondaryMuscles": [],
+      "focus": ["strength"]
+    },
+    {
+      "id": "incline-leg-press",
+      "name": {
+        "en": "Incline leg press",
+        "es": "Prensa inclinada"
+      },
+      "pattern": "squat",
+      "equipment": ["machine"],
+      "level": "beginner",
+      "image": "squat",
+      "images": [
+        {
+          "src": "./assets/incline-leg-press/1-down.jpeg",
+          "alt": {
+            "en": "A person lowers the leg press platform towards the body with knees bent.",
+            "es": "Una persona acerca la plataforma de la prensa inclinada al cuerpo, con las rodillas flexionadas."
+          }
+        },
+        {
+          "src": "./assets/incline-leg-press/2-up.jpeg",
+          "alt": {
+            "en": "A person presses the leg press platform away with legs extended without locking the knees.",
+            "es": "Una persona aleja la plataforma de la prensa inclinada al extender las piernas sin trabar las rodillas."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Sit against the back support and place your feet about shoulder-width on the platform.",
+          "Lower the platform until your knees bend comfortably, then press through your feet without locking your knees."
+        ],
+        "es": [
+          "Sentate con la espalda apoyada y ubicá los pies, más o menos, al ancho de hombros sobre la plataforma.",
+          "Bajá hasta flexionar las rodillas de forma cómoda y empujá con los pies sin trabarlas al extender."
+        ]
+      },
+      "cues": {
+        "en": ["Keep your lower back against the pad and use a range you can control."],
+        "es": ["Mantené la zona lumbar apoyada y usá un recorrido que puedas controlar."]
+      },
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["glutes"],
+      "focus": ["strength"]
+    },
+    {
+      "id": "seated-leg-curl",
+      "name": {
+        "en": "Seated leg curl",
+        "es": "Curl femoral sentado"
+      },
+      "pattern": "knee-flexion",
+      "equipment": ["machine"],
+      "level": "beginner",
+      "image": "hinge",
+      "images": [
+        {
+          "src": "./assets/seated-leg-curl/1-legs-up.jpeg",
+          "alt": {
+            "en": "A person sits at a leg curl machine with the lower legs raised and knees bent.",
+            "es": "Una persona está sentada en la máquina de curl femoral, con las piernas flexionadas y el apoyo elevado."
+          }
+        },
+        {
+          "src": "./assets/seated-leg-curl/2-legs-down.jpeg",
+          "alt": {
+            "en": "A person extends the legs forward against the seated leg curl machine pad.",
+            "es": "Una persona extiende las piernas hacia adelante contra el apoyo de la máquina de curl femoral sentado."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Adjust the seat and pads so your knees line up with the machine pivot.",
+          "Bend your knees to draw the lower-leg pad down, then return slowly."
+        ],
+        "es": [
+          "Ajustá el asiento y los apoyos para que las rodillas queden alineadas con el eje de la máquina.",
+          "Flexioná las rodillas para bajar el apoyo de las piernas y volvé despacio."
+        ]
+      },
+      "cues": {
+        "en": ["Keep your hips against the seat and avoid jerking the weight."],
+        "es": ["Mantené las caderas apoyadas y evitá dar tirones al peso."]
+      },
+      "primaryMuscles": ["hamstrings"],
+      "secondaryMuscles": [],
+      "focus": ["strength"]
+    },
+    {
+      "id": "standing-calf-raise",
+      "name": {
+        "en": "Standing calf raise",
+        "es": "Elevación de gemelos de pie"
+      },
+      "pattern": "ankle-plantar-flexion",
+      "equipment": ["machine"],
+      "level": "beginner",
+      "image": "squat",
+      "images": [
+        {
+          "src": "./assets/standing-calf-raise/1-up.jpeg",
+          "alt": {
+            "en": "A person rises onto the balls of the feet during a standing calf raise.",
+            "es": "Una persona se eleva sobre la parte delantera de los pies durante una elevación de gemelos de pie."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Stand with the balls of your feet on the platform and heels free, using the handles for balance.",
+          "Rise onto your toes, pause briefly, then lower your heels with control."
+        ],
+        "es": [
+          "Parate con la parte delantera de los pies sobre la plataforma y los talones libres; sujetate para mantener el equilibrio.",
+          "Elevá los talones, hacé una pausa breve y bajalos con control."
+        ]
+      },
+      "cues": {
+        "en": ["Use a comfortable ankle range and avoid bouncing at the bottom."],
+        "es": ["Usá un recorrido cómodo para los tobillos y evitá rebotar abajo."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Elevación de talones de pie"]
+      },
+      "primaryMuscles": ["calves"],
+      "secondaryMuscles": [],
+      "focus": ["strength"]
+    },
+    {
+      "id": "quadruped-thoracic-rotation",
+      "name": {
+        "en": "Quadruped thoracic rotation",
+        "es": "Rotación torácica en cuadrupedia"
+      },
+      "pattern": "trunk-rotation",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "how": {
+        "en": [
+          "Start on hands and knees; place one hand lightly behind your head.",
+          "Turn that elbow down towards the floor, then rotate it gently towards the ceiling; repeat both sides."
+        ],
+        "es": [
+          "Empezá en cuatro apoyos y apoyá una mano suavemente detrás de la cabeza.",
+          "Llevá ese codo hacia el piso y después giralo con suavidad hacia el techo. Repetí de ambos lados."
+        ]
+      },
+      "cues": {
+        "en": ["Keep your hips still and make the rotation through your upper back."],
+        "es": ["Mantené las caderas quietas y hacé el giro desde la parte alta de la espalda."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Apertura torácica en cuadrupedia"]
+      },
+      "primaryMuscles": ["back"],
+      "secondaryMuscles": ["shoulders"],
+      "focus": ["mobility"],
+      "images": [
+        {
+          "src": "./assets/quadruped-thoracic-rotation/1-down.jpeg",
+          "alt": {
+            "en": "On hands and knees, the person rotates one elbow down towards the floor.",
+            "es": "En cuatro apoyos, la persona lleva un codo hacia el piso."
+          }
+        },
+        {
+          "src": "./assets/quadruped-thoracic-rotation/2-up.jpeg",
+          "alt": {
+            "en": "On hands and knees, the person rotates one elbow up towards the ceiling.",
+            "es": "En cuatro apoyos, la persona gira un codo hacia el techo."
+          }
+        }
       ]
     },
-    "cues": {
-      "en": ["Keep your hips on the pad and avoid lifting them to move the load."],
-      "es": ["Mantené las caderas apoyadas y evitá levantarlas para mover el peso."]
-    },
-    "primaryMuscles": ["hamstrings"],
-    "secondaryMuscles": [],
-    "focus": ["strength"]
-  },
-  {
-    "id": "glute-bridge",
-    "name": {
-      "en": "Glute bridge",
-      "es": "Puente de glúteos"
-    },
-    "pattern": "hinge",
-    "equipment": ["bodyweight"],
-    "level": "beginner",
-    "image": "hinge",
-    "how": {
-      "en": [
-        "Lie on your back with knees bent and feet flat about hip-width apart.",
-        "Press through your feet to lift your hips until your body forms a comfortable line, then lower slowly."
-      ],
-      "es": [
-        "Acostate boca arriba con las rodillas flexionadas y los pies apoyados, más o menos, al ancho de las caderas.",
-        "Empujá con los pies para elevar las caderas hasta alinear cómodamente el cuerpo y bajá despacio."
+    {
+      "id": "rotational-lunge",
+      "name": {
+        "en": "Lunge with rotation",
+        "es": "Estocada con rotación"
+      },
+      "pattern": "lunge",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "squat",
+      "how": {
+        "en": [
+          "Step forward into a comfortable split stance and bend both knees slightly.",
+          "Rotate your trunk gently towards the forward leg, return to centre, then step back and switch sides."
+        ],
+        "es": [
+          "Dá un paso adelante y adoptá una posición de estocada cómoda, con ambas rodillas apenas flexionadas.",
+          "Girá suavemente el torso hacia la pierna adelantada, volvé al centro, retrocedé y cambiá de lado."
+        ]
+      },
+      "cues": {
+        "en": ["Keep the front foot planted and avoid twisting through the knee."],
+        "es": ["Mantené apoyado el pie delantero y evitá girar desde la rodilla."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Estocadas con rotación"]
+      },
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["glutes"],
+      "focus": ["mobility", "core"],
+      "images": [
+        {
+          "src": "./assets/rotational-lunge/1-start-position.jpeg",
+          "alt": {
+            "en": "A person stands upright on a mat before stepping into a lunge.",
+            "es": "Una persona está de pie sobre una colchoneta antes de dar un paso hacia la estocada."
+          }
+        },
+        {
+          "src": "./assets/rotational-lunge/2-lunge.jpeg",
+          "alt": {
+            "en": "A person holds a forward lunge with the front knee bent and rear leg extended.",
+            "es": "Una persona sostiene una estocada hacia adelante, con la rodilla delantera flexionada y la pierna trasera extendida."
+          }
+        }
       ]
     },
-    "cues": {
-      "en": ["Keep ribs down and avoid arching your lower back at the top."],
-      "es": ["Mantené las costillas controladas y evitá arquear la zona lumbar arriba."]
+    {
+      "id": "ankle-knee-circles",
+      "name": {
+        "en": "Ankle circles and knee bends",
+        "es": "Círculos de tobillo y flexiones de rodilla"
+      },
+      "pattern": "ankle-circles",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "how": {
+        "en": [
+          "Stand near a support and gently circle one ankle, then the other.",
+          "With your feet pointing forwards, bend both knees a short distance and straighten them smoothly."
+        ],
+        "es": [
+          "Parate cerca de un apoyo y hacé círculos suaves con un tobillo y después con el otro.",
+          "Con los pies apuntando hacia adelante, flexioná un poco las rodillas y volvé a estirarlas con suavidad."
+        ]
+      },
+      "cues": {
+        "en": [
+          "Keep the movement small and controlled; do not twist your knees over planted feet. Stop if a joint feels painful."
+        ],
+        "es": [
+          "Hacé movimientos cortos y controlados; no gires las rodillas con los pies apoyados. Pará si sentís dolor en una articulación."
+        ]
+      },
+      "aliases": {
+        "en": ["Ankle and knee mobility circles", "Ankle and knee circles"],
+        "es": ["Movilidad circular de tobillos y rodillas", "Circunducciones de tobillo y rodilla"]
+      },
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["calves"],
+      "focus": ["mobility"]
     },
-    "primaryMuscles": ["glutes"],
-    "secondaryMuscles": ["hamstrings"],
-    "focus": ["strength", "core"]
-  },
-  {
-    "id": "dumbbell-step-up",
-    "name": {
-      "en": "Dumbbell step-up",
-      "es": "Step-up con mancuernas"
-    },
-    "pattern": "lunge",
-    "equipment": ["dumbbells", "step"],
-    "level": "beginner",
-    "image": "squat",
-    "how": {
-      "en": [
-        "Stand facing a stable low step with a dumbbell in each hand.",
-        "Place one whole foot on the step, push through it to stand up, then step down with control and switch legs."
-      ],
-      "es": [
-        "Parate frente a un escalón bajo y firme con una mancuerna en cada mano.",
-        "Apoyá todo un pie en el escalón, empujá para subir y bajá con control; después cambiá de pierna."
+    {
+      "id": "side-plank",
+      "name": {
+        "en": "Side plank",
+        "es": "Plancha lateral (ambos lados)"
+      },
+      "pattern": "lateral-stability",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "how": {
+        "en": [
+          "Lie on your side with your elbow below your shoulder and legs stacked.",
+          "Lift your hips and hold a straight line; lower with control and repeat on the other side."
+        ],
+        "es": [
+          "Acostate de costado con el codo debajo del hombro y las piernas una sobre otra.",
+          "Elevá las caderas y mantené el cuerpo alineado; bajá con control y repetí del otro lado."
+        ]
+      },
+      "cues": {
+        "en": ["Bend your knees for an easier version and do not let the shoulder collapse."],
+        "es": ["Flexioná las rodillas para facilitar la postura y no dejes que el hombro se hunda."]
+      },
+      "primaryMuscles": ["obliques"],
+      "secondaryMuscles": ["shoulders"],
+      "focus": ["strength", "core"],
+      "images": [
+        {
+          "src": "./assets/side-plank/side-plank.jpeg",
+          "alt": {
+            "en": "A person holds a side plank on one forearm with hips lifted and body aligned.",
+            "es": "Una persona sostiene una plancha lateral sobre un antebrazo, con las caderas elevadas y el cuerpo alineado."
+          }
+        }
       ]
     },
-    "cues": {
-      "en": [
-        "Choose a height that lets you keep balance and avoid pushing off strongly with the trailing foot."
-      ],
-      "es": [
-        "Elegí una altura que te permita mantener el equilibrio y evitá impulsarte con fuerza desde el pie de atrás."
+    {
+      "id": "reverse-crunch",
+      "name": {
+        "en": "Reverse crunch",
+        "es": "Crunch inverso"
+      },
+      "pattern": "trunk-flexion",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "how": {
+        "en": [
+          "Lie on your back with knees bent above your hips and arms resting by your sides.",
+          "Curl your pelvis to bring your knees slightly towards your chest, then lower slowly."
+        ],
+        "es": [
+          "Acostate boca arriba con las rodillas flexionadas sobre las caderas y los brazos a los costados.",
+          "Enrollá suavemente la pelvis para acercar las rodillas al pecho y bajá despacio."
+        ]
+      },
+      "cues": {
+        "en": ["Use a small controlled movement rather than swinging your legs."],
+        "es": ["Hacé un movimiento corto y controlado, sin balancear las piernas."]
+      },
+      "primaryMuscles": [],
+      "secondaryMuscles": [],
+      "focus": ["strength", "core"],
+      "images": [
+        {
+          "src": "./assets/reverse-crunch/1-start-position.jpeg",
+          "alt": {
+            "en": "A person lies on their back with knees bent and feet on the floor.",
+            "es": "Una persona está acostada boca arriba, con las rodillas flexionadas y los pies apoyados en el piso."
+          }
+        },
+        {
+          "src": "./assets/reverse-crunch/3-end-position.jpeg",
+          "alt": {
+            "en": "A person curls the pelvis up, drawing bent knees towards the chest.",
+            "es": "Una persona enrolla la pelvis hacia arriba y acerca las rodillas flexionadas al pecho."
+          }
+        }
       ]
     },
-    "aliases": {
-      "en": [],
-      "es": []
+    {
+      "id": "russian-twist",
+      "name": {
+        "en": "Russian twist",
+        "es": "Giros rusos"
+      },
+      "pattern": "trunk-rotation",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "how": {
+        "en": [
+          "Sit with knees bent and feet on the floor; lean back slightly while keeping your trunk long.",
+          "Rotate your ribcage gently from side to side, moving at a controlled pace."
+        ],
+        "es": [
+          "Sentate con las rodillas flexionadas y los pies apoyados; incliná el torso apenas hacia atrás y mantenelo largo.",
+          "Girá suavemente el torso de un lado al otro con un ritmo controlado."
+        ]
+      },
+      "cues": {
+        "en": ["Keep the rotation comfortable and avoid rounding your back."],
+        "es": ["Girá dentro de un recorrido cómodo y evitá encorvar la espalda."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Russian twists (Giros rusos)"]
+      },
+      "primaryMuscles": ["obliques"],
+      "secondaryMuscles": [],
+      "focus": ["strength", "core"],
+      "images": [
+        {
+          "src": "./assets/russian-twist/1-initial.jpeg",
+          "alt": {
+            "en": "The person sits leaning back slightly with knees bent and hands together at the chest.",
+            "es": "La persona se sienta con las rodillas flexionadas, se inclina un poco hacia atrás y junta las manos frente al pecho."
+          }
+        },
+        {
+          "src": "./assets/russian-twist/2-left.jpeg",
+          "alt": {
+            "en": "The person rotates the torso to the left while keeping the legs bent.",
+            "es": "La persona gira el torso hacia la izquierda y mantiene las piernas flexionadas."
+          }
+        },
+        {
+          "src": "./assets/russian-twist/3-right.jpeg",
+          "alt": {
+            "en": "The person rotates the torso to the right while keeping the legs bent.",
+            "es": "La persona gira el torso hacia la derecha y mantiene las piernas flexionadas."
+          }
+        }
+      ]
     },
-    "primaryMuscles": ["quads"],
-    "secondaryMuscles": ["glutes"],
-    "focus": ["strength"]
-  }
-]
+    {
+      "id": "incline-dumbbell-press",
+      "name": {
+        "en": "Incline dumbbell press",
+        "es": "Press inclinado con mancuernas"
+      },
+      "pattern": "horizontal-push",
+      "equipment": ["dumbbells", "bench"],
+      "level": "beginner",
+      "image": "press",
+      "how": {
+        "en": [
+          "Set a bench to a modest incline and hold the dumbbells above your upper chest.",
+          "Lower them beside your chest with wrists over elbows, then press up smoothly."
+        ],
+        "es": [
+          "Ajustá el banco con una inclinación moderada y sostené las mancuernas sobre la parte alta del pecho.",
+          "Bajalas junto al pecho, con las muñecas sobre los codos, y empujá hacia arriba con suavidad."
+        ]
+      },
+      "cues": {
+        "en": ["Keep your head and back supported and do not bounce at the bottom."],
+        "es": ["Mantené la cabeza y la espalda apoyadas y no rebotes abajo."]
+      },
+      "primaryMuscles": ["chest"],
+      "secondaryMuscles": ["triceps", "shoulders"],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/incline-dumbbell-press/1-low.jpeg",
+          "alt": {
+            "en": "On an inclined bench, the person lowers both dumbbells beside the upper chest.",
+            "es": "En un banco inclinado, la persona baja las dos mancuernas junto a la parte alta del pecho."
+          }
+        },
+        {
+          "src": "./assets/incline-dumbbell-press/2-high.jpeg",
+          "alt": {
+            "en": "On an inclined bench, the person presses both dumbbells overhead with arms extended.",
+            "es": "En un banco inclinado, la persona empuja las dos mancuernas hacia arriba hasta extender los brazos."
+          }
+        }
+      ]
+    },
+    {
+      "id": "dumbbell-lateral-raise",
+      "name": {
+        "en": "Dumbbell lateral raise",
+        "es": "Elevaciones laterales con mancuernas"
+      },
+      "pattern": "shoulder-abduction",
+      "equipment": ["dumbbells"],
+      "level": "beginner",
+      "image": "press",
+      "how": {
+        "en": [
+          "Stand tall holding light dumbbells by your sides with elbows slightly bent.",
+          "Raise your arms out to the sides to about shoulder height, then lower slowly."
+        ],
+        "es": [
+          "Parate erguido con mancuernas livianas a los costados y los codos apenas flexionados.",
+          "Elevá los brazos hacia los costados hasta aproximadamente la altura de los hombros y bajalos despacio."
+        ]
+      },
+      "cues": {
+        "en": ["Keep shoulders relaxed and avoid swinging the weights."],
+        "es": ["Mantené los hombros relajados y evitá balancear las mancuernas."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Elevaciones laterales para hombros"]
+      },
+      "primaryMuscles": ["shoulders"],
+      "secondaryMuscles": [],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/dumbbell-lateral-raise/1-low.jpeg",
+          "alt": {
+            "en": "The person stands with dumbbells held by their sides and elbows slightly bent.",
+            "es": "La persona está de pie con las mancuernas a los costados y los codos apenas flexionados."
+          }
+        },
+        {
+          "src": "./assets/dumbbell-lateral-raise/2-high.jpeg",
+          "alt": {
+            "en": "The person raises both arms out to the sides to shoulder height.",
+            "es": "La persona eleva ambos brazos hacia los costados hasta la altura de los hombros."
+          }
+        }
+      ]
+    },
+    {
+      "id": "hammer-curl",
+      "name": {
+        "en": "Hammer curl",
+        "es": "Curl martillo"
+      },
+      "pattern": "elbow-flexion",
+      "equipment": ["dumbbells"],
+      "level": "beginner",
+      "image": "row",
+      "how": {
+        "en": [
+          "Stand with a dumbbell in each hand and palms facing inwards.",
+          "Bend your elbows to bring the weights towards your shoulders, then lower with control."
+        ],
+        "es": [
+          "Parate con una mancuerna en cada mano y las palmas enfrentadas.",
+          "Flexioná los codos para acercar las mancuernas a los hombros y bajalas con control."
+        ]
+      },
+      "cues": {
+        "en": ["Keep wrists neutral and elbows close to your body."],
+        "es": ["Mantené las muñecas rectas y los codos cerca del cuerpo."]
+      },
+      "primaryMuscles": ["biceps"],
+      "secondaryMuscles": [],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/hammer-curl/1-low.jpeg",
+          "alt": {
+            "en": "The person stands holding dumbbells by their sides with palms facing inwards.",
+            "es": "La persona está de pie con las mancuernas a los costados y las palmas enfrentadas."
+          }
+        },
+        {
+          "src": "./assets/hammer-curl/2-high.jpeg",
+          "alt": {
+            "en": "The person bends both elbows to bring the dumbbells towards the shoulders.",
+            "es": "La persona flexiona ambos codos y acerca las mancuernas a los hombros."
+          }
+        }
+      ]
+    },
+    {
+      "id": "dumbbell-french-press",
+      "name": {
+        "en": "Lying dumbbell triceps extension",
+        "es": "Press francés con mancuernas"
+      },
+      "pattern": "elbow-extension",
+      "equipment": ["dumbbells", "bench"],
+      "level": "beginner",
+      "image": "press",
+      "how": {
+        "en": [
+          "Lie on a bench holding the dumbbells above your chest with palms facing each other.",
+          "Bend your elbows to lower the weights beside your head, then extend your arms back up."
+        ],
+        "es": [
+          "Acostate en un banco y sostené las mancuernas sobre el pecho, con las palmas enfrentadas.",
+          "Flexioná los codos para bajar las mancuernas junto a la cabeza y volvé a extender los brazos."
+        ]
+      },
+      "cues": {
+        "en": ["Keep upper arms steady and use a range that feels comfortable at the elbows."],
+        "es": [
+          "Mantené quieta la parte alta de los brazos y usá un recorrido cómodo para los codos."
+        ]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Press francés con mancuernas", "Extensión de tríceps acostado con mancuernas"]
+      },
+      "primaryMuscles": ["triceps"],
+      "secondaryMuscles": [],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/dumbbell-french-press/1-initial-position.jpeg",
+          "alt": {
+            "en": "A person lies on a bench holding two dumbbells above the chest with arms extended.",
+            "es": "Una persona está acostada en un banco y sostiene dos mancuernas sobre el pecho con los brazos extendidos."
+          }
+        },
+        {
+          "src": "./assets/dumbbell-french-press/2-final-position.jpeg",
+          "alt": {
+            "en": "A person bends the elbows to lower two dumbbells beside the head.",
+            "es": "Una persona flexiona los codos para bajar dos mancuernas junto a la cabeza."
+          }
+        }
+      ]
+    },
+    {
+      "id": "conventional-deadlift",
+      "name": {
+        "en": "Conventional deadlift",
+        "es": "Peso muerto convencional"
+      },
+      "pattern": "hinge",
+      "equipment": ["barbell"],
+      "level": "intermediate",
+      "image": "hinge",
+      "images": [
+        {
+          "src": "./assets/conventional-deadlift/1-down.jpeg",
+          "alt": {
+            "en": "A person bends at the hips and knees to grip a barbell near the floor before a deadlift.",
+            "es": "Una persona flexiona las caderas y las rodillas para agarrar una barra cerca del piso antes del peso muerto."
+          }
+        },
+        {
+          "src": "./assets/conventional-deadlift/2-up.jpeg",
+          "alt": {
+            "en": "A person stands upright holding a barbell after lifting it from the floor.",
+            "es": "Una persona está erguida y sostiene una barra después de levantarla del piso."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Stand with the bar over mid-foot. Bend your hips and knees to take a secure grip just outside your legs.",
+          "Brace your trunk, keep the bar close, and stand by pressing the floor away; lower it under control."
+        ],
+        "es": [
+          "Parate con la barra sobre la mitad de los pies. Flexioná caderas y rodillas para agarrarla por fuera de las piernas.",
+          "Activá el abdomen, mantené la barra cerca y parate empujando el piso; bajala con control."
+        ]
+      },
+      "cues": {
+        "en": [
+          "Use a load you can lift smoothly while keeping your trunk controlled; avoid jerking the bar."
+        ],
+        "es": [
+          "Usá un peso que puedas levantar con suavidad y el torso controlado; evitá dar tirones con la barra."
+        ]
+      },
+      "primaryMuscles": ["hamstrings"],
+      "secondaryMuscles": ["glutes", "quads", "back"],
+      "focus": ["strength", "core"]
+    },
+    {
+      "id": "leg-extension-machine",
+      "name": {
+        "en": "Leg extension",
+        "es": "Extensión de cuádriceps en máquina"
+      },
+      "pattern": "knee-extension",
+      "equipment": ["machine"],
+      "level": "beginner",
+      "image": "squat",
+      "how": {
+        "en": [
+          "Adjust the seat so your knees line up with the machine pivot and the pad rests above your ankles.",
+          "Extend your knees smoothly, then lower the pad with control."
+        ],
+        "es": [
+          "Ajustá el asiento para alinear las rodillas con el eje y apoyá el rodillo sobre la parte baja de las piernas.",
+          "Extendé las rodillas con suavidad y bajá el rodillo con control."
+        ]
+      },
+      "cues": {
+        "en": ["Avoid snapping the knees straight or lifting your hips from the seat."],
+        "es": ["Evitá trabar las rodillas de golpe o levantar las caderas del asiento."]
+      },
+      "aliases": {
+        "en": ["Machine leg extension", "Leg extension machine"],
+        "es": []
+      },
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": [],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/leg-extension-machine/1-low.jpeg",
+          "alt": {
+            "en": "Seated at the leg extension machine, the person holds their knees bent with the ankle pad lowered.",
+            "es": "Sentada en la máquina de extensión de piernas, la persona mantiene las rodillas flexionadas y el rodillo abajo."
+          }
+        },
+        {
+          "src": "./assets/leg-extension-machine/2-high.jpeg",
+          "alt": {
+            "en": "The seated person extends both knees to raise the ankle pad in front of them.",
+            "es": "La persona extiende ambas rodillas para elevar el rodillo frente a ella."
+          }
+        }
+      ]
+    },
+    {
+      "id": "seated-calf-raise",
+      "name": {
+        "en": "Barbell seated calf raise",
+        "es": "Elevación de gemelos sentado con barra"
+      },
+      "pattern": "ankle-plantar-flexion",
+      "equipment": ["barbell", "bench"],
+      "level": "beginner",
+      "image": "squat",
+      "how": {
+        "en": [
+          "Sit near the end of a bench with the bar padded across your lower thighs and the balls of your feet on a stable raised surface.",
+          "Raise your heels, pause briefly, then lower them with control."
+        ],
+        "es": [
+          "Sentate cerca del borde de un banco, con la barra acolchada sobre la parte baja de los muslos y la parte delantera de los pies sobre un apoyo firme y elevado.",
+          "Elevá los talones, hacé una pausa breve y bajalos con control."
+        ]
+      },
+      "cues": {
+        "en": ["Pad the bar, keep it clear of your kneecaps and avoid bouncing."],
+        "es": ["Acolchá la barra, mantenela alejada de las rótulas y evitá rebotar."]
+      },
+      "aliases": {
+        "en": ["Seated calf raise"],
+        "es": ["Elevación de gemelos sentado", "Elevación de talones sentado"]
+      },
+      "primaryMuscles": ["calves"],
+      "secondaryMuscles": [],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/seated-calf-raise/1-low.jpeg",
+          "alt": {
+            "en": "The person sits on a bench with a barbell across their thighs and their heels lowered.",
+            "es": "La persona se sienta en un banco con una barra sobre los muslos y los talones bajos."
+          }
+        },
+        {
+          "src": "./assets/seated-calf-raise/2-high.jpeg",
+          "alt": {
+            "en": "The seated person raises their heels while keeping the barbell across their thighs.",
+            "es": "La persona eleva los talones mientras mantiene la barra sobre los muslos."
+          }
+        }
+      ]
+    },
+    {
+      "id": "deep-squat-pry",
+      "name": {
+        "en": "Deep squat pry",
+        "es": "Sentadilla profunda con apertura de rodillas"
+      },
+      "pattern": "squat",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "squat",
+      "how": {
+        "en": [
+          "Stand with feet comfortably apart and lower into a supported depth you can maintain.",
+          "Place elbows inside the knees and gently press them outward while keeping your feet grounded."
+        ],
+        "es": [
+          "Parate con los pies a una distancia cómoda y bajá hasta una profundidad que puedas sostener.",
+          "Apoyá los codos dentro de las rodillas y empujalas suavemente hacia afuera con los pies firmes."
+        ]
+      },
+      "cues": {
+        "en": ["Hold onto a support or use a shallower position if balance or comfort is limited."],
+        "es": [
+          "Agarrate de un apoyo o bajá menos si te cuesta mantener el equilibrio o la comodidad."
+        ]
+      },
+      "aliases": {
+        "en": ["Deep squat hold with elbow pry"],
+        "es": ["Sentadilla profunda isométrica con empuje de codos"]
+      },
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["glutes", "adductors"],
+      "focus": ["mobility"]
+    },
+    {
+      "id": "dynamic-hurdle-step",
+      "name": {
+        "en": "Dynamic hurdle step (heel-to-toe)",
+        "es": "Paso de valla dinámico (talón-punta)"
+      },
+      "pattern": "lunge",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "squat",
+      "how": {
+        "en": [
+          "Stand tall and imagine a low hurdle beside you.",
+          "Lift one knee, step over the imagined hurdle, place the heel then toe, and return; alternate legs."
+        ],
+        "es": [
+          "Parate erguido e imaginá una valla baja a un costado.",
+          "Elevá una rodilla, pasá la pierna por encima, apoyá primero el talón y después la punta; volvé y alterná."
+        ]
+      },
+      "cues": {
+        "en": ["Use a small, controlled step and hold support if balance is uncertain."],
+        "es": ["Hacé un paso corto y controlado, y sujetate si no estás seguro del equilibrio."]
+      },
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["glutes", "calves"],
+      "focus": ["mobility"]
+    },
+    {
+      "id": "prone-ytw",
+      "name": {
+        "en": "Prone Y-T-W raises",
+        "es": "Elevaciones Y-T-W boca abajo"
+      },
+      "pattern": "shoulder-abduction",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "images": [
+        {
+          "src": "./assets/prone-ytw/1-start-position.jpeg",
+          "alt": {
+            "en": "Starting position for prone Y-T-W raises: lying face down with arms relaxed alongside the body.",
+            "es": "Posición inicial de las elevaciones Y-T-W boca abajo: acostado con los brazos relajados junto al cuerpo."
+          }
+        },
+        {
+          "src": "./assets/prone-ytw/2-y-position.jpeg",
+          "alt": {
+            "en": "Prone Y-T-W raise in the Y position, with arms lifted diagonally overhead.",
+            "es": "Elevación Y-T-W boca abajo en posición de Y, con los brazos elevados en diagonal."
+          }
+        },
+        {
+          "src": "./assets/prone-ytw/4-t-position.jpeg",
+          "alt": {
+            "en": "Prone Y-T-W raise in the T position, with arms extended out to the sides.",
+            "es": "Elevación Y-T-W boca abajo en posición de T, con los brazos extendidos hacia los lados."
+          }
+        },
+        {
+          "src": "./assets/prone-ytw/3-w-position.jpeg",
+          "alt": {
+            "en": "Prone Y-T-W raise in the W position, with elbows bent and shoulder blades drawn together.",
+            "es": "Elevación Y-T-W boca abajo en posición de W, con los codos flexionados y las escápulas juntas."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Lie face down with your forehead supported and arms relaxed.",
+          "Lift your arms gently in Y, T, then W shapes, drawing your shoulder blades back; lower between shapes."
+        ],
+        "es": [
+          "Acostate boca abajo con la frente apoyada y los brazos relajados.",
+          "Elevá suavemente los brazos formando una Y, una T y una W; acercá las escápulas y bajá entre cada forma."
+        ]
+      },
+      "cues": {
+        "en": ["Use small movements and keep your neck relaxed; bodyweight is enough."],
+        "es": ["Hacé movimientos pequeños y relajá el cuello; no hace falta agregar peso."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Y-T-W extensiones escapulares prone", "Extensiones escapulares Y-T-W boca abajo"]
+      },
+      "primaryMuscles": ["shoulders"],
+      "secondaryMuscles": ["back"],
+      "focus": ["mobility"]
+    },
+    {
+      "id": "ab-wheel-rollout",
+      "name": {
+        "en": "Ab wheel rollout",
+        "es": "Rueda abdominal"
+      },
+      "pattern": "anti-extension",
+      "equipment": ["ab-wheel"],
+      "level": "intermediate",
+      "image": "core",
+      "how": {
+        "en": [
+          "Kneel with the wheel under your shoulders and brace your trunk.",
+          "Roll forwards only as far as you can keep your body controlled, then pull the wheel back."
+        ],
+        "es": [
+          "Arrodillate con la rueda debajo de los hombros y activá el abdomen.",
+          "Avanzá solo hasta donde puedas mantener el cuerpo controlado y después acercá la rueda."
+        ]
+      },
+      "cues": {
+        "en": ["Shorten the range or use a wall stop if your lower back begins to sag."],
+        "es": [
+          "Acortá el recorrido o frená contra una pared si se empieza a hundir la zona lumbar."
+        ]
+      },
+      "aliases": {
+        "en": ["Ab-wheel rollout"],
+        "es": ["Rodillo abdominal (ab wheel rollout)"]
+      },
+      "primaryMuscles": [],
+      "secondaryMuscles": ["shoulders"],
+      "focus": ["strength", "core"]
+    },
+    {
+      "id": "hollow-hold",
+      "name": {
+        "en": "Hollow hold",
+        "es": "Hollow hold (posición hollow)"
+      },
+      "pattern": "isometric-stability",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "images": [
+        {
+          "src": "./assets/hollow-hold/hollow-hold.jpeg",
+          "alt": {
+            "en": "Hollow hold: a person lies on their back with shoulders and straight legs raised, arms reaching overhead.",
+            "es": "Hollow hold: una persona está boca arriba, con los hombros y las piernas extendidas elevados y los brazos sobre la cabeza."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Lie on your back and gently brace so your lower back stays in contact with the floor.",
+          "Lift your shoulders and legs slightly, arms reaching overhead or forwards, and hold while breathing."
+        ],
+        "es": [
+          "Acostate boca arriba y activá suavemente el abdomen para mantener la zona lumbar en contacto con el piso.",
+          "Elevá un poco los hombros y las piernas, con los brazos hacia adelante o arriba, y sostené mientras respirás."
+        ]
+      },
+      "cues": {
+        "en": ["Bend your knees or bring your arms forwards to make the hold easier."],
+        "es": ["Flexioná las rodillas o llevá los brazos hacia adelante para facilitar la postura."]
+      },
+      "aliases": {
+        "en": ["Hollow-body hold"],
+        "es": ["Hollow hold (mantención en canoa)"]
+      },
+      "primaryMuscles": [],
+      "secondaryMuscles": [],
+      "focus": ["strength", "core"]
+    },
+    {
+      "id": "bird-dog",
+      "name": {
+        "en": "Bird-dog",
+        "es": "Bird dog (extensión alternada)"
+      },
+      "pattern": "anti-rotation",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "core",
+      "how": {
+        "en": [
+          "Start on hands and knees with your back steady.",
+          "Reach one arm forwards and the opposite leg back, return slowly, then switch sides."
+        ],
+        "es": [
+          "Empezá en cuatro apoyos y mantené la espalda estable.",
+          "Estirá un brazo hacia adelante y la pierna contraria hacia atrás; volvé despacio y cambiá de lado."
+        ]
+      },
+      "cues": {
+        "en": ["Keep hips level and avoid arching or rotating your trunk."],
+        "es": ["Mantené las caderas niveladas y evitá arquear o girar el torso."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Bird dog (alternado controlado)"]
+      },
+      "primaryMuscles": [],
+      "secondaryMuscles": ["back", "glutes"],
+      "focus": ["strength", "core"]
+    },
+    {
+      "id": "arnold-press",
+      "name": {
+        "en": "Arnold press",
+        "es": "Press Arnold"
+      },
+      "pattern": "vertical-push",
+      "equipment": ["dumbbells"],
+      "level": "intermediate",
+      "image": "press",
+      "images": [
+        {
+          "src": "./assets/arnold-press/1-start-position.jpeg",
+          "alt": {
+            "en": "Arnold press starting position: dumbbells held in front of the shoulders with palms facing the body.",
+            "es": "Posición inicial del press Arnold: mancuernas frente a los hombros y palmas hacia el cuerpo."
+          }
+        },
+        {
+          "src": "./assets/arnold-press/2-end-position.jpeg",
+          "alt": {
+            "en": "Arnold press top position: both dumbbells pressed overhead with arms extended.",
+            "es": "Posición final del press Arnold: las dos mancuernas elevadas sobre la cabeza y los brazos extendidos."
+          }
+        }
+      ],
+      "how": {
+        "en": [
+          "Hold dumbbells at shoulder height with palms facing you.",
+          "Press overhead while turning your palms forwards; reverse the rotation as you lower."
+        ],
+        "es": [
+          "Sostené las mancuernas a la altura de los hombros, con las palmas hacia vos.",
+          "Empujá hacia arriba mientras girás las palmas hacia adelante; invertí el giro al bajar."
+        ]
+      },
+      "cues": {
+        "en": ["Keep the rotation smooth and avoid leaning back."],
+        "es": ["Hacé el giro con suavidad y evitá inclinarte hacia atrás."]
+      },
+      "primaryMuscles": ["shoulders"],
+      "secondaryMuscles": ["triceps"],
+      "focus": ["strength"]
+    },
+    {
+      "id": "seated-cable-row-neutral",
+      "name": {
+        "en": "Seated cable row (neutral grip)",
+        "es": "Remo sentado en polea baja con agarre neutro"
+      },
+      "pattern": "horizontal-pull",
+      "equipment": ["cable", "machine"],
+      "level": "beginner",
+      "image": "row",
+      "how": {
+        "en": [
+          "Sit facing the cable with feet braced and hold a neutral-grip handle.",
+          "Pull towards your lower ribs with elbows close, then extend your arms slowly."
+        ],
+        "es": [
+          "Sentate frente a la polea, apoyá los pies y sostené un agarre neutro.",
+          "Llevá las manos hacia las costillas bajas con los codos cerca y extendé los brazos despacio."
+        ]
+      },
+      "cues": {
+        "en": ["Keep your torso steady rather than rocking backwards."],
+        "es": ["Mantené el torso quieto en vez de balancearte hacia atrás."]
+      },
+      "aliases": {
+        "en": ["Seated neutral-grip cable row"],
+        "es": ["Remo en polea baja (Grip neutro)", "Remo en polea baja con agarre neutro"]
+      },
+      "primaryMuscles": ["back"],
+      "secondaryMuscles": ["biceps"],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/seated-cable-row-neutral/1-start-position.jpeg",
+          "alt": {
+            "en": "A person sits facing a cable machine with arms extended while holding a close-grip handle.",
+            "es": "Una persona está sentada frente a una polea, con los brazos extendidos y sosteniendo un agarre cerrado."
+          }
+        },
+        {
+          "src": "./assets/seated-cable-row-neutral/2-start-position.jpeg",
+          "alt": {
+            "en": "A person pulls a close-grip cable handle towards the abdomen with elbows bent.",
+            "es": "Una persona lleva un agarre cerrado hacia el abdomen con los codos flexionados."
+          }
+        }
+      ]
+    },
+    {
+      "id": "high-cable-crossover",
+      "name": {
+        "en": "High-cable chest fly",
+        "es": "Cruces en polea alta para pecho"
+      },
+      "pattern": "horizontal-adduction",
+      "equipment": ["cable"],
+      "level": "beginner",
+      "image": "press",
+      "how": {
+        "en": [
+          "Stand between high cable pulleys and hold the handles with a slight bend in your elbows.",
+          "Sweep your hands down and together in front of your torso, then return slowly."
+        ],
+        "es": [
+          "Parate entre dos poleas altas y sostené las manijas con los codos apenas flexionados.",
+          "Llevá las manos hacia abajo y juntas delante del torso; volvé despacio."
+        ]
+      },
+      "cues": {
+        "en": ["Keep the movement comfortable and avoid pulling your arms far behind your body."],
+        "es": ["Usá un recorrido cómodo y evitá llevar los brazos muy detrás del cuerpo."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Cruces en polea alta (Pecho)"]
+      },
+      "primaryMuscles": ["chest"],
+      "secondaryMuscles": ["shoulders"],
+      "focus": ["strength"]
+    },
+    {
+      "id": "concentration-curl",
+      "name": {
+        "en": "Concentration curl",
+        "es": "Curl concentrado con mancuerna"
+      },
+      "pattern": "elbow-flexion",
+      "equipment": ["dumbbells", "bench"],
+      "level": "beginner",
+      "image": "row",
+      "how": {
+        "en": [
+          "Sit on a bench and support one upper arm against the inside of your thigh.",
+          "Curl the dumbbell towards your shoulder, then lower it slowly; repeat with the other arm."
+        ],
+        "es": [
+          "Sentate en un banco y apoyá la parte alta de un brazo contra la cara interna del muslo.",
+          "Acercá la mancuerna al hombro y bajala despacio; después repetí con el otro brazo."
+        ]
+      },
+      "cues": {
+        "en": ["Keep your torso still and use a weight you can lower smoothly."],
+        "es": ["Mantené el torso quieto y elegí un peso que puedas bajar con suavidad."]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Curl concentrado unilateral"]
+      },
+      "primaryMuscles": ["biceps"],
+      "secondaryMuscles": [],
+      "focus": ["strength"]
+    },
+    {
+      "id": "bench-dip",
+      "name": {
+        "en": "Bench dip",
+        "es": "Fondos en banco"
+      },
+      "pattern": "elbow-extension",
+      "equipment": ["bench"],
+      "level": "beginner",
+      "image": "press",
+      "how": {
+        "en": [
+          "Place your hands on a stable bench behind you and set your feet comfortably on the floor.",
+          "Bend your elbows to lower a short distance, then press back up."
+        ],
+        "es": [
+          "Apoyá las manos en un banco firme detrás tuyo y ubicá los pies cómodamente en el piso.",
+          "Flexioná los codos para bajar un tramo corto y después empujá para volver arriba."
+        ]
+      },
+      "cues": {
+        "en": [
+          "Keep the range shallow and comfortable. Stop if you feel shoulder pain; use a cable triceps push-down as an alternative."
+        ],
+        "es": [
+          "Usá un recorrido corto y cómodo. Pará si te duelen los hombros; como alternativa, hacé una extensión de tríceps en polea."
+        ]
+      },
+      "aliases": {
+        "en": [],
+        "es": ["Fondos en banco/cajon", "Fondos en banco o cajón"]
+      },
+      "primaryMuscles": ["triceps"],
+      "secondaryMuscles": ["shoulders"],
+      "focus": ["strength"]
+    },
+    {
+      "id": "walking-lunge",
+      "name": {
+        "en": "Walking lunge",
+        "es": "Estocadas caminando"
+      },
+      "pattern": "lunge",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "squat",
+      "how": {
+        "en": [
+          "Stand tall and take a comfortable step forwards.",
+          "Lower under control, push through the front foot to rise, then step forwards with the other leg."
+        ],
+        "es": [
+          "Parate erguido y da un paso cómodo hacia adelante.",
+          "Bajá con control, empujá con el pie delantero para subir y avanzá con la otra pierna."
+        ]
+      },
+      "cues": {
+        "en": ["Keep the front knee tracking with your toes and use a shorter step if needed."],
+        "es": ["Alineá la rodilla delantera con los pies y acortá el paso si hace falta."]
+      },
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["glutes"],
+      "focus": ["strength"],
+      "images": [
+        {
+          "src": "./assets/walking-lunge/1-3-first-third-positions.jpeg",
+          "alt": {
+            "en": "A person stands upright before taking a step forwards.",
+            "es": "Una persona está de pie antes de dar un paso hacia adelante."
+          }
+        },
+        {
+          "src": "./assets/walking-lunge/2-second-position.jpeg",
+          "alt": {
+            "en": "A person holds a forward lunge with the front knee bent and rear leg extended.",
+            "es": "Una persona sostiene una estocada hacia adelante, con la rodilla delantera flexionada y la pierna trasera extendida."
+          }
+        },
+        {
+          "src": "./assets/walking-lunge/4-fourth-position.jpeg",
+          "alt": {
+            "en": "A person holds a forward lunge with the other leg leading.",
+            "es": "Una persona sostiene una estocada hacia adelante con la otra pierna al frente."
+          }
+        }
+      ]
+    },
+    {
+      "id": "lying-leg-curl",
+      "name": {
+        "en": "Lying leg curl",
+        "es": "Curl femoral"
+      },
+      "pattern": "knee-flexion",
+      "equipment": ["machine"],
+      "level": "beginner",
+      "image": "hinge",
+      "how": {
+        "en": [
+          "Lie face down on the machine with the pad resting above your heels and knees near the pivot.",
+          "Bend your knees to curl the pad towards you, then lower it slowly."
+        ],
+        "es": [
+          "Acostate boca abajo en la máquina, con el rodillo sobre los talones y las rodillas cerca del eje.",
+          "Flexioná las rodillas para acercar el rodillo y después bajalo despacio."
+        ]
+      },
+      "cues": {
+        "en": ["Keep your hips on the pad and avoid lifting them to move the load."],
+        "es": ["Mantené las caderas apoyadas y evitá levantarlas para mover el peso."]
+      },
+      "primaryMuscles": ["hamstrings"],
+      "secondaryMuscles": [],
+      "focus": ["strength"]
+    },
+    {
+      "id": "glute-bridge",
+      "name": {
+        "en": "Glute bridge",
+        "es": "Puente de glúteos"
+      },
+      "pattern": "hinge",
+      "equipment": ["bodyweight"],
+      "level": "beginner",
+      "image": "hinge",
+      "how": {
+        "en": [
+          "Lie on your back with knees bent and feet flat about hip-width apart.",
+          "Press through your feet to lift your hips until your body forms a comfortable line, then lower slowly."
+        ],
+        "es": [
+          "Acostate boca arriba con las rodillas flexionadas y los pies apoyados, más o menos, al ancho de las caderas.",
+          "Empujá con los pies para elevar las caderas hasta alinear cómodamente el cuerpo y bajá despacio."
+        ]
+      },
+      "cues": {
+        "en": ["Keep ribs down and avoid arching your lower back at the top."],
+        "es": ["Mantené las costillas controladas y evitá arquear la zona lumbar arriba."]
+      },
+      "primaryMuscles": ["glutes"],
+      "secondaryMuscles": ["hamstrings"],
+      "focus": ["strength", "core"]
+    },
+    {
+      "id": "dumbbell-step-up",
+      "name": {
+        "en": "Dumbbell step-up",
+        "es": "Step-up con mancuernas"
+      },
+      "pattern": "lunge",
+      "equipment": ["dumbbells", "step"],
+      "level": "beginner",
+      "image": "squat",
+      "how": {
+        "en": [
+          "Stand facing a stable low step with a dumbbell in each hand.",
+          "Place one whole foot on the step, push through it to stand up, then step down with control and switch legs."
+        ],
+        "es": [
+          "Parate frente a un escalón bajo y firme con una mancuerna en cada mano.",
+          "Apoyá todo un pie en el escalón, empujá para subir y bajá con control; después cambiá de pierna."
+        ]
+      },
+      "cues": {
+        "en": [
+          "Choose a height that lets you keep balance and avoid pushing off strongly with the trailing foot."
+        ],
+        "es": [
+          "Elegí una altura que te permita mantener el equilibrio y evitá impulsarte con fuerza desde el pie de atrás."
+        ]
+      },
+      "aliases": {
+        "en": [],
+        "es": []
+      },
+      "primaryMuscles": ["quads"],
+      "secondaryMuscles": ["glutes"],
+      "focus": ["strength"]
+    }
+  ]
+}
