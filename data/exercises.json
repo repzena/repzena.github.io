@@ -1736,7 +1736,16 @@
       },
       "primaryMuscles": ["quads"],
       "secondaryMuscles": ["glutes", "adductors"],
-      "focus": ["mobility"]
+      "focus": ["mobility"],
+      "images": [
+        {
+          "src": "./assets/deep-squat-pry/1-position.jpeg",
+          "alt": {
+            "en": "Deep squat pry hold with elbows pressing the knees outward and palms together.",
+            "es": "Posición sostenida de sentadilla profunda, con los codos empujando las rodillas hacia afuera y las palmas juntas."
+          }
+        }
+      ]
     },
     {
       "id": "dynamic-hurdle-step",

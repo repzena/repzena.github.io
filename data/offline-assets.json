@@ -1,5 +1,5 @@
 {
-  "version": "e46f9e7a35ddefa08970fab87dcb9c9ef90264cdedf85bd26e388e69929fff9e",
+  "version": "9c8f8633f0cc09d685b22e2cb104ca66c965cd08e88ba3996355ef443bbbea78",
   "assets": [
     {
       "url": "./assets/ab-wheel-rollout/1-high.jpeg",
@@ -88,6 +88,10 @@
     {
       "url": "./assets/conventional-deadlift/2-up.jpeg",
       "sha256": "abce75962440f5900fb8926e66057e5a476d5e0ddc964951d20ee3a0c76624e2"
+    },
+    {
+      "url": "./assets/deep-squat-pry/1-position.jpeg",
+      "sha256": "8b8166e52965abdfbb8b3cca3c4268d79394549caf1f54758aa25e3403d42afc"
     },
     {
       "url": "./assets/dumbbell-french-press/1-initial-position.jpeg",
