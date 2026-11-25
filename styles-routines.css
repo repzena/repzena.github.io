@@ -379,7 +379,7 @@
   display: grid;
   flex: 1;
   min-width: 0;
-  grid-template-columns: minmax(74px, 0.45fr) minmax(110px, 1fr) auto;
+  grid-template-columns: minmax(60px, 0.45fr) minmax(90px, 0.7fr) minmax(110px, 1fr) auto;
   align-items: end;
   gap: 9px;
 }
@@ -391,7 +391,12 @@
   font-size: 11px;
   font-weight: 650;
 }
-.routine-item-edit input {
+.routine-item-edit label[hidden],
+.form-grid label[hidden] {
+  display: none;
+}
+.routine-item-edit input,
+.routine-item-edit select {
   width: 100%;
   min-width: 0;
   height: 40px;
@@ -544,7 +549,7 @@
 }
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 65px 100px 34px;
+  grid-template-columns: minmax(0, 1fr) 65px 100px 100px 34px;
   gap: 10px;
   align-items: end;
   margin-top: 9px;

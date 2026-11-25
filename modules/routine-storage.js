@@ -25,6 +25,13 @@ export function makeRoutineItem(item) {
     block: String(item.block || '').slice(0, 120),
     sets: Math.min(99, Math.max(1, Number(item.sets) || 3)),
     reps: String(item.reps || '').slice(0, 80),
+    prescriptionMode: ['reps', 'time'].includes(item.prescriptionMode)
+      ? item.prescriptionMode
+      : null,
+    durationSeconds:
+      Number.isInteger(Number(item.durationSeconds)) && Number(item.durationSeconds) > 0
+        ? Math.min(3600, Number(item.durationSeconds))
+        : null,
   };
 }
 export function makeRoutineDay(name, defaultName, sections = [], items = []) {

@@ -16,7 +16,7 @@ export async function parseRoutineFile(
   if (!file || file.size > MAX_IMPORT_BYTES) throw new Error('routine-file-too-large');
   const data = JSON.parse(await file.text());
   if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('invalid-routine');
-  if (data.format === 'gym-exercise-routine' && ![1, 2].includes(data.version))
+  if (data.format === 'gym-exercise-routine' && ![1, 2, 3].includes(data.version))
     throw new Error('unsupported-routine-version');
   if (data.format && data.format !== 'gym-exercise-routine')
     throw new Error('unsupported-routine-format');
@@ -34,6 +34,31 @@ export async function parseRoutineFile(
         throw new Error('invalid-exercise');
       const rawSets = Number(exercise.sets);
       const rawName = importText(exercise.name, language, 'Exercise');
+      const prescription = exercise.prescription;
+      const hasLocalizedText = (value) =>
+        typeof value === 'string' ||
+        (value &&
+          typeof value === 'object' &&
+          !Array.isArray(value) &&
+          ['en', 'es'].some((locale) => typeof value[locale] === 'string'));
+      if (
+        data.version === 3 &&
+        (!prescription ||
+          typeof prescription !== 'object' ||
+          Array.isArray(prescription) ||
+          !['reps', 'time'].includes(prescription.mode) ||
+          (prescription.mode === 'time' &&
+            (!Number.isInteger(prescription.duration_seconds) ||
+              prescription.duration_seconds < 1 ||
+              prescription.duration_seconds > 3600 ||
+              Object.keys(prescription).some(
+                (key) => !['mode', 'duration_seconds'].includes(key),
+              ))) ||
+          (prescription.mode === 'reps' &&
+            (!hasLocalizedText(prescription.reps) ||
+              Object.keys(prescription).some((key) => !['mode', 'reps'].includes(key)))))
+      )
+        throw new Error('invalid-prescription');
       return {
         name: rawName.slice(0, 200),
         names:
@@ -51,7 +76,12 @@ export async function parseRoutineFile(
               ? exercise.id.slice(0, 120)
               : null,
         sets: Number.isFinite(rawSets) ? Math.min(99, Math.max(1, Math.round(rawSets))) : 3,
-        reps: importText(exercise.reps_or_time, language).slice(0, 80),
+        reps:
+          prescription?.mode === 'time'
+            ? ''
+            : importText(prescription?.reps ?? exercise.reps_or_time, language).slice(0, 80),
+        prescriptionMode: ['reps', 'time'].includes(prescription?.mode) ? prescription.mode : null,
+        durationSeconds: prescription?.mode === 'time' ? prescription.duration_seconds : null,
       };
     });
   };
@@ -107,18 +137,27 @@ export function serializeRoutine(
   routine,
   { language, displayName, displaySessionName, resolveExercise },
 ) {
-  const serializeItem = (item, section = null) => ({
-    name: resolveExercise(item)?.name || item.names || { [language]: item.name },
-    exercise_id: resolveExercise(item)?.id || item.exerciseId || null,
-    sets: Number(item.sets) || 3,
-    reps_or_time: { [language]: item.reps || '' },
-    section: section
-      ? { type: section.type, name: section.type === 'custom' ? section.name : '' }
-      : null,
-  });
+  const serializeItem = (item, section = null) => {
+    const exercise = resolveExercise(item);
+    const mode = item.prescriptionMode || exercise?.prescriptionMode || 'reps';
+    const duration = item.durationSeconds || exercise?.defaultDurationSeconds || 30;
+    return {
+      name: exercise?.name || item.names || { [language]: item.name },
+      exercise_id: exercise?.id || item.exerciseId || null,
+      sets: Number(item.sets) || 3,
+      reps_or_time: { [language]: mode === 'time' ? `${duration} seconds` : item.reps || '' },
+      prescription:
+        mode === 'time'
+          ? { mode: 'time', duration_seconds: duration }
+          : { mode: 'reps', reps: { [language]: item.reps || '' } },
+      section: section
+        ? { type: section.type, name: section.type === 'custom' ? section.name : '' }
+        : null,
+    };
+  };
   return {
     format: 'gym-exercise-routine',
-    version: 2,
+    version: 3,
     routine: {
       name: { [language]: displayName(routine) },
       default_name: routine.defaultName,

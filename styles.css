@@ -306,6 +306,141 @@ a {
 .install-help-steps li + li {
   margin-top: 9px;
 }
+.guide-timer {
+  margin: 24px 0 4px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--paper) 86%, var(--mint));
+}
+.guide-timer-heading,
+.guide-timer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.guide-timer-actions[hidden] {
+  display: none;
+}
+.guide-timer-heading h3 {
+  margin: 0;
+}
+.guide-timer-heading [role='status'],
+.timer-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+.guide-timer > label {
+  display: grid;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 650;
+}
+.guide-timer input {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--white);
+}
+.guide-timer-display {
+  display: block;
+  margin: 18px 0;
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(38px, 10vw, 56px);
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+.guide-timer-actions {
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+.guide-timer-actions .button {
+  min-height: 44px;
+  gap: 10px;
+}
+.timer-note {
+  margin-bottom: 0;
+}
+.active-timer {
+  position: fixed;
+  z-index: 30;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: min(760px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 10px 36px #10171430;
+}
+.active-timer[hidden] {
+  display: none;
+}
+.active-timer-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2px 12px;
+  min-width: 0;
+}
+.active-timer-copy strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.active-timer-copy > span {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 24px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+.active-timer-copy small {
+  color: var(--muted);
+}
+.active-timer > button {
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 650;
+  cursor: pointer;
+}
+.active-timer > button[data-timer-clear] {
+  min-width: 42px;
+  font-size: 22px;
+}
+@media (max-width: 620px) {
+  .active-timer {
+    left: 8px;
+    right: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom));
+    width: calc(100% - 16px);
+    flex-wrap: wrap;
+  }
+  .active-timer-copy {
+    flex: 1 1 100%;
+  }
+  .active-timer > button {
+    flex: 1;
+    padding-inline: 8px;
+    font-size: 12px;
+  }
+}
 .install-help-offline-note {
   margin: 18px 0 0;
   padding-top: 14px;

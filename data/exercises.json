@@ -437,6 +437,8 @@
     },
     {
       "id": "plank",
+      "prescriptionMode": "time",
+      "defaultDurationSeconds": 30,
       "name": {
         "en": "Forearm plank",
         "es": "Plancha con antebrazos"
@@ -750,6 +752,8 @@
     },
     {
       "id": "high-plank",
+      "prescriptionMode": "time",
+      "defaultDurationSeconds": 30,
       "name": {
         "en": "High plank",
         "es": "Plancha alta"
@@ -1240,6 +1244,8 @@
     },
     {
       "id": "side-plank",
+      "prescriptionMode": "time",
+      "defaultDurationSeconds": 30,
       "name": {
         "en": "Side plank",
         "es": "Plancha lateral (ambos lados)"
@@ -1706,6 +1712,8 @@
     },
     {
       "id": "deep-squat-pry",
+      "prescriptionMode": "time",
+      "defaultDurationSeconds": 30,
       "name": {
         "en": "Deep squat pry",
         "es": "Sentadilla profunda con apertura de rodillas"
@@ -1889,6 +1897,8 @@
     },
     {
       "id": "hollow-hold",
+      "prescriptionMode": "time",
+      "defaultDurationSeconds": 30,
       "name": {
         "en": "Hollow hold",
         "es": "Hollow hold (posición hollow)"

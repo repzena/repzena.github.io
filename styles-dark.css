@@ -279,7 +279,8 @@
 :root[data-theme='dark'] .routine-item-edit label {
   color: #aab8ae;
 }
-:root[data-theme='dark'] .routine-item-edit input {
+:root[data-theme='dark'] .routine-item-edit input,
+:root[data-theme='dark'] .routine-item-edit select {
   border-color: #435249;
   background: #1b2520;
   color: var(--ink);

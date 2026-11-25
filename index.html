@@ -335,7 +335,22 @@
                   ><input id="add-sets" type="number" min="1" max="20" value="3" /></label
                 ><label
                   ><span data-i18n="repsTime">Reps / time</span
+                  ><select id="add-mode">
+                    <option value="reps">Repetitions</option>
+                    <option value="time">Time</option>
+                  </select></label
+                ><label id="add-reps-wrap"
+                  ><span data-i18n="repsMode">Repetitions</span
                   ><input id="add-reps" type="text" placeholder="8–12" /></label
+                ><label id="add-duration-wrap" hidden
+                  ><span data-i18n="durationSeconds">Duration (seconds)</span
+                  ><input
+                    id="add-duration"
+                    type="number"
+                    min="1"
+                    max="3600"
+                    step="1"
+                    value="30" /></label
                 ><button
                   class="add-button"
                   id="add-exercise-button"
@@ -406,6 +421,14 @@
         </div>
       </aside>
     </footer>
+    <aside
+      id="active-timer"
+      class="active-timer"
+      hidden
+      role="region"
+      data-i18n-aria-label="timerTitle"
+      aria-label="Exercise timer"
+    ></aside>
     <dialog id="exercise-dialog" class="exercise-dialog" aria-labelledby="exercise-dialog-title">
       <button
         class="dialog-close"

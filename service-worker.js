@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'repzena-static-';
-const CACHE_NAME = `${CACHE_PREFIX}v15`;
+const CACHE_NAME = `${CACHE_PREFIX}v16`;
 const OFFLINE_CACHE_NAME = 'repzena-offline-v1';
 const OFFLINE_METADATA_URL = './__repzena_offline_metadata__.json';
 const CORE_FILES = [
@@ -17,6 +17,9 @@ const CORE_FILES = [
   './modules/language.js',
   './modules/exercise-search.js',
   './modules/exercise-catalog.js',
+  './modules/routine-storage.js',
+  './modules/routine-transfer.js',
+  './modules/routing.js',
   './modules/offline.js',
   './analytics.js',
   './theme.js',

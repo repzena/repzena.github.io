@@ -219,7 +219,7 @@
     padding: 22px 17px;
   }
   .form-grid {
-    grid-template-columns: 1fr 54px 78px 32px;
+    grid-template-columns: minmax(0, 1fr) 54px 78px 78px 44px;
     gap: 8px;
   }
   .form-grid input,

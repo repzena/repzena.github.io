@@ -1,4 +1,4 @@
-const CATALOG_CACHE_KEY = 'repzena.exerciseCatalog.v3';
+const CATALOG_CACHE_KEY = 'repzena.exerciseCatalog.v4';
 function validCatalog(data) {
   return (
     data?.format === 'repzena-exercise-catalog' &&
@@ -10,6 +10,13 @@ function validCatalog(data) {
         exercise &&
         typeof exercise === 'object' &&
         typeof exercise.id === 'string' &&
+        (exercise.prescriptionMode === undefined ||
+          ['reps', 'time'].includes(exercise.prescriptionMode)) &&
+        (exercise.prescriptionMode !== 'time' ||
+          (Number.isInteger(exercise.defaultDurationSeconds) &&
+            exercise.defaultDurationSeconds >= 1 &&
+            exercise.defaultDurationSeconds <= 3600)) &&
+        (exercise.prescriptionMode === 'time' || exercise.defaultDurationSeconds === undefined) &&
         typeof exercise.name?.en === 'string' &&
         typeof exercise.name?.es === 'string' &&
         typeof exercise.pattern === 'string' &&

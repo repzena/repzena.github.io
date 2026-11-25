@@ -49,6 +49,9 @@ let editingSectionId = null;
 let editingRoutineItem = null;
 const collapsedSectionIds = new Set();
 let toastTimer;
+let activeTimer = null;
+let timerInterval = null;
+let guideTimerContext = null;
 function makeSection(type = 'main-work', name = '', items = []) {
   return {
     id: crypto.randomUUID(),
@@ -123,6 +126,279 @@ function allMuscles(exercise) {
 }
 function focusLabels(exercise) {
   return exercise.focus.map((id) => label('focus', id)).join(', ');
+}
+function prescriptionMode(exercise, item = null) {
+  return item?.prescriptionMode || exercise?.prescriptionMode || 'reps';
+}
+function formatTimerSeconds(value) {
+  const seconds = Math.max(0, Math.floor(value || 0));
+  return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+}
+function timerRemaining(timer = activeTimer) {
+  if (!timer) return 0;
+  return timer.running
+    ? Math.max(0, Math.ceil((timer.deadlineAt - Date.now()) / 1000))
+    : timer.remainingSeconds;
+}
+function renderTimerIndicator() {
+  const indicator = $('#active-timer');
+  if (!activeTimer) {
+    indicator.hidden = true;
+    indicator.innerHTML = '';
+    return;
+  }
+  const remaining = timerRemaining();
+  const stateText =
+    activeTimer.status === 'complete'
+      ? t('timerTimeUp')
+      : activeTimer.running
+        ? t('timerRunning')
+        : t('timerPaused');
+  const progressText =
+    activeTimer.routineItem && activeTimer.totalSets > 1
+      ? t('timerSetProgress')
+          .replace('{set}', activeTimer.setNumber)
+          .replace('{total}', activeTimer.totalSets)
+      : '';
+  indicator.hidden = $('#exercise-dialog')?.open || false;
+  indicator.innerHTML = `<div class="active-timer-copy"><strong>${escapeHtml(localized(activeTimer.names) || activeTimer.name)}</strong><span data-timer-indicator-time role="timer" aria-live="off">${formatTimerSeconds(remaining)}</span><small><span data-timer-indicator-status role="status">${escapeHtml(stateText)}</span><span data-timer-indicator-progress>${progressText ? ` · ${escapeHtml(progressText)}` : ''}</span></small></div><button type="button" data-timer-open>${escapeHtml(t('timerOpenGuide'))}</button><button type="button" data-timer-toggle>${escapeHtml(activeTimer.running ? t('timerPause') : t('timerResume'))}</button><button type="button" data-timer-clear aria-label="${escapeHtml(t('timerClear'))}">×</button>`;
+  indicator.querySelector('[data-timer-open]').onclick = () =>
+    openDetail(activeTimer.exerciseId, true, activeTimer.routineItem);
+  indicator.querySelector('[data-timer-toggle]').onclick = () => {
+    if (activeTimer.running) pauseTimer();
+    else resumeTimer();
+  };
+  indicator.querySelector('[data-timer-clear]').onclick = clearTimer;
+}
+function updateTimerDisplays() {
+  if (!activeTimer) {
+    if (guideTimerContext) {
+      const input = $('#dialog-content [data-guide-duration]');
+      const duration = Number(input?.value) || guideTimerContext.duration;
+      document.querySelectorAll('[data-timer-display]').forEach((node) => {
+        node.textContent = formatTimerSeconds(duration);
+      });
+      const status = $('#dialog-content [data-timer-status]');
+      if (status) status.textContent = '';
+      const start = $('#dialog-content [data-timer-start]');
+      if (start) {
+        start.disabled = false;
+        start.textContent = t('timerStart');
+      }
+      const pause = $('#dialog-content [data-timer-pause]');
+      if (pause) pause.disabled = true;
+      const setActions = $('#dialog-content [data-timer-set-actions]');
+      if (setActions) setActions.hidden = true;
+    }
+    return renderTimerIndicator();
+  }
+  const remaining = timerRemaining();
+  const guideMatchesActiveTimer = guideTimerContext?.exercise.id === activeTimer.exerciseId;
+  const guideRemaining = guideMatchesActiveTimer
+    ? remaining
+    : guideTimerContext?.duration || remaining;
+  document.querySelectorAll('#dialog-content [data-timer-display]').forEach((node) => {
+    node.textContent = formatTimerSeconds(guideRemaining);
+  });
+  const status = guideMatchesActiveTimer ? $('#dialog-content [data-timer-status]') : null;
+  if (status)
+    status.textContent =
+      activeTimer.status === 'complete'
+        ? t('timerTimeUp')
+        : activeTimer.running
+          ? t('timerRunning')
+          : t('timerPaused');
+  const guideProgress = $('#dialog-content [data-guide-set-progress]');
+  if (guideProgress && guideMatchesActiveTimer && activeTimer.routineItem)
+    guideProgress.textContent = t('timerSetProgress')
+      .replace('{set}', activeTimer.setNumber)
+      .replace('{total}', activeTimer.totalSets);
+  const start = $('#dialog-content [data-timer-start]');
+  if (start) {
+    start.disabled = activeTimer.running && guideMatchesActiveTimer;
+    start.textContent = t(
+      activeTimer.running && guideMatchesActiveTimer
+        ? 'timerRunning'
+        : activeTimer.status === 'complete' && guideMatchesActiveTimer
+          ? 'timerStart'
+          : 'timerResume',
+    );
+  }
+  const durationInput = $('#dialog-content [data-guide-duration]');
+  if (durationInput) durationInput.disabled = activeTimer.running && guideMatchesActiveTimer;
+  const pause = $('#dialog-content [data-timer-pause]');
+  if (pause) pause.disabled = !activeTimer.running || !guideMatchesActiveTimer;
+  const setActions = $('#dialog-content [data-timer-set-actions]');
+  if (setActions) {
+    setActions.hidden =
+      !guideMatchesActiveTimer ||
+      activeTimer.status !== 'complete' ||
+      activeTimer.setNumber >= activeTimer.totalSets;
+    const progress = guideMatchesActiveTimer
+      ? $('#dialog-content [data-timer-set-progress]')
+      : null;
+    if (progress)
+      progress.textContent =
+        activeTimer.routineItem && activeTimer.totalSets > 1
+          ? t('timerSetProgress')
+              .replace('{set}', activeTimer.setNumber)
+              .replace('{total}', activeTimer.totalSets)
+          : '';
+  }
+  const indicator = $('#active-timer');
+  if (indicator.hidden) renderTimerIndicator();
+  else {
+    const time = indicator.querySelector('[data-timer-indicator-time]');
+    const state = indicator.querySelector('[data-timer-indicator-status]');
+    const toggle = indicator.querySelector('[data-timer-toggle]');
+    const progress = indicator.querySelector('[data-timer-indicator-progress]');
+    if (time) time.textContent = formatTimerSeconds(remaining);
+    if (state)
+      state.textContent =
+        activeTimer.status === 'complete'
+          ? t('timerTimeUp')
+          : activeTimer.running
+            ? t('timerRunning')
+            : t('timerPaused');
+    if (toggle) toggle.textContent = t(activeTimer.running ? 'timerPause' : 'timerResume');
+    if (progress)
+      progress.textContent =
+        activeTimer.routineItem && activeTimer.totalSets > 1
+          ? ` · ${t('timerSetProgress')
+              .replace('{set}', activeTimer.setNumber)
+              .replace('{total}', activeTimer.totalSets)}`
+          : '';
+  }
+}
+function pauseTimer() {
+  if (!activeTimer?.running) return;
+  activeTimer.remainingSeconds = timerRemaining();
+  activeTimer.running = false;
+  activeTimer.status = 'paused';
+  window.clearInterval(timerInterval);
+  timerInterval = null;
+  updateTimerDisplays();
+}
+function resumeTimer() {
+  if (!activeTimer) return;
+  if (activeTimer.status === 'complete') activeTimer.remainingSeconds = activeTimer.durationSeconds;
+  if (activeTimer.remainingSeconds <= 0) activeTimer.remainingSeconds = activeTimer.durationSeconds;
+  activeTimer.running = true;
+  activeTimer.status = 'running';
+  activeTimer.deadlineAt = Date.now() + activeTimer.remainingSeconds * 1000;
+  window.clearInterval(timerInterval);
+  timerInterval = window.setInterval(() => {
+    if (timerRemaining() <= 0) {
+      activeTimer.remainingSeconds = 0;
+      activeTimer.running = false;
+      activeTimer.status = 'complete';
+      window.clearInterval(timerInterval);
+      timerInterval = null;
+    }
+    updateTimerDisplays();
+  }, 250);
+  updateTimerDisplays();
+}
+function resetTimer() {
+  if (!activeTimer) return;
+  window.clearInterval(timerInterval);
+  timerInterval = null;
+  activeTimer.remainingSeconds = activeTimer.durationSeconds;
+  activeTimer.running = false;
+  activeTimer.status = 'paused';
+  activeTimer.setNumber = 1;
+  updateTimerDisplays();
+}
+function clearTimer() {
+  window.clearInterval(timerInterval);
+  timerInterval = null;
+  activeTimer = null;
+  updateTimerDisplays();
+}
+function renderGuideTimer(exercise, item = null) {
+  if (prescriptionMode(exercise, item) !== 'time') {
+    guideTimerContext = null;
+    return '';
+  }
+  const duration = Math.min(
+    3600,
+    Math.max(1, Number(item?.durationSeconds || exercise.defaultDurationSeconds) || 30),
+  );
+  guideTimerContext = { exercise, item, duration };
+  const sameTimer = activeTimer?.exerciseId === exercise.id;
+  const value = sameTimer ? timerRemaining() : duration;
+  const replacementNote =
+    activeTimer && !sameTimer ? `<p class="timer-note">${escapeHtml(t('timerReplace'))}</p>` : '';
+  const setCount = Number(item?.sets) || 1;
+  const setProgress = sameTimer
+    ? t('timerSetProgress')
+        .replace('{set}', activeTimer.setNumber)
+        .replace('{total}', activeTimer.totalSets)
+    : setCount > 1
+      ? t('timerSetProgress').replace('{set}', '1').replace('{total}', setCount)
+      : '';
+  return `<section class="guide-timer" aria-labelledby="guide-timer-title"><div class="guide-timer-heading"><h3 id="guide-timer-title">${escapeHtml(t('timerTitle'))}</h3><span data-timer-status role="status" aria-live="polite">${sameTimer ? escapeHtml(activeTimer.running ? t('timerRunning') : activeTimer.status === 'complete' ? t('timerTimeUp') : t('timerPaused')) : ''}</span><small data-guide-set-progress>${escapeHtml(setProgress)}</small></div><label><span>${escapeHtml(t('durationSeconds'))}</span><input data-guide-duration type="number" min="1" max="3600" step="1" value="${sameTimer ? activeTimer.durationSeconds : duration}" ${sameTimer && activeTimer.running ? 'disabled' : ''}></label><strong class="guide-timer-display" data-timer-display role="timer" aria-live="off">${formatTimerSeconds(value)}</strong><div class="guide-timer-actions"><button type="button" class="button button-dark" data-timer-start>${escapeHtml(sameTimer && activeTimer.running ? t('timerRunning') : sameTimer && activeTimer.status !== 'complete' ? t('timerResume') : t('timerStart'))}</button><button type="button" class="button button-light" data-timer-pause>${escapeHtml(t('timerPause'))}</button><button type="button" class="text-button" data-timer-reset>${escapeHtml(t('timerReset'))}</button></div><div class="guide-timer-actions" data-timer-set-actions hidden><span data-timer-set-progress></span><button type="button" class="text-button" data-timer-next-set>${escapeHtml(t('timerNextSet'))}</button></div>${replacementNote}</section>`;
+}
+function bindGuideTimer() {
+  const root = $('#dialog-content');
+  const start = root.querySelector('[data-timer-start]');
+  if (!start) return;
+  const durationInput = root.querySelector('[data-guide-duration]');
+  const context = guideTimerContext;
+  const sameTimer = activeTimer?.exerciseId === context.exercise.id;
+  if (sameTimer) {
+    const setActions = root.querySelector('[data-timer-set-actions]');
+    setActions.hidden =
+      activeTimer.status !== 'complete' || activeTimer.setNumber >= activeTimer.totalSets;
+    root.querySelector('[data-timer-set-progress]').textContent =
+      activeTimer.routineItem && activeTimer.totalSets > 1
+        ? t('timerSetProgress')
+            .replace('{set}', activeTimer.setNumber)
+            .replace('{total}', activeTimer.totalSets)
+        : '';
+    root.querySelector('[data-timer-pause]').disabled = !activeTimer.running;
+    start.disabled = activeTimer.running;
+  } else {
+    root.querySelector('[data-timer-pause]').disabled = true;
+  }
+  start.onclick = () => {
+    const durationSeconds = Math.min(
+      3600,
+      Math.max(1, Number(durationInput.value) || context.duration),
+    );
+    durationInput.value = String(durationSeconds);
+    if (activeTimer?.exerciseId === context.exercise.id) {
+      activeTimer.durationSeconds = durationSeconds;
+      if (!activeTimer.running) activeTimer.remainingSeconds = durationSeconds;
+    } else {
+      activeTimer = {
+        exerciseId: context.exercise.id,
+        name: localized(context.exercise.name),
+        names: context.exercise.name,
+        durationSeconds,
+        remainingSeconds: durationSeconds,
+        running: false,
+        status: 'paused',
+        deadlineAt: 0,
+        setNumber: 1,
+        totalSets: Number(context.item?.sets) || 1,
+        routineItem: context.item || null,
+      };
+    }
+    resumeTimer();
+    bindGuideTimer();
+  };
+  root.querySelector('[data-timer-pause]').onclick = pauseTimer;
+  root.querySelector('[data-timer-reset]').onclick = resetTimer;
+  root.querySelector('[data-timer-next-set]').onclick = () => {
+    if (!activeTimer || activeTimer.setNumber >= activeTimer.totalSets) return;
+    activeTimer.setNumber += 1;
+    activeTimer.status = 'paused';
+    activeTimer.remainingSeconds = activeTimer.durationSeconds;
+    activeTimer.running = false;
+    updateTimerDisplays();
+    bindGuideTimer();
+  };
 }
 function pageTitle(page) {
   const titleKey = {
@@ -199,10 +475,12 @@ function applyLanguage() {
   renderFilters();
   renderExercises();
   renderRoutines();
+  renderTimerIndicator();
   updateOfflineLanguage();
   if ($('#exercise-dialog').open) {
     const id = exerciseIdFromHash(location.hash);
-    if (id && exercises.some((exercise) => exercise.id === id)) openDetail(id, false);
+    if (id && exercises.some((exercise) => exercise.id === id))
+      openDetail(id, false, activeTimer?.exerciseId === id ? activeTimer.routineItem : null);
   }
 }
 function optionsFor(select, dict, first) {
@@ -235,6 +513,22 @@ function renderFilters() {
     exercises
       .map((e) => `<option value="${escapeHtml(e.id)}">${escapeHtml(localized(e.name))}</option>`)
       .join('');
+  $('#add-mode').innerHTML =
+    `<option value="reps">${escapeHtml(t('repsMode'))}</option><option value="time">${escapeHtml(t('timeMode'))}</option>`;
+  syncAddPrescriptionFields();
+}
+function syncAddPrescriptionFields() {
+  const mode = $('#add-mode').value;
+  $('#add-reps-wrap').hidden = mode === 'time';
+  $('#add-duration-wrap').hidden = mode !== 'time';
+}
+function selectAddExercisePrescription(id) {
+  const exercise = exercises.find((item) => item.id === id);
+  const mode = exercise?.prescriptionMode || 'reps';
+  $('#add-mode').value = mode;
+  if (mode === 'time') $('#add-duration').value = exercise.defaultDurationSeconds || 30;
+  else if (!$('#add-reps').value) $('#add-reps').value = '8–12';
+  syncAddPrescriptionFields();
 }
 function renderSectionTypeOptions() {
   const select = $('#section-type');
@@ -567,7 +861,7 @@ function renderFilterChips() {
         }),
     );
 }
-function openDetail(id, updateUrl = true) {
+function openDetail(id, updateUrl = true, routineItem = null) {
   const e = exercises.find((x) => x.id === id);
   if (!e) return;
   document.title = `Repzena — ${localized(e.name)} | ${lang === 'es' ? 'Guía de ejercicios' : 'Exercise guide'}`;
@@ -611,9 +905,15 @@ function openDetail(id, updateUrl = true) {
     `${e.images?.length ? '<div data-exercise-gallery></div>' : imageMarkup(e)}<div class="dialog-copy"><div class="card-kicker">${escapeHtml(label('pattern', e.pattern))} · ${escapeHtml(focusLabels(e))}</div><h2 id="exercise-dialog-title">${escapeHtml(localized(e.name))}</h2><button class="guide-link" type="button" data-copy-guide>${escapeHtml(t('copyGuideLink'))}</button><div class="detail-facts"><div><small>${escapeHtml(t('equipment'))}</small><b>${e.equipment.map((x) => escapeHtml(label('equipment', x))).join(', ')}</b></div>${primaryMuscles ? `<div><small>${escapeHtml(t('primaryMuscle'))}</small><b>${primaryMuscles}</b></div>` : ''}<div><small>${escapeHtml(t('secondaryMuscle'))}</small><b>${e.secondaryMuscles.map((x) => escapeHtml(label('muscles', x))).join(', ') || '—'}</b></div></div><h3>${escapeHtml(t('howTo'))}</h3><ol>${e.how[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ol><h3>${escapeHtml(t('watchFor'))}</h3><ul class="cue-list">${e.cues[lang].map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ul><button class="button button-dark detail-add" data-detail-add="${escapeHtml(e.id)}">${escapeHtml(t('addToRoutine'))} <span aria-hidden="true">＋</span></button></div>`;
   if (e.images?.length)
     renderExerciseGallery(e, $('#dialog-content [data-exercise-gallery]'), { enlarged: true });
+  $('#dialog-content .detail-facts').insertAdjacentHTML(
+    'afterend',
+    renderGuideTimer(e, routineItem),
+  );
+  bindGuideTimer();
   $('#dialog-content').querySelector('[data-detail-add]').onclick = () => addById(id);
   $('#dialog-content').querySelector('[data-copy-guide]').onclick = copyGuideLink;
   if (!$('#exercise-dialog').open) $('#exercise-dialog').showModal();
+  renderTimerIndicator();
 }
 function syncRouteWithUrl() {
   const id = exerciseIdFromHash(location.hash);
@@ -622,7 +922,7 @@ function syncRouteWithUrl() {
       ? history.state.repzenaReturnPage
       : 'exercises';
     setActivePage(activePage);
-    openDetail(id, false);
+    openDetail(id, false, activeTimer?.exerciseId === id ? activeTimer.routineItem : null);
     return;
   }
   const page = pageFromHash(location.hash);
@@ -733,7 +1033,12 @@ function renderRoutines() {
   $('#routine-sections')
     .querySelectorAll('[data-routine-detail]')
     .forEach((button) => {
-      button.onclick = () => openDetail(button.dataset.routineDetail);
+      button.onclick = () => {
+        const section = day.sections.find((item) => item.id === button.dataset.sectionId);
+        const items = section ? section.items : day.items;
+        const item = items[Number(button.dataset.routineItem)];
+        openDetail(button.dataset.routineDetail, true, item || null);
+      };
     });
   $('#routine-sections')
     .querySelectorAll('[data-routine-match]')
@@ -764,6 +1069,10 @@ function renderRoutines() {
         event.preventDefault();
         const button = form.querySelector('[data-save-item]');
         if (button) saveRoutineItem(day, button);
+      };
+      form.querySelector('[data-edit-mode]').onchange = (event) => {
+        form.querySelector('[data-edit-reps-wrap]').hidden = event.target.value === 'time';
+        form.querySelector('[data-edit-duration-wrap]').hidden = event.target.value !== 'time';
       };
     });
   $('#routine-sections')
@@ -909,9 +1218,12 @@ function openRoutineGuideMatcher(item) {
         item.exerciseId = exercise.id;
         item.name = exercise.name.en;
         item.names = { en: exercise.name.en, es: exercise.name.es };
+        item.prescriptionMode ||= exercise.prescriptionMode || 'reps';
+        if (item.prescriptionMode === 'time' && !item.durationSeconds)
+          item.durationSeconds = exercise.defaultDurationSeconds || 30;
       })
     )
-      openDetail(exercise.id, false);
+      openDetail(exercise.id, false, item);
   };
   if (!$('#exercise-dialog').open) $('#exercise-dialog').showModal();
 }
@@ -923,6 +1235,29 @@ function migrateRoutineExerciseIds() {
       for (const item of items) {
         const exercise = routineExercise(item);
         if (!exercise) continue;
+        if (!item.prescriptionMode) {
+          const legacy = String(item.reps || '');
+          const clockDuration = legacy.match(/(\d{1,2}):(\d{2})/);
+          const unitDuration = legacy.match(/(\d{1,4})\s*(?:s|sec|seconds?|seg|segundos?|["″])/i);
+          const durationSeconds = clockDuration
+            ? Number(clockDuration[1]) * 60 + Number(clockDuration[2])
+            : unitDuration
+              ? Number(unitDuration[1])
+              : 0;
+          if (durationSeconds > 0 && durationSeconds <= 3600) {
+            item.prescriptionMode = 'time';
+            item.durationSeconds = durationSeconds;
+            item.reps = '';
+          } else if (exercise.prescriptionMode === 'time' && !legacy.trim()) {
+            item.prescriptionMode = 'time';
+            item.durationSeconds = exercise.defaultDurationSeconds || 30;
+          } else item.prescriptionMode = 'reps';
+          changed = true;
+        }
+        if (item.prescriptionMode === 'time' && !item.durationSeconds) {
+          item.durationSeconds = exercise.defaultDurationSeconds || 30;
+          changed = true;
+        }
         if (
           item.exerciseId !== exercise.id ||
           item.name !== exercise.name.en ||
@@ -947,12 +1282,13 @@ function migrateRoutineExerciseIds() {
 }
 function renderRoutineItem(item, itemIndex, sectionId = '', itemCount = 0) {
   const exercise = routineExercise(item);
+  const itemMode = prescriptionMode(exercise, item);
   const itemName = escapeHtml(
     exercise ? localized(exercise.name) : localized(item.names) || item.name,
   );
   const guideId = exercise?.id || null;
   const itemTarget = guideId
-    ? `data-routine-detail="${escapeHtml(guideId)}"`
+    ? `data-routine-detail="${escapeHtml(guideId)}" data-routine-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}"`
     : `data-routine-match data-routine-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}"`;
   const actionLabel = guideId ? t('openGuide') : t('matchRoutineExercise');
   const open = `<button type="button" class="routine-item-open" ${itemTarget} aria-label="${escapeHtml(actionLabel)}: ${itemName}">`;
@@ -960,14 +1296,16 @@ function renderRoutineItem(item, itemIndex, sectionId = '', itemCount = 0) {
   const isEditing =
     editingRoutineItem?.sectionId === sectionId && editingRoutineItem.index === itemIndex;
   const details = isEditing
-    ? `<form class="routine-item-edit" data-edit-item-form><label><span>${escapeHtml(t('editSets'))}</span><input data-edit-sets type="number" min="1" max="99" required value="${escapeHtml(item.sets)}"></label><label><span>${escapeHtml(t('editReps'))}</span><input data-edit-reps type="text" maxlength="80" value="${escapeHtml(item.reps || '')}"></label><div class="routine-item-edit-actions"><button type="submit" class="text-button" data-save-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('saveExercise'))}">${escapeHtml(t('save'))}</button><button type="button" class="text-button muted" data-cancel-item aria-label="${escapeHtml(t('cancel'))}">${escapeHtml(t('cancel'))}</button></div></form>`
-    : `${open}<span class="item-order">${String(itemIndex + 1).padStart(2, '0')}</span><div class="item-info"><b>${itemName}</b><small>${escapeHtml(item.sets)} ${escapeHtml(t('sets').toLowerCase())} <span>·</span> ${escapeHtml(item.reps || '—')}</small></div>${close}<button type="button" class="item-action" data-edit-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('editExercise'))}: ${itemName}" title="${escapeHtml(t('editExercise'))}">✎</button>`;
+    ? `<form class="routine-item-edit" data-edit-item-form><label><span>${escapeHtml(t('editSets'))}</span><input data-edit-sets type="number" min="1" max="99" required value="${escapeHtml(item.sets)}"></label><label><span>${escapeHtml(t('repsTime'))}</span><select data-edit-mode><option value="reps" ${itemMode === 'reps' ? 'selected' : ''}>${escapeHtml(t('repsMode'))}</option><option value="time" ${itemMode === 'time' ? 'selected' : ''}>${escapeHtml(t('timeMode'))}</option></select></label><label data-edit-reps-wrap ${itemMode === 'time' ? 'hidden' : ''}><span>${escapeHtml(t('repsMode'))}</span><input data-edit-reps type="text" maxlength="80" value="${escapeHtml(item.reps || '')}"></label><label data-edit-duration-wrap ${itemMode !== 'time' ? 'hidden' : ''}><span>${escapeHtml(t('durationSeconds'))}</span><input data-edit-duration type="number" min="1" max="3600" step="1" value="${escapeHtml(item.durationSeconds || exercise?.defaultDurationSeconds || 30)}"></label><div class="routine-item-edit-actions"><button type="submit" class="text-button" data-save-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('saveExercise'))}">${escapeHtml(t('save'))}</button><button type="button" class="text-button muted" data-cancel-item aria-label="${escapeHtml(t('cancel'))}">${escapeHtml(t('cancel'))}</button></div></form>`
+    : `${open}<span class="item-order">${String(itemIndex + 1).padStart(2, '0')}</span><div class="item-info"><b>${itemName}</b><small>${escapeHtml(item.sets)} ${escapeHtml(t('sets').toLowerCase())} <span>·</span> ${escapeHtml(itemMode === 'time' ? `${item.durationSeconds || exercise?.defaultDurationSeconds || 30} ${lang === 'es' ? 's' : 'sec'}` : item.reps || '—')}</small></div>${close}<button type="button" class="item-action" data-edit-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('editExercise'))}: ${itemName}" title="${escapeHtml(t('editExercise'))}">✎</button>`;
   return `<div class="routine-item">${details}<button type="button" class="item-action" data-item-up="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveUp'))}" ${itemIndex === 0 ? 'disabled' : ''}>↑</button><button type="button" class="item-action" data-item-down="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('moveDown'))}" ${itemIndex === itemCount - 1 ? 'disabled' : ''}>↓</button><button type="button" class="item-action remove" data-remove-item="${itemIndex}" data-section-id="${escapeHtml(sectionId)}" aria-label="${escapeHtml(t('delete'))}">×</button></div>`;
 }
 function saveRoutineItem(day, button) {
   const row = button.closest('.routine-item');
   const setsInput = row?.querySelector('[data-edit-sets]');
   const repsInput = row?.querySelector('[data-edit-reps]');
+  const modeInput = row?.querySelector('[data-edit-mode]');
+  const durationInput = row?.querySelector('[data-edit-duration]');
   if (!setsInput?.reportValidity()) return;
   const section = day.sections.find((item) => item.id === button.dataset.sectionId);
   const items = section ? section.items : day.items;
@@ -976,7 +1314,13 @@ function saveRoutineItem(day, button) {
   if (
     commitDBChange(() => {
       item.sets = Number(setsInput.value);
-      item.reps = String(repsInput?.value || '').slice(0, 80);
+      item.prescriptionMode = modeInput?.value === 'time' ? 'time' : 'reps';
+      item.reps =
+        item.prescriptionMode === 'reps' ? String(repsInput?.value || '').slice(0, 80) : '';
+      item.durationSeconds =
+        item.prescriptionMode === 'time'
+          ? Math.min(3600, Math.max(1, Number(durationInput?.value) || 30))
+          : null;
       editingRoutineItem = null;
     })
   )
@@ -1117,10 +1461,18 @@ function openAddDialog(id) {
   if (day?.sections.some((section) => section.id === selectedSectionId))
     $('#add-section-target').value = selectedSectionId;
   $('#confirm-add-to-routine').dataset.exerciseId = id;
+  selectAddExercisePrescription(id);
   $('#add-dialog').showModal();
   $('#add-routine-target').focus();
 }
-function addExerciseToRoutine(id, sets = 3, reps = '8–12', target = {}) {
+function addExerciseToRoutine(
+  id,
+  sets = 3,
+  reps = '8–12',
+  target = {},
+  mode = null,
+  duration = null,
+) {
   const e = exercises.find((x) => x.id === id);
   if (!e) return false;
   const routine = db.routines.find((item) => item.id === target.routineId) || currentRoutine();
@@ -1142,7 +1494,12 @@ function addExerciseToRoutine(id, sets = 3, reps = '8–12', target = {}) {
       name: localized(e.name),
       names: e.name,
       sets: Number(sets) || 3,
-      reps: String(reps || ''),
+      prescriptionMode: mode || e.prescriptionMode || 'reps',
+      reps: (mode || e.prescriptionMode) === 'time' ? '' : String(reps || ''),
+      durationSeconds:
+        (mode || e.prescriptionMode) === 'time'
+          ? Math.min(3600, Math.max(1, Number(duration || e.defaultDurationSeconds) || 30))
+          : null,
     };
     if (section) section.items.push(item);
     else day.items.push(item);
@@ -1171,7 +1528,14 @@ function addSelected() {
     $('#add-exercise').focus();
     return;
   }
-  addExerciseToRoutine(id, $('#add-sets').value, $('#add-reps').value);
+  addExerciseToRoutine(
+    id,
+    $('#add-sets').value,
+    $('#add-reps').value,
+    {},
+    $('#add-mode').value,
+    $('#add-duration').value,
+  );
 }
 function openSectionForm(open) {
   $('#section-form').hidden = !open;
@@ -1251,8 +1615,11 @@ async function importRoutine(file) {
         db.current = routine.id;
         selectedDay = 0;
       })
-    )
+    ) {
+      migrateRoutineExerciseIds();
+      renderRoutines();
       toast(t('imported'));
+    }
   } catch (err) {
     console.error(err);
     toast(err.message === 'routine-file-too-large' ? t('importTooLarge') : t('errorImport'));
@@ -1336,6 +1703,7 @@ $('#image-viewer').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) e.currentTarget.close();
 });
 $('#exercise-dialog').addEventListener('close', () => {
+  renderTimerIndicator();
   if (closingFromNavigation) {
     closingFromNavigation = false;
     return;
@@ -1473,6 +1841,10 @@ $('#add-section-button').onclick = () => {
 };
 $('#use-starter-layout').onclick = useStarterLayout;
 $('#add-exercise-button').onclick = addSelected;
+$('#add-mode').addEventListener('change', syncAddPrescriptionFields);
+$('#add-exercise').addEventListener('change', (event) =>
+  selectAddExercisePrescription(event.target.value),
+);
 $('#add-routine-target').addEventListener('change', fillAddSessionTargets);
 $('#add-session-target').addEventListener('change', fillAddSectionTargets);
 $('#confirm-add-to-routine').onclick = () => {
